@@ -151,57 +151,74 @@ class UMinhoDSpace8Scraper:
         self.wait = WebDriverWait(self.driver, 10)
 
         # Time to wait for Angular to settle after page loads
-        self.ANGULAR_SETTLE_TIME = 0.5  # seconds
+        self.ANGULAR_SETTLE_TIME = 2.0  # seconds
         # Max items to scrape
         self.MAX_ITEMS = max_items
 
     def get_paper_info(self, url):
-        """
-        Given a paper URL, navigates to it and extracts metadata from the table.
-        """
-        self.driver.get(url)
-        # Wait for the table to appear
-        self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.table-striped")))
-        time.sleep(self.ANGULAR_SETTLE_TIME) # Angular settle time
+        # 1. VISITA A PÁGINA PRINCIPAL (Para o Link do PDF)
+        try:
+            self.driver.get(url)
+            time.sleep(self.ANGULAR_SETTLE_TIME + 1)
+        except Exception:
+            return None
 
-        # Dictionary to store the mapping we want
-        # This is our "Shopping List" - Key: what the HTML says, Value: what we want in our JSON
-        targets = {
-            "dc.title": "title",
-            "dc.date.issued": "year",
-            "dc.identifier.doi": "doi",
-            "dc.contributor.author": "authors",
-            "dc.description.abstract": "abstract"
+        data = { 
+            "title": "N/A", "year": "N/A", "doi": "N/A", "abstract": "N/A", 
+            "authors": [], "keywords": [], "affiliations": [], "document_link": "N/A" 
         }
 
-        data = { "title": "N/A", "year": "N/A", "doi": "N/A", "abstract": "N/A", "authors": [] }
-
+        # REQ-B04: PDF Link
         try:
-            # Locate all rows in the metadata table
+            pdf_link_elem = self.driver.find_elements(By.CSS_SELECTOR, "a[href*='/bitstream/'], a.download-button")
+            if pdf_link_elem:
+                data["document_link"] = pdf_link_elem[0].get_attribute("href")
+        except:
+            pass
+
+        # 2. VISITA A PÁGINA /FULL (Para Metadados)
+        try:
+            self.driver.get(url + "/full")
+            # Espera a tabela estar presente e visível
+            self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "table.table-striped")))
+            time.sleep(1) # Tempo extra para o Angular estabilizar
+            
+            targets = {
+                "dc.title": "title",
+                "dc.date.issued": "year",
+                "dc.identifier.doi": "doi",
+                "dc.contributor.author": "authors",
+                "dc.description.abstract": "abstract",
+                "dc.subject": "keywords",
+                "dc.contributor.affiliation": "affiliations"
+            }
+
+            # RESOLUÇÃO DO STALE ELEMENT: 
+            # Em vez de guardar os objetos 'row', guardamos logo o texto das células
             rows = self.driver.find_elements(By.CSS_SELECTOR, "table.table-striped tbody tr")
-
+            
+            # Criamos uma lista de tuplos (label, valor) com o texto já extraído
+            extracted_rows = []
             for row in rows:
-                cols = row.find_elements(By.TAG_NAME, "td")
-                if len(cols) >= 2:
-                    field_label = cols[0].text.strip()
-                    field_value = cols[1].text.strip()
+                try:
+                    cols = row.find_elements(By.TAG_NAME, "td")
+                    if len(cols) >= 2:
+                        extracted_rows.append((cols[0].text.strip(), cols[1].text.strip()))
+                except:
+                    continue # Se uma linha falhar, ignora e continua
 
-                    if field_label in targets:
-                        key = targets[field_label]
-                        if key == "authors":
-                            data[key].append(field_value)
-                        else:
-                            data[key] = field_value
-
-            # Attempt to find the document link (if available)
-            docLink = self.driver.find_elements(By.CSS_SELECTOR, "a.btn.overflow-ellipsis.mb-1[title^='Download:']")
-            if docLink:
-                data["document_link"] = docLink[0].get_attribute("href")
-            else:
-                data["document_link"] = "N/A"
+            # Agora processamos os dados extraídos sem risco de 'stale element'
+            for label, val in extracted_rows:
+                if label in targets:
+                    key = targets[label]
+                    if isinstance(data[key], list):
+                        if val not in data[key]: data[key].append(val)
+                    else:
+                        data[key] = val
 
         except Exception as e:
-            print(f"Error parsing table: {e}")
+            print(f"Erro ao processar {url}: {e}")
+            return None
 
         return data
 
@@ -310,11 +327,15 @@ class UMinhoDSpace8Scraper:
 
             # Visit each paper to get the abstract and authors
             for url in paper_urls:
-                # print(f"   Opening Paper: {url}")               # Debug print
-                full_url = url + "/full"                        # add '/full' to get the full metadata view
-                paper_info = self.get_paper_info(full_url)      # get the paper info
-                print(f"      Title: {paper_info['title']}")    # Debug print
-                results.append(paper_info)
+                # Obtém a informação (pode vir None se houver erro)
+                paper_info = self.get_paper_info(url)
+                
+                if paper_info:
+                    print(f"   [{len(results)+1}] Sucesso: {paper_info['title']}")
+                    results.append(paper_info)
+                else:
+                    # Se deu erro, o programa continua para o próximo URL (REQ-B06)
+                    print(f"   [!] A saltar documento devido a erro de carregamento.")
 
         finally:
             self.driver.quit()
