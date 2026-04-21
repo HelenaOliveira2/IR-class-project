@@ -52,7 +52,7 @@ class TextProcessor:
 
         return processed_words
 
-def process_scraped_data(input_file='scraper_results.json', output_file='processed_data.json'):
+def process_scraped_data(input_file='../scraper/scraper_results.json', output_file='processed_data.json'):
     """
     Lê os dados brutos, aplica NLP e guarda o resultado para ser usado pelo Indexer.
     Cumpre REQ-B10 (Store raw and processed versions).
