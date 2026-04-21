@@ -19,7 +19,7 @@ class TextProcessor:
         # Carregar stop words para os dois idiomas (REQ-B22)
         self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('portuguese')))
 
-    def clean_text(self, text, use_stemming=True):
+    def clean_text(self, text, use_stemming=True, remove_stopwords=True):
         """
         REQ-B14: Tokenização
         REQ-B21: Filtragem de Stop Words
@@ -35,8 +35,13 @@ class TextProcessor:
         table = str.maketrans('', '', string.punctuation)
         stripped = [w.translate(table) for w in tokens]
 
-        # 3. Remover tokens vazios e stop words (REQ-B20, B21)
-        words = [w for w in stripped if w.isalpha() and w not in self.stop_words]
+        # 3. Filtragem de Stop Words (REQ-B21)
+        if remove_stopwords:
+            # Filtra se for stopword
+            words = [w for w in stripped if w.isalpha() and w not in self.stop_words]
+        else:
+            # Mantém tudo o que é alfabético, incluindo stopwords
+            words = [w for w in stripped if w.isalpha()]
 
         # 4. Aplicar Stemming ou Lematização (REQ-B18)
         if use_stemming:
