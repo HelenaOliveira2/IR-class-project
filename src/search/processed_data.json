@@ -1,6 +1,6 @@
 [
     {
-        "id": 0,
+        "id": 1,
         "title_tokens": [
             "foreword",
             "special",
@@ -45,24 +45,15 @@
             "chapter",
             "gpcg"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Foreword to the special section on recent advances in graphics and interaction",
             "year": "2022",
             "doi": "10.1016/j.cag.2021.12.006",
-            "abstract": "This special section on Recent Advances in Graphics and In- teraction features the papers submitted to Computers & Graphics (C&G) and presented at the 2021 edition of the International Conference on Graphics and Interaction – ICGI’2021 – which was held on November 4 and 5, 2021 at the Faculty of Engineering of the University of Porto, Portugal, as a joint organization with the Eurographics Portuguese Chapter — GPCG.",
-            "authors": [
-                "Rodrigues, Nuno",
-                "Mendes, Daniel",
-                "Santos, Luís Paulo",
-                "Bouatouch, Kadi"
-            ],
-            "keywords": [],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 1,
+        "id": 2,
         "title_tokens": [
             "ensembl",
             "metropoli",
@@ -150,29 +141,15 @@
             "varieti",
             "scene"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Ensemble metropolis light transport",
             "year": "2022",
             "doi": "10.1145/3472294",
-            "abstract": "This article proposes a Markov Chain Monte Carlo (MCMC) rendering algorithm based on a family of guided transition kernels. The kernels exploit properties of ensembles of light transport paths, which are distributed according to the lighting in the scene, and utilize this information to make informed decisions for guiding local path sampling. Critically, our approach does not require caching distributions in world space, saving time and memory, yet it is able to make guided sampling decisions based on whole paths. We show how this can be implemented efficiently by organizing the paths in each ensemble and designing transition kernels for MCMC rendering based on a carefully chosen subset of paths from the ensemble. This algorithm is easy to parallelize and leads to improvements in variance when rendering a variety of scenes.",
-            "authors": [
-                "Bashford-Rogers, Thomas",
-                "Santos, Luís Paulo",
-                "Marnerides, Demetris",
-                "Debattista, Kurt"
-            ],
-            "keywords": [
-                "Light transport",
-                "Markov Chain Monte Carlo",
-                "MCMC",
-                "ensemble"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 2,
+        "id": 3,
         "title_tokens": [
             "ner",
             "archiv",
@@ -289,28 +266,15 @@
             "ner",
             "di"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "NER in archival finding aids: extended",
             "year": "2022-01-17",
             "doi": "10.3390/make4010003",
-            "abstract": "The amount of information preserved in Portuguese archives has increased over the years. These documents represent a national heritage of high importance, as they portray the country’s history. Currently, most Portuguese archives have made their finding aids available to the public in digital format, however, these data do not have any annotation, so it is not always easy to analyze their content. In this work, Named Entity Recognition solutions were created that allow the identification and classification of several named entities from the archival finding aids. These named entities translate into crucial information about their context and, with high confidence results, they can be used for several purposes, for example, the creation of smart browsing tools by using entity linking and record linking techniques. In order to achieve high result scores, we annotated several corpora to train our own Machine Learning algorithms in this context domain. We also used different architectures, such as CNNs, LSTMs, and Maximum Entropy models. Finally, all the created datasets and ML models were made available to the public with a developed web platform, NER@DI.",
-            "authors": [
-                "Cunha, Luís Filipe da Costa",
-                "Ramalho, José Carlos"
-            ],
-            "keywords": [
-                "named entity recognition",
-                "archival search aids",
-                "machine learning",
-                "deep learning",
-                "maximum entropy"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 3,
+        "id": 4,
         "title_tokens": [
             "heterogen",
             "implement",
@@ -436,39 +400,15 @@
             "thread",
             "avail"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Heterogeneous implementation of a Voronoi cell-based SVP solver",
             "year": "2019-09",
             "doi": "10.1109/ACCESS.2019.2939142",
-            "abstract": "This paper presents a new, heterogeneous CPU+GPU attacks against lattice-based (postquantum) cryptosystems based on the Shortest Vector Problem (SVP), a central problem in lattice-based cryptanalysis. To the best of our knowledge, this is the first SVP-attack against lattice-based cryptosystems using CPUs and GPUs simultaneously. We show that Voronoi-cell based CPU+GPU attacks, algorithmically improved in previous work, are suitable for the proposed massively parallel platforms. Results show that 1) heterogeneous platforms are useful in this scenario, as they increment the overall memory available in the system (as GPU's memory can be used effectively), a typical bottleneck for Voronoi-cell algorithms, and we have also been able to increase the performance of the algorithm on such a platform, by successfully using the GPU as a co-processor, 2) this attack can be successfully accelerated using conventional GPUs and 3) we can take advantage of multiple GPUs to attack lattice-based cryptosystems. Experimental results show a speedup up to 7.6× for 2 GPUs hosted by an Intel Xeon E5-2695 v2 CPU (12 cores ×2 sockets) using only 1 core and gains in the order of 20% for 2 GPUs hosted by the same machine using all 22 CPU threads (2 are reserved for orchestrating the GPUs), compared to single-CPU execution using the entire 24 threads available.",
-            "authors": [
-                "Falcão, Gabriel",
-                "Cabeleira, Filipe",
-                "Mariano, Artur",
-                "Santos, Luís Paulo"
-            ],
-            "keywords": [
-                "lattice-based cryptanalysis",
-                "parallel computing",
-                "Lattices",
-                "Voronoi-cell",
-                "algorithms",
-                "high performance computing",
-                "parallelism",
-                "multi-threading",
-                "multicores",
-                "graphics processing units",
-                "multi-GPU",
-                "CUDA",
-                "OpenMP",
-                "StarPU"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 4,
+        "id": 5,
         "title_tokens": [
             "spell",
             "energi",
@@ -596,32 +536,15 @@
             "right",
             "reserv"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "SPELLing out energy leaks: Aiding developers locate energy inefficient code",
             "year": "2020",
             "doi": "10.1016/j.jss.2019.110463",
-            "abstract": "Although hardware is generally seen as the main culprit for a computer's energy usage, software too has a tremendous impact on the energy spent. Unfortunately, there is still not enough support for software developers so they can make their code more energy-aware.This paper proposes a technique to detect energy inefficient fragments in the source code of a software system. Test cases are executed to obtain energy consumption measurements, and a statistical method, based on spectrum-based fault localization, is introduced to relate energy consumption to the source code. The result of our technique is an energy ranking of source code fragments pointing developers to possible energy leaks in their code. This technique was implemented in the SPELL toolkit.Finally, in order to evaluate our technique, we conducted an empirical study where we asked participants to optimize the energy efficiency of a software system using our tool, while also having two other groups using no tool assistance and a profiler, respectively. We showed statistical evidence that developers using our technique were able to improve the energy efficiency by 43% on average, and even out performing a profiler for energy optimization. (C) 2019 Elsevier Inc. All rights reserved.",
-            "authors": [
-                "Pereira, Rui Alexandre Afonso",
-                "Carção, Tiago Alves",
-                "Couto, Marco Domingos Mendes",
-                "Cunha, Jácome",
-                "Fernandes, João Paulo",
-                "Saraiva, João"
-            ],
-            "keywords": [
-                "Green Software",
-                "Program Analysis",
-                "Program Optimization",
-                "Green Computing",
-                "Fault Localization"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 5,
+        "id": 6,
         "title_tokens": [
             "metamorphosi",
             "topic",
@@ -698,26 +621,15 @@
             "semant",
             "integr"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Metamorphosis – a topic maps based environment to handle heterogeneous information resources",
             "year": "2006",
             "doi": "10.1007/11676904_2",
-            "abstract": "Nowadays, data handled by an institution or company is spread out by more than one database and lots of documents of different types. To extract the information implicit in that data, it is necessary to pick parts from those various archives. To obtain a general overview, those information slices should be integrated. Different approaches can be followed to achieve that integration, ranging from the merge of resources till the fusion of the extracted parts. In this paper, we introduce Metamorphosis – a Topic Maps oriented environment that enables a conceptual navigation among heterogenous information systems – and we argue that Metamorphosis can be used to achieve, via Topic Maps, the referred semantic integration.",
-            "authors": [
-                "Ramalho, José Carlos",
-                "Librelotto, Giovani Rubert",
-                "Henriques, Pedro Rangel"
-            ],
-            "keywords": [
-                "Topic Maps",
-                "Interoperability"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 6,
+        "id": 7,
         "title_tokens": [
             "predict",
             "plateau",
@@ -813,34 +725,15 @@
             "accuraci",
             "rang"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Predicting plateau pressure in intensive medicine for ventilated patients",
             "year": "2015",
             "doi": "10.1007/978-3-319-16528-8_17",
-            "abstract": "Barotrauma is identified as one of the leading diseases in Ventilated Patients. This type of problem is most common in the Intensive Care Units. In order to prevent this problem the use of Data Mining (DM) can be useful for predicting their occurrence. The main goal is to predict the occurence of Barotrauma in order to support the health professionals taking necessary precautions. In a first step intensivists identified the Plateau Pressure values as a possible cause of Barotrauma. Through this study DM models (classification) where induced for predicting the Plateau Pressure class (>=30 cm𝐻2O) in a real environment and using real data. The present study explored and assessed the possibility of predicting the Plateau pressure class with high accuracies. The dataset used only contained data provided by the ventilators. The best models are able to predict the Plateau Pressure with an accuracy ranging from 95.52% to 98.71%.",
-            "authors": [
-                "Oliveira, Sérgio",
-                "Portela, Filipe",
-                "Santos, Manuel",
-                "Machado, José Manuel",
-                "Abelha, António",
-                "Silva, Álvaro",
-                "Rua, Fernando"
-            ],
-            "keywords": [
-                "Barotrauma",
-                "Plateau Pressure",
-                "Intensive Medicine",
-                "Data Mining",
-                "INTCare",
-                "Mechanical Ventilation"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 7,
+        "id": 8,
         "title_tokens": [
             "inform",
             "system",
@@ -930,32 +823,15 @@
             "medic",
             "record"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Information systems assessment in pathologic anatomy service",
             "year": "2015",
             "doi": "10.1007/978-3-319-16528-8_19",
-            "abstract": "Information technologies changed the way of how the health organizations work, contributing to their effectiveness, efficiency and sustainability. Hospital Information Systems (HIS) are emerging on all of health institutions, helping health professionals and patients. However, HIS are not always implemented and used in the best way, leading to low levels of benefits and acceptance by users of these systems. In order to mitigate this problem, it is essential to take measures able to ensure if the HIS and their interfaces are designed in a simple and interactive way. With this in mind, a study to measure the user satisfaction and their opinion was made. It was applied the Technology Acceptance Model (TAM) on a HIS implemented on various hospital centers (AIDA), being used the Pathologic Anatomy Service. The study identified weakness and strengths features of AIDA and it pointed some solutions to improve the medical record.",
-            "authors": [
-                "Novo, Ana",
-                "Duarte, Júlio",
-                "Portela, Filipe",
-                "Abelha, António",
-                "Santos, Manuel",
-                "Machado, José Manuel"
-            ],
-            "keywords": [
-                "TAM",
-                "Hospital Information Systems",
-                "Technology Acceptance",
-                "Technology Assessment,",
-                "Pathologic Anatomy Service"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 8,
+        "id": 9,
         "title_tokens": [
             "step",
             "toward",
@@ -1059,33 +935,15 @@
             "step",
             "defin"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Step towards of a homemade business intelligence solution: A case study in textile industry",
             "year": "2015",
             "doi": "10.1007/978-3-319-16486-1_36",
-            "abstract": "Nowadays, organizations are increasingly looking to invest in business intelligence solutions, mainly private companies in order to get advantage over its competitors, however they do not know what is necessary. Business intelligence allows an analysis of consolidated information in order to obtain more specific outlets and certain indications in order to support the decision making process. You can take the right decision based on the data collected from different information systems present in the organization and outside of them. The textile sector is a sector where concept of Business Intelligence it is not many explored yet. Actually there are few textile companies that have a BI platform. Thus, the article objective is present an architecture and show all the steps by which companies need to spend to implement a successful free homemade Business Intelligence system. As result the proposed approach it was validated using real data aiming assess the steps defined.",
-            "authors": [
-                "Carvalho, Sandrina",
-                "Portela, Filipe",
-                "Santos, Manuel",
-                "Abelha, António",
-                "Machado, José Manuel"
-            ],
-            "keywords": [
-                "Textile",
-                "Business Intelligence",
-                "Data Warehouse",
-                "Free Software",
-                "Architectures",
-                "Decision Support",
-                "Business Intelligence. Data Warehouse"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 9,
+        "id": 10,
         "title_tokens": [
             "assess",
             "chronic",
@@ -1269,33 +1127,15 @@
             "rang",
             "respect"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "An assessment of chronic kidney diseases",
             "year": "2015",
             "doi": "10.1007/978-3-319-16486-1_18",
-            "abstract": "Kidney renal failure means that one’s kidney have unexpectedlystoppedfunctioning,i.e.,oncechronicdiseaseis exposed, the presence or degree of kidney dysfunction and its progression must be assessed, and the underlying syndrome has to be diagnosed. Although the patient’s history and physical examination may denote good practice, some key information has to be obtained from valuation of the glomerular filtration rate, and the analysis of serum biomarkers. Indeed, chronic kidney sickness depicts anomalous kidney function and/or its makeup, i.e., there is evidence that treatment may avoid or delay its progression, either by reducing and prevent the development of some associated complications, namely hypertension, obesity, diabetes mellitus, and cardiovascular complications. Acute kidney injury appears abruptly, with a rapiddeteriorationoftherenalfunction,butisoftenreversible if it is recognized early and treated promptly. In both situations, i.e., acute kidney injury and chronic kidney disease, an early intervention can significantly improve the prognosis. The assessment of these pathologies is therefore mandatory, although it is hard to do it with traditional methodologies and existing tools for problem solving. Hence, in this work, we will focus on the development of a hybrid decision support system, in terms of its knowledge representation and reasoning procedures based on Logic Programming, that will allow onetoconsiderincomplete,unknown,and evencontradictory information, complemented with an approach to computing centered on Artificial Neural Networks, in order to weigh the Degree-of-Confidence that one has on such a happening. The present study involved 558 patients with an age average of 51.7 years and the chronic kidney disease was observed in 175 cases. The dataset comprise twenty four variables, grouped into five main categories. The proposed model showed a good performance in the diagnosis of chronic kidney disease, since the sensitivity and the specificity exhibited values range between 93.1 and 94.9 and 91.9–94.2 %, respectively.",
-            "authors": [
-                "Neves, José",
-                "Rosário Martins, M.",
-                "Vilhena, João",
-                "Neves, João",
-                "Gomes, Sabino",
-                "Abelha, António",
-                "Machado, José Manuel",
-                "Vicente, Henrique"
-            ],
-            "keywords": [
-                "Healthcare",
-                "Logic Programming",
-                "Knowledge Representation and Reasoning",
-                "Artificial Neuronal Networks"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 10,
+        "id": 11,
         "title_tokens": [
             "logic",
             "program",
@@ -1380,34 +1220,15 @@
             "one",
             "happen"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Logic programming and artificial neural networks in breast cancer detection",
             "year": "2015",
             "doi": "10.1007/978-3-319-19222-2_18",
-            "abstract": "About 90% of breast cancers do not cause or are capable of producing death if detected at an early stage and treated properly. Indeed, it is still not known a specific cause for the illness. It may be not only a beginning, but also a set of associations that will determine the onset of the disease. Undeniably, there are some factors that seem to be associated with the boosted risk of the malady. Pondering the present study, different breast cancer risk assessment models where considered. It is our intention to develop a hybrid decision support system under a formal framework based on Logic Programming for knowledge representation and reasoning, complemented with an approach to computing centered on Artificial Neural Networks, to evaluate the risk of developing breast cancer and the respective Degree-of-Confidence that one has on such a happening.",
-            "authors": [
-                "Neves, José",
-                "Guimarães, Tiago",
-                "Gomes, Sabino",
-                "Vicente, Henrique",
-                "Santos, Mariana",
-                "Neves, João",
-                "Machado, José",
-                "Novais, Paulo"
-            ],
-            "keywords": [
-                "Breast cancer",
-                "Tyrer-cuzick model",
-                "Knowledge representation and reasoning",
-                "Logic programing",
-                "Artificial Neural Networks"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 11,
+        "id": 12,
         "title_tokens": [
             "abstract",
             "comput",
@@ -1524,29 +1345,15 @@
             "defect",
             "inform"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
             "year": "2015",
             "doi": "10.1155/2015/467178",
-            "abstract": "Schizophrenia stands for a long-lasting state of mental uncertainty that may bring to an end the relation among behavior, thought, and emotion; that is, it may lead to unreliable perception, not suitable actions and feelings, and a sense of mental fragmentation. Indeed, its diagnosis is done over a large period of time; continuos signs of the disturbance persist for at least 6 (six) months. Once detected, the psychiatrist diagnosis is made through the clinical interview and a series of psychic tests, addressed mainly to avoid the diagnosis of other mental states or diseases. Undeniably, the main problem with identifying schizophrenia is the difficulty to distinguish its symptoms from those associated to different untidiness or roles. Therefore, this work will focus on the development of a diagnostic support system, in terms of its knowledge representation and reasoning procedures, based on a blended of Logic Programming and Artificial Neural Networks approaches to computing, taking advantage of a novel approach to knowledge representation and reasoning, which aims to solve the problems associated in the handling (i.e., to stand for and reason) of defective information.",
-            "authors": [
-                "Cardoso, L.",
-                "Marins, F.",
-                "Magalhães, R.",
-                "Marins, N.",
-                "Oliveira, T.",
-                "Vicente, H.",
-                "Abelha, António",
-                "Machado, José Manuel",
-                "Neves, J."
-            ],
-            "keywords": [],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 12,
+        "id": 13,
         "title_tokens": [
             "educas",
             "intellig",
@@ -1607,28 +1414,15 @@
             "technic",
             "technolog"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Educase – intelligent system for pedagogical advising using case-based reasoning",
             "year": "2015-04",
             "doi": "N/A",
-            "abstract": "This paper introduces a proposal scheme for an Intelligent System applied to Pedagogical Advising using Case-Based Reasoning, to find consolidated solutions before used for the new problems, making easier the task of advising students to the pedagogical staff. We do intend, through this work, introduce the motivation behind the choices for this system structure, justifying the development of an incremental and smart web system who learns bests solutions for new cases when it’s used, showing technics and technology.",
-            "authors": [
-                "Moura, Elionai",
-                "Cunha, José António",
-                "Analide, Cesar"
-            ],
-            "keywords": [
-                "Case-based Reasoning",
-                "Pedagogical Advising",
-                "Educational Data-Mining",
-                "Machine Learning"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 13,
+        "id": 14,
         "title_tokens": [
             "prototyp",
             "team",
@@ -1727,31 +1521,15 @@
             "skirmish",
             "condit"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Prototyping teams of affective agents in robocode",
             "year": "2015",
             "doi": "N/A",
-            "abstract": "The study of the impact of emotion and affect in decision making processes involved in a working team stands for a multi-disciplinary issue (e.g. with insights from disciplines such as Psychology, Neuroscience, Philosophy and Computer Science). On the one hand, and in order to create such an environment we look at a team of affective agents to play into a battlefield, which present different emotional profiles (e.g. personality and mood). An emotional system, based on the OCC (Ortony, Clore and Collins) model, was proposed and implemented. As a way to integrate the personality of a robot with its emotions we used pleasure-arousal-dominance (PAD) model of mood. On the other hand, to attain cooperation, a voting mechanism and a decision-making process was implemented, being Robocode used as the simulation environment. Indeed, the results so far obtained are quite satisfying; the agent team performs quite well in the battlefield and undertakes different behaviours depending on the skirmish conditions",
-            "authors": [
-                "Rebelo, António",
-                "Catalão, Fábio",
-                "Alves, João",
-                "Marreiros, Goreti",
-                "Analide, Cesar",
-                "Novais, Paulo",
-                "Neves, José"
-            ],
-            "keywords": [
-                "Affective agents",
-                "Team behaviour",
-                "Robocode"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 14,
+        "id": 15,
         "title_tokens": [
             "parallel",
             "evolutionari",
@@ -1866,28 +1644,15 @@
             "model",
             "optim"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Parallel evolutionary computation in bioinformatics applications",
             "year": "2013-05",
             "doi": "10.1016/j.cmpb.2012.10.001",
-            "abstract": "A large number of optimization problems within the field of Bioinformatics require methods able to handle its inherent complexity (e.g. NP-hard problems) and also demand increased computational efforts. In this context, the use of parallel architectures is a necessity. In this work, we propose ParJECoLi, a Java based library that offers a large set of metaheuristic methods (such as Evolutionary Algorithms) and also addresses the issue of its efficient execution on a wide range of parallel architectures. The proposed approach focuses on the easiness of use, making the adaptation to distinct parallel environments (multicore, cluster, grid) transparent to the user. Indeed, this work shows how the development of the optimization library can proceed independently of its adaptation for several architectures, making use of Aspect-Oriented Programming. The pluggable nature of parallelism related modules allows the user to easily configure its environment, adding parallelism modules to the base source code when needed. The performance of the platform is validated with two case studies within biological model optimization.",
-            "authors": [
-                "Pinho, Jorge",
-                "Sobral, João Luís Ferreira",
-                "Rocha, Miguel"
-            ],
-            "keywords": [
-                "Evolutionary computation",
-                "Parallel software development",
-                "Aspect oriented programming",
-                "Bioinformatics"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 15,
+        "id": 16,
         "title_tokens": [
             "uthren",
             "radic",
@@ -1918,25 +1683,15 @@
             "deriv",
             "graphen"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Uthrene, a radically new molecule?",
             "year": "2015",
             "doi": "10.1039/c5cc01276g",
-            "abstract": "We have studied uthrene with a large range of quantum chemical models. Uthrene is predicted to be naturally twisted and to possess a triplet ground state, making it the smallest non-planar polycyclic biradical that can be derived from graphene.",
-            "authors": [
-                "Melle-Franco, M."
-            ],
-            "keywords": [
-                "PAH",
-                "Chemistry",
-                "Graphene"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 16,
+        "id": 17,
         "title_tokens": [
             "synergi",
             "onlin",
@@ -2021,29 +1776,15 @@
             "desafio",
             "ami"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Synergy in online dispute resolution and the need to protect privacy and personal data",
             "year": "2014",
             "doi": "N/A",
-            "abstract": "Esta contribuição apresenta uma nova compleição para a resolução de litígios em linha. Neste artigo pretendemos aferir se a performatividade e sinergia dos sistemas de Ambiente Inteligente (AmI), através da inserção de sensores introduzidos em dispositivos móveis que nos são familiares, poderá enriquecer o processo comunicacional e decisional na resolução de conflitos em linha. Com estes novos contributos, fornecemos uma perspectiva das principais implicações jurídicas do uso desta tecnologia de natureza ubíqua no ODR. Propomo-nos a retratar e responder às principais críticas e apreensões relacionadas com o AmI e conceituamo-las no quadrante da mediação online. Dispomo-nos a analisar a relevância, aplicabilidade e adequação da legislação atinente à privacidade e proteção de dados face aos emergentes desafios do AmI.",
-            "authors": [
-                "Santos, Cristiana Teixeira",
-                "Andrade, Francisco Carneiro Pacheco",
-                "Novais, Paulo"
-            ],
-            "keywords": [
-                "ODR",
-                "Ambiente Inteligentei",
-                "Informação contextual",
-                "Privacidade e proteção de dados",
-                "Regulação"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 17,
+        "id": 18,
         "title_tokens": [
             "assess",
             "road",
@@ -2188,27 +1929,15 @@
             "transport",
             "infrastructur"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Assessing road traffic expression",
             "year": "2014",
             "doi": "10.9781/ijimai.2014.313",
-            "abstract": "Road traffic is a problem which is increasing in cities with large population. Unrelated to this fact the number of portable and wearable devices has also been increasing throughout the population of most countries. With this advent, the capacity to monitor and register data about people habits and locations as well as more complex data such as intensity and strength of movements has created an opportunity to contribute to the general wealth and comfort within these environments. Ambient Intelligence and Intelligent Decision Making processes can benefit from the knowledge gathered by these devices to improve decisions on everyday tasks such as deciding navigation routes by car, bicycle or other means of transportation and avoiding route perils. The concept of computational sustainability may also be applied to this problem. Current applications in this area demonstrate the usefulness of real time system that inform the user of certain conditions in the surrounding area. On the other hand, the approach presented in this work aims to describe models and approaches to automatically identify current states of traffic inside cities and use methods from computer science to improve overall comfort and the sustainability of road traffic both with the user and the environment in mind. Such objective is delivered by analyzing real time contributions from those mobile ubiquitous devices to identifying problematic situations and areas under a defined criteria that have significant influence towards a sustainable use of the road transport infrastructure.",
-            "authors": [
-                "Silva, Fábio",
-                "Analide, César",
-                "Novais, Paulo"
-            ],
-            "keywords": [
-                "Traffic expression",
-                "Computational sustainability",
-                "Smart cities"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 18,
+        "id": 19,
         "title_tokens": [
             "genomescal",
             "bacteri",
@@ -2336,31 +2065,15 @@
             "wholecel",
             "model"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
             "year": "2014",
             "doi": "10.1093/bib/bbs071",
-            "abstract": "Advances in sequencing technology are resulting in the rapid emergence of large numbers of complete genome sequences. High throughput annotation and metabolic modeling of these genomes is now a reality. The high throughput reconstruction and analysis of genome-scale transcriptional regulatory networks represents the next frontier in microbial bioinformatics. The fruition of this next frontier will depend upon the integration of numerous data sources relating to mechanisms, components, and behavior of the transcriptional regulatory machinery, as well as the integration of the regulatory machinery into genome-scale cellular models. Here we review existing repositories for different types of transcriptional regulatory data, including expression data, transcription factor data, and binding site locations, and we explore how these data are being used for the reconstruction of new regulatory networks. From template network based methods to de novo reverse engineering from expression data, we discuss how regulatory networks can be reconstructed and integrated with metabolic models to improve model predictions and performance. Finally, we explore the impact these integrated models can have in simulating phenotypes, optimizing the production of compounds of interest or paving the way to a whole-cell model.",
-            "authors": [
-                "Faria, J. P.",
-                "Overbeek, R.",
-                "Xia, F.",
-                "Rocha, Miguel",
-                "Rocha, I.",
-                "Henry, C. S."
-            ],
-            "keywords": [
-                "genome-scale metabolic (GSM) model",
-                "transcriptional regulatory network (TRN)",
-                "de novo reverse engineering",
-                "integrated metabolic and regulatory models"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     },
     {
-        "id": 19,
+        "id": 20,
         "title_tokens": [
             "experiment",
             "studi",
@@ -2444,27 +2157,10 @@
             "predict",
             "algorithm"
         ],
-        "original_data": {
+        "original_metadata": {
             "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
             "year": "2013-06",
             "doi": "10.1007/978-3-642-38622-0_21",
-            "abstract": "This paper combines techniques of ambient intelligence and wireless sensor networks with the objective of obtain important conclusions to increase the quality of life of people. In particular, we oriented our study to the stress at the workplace, because stress is a leading cause of illness and disease. This article presents a wireless sensor network obtaining information of the environment, a pulse sensor obtaining hear rate values and a complete data analysis applying techniques of ambient intelligence to predict stress from these environment variables and people attributes. Results show promise on the identification of stressful situations as well as stress inference through the use of predictive algorithms",
-            "authors": [
-                "Silva, Fábio",
-                "Olivares, Teresa",
-                "Royo, Fernando",
-                "Vergara, M. A.",
-                "Analide, César"
-            ],
-            "keywords": [
-                "Ambient intelligence",
-                "Intelligent environments",
-                "Wireless sensor networks",
-                "Body area networks",
-                "Environmental monitoring",
-                "Stress detection"
-            ],
-            "affiliations": [],
             "document_link": "N/A"
         }
     }
