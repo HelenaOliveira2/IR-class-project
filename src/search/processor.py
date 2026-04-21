@@ -3,7 +3,7 @@ import json
 import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
 import sqlite3
 
 class TextProcessor:
@@ -28,8 +28,11 @@ class TextProcessor:
         if not text or text == "N/A":
             return []
 
-        # 1. Tokenização e conversão para minúsculas (REQ-B14)
-        tokens = word_tokenize(text.lower())
+        # REQ-B14: Segmentação de frases e Tokenização
+        sentences = sent_tokenize(text.lower())
+        tokens = []
+        for sentence in sentences:
+            tokens.extend(word_tokenize(sentence))
 
         # 2. Remoção de pontuação e caracteres especiais
         table = str.maketrans('', '', string.punctuation)

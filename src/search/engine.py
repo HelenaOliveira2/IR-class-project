@@ -41,159 +41,242 @@ class SearchEngine:
         return matrix
 
     # --------------------------------------------------------------------------
-    # REQ-B25: Process AND operations with term frequency optimization
-    # --------------------------------------------------------------------------
-    def _execute_optimized_and(self, terms):
-        """
-        Interseção otimizada: Processa as listas mais curtas (menor DF) primeiro.
-        """
-        if not terms: return set()
-        
-        # Obter (termo, DF) e ordenar por DF (Document Frequency) ascendente
-        term_df_list = []
-        for t in terms:
-            df = self.index_data.get(t.lower(), {}).get("df", 0)
-            if df == 0: return set() # Se um termo não existe, o AND é vazio
-            term_df_list.append((t, df))
-        
-        # Ordenação crucial para o REQ-B25
-        term_df_list.sort(key=lambda x: x[1])
-        
-        # Começamos com a lista mais pequena
-        result = self._get_postings(term_df_list[0][0])
-        for next_term, _ in term_df_list[1:]:
-            result = result.intersection(self._get_postings(next_term))
-            if not result: break # Curto-circuito se a interseção ficar vazia
-        return result
-
-    # --------------------------------------------------------------------------
     # REQ-B23: Implement Boolean operators (AND, OR, NOT) with precedence
+    # REQ-B25: Process AND operations with term frequency optimization
     # REQ-B26: Support space-separated terms as implicit AND
     # --------------------------------------------------------------------------
+    def _tokenize_boolean_query(self, query):
+        """REQ-B26: Tokeniza a query, lida com parênteses e insere AND implícito."""
+        # Limpar e dar espaço aos parênteses para o split() não colar palavras aos parênteses
+        query = query.lower().replace('(', ' ( ').replace(')', ' ) ')
+        tokens = query.split()
+        
+        processed_tokens = []
+        for i, token in enumerate(tokens):
+            if i > 0:
+                prev = tokens[i-1]
+                # Se a palavra anterior for um termo normal (ou parênteses a fechar) 
+                # e a atual também for um termo normal (ou parênteses a abrir), insere AND.
+                prev_is_term = prev not in ['and', 'or', 'not', '(']
+                curr_is_term = token not in ['and', 'or', ')']
+                if prev_is_term and curr_is_term:
+                    processed_tokens.append('and')
+            processed_tokens.append(token)
+        return processed_tokens
+
+    def _infix_to_postfix(self, tokens):
+        """REQ-B23: Algoritmo Shunting-yard para garantir NOT > AND > OR."""
+        precedence = {'not': 3, 'and': 2, 'or': 1, '(': 0}
+        output = []
+        stack = []
+        
+        for token in tokens:
+            if token == '(':
+                stack.append(token)
+            elif token == ')':
+                while stack and stack[-1] != '(':
+                    output.append(stack.pop())
+                if stack: 
+                    stack.pop() # Remove o '('
+            elif token in precedence:
+                while stack and precedence.get(stack[-1], 0) >= precedence[token]:
+                    output.append(stack.pop())
+                stack.append(token)
+            else:
+                output.append(token) # É um termo
+                
+        while stack:
+            output.append(stack.pop())
+        return output
+
     def search(self, query):
         """
-        Resolve a query booleana respeitando operadores e precedência.
+        Resolve a query booleana respeitando matemática rigorosa.
+        Substitui a versão anterior para resolver precedências complexas.
         """
-        tokens = query.lower().split()
+        tokens = self._tokenize_boolean_query(query)
         if not tokens: return []
-
-        # REQ-B26: Se não houver operadores explícitos, trata tudo como AND otimizado
-        operators = {'and', 'or', 'not'}
-        if not any(op in tokens for op in operators):
-            final_ids = self._execute_optimized_and(tokens)
-            return sorted(list(final_ids))
-
-        # REQ-B23: Lógica de Processamento com Operadores
-        # Nota: Para precedência complexa, usamos processamento sequencial 
-        # (NOT > AND > OR). Aqui implementamos a base funcional:
         
-        try:
-            # 1. Tratar NOT primeiro (Maior precedência)
-            # Ex: "saude NOT covid"
-            result = self._get_postings(tokens[0])
-            
-            idx = 1
-            while idx < len(tokens):
-                op = tokens[idx]
+        postfix = self._infix_to_postfix(tokens)
+        stack = []
+        
+        # O universo de todos os documentos (para podermos fazer o operador NOT)
+        all_docs_set = set(self.all_doc_ids)
+        
+        for token in postfix:
+            if token == 'not':
+                if stack:
+                    s1 = stack.pop()
+                    stack.append(all_docs_set - s1)
+            elif token == 'and':
+                if len(stack) >= 2:
+                    s2 = stack.pop()
+                    s1 = stack.pop()
+                    # REQ-B25: Otimização do AND - Interseta começando pelo conjunto mais pequeno
+                    if len(s1) <= len(s2):
+                        stack.append(s1.intersection(s2))
+                    else:
+                        stack.append(s2.intersection(s1))
+            elif token == 'or':
+                if len(stack) >= 2:
+                    s2 = stack.pop()
+                    s1 = stack.pop()
+                    stack.append(s1.union(s2))
+            else:
+                # É um termo de pesquisa normal
+                stack.append(self._get_postings(token))
                 
-                if op == 'and':
-                    next_val = self._get_postings(tokens[idx+1])
-                    result = result.intersection(next_val)
-                    idx += 2
-                elif op == 'or':
-                    next_val = self._get_postings(tokens[idx+1])
-                    result = result.union(next_val)
-                    idx += 2
-                elif op == 'not':
-                    next_val = self._get_postings(tokens[idx+1])
-                    result = result.difference(next_val)
-                    idx += 2
-                else:
-                    # Caso de termo solto (Implicit AND)
-                    result = result.intersection(self._get_postings(op))
-                    idx += 1
-                    
-            return sorted(list(result))
-        except IndexError:
-            print("Erro de sintaxe na query.")
-            return []
+        # O resultado final é o único conjunto que sobra na pilha
+        result = stack[0] if stack else set()
+        return sorted(list(result))
         
-    def _calculate_custom_tfidf(self, term, doc_id):
+    # ---------------------------------------------------------
+    # REQ-B32, B33, B34: TF e IDF manuais
+    # REQ-B39: Support ranking by different weighting schemes
+    # ---------------------------------------------------------
+    def _calculate_custom_weight(self, term, doc_id, scheme="tfidf"):
         """
-        REQ-B34: Implementação manual da fórmula TF-IDF.
+        Calcula o peso. Suporta os esquemas: 'tfidf' (default), 'tf', e 'boolean'.
         """
-        # TF (Term Frequency): Frequência do termo no documento
+        # REQ-B32: Term Frequency (TF)
         tf = self.index_data.get(term, {}).get("postings", {}).get(str(doc_id), 0)
-        if tf == 0: return 0
         
-        # Logarithmic TF scaling (opcional mas recomendado)
+        if scheme == "boolean":
+            return 1 if tf > 0 else 0
+            
+        if tf == 0: return 0
         tf_score = 1 + math.log10(tf)
         
-        # IDF (Inverse Document Frequency)
-        # REQ-B33: log10(N / df)
+        if scheme == "tf":
+            return tf_score
+            
+        # REQ-B33: Inverse Document Frequency (IDF)
         n_docs = len(self.all_doc_ids)
         df = self.index_data.get(term, {}).get("df", 0)
-        
         idf_score = math.log10(n_docs / df) if df > 0 else 0
         
+        # REQ-B34: TF-IDF Custom
         return tf_score * idf_score
 
     # ---------------------------------------------------------
     # REQ-B35 & REQ-B36: Sklearn Integration & Selection
     # ---------------------------------------------------------
-    def ranked_search(self, query, use_sklearn=False):
+    def ranked_search(self, query, use_sklearn=False, scheme="tfidf"):
         """
-        REQ-B36: Permite ao utilizador escolher entre implementação Custom ou Sklearn.
+        REQ-B36: Seleção entre Custom e Sklearn.
         """
-        query_terms = self.processor.clean_text(query)
+        # Limpeza básica para os testes no terminal.
+        # Numa API real, deves passar a query pelo TextProcessor do Módulo 2.
+        import string
+        query_terms = [w.strip(string.punctuation).lower() for w in query.split() if w.isalpha()]
+        
         if not query_terms: return []
 
         if use_sklearn:
             return self._search_with_sklearn(query_terms)
         else:
-            return self._search_with_custom(query_terms)
+            return self._search_with_custom(query_terms, scheme)
 
-    def _search_with_custom(self, query_terms):
-        """Executa ranking usando a tua função manual (REQ-B34)."""
-        scores = defaultdict(float)
+    # ---------------------------------------------------------
+    # REQ-B37: Implement cosine similarity calculation
+    # REQ-B38: Rank search results by relevance scores
+    # ---------------------------------------------------------
+    def _search_with_custom(self, query_terms, scheme="tfidf"):
+        """
+        Calcula a Similaridade do Cosseno manualmente.
+        """
+        # Vetor da Query (assumimos peso 1 para cada termo pesquisado)
+        query_vector = {term: 1 for term in query_terms}
         
+        # Encontrar documentos que têm pelo menos um termo
+        relevant_docs = set()
         for term in query_terms:
-            postings = self._get_postings(term)
-            for doc_id in postings:
-                scores[doc_id] += self._calculate_custom_tfidf(term, doc_id)
-        
-        # Ordenar por score descendente
+            relevant_docs.update(self._get_postings(term))
+            
+        scores = {}
+        for doc_id in relevant_docs:
+            dot_product = 0.0
+            doc_norm_sq = 0.0
+            query_norm_sq = 0.0
+            
+            for term in query_terms:
+                w_doc = self._calculate_custom_weight(term, doc_id, scheme)
+                w_query = query_vector[term]
+                
+                dot_product += (w_doc * w_query)
+                doc_norm_sq += (w_doc ** 2)
+                query_norm_sq += (w_query ** 2)
+                
+            doc_norm = math.sqrt(doc_norm_sq)
+            query_norm = math.sqrt(query_norm_sq)
+            
+            # REQ-B37: Fórmula Cosine Similarity
+            if doc_norm > 0 and query_norm > 0:
+                cosine_sim = dot_product / (doc_norm * query_norm)
+                scores[doc_id] = cosine_sim
+                
+        # REQ-B38: Ordenar resultados pelo score (maior para menor)
         return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
     def _search_with_sklearn(self, query_terms):
-        """
-        REQ-B35: Integração com sklearn para comparação.
-        """
-        # Para o Sklearn, precisamos de reconstruir o "corpus" (texto processado)
-        # Numa escala real, isto seria feito durante a indexação
+        """REQ-B35: Integração com sklearn para comparação."""
         corpus = []
         doc_ids = []
         for d_id, meta in self.metadata.items():
-            corpus.append(meta['title']) # Simplificação: usa o título para o vetor
+            texto = meta.get('title', '') + " " + meta.get('abstract', '')
+            corpus.append(texto)
             doc_ids.append(int(d_id))
 
         vectorizer = TfidfVectorizer()
         tfidf_matrix = vectorizer.fit_transform(corpus)
-        
-        # Transformar a query no mesmo espaço vetorial
         query_vec = vectorizer.transform([" ".join(query_terms)])
         
-        # Calcular similaridade (produto escalar)
         from sklearn.metrics.pairwise import cosine_similarity
         cosine_similarities = cosine_similarity(query_vec, tfidf_matrix).flatten()
         
-        results = []
-        for i, score in enumerate(cosine_similarities):
-            if score > 0:
-                results.append((doc_ids[i], score))
-        
+        results = [(doc_ids[i], score) for i, score in enumerate(cosine_similarities) if score > 0]
         return sorted(results, key=lambda x: x[1], reverse=True)
+
+    # ---------------------------------------------------------
+    # REQ-B40: Generate document similarity matrices
+    # ---------------------------------------------------------
+    def generate_document_similarity_matrix(self):
+        """
+        Gera matriz de similaridade entre todos os documentos da coleção.
+        """
+        corpus = []
+        doc_ids = []
+        for d_id, meta in self.metadata.items():
+            texto = meta.get('title', '') + " " + meta.get('abstract', '')
+            corpus.append(texto)
+            doc_ids.append(d_id)
+
+        vectorizer = TfidfVectorizer()
+        tfidf_matrix = vectorizer.fit_transform(corpus)
+        
+        from sklearn.metrics.pairwise import cosine_similarity
+        doc_sim_matrix = cosine_similarity(tfidf_matrix)
+        
+        print("\n--- Matriz de Similaridade de Documentos (Top 5x5) ---")
+        for i in range(min(5, len(doc_ids))):
+            linha = [f"{score:.2f}" for score in doc_sim_matrix[i][:5]]
+            print(f"Doc {doc_ids[i]}: {linha}")
+            
+        return doc_sim_matrix
 
 # --- Bloco de Demonstração para Defesa do Projeto ---
 if __name__ == "__main__":
     engine = SearchEngine()
+    
+    print("1. Motor Booleano (REQ-B23):", engine.search("saude AND covid"))
+    
+    print("\n2. Ranking Manual TF-IDF (REQ-B34, B37):")
+    print(engine.ranked_search("machine learning", use_sklearn=False, scheme="tfidf"))
+    
+    print("\n3. Ranking com Sklearn (REQ-B35):")
+    print(engine.ranked_search("machine learning", use_sklearn=True))
+    
+    print("\n4. Ranking Manual apenas TF (REQ-B39):")
+    print(engine.ranked_search("machine learning", use_sklearn=False, scheme="tf"))
+    
+    engine.generate_document_similarity_matrix()
