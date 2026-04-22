@@ -58,40 +58,36 @@ class TextProcessor:
 # --- FUNÇÃO FORA DA CLASSE (Para evitar o NameError) ---
 
 def process_from_db(db_file='publications.db', output_file='src/search/processed_data.json'):
-    """
-    Lê os dados da SQLite e prepara o JSON para o Indexer.
-    """
-    if not os.path.exists(db_file):
-        print(f"Erro: Base de dados {db_file} não encontrada!")
-        return
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+    
+    # ADICIONA 'authors' e 'year' aqui no SELECT
+    cursor.execute('SELECT id, title, abstract, year, doi, document_link, authors FROM documents')
+    rows = cursor.fetchall()
+    
+    processor = TextProcessor()
+    processed_list = []
+    
+    for row in rows:
+        # Desempacota as 7 colunas (agora incluindo authors)
+        doc_id, title, abstract, year, doi, link, authors_raw = row
+        
+        # O SQLite guarda listas como strings. Se os autores estiverem separados por vírgulas:
+        authors_list = [a.strip() for a in authors_raw.split(',')] if authors_raw else []
 
-    try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-        
-        cursor.execute('SELECT id, title, abstract, year, doi, document_link FROM documents')
-        rows = cursor.fetchall()
-        
-        processor = TextProcessor()
-        processed_list = []
-        
-        print(f"--- A processar {len(rows)} documentos da Base de Dados ---")
-        
-        for row in rows:
-            doc_id, title, abstract, year, doi, link = row
-            
-            processed_doc = {
-                "id": doc_id,
-                "title_tokens": processor.clean_text(title),
-                "abstract_tokens": processor.clean_text(abstract),
-                "original_metadata": {
-                    "title": title,
-                    "year": year,
-                    "doi": doi,
-                    "document_link": link
-                }
+        processed_doc = {
+            "id": doc_id,
+            "title_tokens": processor.clean_text(title),
+            "abstract_tokens": processor.clean_text(abstract),
+            "original_metadata": {
+                "title": title,
+                "year": year,
+                "authors": authors_list,  # <--- CRUCIAL: Adicionar aqui!
+                "doi": doi,
+                "document_link": link
             }
-            processed_list.append(processed_doc)
+        }
+        processed_list.append(processed_doc)
         
         # Garantir que a pasta existe
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
@@ -101,9 +97,8 @@ def process_from_db(db_file='publications.db', output_file='src/search/processed
             
         conn.close()
         print(f"Sucesso! Dados guardados em {output_file}")
-            
-    except sqlite3.Error as e:
-        print(f"Erro ao ler a base de dados: {e}")
 
 if __name__ == "__main__":
     process_from_db()
+
+    

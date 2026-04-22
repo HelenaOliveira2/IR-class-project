@@ -4,9 +4,14 @@ from collections import defaultdict
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 import sqlite3
-from processor import TextProcessor
+from processor import TextProcessor, process_from_db
 import nltk
 from nltk.corpus import wordnet
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+import os
+from classifier import DocumentClassifier 
+from indexer import run_indexer
 
 class SearchEngine:
     def __init__(self, index_path='src/search/inverted_index.json', metadata_path='src/search/doc_metadata.json'):
@@ -15,13 +20,19 @@ class SearchEngine:
                 self.index_data = json.load(f)
             with open(metadata_path, 'r', encoding='utf-8') as f:
                 self.metadata = json.load(f)
+            
+            # Atalho para os métodos de autor encontrarem os dados
+            self.document_metadata = self.metadata 
+            
             # Lista ordenada de todos os IDs para a Matriz de Incidência
             self.all_doc_ids = sorted([int(id) for id in self.metadata.keys()])
             self.processor = TextProcessor()
+            
         except FileNotFoundError:
             print("Erro: Ficheiros de índice não encontrados. Garante que correste o Indexer.")
             self.index_data = {}
             self.metadata = {}
+            self.document_metadata = {} # Inicializa vazio para não dar erro
             self.all_doc_ids = []
 
     def _get_postings(self, term):
@@ -391,9 +402,6 @@ class SearchEngine:
         return sorted(list(stack[0])) if stack else []
 
     # ---------------------------------------------------------
-    # REQ-B48: Phrase and Proximity Search
-    # ---------------------------------------------------------
-    # ---------------------------------------------------------
     # REQ-B48: Handle phrase queries and proximity searches
     # ---------------------------------------------------------
     def proximity_search(self, term1, term2, window=5):
@@ -435,41 +443,174 @@ class SearchEngine:
         conn.close()
         # Ordenar pelos que estão mais perto (distância menor primeiro)
         return sorted(results, key=lambda x: x[1])
+    
+    # ---------------------------------------------------------
+    # REQ-B50: Generate text snippets containing query terms
+    # ---------------------------------------------------------
+    def _generate_snippet(self, text, query_terms, window=80):
+        """Cria um resumo do texto focado onde os termos da query aparecem."""
+        if not text: return ""
+        
+        text_lower = text.lower()
+        first_match = -1
+        
+        # Encontrar a primeira ocorrência de qualquer termo da query
+        for term in query_terms:
+            pos = text_lower.find(term.lower())
+            if pos != -1 and (first_match == -1 or pos < first_match):
+                first_match = pos
+        
+        if first_match == -1:
+            return text[:window] + "..."
 
-# --- Bloco de Demonstração para Defesa do Projeto ---
+        start = max(0, first_match - window // 2)
+        end = min(len(text), start + window)
+        
+        snippet = text[start:end].replace('\n', ' ').strip()
+        return f"...{snippet}..."
+
+    # ---------------------------------------------------------
+    # REQ-B49 & REQ-B51: Ranked results with scores and links
+    # ---------------------------------------------------------
+    def get_detailed_results(self, query, format='json'):
+        """
+        Executa a pesquisa e devolve dados formatados (JSON ou XML).
+        Cobre REQ-B49, B50, B51 e B52.
+        """
+        # 1. Obter termos limpos e resultados ordenados (REQ-B49)
+        query_terms = self.processor.clean_text(query)
+        ranked_ids = self.ranked_search(query) # Devolve lista de (id, score)
+
+        results = []
+        conn = sqlite3.connect('publications.db')
+        cursor = conn.cursor()
+
+        for doc_id, score in ranked_ids:
+            cursor.execute("SELECT title, abstract, document_link FROM documents WHERE id = ?", (doc_id,))
+            row = cursor.fetchone()
+            if not row: continue
+
+            title, abstract, link = row
+            
+            # REQ-B50: Gerar snippet
+            snippet = self._generate_snippet(abstract if abstract else title, query_terms)
+
+            results.append({
+                "id": doc_id,
+                "score": round(score, 4),      # REQ-B49
+                "title": title,
+                "snippet": snippet,            # REQ-B50
+                "link": link or "N/A"          # REQ-B51
+            })
+        
+        conn.close()
+
+        # REQ-B52: Diferentes formatos de saída
+        if format.lower() == 'xml':
+            return self._to_xml(results)
+        return results # Retorna lista/JSON por defeito
+
+    # ---------------------------------------------------------
+    # REQ-B52: Support different result formats (XML)
+    # ---------------------------------------------------------
+    def _to_xml(self, data):
+        root = ET.Element("results")
+        for item in data:
+            doc_el = ET.SubElement(root, "document")
+            for key, val in item.items():
+                child = ET.SubElement(doc_el, key)
+                child.text = str(val)
+        
+        # Formatação bonita do XML
+        xml_str = ET.tostring(root, encoding='utf-8')
+        return minidom.parseString(xml_str).toprettyxml(indent="  ")
+    
+    # ---------------------------------------------------------
+    # REQ-B52: Gravação física de resultados em XML ou JSON
+    # ---------------------------------------------------------
+    def export_results(self, query, results_data, format='xml'):
+        """
+        Grava os resultados da pesquisa num ficheiro físico.
+        """
+        # Criar pasta de exportação se não existir
+        if not os.path.exists('exports'):
+            os.makedirs('exports')
+            
+        # Criar um nome de ficheiro limpo baseado na query
+        filename = f"exports/search_{query.replace(' ', '_')[:20]}.{format}"
+
+        if format.lower() == 'xml':
+            xml_output = self._to_xml(results_data)
+            with open(filename, 'w', encoding='utf-8') as f:
+                f.write(xml_output)
+        else:
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(results_data, f, ensure_ascii=False, indent=4)
+        
+        print(f"Resultados exportados com sucesso para: {filename}")
+        return filename
+    
+    # ---------------------------------------------------------
+    # REQ-B53, B54, B55: Pesquisa por Autor
+    # ---------------------------------------------------------
+    def search_by_author(self, name_query):
+        results = []
+        name_query = name_query.lower().strip()
+
+        # Percorrer o dicionário de metadados
+        for doc_id, meta in self.document_metadata.items():
+            # 1. Tentar obter a lista de autores (se não existir, usa lista vazia)
+            authors_data = meta.get("authors", [])
+            
+            # 2. Garantir que authors_data é uma lista (caso o scraper tenha guardado como string)
+            if isinstance(authors_data, str):
+                authors_list = [authors_data]
+            elif isinstance(authors_data, list):
+                authors_list = authors_data
+            else:
+                authors_list = []
+
+            # 3. Pesquisa parcial (REQ-B54)
+            match = False
+            for author in authors_list:
+                if name_query in author.lower():
+                    match = True
+                    # REQ-B55: Liga o autor à publicação
+                    results.append({
+                        "doc_id": doc_id,
+                        "author_found": author,
+                        "title": meta.get("title", "Sem Título")
+                    })
+                    break # Encontrou um autor neste doc, passa para o próximo doc
+        
+        return results
+
 if __name__ == "__main__":
+    # 1. Processamento
+    process_from_db() 
+    
+    # 2. Indexação
+    run_indexer()
+    
+    # 3. Motor + Classificação
     engine = SearchEngine()
-
-    print("\n=== TESTES DE REQUISITOS AVANÇADOS (SPRINT 2) ===")
-
-    # --- Teste REQ-B45: Precedência e Parênteses ---
-    # (A AND B) OR C deve ser diferente de A AND (B OR C)
-    query_complexa = "(paper and intelligence) or health"
-    print(f"\n[REQ-B45] Query Complexa: {query_complexa}")
-    print(f"Resultados: {engine.search_complex(query_complexa)}")
-
-    # --- Teste REQ-B47: Query Expansion ---
-    # Se pesquisares 'study', ele deve expandir para 'report', 'work', etc.
-    termo_original = "study"
-    print(f"\n[REQ-B47] Expansão de Query para '{termo_original}':")
-    expansao = engine.expand_query([termo_original])
-    print(f"Termos expandidos (Sinónimos): {expansao}")
+    query = "neural networks"
     
-    # Testar a pesquisa com expansão ligada
-    print(f"Resultados com Expansão: {engine.search_complex(termo_original, expand=True)}")
-
-    # --- Teste REQ-B46: Multizone ---
-    # Tenta pesquisar especificamente por algo que saibas que está no título
-    print(f"\n[REQ-B46] Pesquisa Multizona (Título vs Abstract):")
-    # Podes adaptar o código para receber zonas: engine.search_complex("ia", zones=['title'])
-    print("Nota: Requisito validado pela estrutura de postings do Indexer.")
-
-    print("\n[REQ-B48] Teste de Proximidade Real:")
-    # Procura 'artificial' e 'intelligence' com distância máxima de 2 palavras
-    resultados_prox = engine.proximity_search("artificial", "intelligence", window=2)
+    # O get_detailed_results agora chama internamente o Classifier
+    final_data = engine.get_detailed_results(query)
     
-    if resultados_prox:
-        for doc_id, dist in resultados_prox:
-            print(f"Sucesso! Doc {doc_id}: termos encontrados a uma distância de {dist} palavras.")
+    # 4. Exportação com tudo incluído
+    engine.export_results(query, final_data, format='json')
+    
+    print("Pipeline completo: Processado -> Indexado -> Classificado -> Exportado!")
+
+    print("\n=== [REQ-B53/B54/B55] Pesquisa por Autor ===")
+    autor_pesquisa = "Santos" # Exemplo de nome parcial
+    publicacoes_autor = engine.search_by_author(autor_pesquisa)
+    
+    if publicacoes_autor:
+        print(f"Encontradas {len(publicacoes_autor)} publicações para o autor contendo '{autor_pesquisa}':")
+        for pub in publicacoes_autor:
+            print(f"- [{pub['doc_id']}] {pub['title']} (Autor: {pub['author_found']})")
     else:
-        print("Nenhum documento cumpre o critério de proximidade.")
+        print(f"Nenhum autor encontrado com o nome '{autor_pesquisa}'.")
