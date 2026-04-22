@@ -1,9 +1,11 @@
+import time
+
 import nltk
 import json
 import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 # REQ-B13: Descarregar recursos necessários do NLTK
 nltk.download('punkt')
@@ -87,6 +89,54 @@ def process_scraped_data(input_file='../scraper/scraper_results.json', output_fi
     except FileNotFoundError:
         print(f"Erro: Ficheiro {input_file} não encontrado na raiz.")
 
+#REQ-B14
+def segment_and_tokenize(text):
+    #Segmentação
+    sentences = sent_tokenize(text)
+    
+    #Tokenização
+    all_tokens = []
+    for sentence in sentences:
+        tokens = word_tokenize(sentence.lower())
+        all_tokens.extend(tokens)
+        
+    return sentences, all_tokens
+
+#REQ-B19
+def compare_nlp_strategies(tokens):
+    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
+    
+    # Testar Stemming
+    start = time.time()
+    stems = [stemmer.stem(t) for t in tokens]
+    end_stem = time.time() - start
+    
+    # Testar Lemmatization
+    start = time.time()
+    lemmas = [lemmatizer.lemmatize(t) for t in tokens]
+    end_lem = time.time() - start
+    
+    print(f"--- Performance ---")
+    print(f"Stemming: {end_stem:.5f}s | Termos únicos: {len(set(stems))}")
+    print(f"Lemmatization: {end_lem:.5f}s | Termos únicos: {len(set(lemmas))}")
+    
+    return stems, lemmas
+
+#REQ-B21
+def process_with_stopword_control(tokens, remove_stopwords=True, lang='portuguese'):
+    if not remove_stopwords:
+        return tokens # Retorna todos os termos, incluindo "de", "o", "a"
+    
+    stop_words = set(stopwords.words(lang))
+    # Adiciona stop words de inglês também para cobrir o REQ-B22
+    stop_words.update(stopwords.words('english'))
+    
+    filtered_tokens = [t for t in tokens if t.lower() not in stop_words and t.isalpha()]
+    return filtered_tokens
+
+
 if __name__ == "__main__":
     # Correr o processamento
     process_scraped_data()
+
