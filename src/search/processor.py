@@ -13,14 +13,15 @@ class TextProcessor:
         self.stemmer = PorterStemmer() 
         self.lemmatizer = WordNetLemmatizer() 
         
-        # REQ-B22: Carregar stop words para os dois idiomas
-        try:
-            self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('portuguese')))
-        except:
-            nltk.download('stopwords')
-            nltk.download('punkt')
-            nltk.download('wordnet')
-            self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('portuguese')))
+        # Faz os downloads silenciosamente (quiet=True) caso falte algum.
+        # Assim garantimos que o projeto corre perfeitamente no PC do professor!
+        nltk.download('stopwords', quiet=True)
+        nltk.download('punkt', quiet=True)
+        nltk.download('punkt_tab', quiet=True)
+        nltk.download('wordnet', quiet=True)
+        
+        # REQ-B22: Carregar stop words
+        self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('portuguese')))
 
     def clean_text(self, text, use_stemming=True, remove_stopwords=True):
         """REQ-B14, B18, B21: Tokenização, Stemming e Filtragem"""
@@ -89,14 +90,14 @@ def process_from_db(db_file='publications.db', output_file='src/search/processed
         }
         processed_list.append(processed_doc)
         
-        # Garantir que a pasta existe
-        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    # Garantir que a pasta existe
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(processed_list, f, ensure_ascii=False, indent=4)
         
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(processed_list, f, ensure_ascii=False, indent=4)
-            
-        conn.close()
-        print(f"Sucesso! Dados guardados em {output_file}")
+    conn.close()
+    print(f"Sucesso! Dados guardados em {output_file}")
 
 if __name__ == "__main__":
     process_from_db()

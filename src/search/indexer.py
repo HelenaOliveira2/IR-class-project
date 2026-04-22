@@ -103,8 +103,11 @@ class Indexer:
             
         print("Índice Invertido e Metadados guardados com sucesso!")
 
-def run_indexer():
-    # --- CORREÇÃO DE CAMINHO: Apontar para a pasta src/search ---
+def run_indexer(batch_size=100):
+    """
+    REQ-B59: Implementação de processamento em lotes (batch processing).
+    Processa a coleção em fatias para não sobrecarregar a memória RAM.
+    """
     input_path = 'src/search/processed_data.json'
     
     try:
@@ -116,7 +119,20 @@ def run_indexer():
 
     indexer = Indexer()
     indexer.load_existing_index()
-    indexer.build_index(processed_data)
+    
+    # --- REQ-B59: Lógica de Lotes (Batches) ---
+    total_docs = len(processed_data)
+    print(f"\n📦 A iniciar indexação em Lotes (Tamanho do Lote: {batch_size})...")
+    
+    for i in range(0, total_docs, batch_size):
+        # Cortar a lista numa fatia de tamanho 'batch_size'
+        batch = processed_data[i:i + batch_size]
+        print(f" -> A processar lote {i//batch_size + 1} (Docs {i} a {i + len(batch) - 1})...")
+        
+        # Constrói o índice apenas para esta fatia
+        indexer.build_index(batch)
+        
+    # Guarda o ficheiro gigante apenas uma vez no final
     indexer.save_index()
 
 if __name__ == "__main__":
