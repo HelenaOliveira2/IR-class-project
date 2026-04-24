@@ -1,6 +1,6 @@
 # logger.py
 import logging
-from scraper.config import settings
+from api.config import settings
 
 # Configuração básica de Logging
 logging.basicConfig(
