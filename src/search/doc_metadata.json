@@ -1,102 +1,336 @@
 {
-    "0": {
+    "1": {
         "title": "Foreword to the special section on recent advances in graphics and interaction",
-        "document_link": "N/A",
+        "authors": [
+            "Rodrigues",
+            "Nuno",
+            "Mendes",
+            "Daniel",
+            "Santos",
+            "Luís Paulo",
+            "Bouatouch",
+            "Kadi"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/aae6409f-cf8a-4961-bd5f-d57bddadc98e",
         "doi": "10.1016/j.cag.2021.12.006"
     },
-    "1": {
+    "2": {
         "title": "Ensemble metropolis light transport",
-        "document_link": "N/A",
+        "authors": [
+            "Bashford-Rogers",
+            "Thomas",
+            "Santos",
+            "Luís Paulo",
+            "Marnerides",
+            "Demetris",
+            "Debattista",
+            "Kurt"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/4a6a1f65-3f0d-44ee-8e95-0f957949e1f3",
         "doi": "10.1145/3472294"
     },
-    "2": {
+    "3": {
         "title": "NER in archival finding aids: extended",
-        "document_link": "N/A",
+        "authors": [
+            "Cunha",
+            "Luís Filipe da Costa",
+            "Ramalho",
+            "José Carlos"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/af79b188-3db8-4ff0-9560-0cf6d3d991fc",
         "doi": "10.3390/make4010003"
     },
-    "3": {
+    "4": {
         "title": "Heterogeneous implementation of a Voronoi cell-based SVP solver",
-        "document_link": "N/A",
+        "authors": [
+            "Falcão",
+            "Gabriel",
+            "Cabeleira",
+            "Filipe",
+            "Mariano",
+            "Artur",
+            "Santos",
+            "Luís Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/12918e95-f79a-424a-b00e-f54c7fb42205",
         "doi": "10.1109/ACCESS.2019.2939142"
     },
-    "4": {
+    "5": {
         "title": "SPELLing out energy leaks: Aiding developers locate energy inefficient code",
-        "document_link": "N/A",
+        "authors": [
+            "Pereira",
+            "Rui Alexandre Afonso",
+            "Carção",
+            "Tiago Alves",
+            "Couto",
+            "Marco Domingos Mendes",
+            "Cunha",
+            "Jácome",
+            "Fernandes",
+            "João Paulo",
+            "Saraiva",
+            "João"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/bf7d71cb-fc49-4f2e-9274-7b227c25d624",
         "doi": "10.1016/j.jss.2019.110463"
     },
-    "5": {
+    "6": {
         "title": "Metamorphosis – a topic maps based environment to handle heterogeneous information resources",
-        "document_link": "N/A",
+        "authors": [
+            "Ramalho",
+            "José Carlos",
+            "Librelotto",
+            "Giovani Rubert",
+            "Henriques",
+            "Pedro Rangel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/1ab06fe0-45a5-475f-993d-69c632eb44c5",
         "doi": "10.1007/11676904_2"
     },
-    "6": {
+    "7": {
         "title": "Predicting plateau pressure in intensive medicine for ventilated patients",
-        "document_link": "N/A",
+        "authors": [
+            "Oliveira",
+            "Sérgio",
+            "Portela",
+            "Filipe",
+            "Santos",
+            "Manuel",
+            "Machado",
+            "José Manuel",
+            "Abelha",
+            "António",
+            "Silva",
+            "Álvaro",
+            "Rua",
+            "Fernando"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/26132fe1-5c7e-4b86-b71d-fdc83d8d4159",
         "doi": "10.1007/978-3-319-16528-8_17"
     },
-    "7": {
+    "8": {
         "title": "Information systems assessment in pathologic anatomy service",
-        "document_link": "N/A",
+        "authors": [
+            "Novo",
+            "Ana",
+            "Duarte",
+            "Júlio",
+            "Portela",
+            "Filipe",
+            "Abelha",
+            "António",
+            "Santos",
+            "Manuel",
+            "Machado",
+            "José Manuel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/d286d4ad-5fec-49b9-ba8e-2d07ad277113",
         "doi": "10.1007/978-3-319-16528-8_19"
     },
-    "8": {
+    "9": {
         "title": "Step towards of a homemade business intelligence solution: A case study in textile industry",
-        "document_link": "N/A",
+        "authors": [
+            "Carvalho",
+            "Sandrina",
+            "Portela",
+            "Filipe",
+            "Santos",
+            "Manuel",
+            "Abelha",
+            "António",
+            "Machado",
+            "José Manuel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/695864cf-03af-44f1-ad8b-52f20f689588",
         "doi": "10.1007/978-3-319-16486-1_36"
     },
-    "9": {
+    "10": {
         "title": "An assessment of chronic kidney diseases",
-        "document_link": "N/A",
+        "authors": [
+            "Neves",
+            "José",
+            "Rosário Martins",
+            "M.",
+            "Vilhena",
+            "João",
+            "Neves",
+            "João",
+            "Gomes",
+            "Sabino",
+            "Abelha",
+            "António",
+            "Machado",
+            "José Manuel",
+            "Vicente",
+            "Henrique"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/ee7ec69f-b012-4559-b1cc-9a2550bb6f74",
         "doi": "10.1007/978-3-319-16486-1_18"
     },
-    "10": {
+    "11": {
         "title": "Logic programming and artificial neural networks in breast cancer detection",
-        "document_link": "N/A",
+        "authors": [
+            "Neves",
+            "José",
+            "Guimarães",
+            "Tiago",
+            "Gomes",
+            "Sabino",
+            "Vicente",
+            "Henrique",
+            "Santos",
+            "Mariana",
+            "Neves",
+            "João",
+            "Machado",
+            "José",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/c9e6c7cb-6253-46b9-b80e-d980dba537b8",
         "doi": "10.1007/978-3-319-19222-2_18"
     },
-    "11": {
+    "12": {
         "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
-        "document_link": "N/A",
+        "authors": [
+            "Cardoso",
+            "L.",
+            "Marins",
+            "F.",
+            "Magalhães",
+            "R.",
+            "Marins",
+            "N.",
+            "Oliveira",
+            "T.",
+            "Vicente",
+            "H.",
+            "Abelha",
+            "António",
+            "Machado",
+            "José Manuel",
+            "Neves",
+            "J."
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/b39ee01c-29f4-4652-85ef-a4b250e809b7",
         "doi": "10.1155/2015/467178"
     },
-    "12": {
-        "title": "Educase – intelligent system for pedagogical advising using case-based reasoning",
-        "document_link": "N/A",
-        "doi": "N/A"
-    },
     "13": {
-        "title": "Prototyping teams of affective agents in robocode",
-        "document_link": "N/A",
+        "title": "Educase – intelligent system for pedagogical advising using case-based reasoning",
+        "authors": [
+            "Moura",
+            "Elionai",
+            "Cunha",
+            "José António",
+            "Analide",
+            "Cesar"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/ae50eb78-6cb7-42a5-9de7-3b7c28f1df49",
         "doi": "N/A"
     },
     "14": {
-        "title": "Parallel evolutionary computation in bioinformatics applications",
-        "document_link": "N/A",
-        "doi": "10.1016/j.cmpb.2012.10.001"
-    },
-    "15": {
-        "title": "Uthrene, a radically new molecule?",
-        "document_link": "N/A",
-        "doi": "10.1039/c5cc01276g"
-    },
-    "16": {
-        "title": "Synergy in online dispute resolution and the need to protect privacy and personal data",
-        "document_link": "N/A",
+        "title": "Prototyping teams of affective agents in robocode",
+        "authors": [
+            "Rebelo",
+            "António",
+            "Catalão",
+            "Fábio",
+            "Alves",
+            "João",
+            "Marreiros",
+            "Goreti",
+            "Analide",
+            "Cesar",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/cb00734d-9c7f-4222-a0df-bad69f536917",
         "doi": "N/A"
     },
+    "15": {
+        "title": "Parallel evolutionary computation in bioinformatics applications",
+        "authors": [
+            "Pinho",
+            "Jorge",
+            "Sobral",
+            "João Luís Ferreira",
+            "Rocha",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/53db2176-59ae-47e8-a74a-71c5d16bb366",
+        "doi": "10.1016/j.cmpb.2012.10.001"
+    },
+    "16": {
+        "title": "Uthrene, a radically new molecule?",
+        "authors": [
+            "Melle-Franco",
+            "M."
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/19a2431e-fd6b-4b4b-ae2b-a13d05afa94d",
+        "doi": "10.1039/c5cc01276g"
+    },
     "17": {
-        "title": "Assessing road traffic expression",
-        "document_link": "N/A",
-        "doi": "10.9781/ijimai.2014.313"
+        "title": "Synergy in online dispute resolution and the need to protect privacy and personal data",
+        "authors": [
+            "Santos",
+            "Cristiana Teixeira",
+            "Andrade",
+            "Francisco Carneiro Pacheco",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/238bf6ce-c926-40d3-8b37-5d8fa0fa108d",
+        "doi": "N/A"
     },
     "18": {
-        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
-        "document_link": "N/A",
-        "doi": "10.1093/bib/bbs071"
+        "title": "Assessing road traffic expression",
+        "authors": [
+            "Silva",
+            "Fábio",
+            "Analide",
+            "César",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/9f025d96-2606-4d1f-a2f7-3e5c6c19dcb1",
+        "doi": "10.9781/ijimai.2014.313"
     },
     "19": {
+        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
+        "authors": [
+            "Faria",
+            "J. P.",
+            "Overbeek",
+            "R.",
+            "Xia",
+            "F.",
+            "Rocha",
+            "Miguel",
+            "Rocha",
+            "I.",
+            "Henry",
+            "C. S."
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/c5d84aab-442b-4f53-960a-3f9ab282dc70",
+        "doi": "10.1093/bib/bbs071"
+    },
+    "20": {
         "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
-        "document_link": "N/A",
+        "authors": [
+            "Silva",
+            "Fábio",
+            "Olivares",
+            "Teresa",
+            "Royo",
+            "Fernando",
+            "Vergara",
+            "M. A.",
+            "Analide",
+            "César"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/a5b4ad9b-67b5-447a-b72e-f7f0e7ca68b1",
         "doi": "10.1007/978-3-642-38622-0_21"
     }
 }

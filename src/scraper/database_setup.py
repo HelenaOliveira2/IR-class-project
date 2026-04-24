@@ -12,10 +12,11 @@ def setup_database(json_file='src/scraper/scraper_results.json', db_file='public
         CREATE TABLE IF NOT EXISTS documents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
+            abstract TEXT,
             year TEXT,
             doi TEXT,
-            abstract TEXT,
-            document_link TEXT
+            document_link TEXT,
+            authors TEXT  -- GARANTE QUE ESTA LINHA EXISTE
         )
     ''')
 
@@ -45,9 +46,17 @@ def setup_database(json_file='src/scraper/scraper_results.json', db_file='public
     for pub in publications:
         # Inserir Documento
         cursor.execute('''
-            INSERT INTO documents (title, year, doi, abstract, document_link)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (pub['title'], pub['year'], pub['doi'], pub['abstract'], pub['document_link']))
+            INSERT INTO documents (title, year, doi, abstract, document_link, authors)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (
+            pub['title'], 
+            pub['year'], 
+            pub['doi'], 
+            pub['abstract'], 
+            pub['document_link'], 
+            # Convertemos a lista de autores numa string para a coluna 'authors' da tabela 'documents'
+            ", ".join(pub['authors']) if isinstance(pub['authors'], list) else pub['authors']
+        ))
         
         doc_id = cursor.lastrowid
 

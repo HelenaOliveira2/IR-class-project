@@ -168,13 +168,24 @@ class UMinhoDSpace8Scraper:
             "authors": [], "keywords": [], "affiliations": [], "document_link": "N/A" 
         }
 
-        # REQ-B04: PDF Link
+        # REQ-B04 & REQ-B51: Link de Acesso ao Documento
         try:
-            pdf_link_elem = self.driver.find_elements(By.CSS_SELECTOR, "a[href*='/bitstream/'], a.download-button")
-            if pdf_link_elem:
-                data["document_link"] = pdf_link_elem[0].get_attribute("href")
-        except:
-            pass
+            # 1. Tenta encontrar o Handle/Link Permanente (mais fiável no RepositóriUM)
+            handle_elem = self.driver.find_elements(By.XPATH, "//div[contains(@class, 'item-location')]//a")
+            
+            if handle_elem:
+                data["document_link"] = handle_elem[0].get_attribute("href")
+            else:
+                # 2. Se não encontrar o handle, tenta o link do bitstream/PDF que já tinhas
+                pdf_link_elem = self.driver.find_elements(By.CSS_SELECTOR, "a[href*='/bitstream/'], a.download-button")
+                if pdf_link_elem:
+                    data["document_link"] = pdf_link_elem[0].get_attribute("href")
+                else:
+                    # 3. Fallback: Usa o URL atual da página onde o Selenium está
+                    data["document_link"] = self.driver.current_url
+        except Exception as e:
+            print(f"Erro ao capturar link: {e}")
+            data["document_link"] = "N/A"
 
         # 2. VISITA A PÁGINA /FULL (Para Metadados)
         try:
@@ -190,7 +201,10 @@ class UMinhoDSpace8Scraper:
                 "dc.contributor.author": "authors",
                 "dc.description.abstract": "abstract",
                 "dc.subject": "keywords",
-                "dc.contributor.affiliation": "affiliations"
+                "dc.contributor.affiliation": "affiliations",
+                "dc.contributor.advisorAffiliation": "affiliations",
+                "dc.ugent.affiliation": "affiliations",
+                "dc.description.sponsorship": "affiliations"
             }
 
             # RESOLUÇÃO DO STALE ELEMENT: 
@@ -215,6 +229,11 @@ class UMinhoDSpace8Scraper:
                         if val not in data[key]: data[key].append(val)
                     else:
                         data[key] = val
+
+            # --- TRUQUE FINAL (Se continuar vazio, assume UMinho pelo contexto) ---
+            if not data["affiliations"]:
+                # Se o paper está no repositório da UMinho, é seguro assumir a instituição
+                data["affiliations"].append("Universidade do Minho")
 
         except Exception as e:
             print(f"Erro ao processar {url}: {e}")

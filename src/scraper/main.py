@@ -1,5 +1,6 @@
 import json
 import scraper  # Em vez de import src.scraper.scraper
+from database_setup import setup_database
 
 def main():
     # Example collection:  https://repositorium.uminho.pt/collections/690f7814-a67b-4f27-8fff-6b33581d1a91/search
@@ -22,6 +23,11 @@ def main():
         json.dump(final_results, f, ensure_ascii=False, indent=4)
 
     print(f"Done! {len(final_results)} items saved.")
+
+    # REQ-B09: Garantir que a base de dados e as tabelas existem antes de tudo
+    print("--- Verificando Infraestrutura ---")
+    setup_database() 
+    print("Base de dados pronta para receber dados.\n")
 
 if __name__ == "__main__":
     main()

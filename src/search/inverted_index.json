@@ -2,6860 +2,6860 @@
     "foreword": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "special": {
         "df": 1,
         "postings": {
-            "0": 2
+            "1": 2
         },
         "skip_pointers": {}
     },
     "section": {
         "df": 1,
         "postings": {
-            "0": 2
+            "1": 2
         },
         "skip_pointers": {}
     },
     "recent": {
         "df": 1,
         "postings": {
-            "0": 2
+            "1": 2
         },
         "skip_pointers": {}
     },
     "advanc": {
         "df": 2,
         "postings": {
-            "0": 2,
-            "18": 1
+            "1": 2,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "graphic": {
         "df": 1,
         "postings": {
-            "0": 4
+            "1": 4
         },
         "skip_pointers": {}
     },
     "interact": {
         "df": 2,
         "postings": {
-            "0": 2,
-            "7": 1
+            "1": 2,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "teract": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "featur": {
         "df": 2,
         "postings": {
-            "0": 1,
-            "7": 1
+            "1": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "paper": {
         "df": 6,
         "postings": {
-            "0": 1,
-            "3": 1,
+            "1": 1,
             "4": 1,
             "5": 1,
-            "12": 1,
-            "19": 1
+            "6": 1,
+            "13": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "0": 4,
-            "4": 12
+            "1": 5,
+            "5": 13
         }
     },
     "submit": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "comput": {
         "df": 8,
         "postings": {
-            "0": 1,
-            "4": 1,
-            "9": 1,
+            "1": 1,
+            "5": 1,
             "10": 1,
-            "11": 2,
-            "13": 1,
-            "14": 2,
-            "17": 2
+            "11": 1,
+            "12": 2,
+            "14": 1,
+            "15": 2,
+            "18": 2
         },
         "skip_pointers": {
-            "0": 9,
-            "9": 11,
-            "11": 14
+            "1": 10,
+            "10": 12,
+            "12": 15
         }
     },
     "c": {
         "df": 2,
         "postings": {
-            "0": 1,
-            "4": 1
+            "1": 1,
+            "5": 1
         },
         "skip_pointers": {}
     },
     "g": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "present": {
         "df": 9,
         "postings": {
-            "0": 1,
-            "3": 1,
-            "6": 1,
-            "8": 2,
-            "9": 1,
+            "1": 1,
+            "4": 1,
+            "7": 1,
+            "9": 2,
             "10": 1,
-            "13": 1,
-            "17": 1,
-            "19": 1
+            "11": 1,
+            "14": 1,
+            "18": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "0": 8,
-            "8": 13
+            "1": 9,
+            "9": 14
         }
     },
     "edit": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "intern": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "confer": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "icgi": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "held": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "novemb": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "faculti": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "engin": {
         "df": 2,
         "postings": {
-            "0": 1,
-            "18": 1
+            "1": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "univers": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "porto": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "portug": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "joint": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "organ": {
         "df": 4,
         "postings": {
-            "0": 1,
             "1": 1,
-            "7": 1,
-            "8": 2
+            "2": 1,
+            "8": 1,
+            "9": 2
         },
         "skip_pointers": {
-            "0": 7
+            "1": 8
         }
     },
     "eurograph": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "portugues": {
         "df": 2,
         "postings": {
-            "0": 1,
-            "2": 2
+            "1": 1,
+            "3": 2
         },
         "skip_pointers": {}
     },
     "chapter": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "gpcg": {
         "df": 1,
         "postings": {
-            "0": 1
+            "1": 1
         },
         "skip_pointers": {}
     },
     "ensembl": {
         "df": 1,
         "postings": {
-            "1": 4
+            "2": 4
         },
         "skip_pointers": {}
     },
     "metropoli": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "light": {
         "df": 1,
         "postings": {
-            "1": 3
+            "2": 3
         },
         "skip_pointers": {}
     },
     "transport": {
         "df": 2,
         "postings": {
-            "1": 2,
-            "17": 2
+            "2": 2,
+            "18": 2
         },
         "skip_pointers": {}
     },
     "articl": {
         "df": 3,
         "postings": {
-            "1": 1,
-            "8": 1,
-            "19": 1
+            "2": 1,
+            "9": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "1": 8,
-            "8": 19
+            "2": 9,
+            "9": 20
         }
     },
     "propos": {
         "df": 8,
         "postings": {
-            "1": 1,
-            "3": 1,
+            "2": 1,
             "4": 1,
-            "8": 1,
+            "5": 1,
             "9": 1,
-            "12": 1,
+            "10": 1,
             "13": 1,
-            "14": 2
+            "14": 1,
+            "15": 2
         },
         "skip_pointers": {
-            "1": 4,
-            "4": 9,
-            "9": 13
+            "2": 5,
+            "5": 10,
+            "10": 14
         }
     },
     "markov": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "chain": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "mont": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "carlo": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "mcmc": {
         "df": 1,
         "postings": {
-            "1": 2
+            "2": 2
         },
         "skip_pointers": {}
     },
     "render": {
         "df": 1,
         "postings": {
-            "1": 3
+            "2": 3
         },
         "skip_pointers": {}
     },
     "algorithm": {
         "df": 5,
         "postings": {
-            "1": 2,
-            "2": 1,
-            "3": 3,
-            "14": 1,
-            "19": 1
+            "2": 2,
+            "3": 1,
+            "4": 3,
+            "15": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "1": 3,
-            "3": 19
+            "2": 4,
+            "4": 20
         }
     },
     "base": {
         "df": 11,
         "postings": {
-            "1": 3,
-            "3": 2,
-            "4": 1,
+            "2": 3,
+            "4": 2,
             "5": 1,
-            "8": 1,
+            "6": 1,
             "9": 1,
             "10": 1,
-            "11": 2,
-            "13": 1,
-            "14": 2,
-            "18": 1
+            "11": 1,
+            "12": 2,
+            "14": 1,
+            "15": 2,
+            "19": 1
         },
         "skip_pointers": {
-            "1": 5,
-            "5": 10,
-            "10": 14
+            "2": 6,
+            "6": 11,
+            "11": 15
         }
     },
     "famili": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "guid": {
         "df": 1,
         "postings": {
-            "1": 3
+            "2": 3
         },
         "skip_pointers": {}
     },
     "transit": {
         "df": 1,
         "postings": {
-            "1": 2
+            "2": 2
         },
         "skip_pointers": {}
     },
     "kernel": {
         "df": 1,
         "postings": {
-            "1": 3
+            "2": 3
         },
         "skip_pointers": {}
     },
     "exploit": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "properti": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "path": {
         "df": 1,
         "postings": {
-            "1": 5
+            "2": 5
         },
         "skip_pointers": {}
     },
     "distribut": {
         "df": 1,
         "postings": {
-            "1": 2
+            "2": 2
         },
         "skip_pointers": {}
     },
     "accord": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "scene": {
         "df": 1,
         "postings": {
-            "1": 2
+            "2": 2
         },
         "skip_pointers": {}
     },
     "util": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "inform": {
         "df": 9,
         "postings": {
-            "1": 2,
             "2": 2,
-            "5": 4,
-            "7": 3,
-            "8": 2,
+            "3": 2,
+            "6": 4,
+            "8": 3,
             "9": 2,
-            "11": 1,
-            "17": 1,
-            "19": 1
+            "10": 2,
+            "12": 1,
+            "18": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "1": 7,
-            "7": 11
+            "2": 8,
+            "8": 12
         }
     },
     "make": {
         "df": 8,
         "postings": {
-            "1": 2,
-            "4": 1,
-            "8": 1,
-            "12": 1,
+            "2": 2,
+            "5": 1,
+            "9": 1,
             "13": 1,
-            "14": 2,
-            "15": 1,
-            "17": 1
+            "14": 1,
+            "15": 2,
+            "16": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "1": 8,
-            "8": 13,
-            "13": 15
+            "2": 9,
+            "9": 14,
+            "14": 16
         }
     },
     "decis": {
         "df": 6,
         "postings": {
-            "1": 2,
-            "8": 2,
-            "9": 1,
+            "2": 2,
+            "9": 2,
             "10": 1,
-            "13": 1,
-            "17": 2
+            "11": 1,
+            "14": 1,
+            "18": 2
         },
         "skip_pointers": {
-            "1": 9,
-            "9": 13
+            "2": 10,
+            "10": 14
         }
     },
     "local": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "4": 1
+            "2": 1,
+            "5": 1
         },
         "skip_pointers": {}
     },
     "sampl": {
         "df": 1,
         "postings": {
-            "1": 2
+            "2": 2
         },
         "skip_pointers": {}
     },
     "critic": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "approach": {
         "df": 8,
         "postings": {
-            "1": 1,
-            "5": 1,
-            "8": 1,
+            "2": 1,
+            "6": 1,
             "9": 1,
             "10": 1,
-            "11": 2,
-            "14": 1,
-            "17": 2
+            "11": 1,
+            "12": 2,
+            "15": 1,
+            "18": 2
         },
         "skip_pointers": {
-            "1": 8,
-            "8": 10,
-            "10": 14
+            "2": 9,
+            "9": 11,
+            "11": 15
         }
     },
     "requir": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "14": 1
+            "2": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "cach": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "world": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "space": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "save": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "time": {
         "df": 3,
         "postings": {
-            "1": 1,
-            "11": 1,
-            "17": 2
+            "2": 1,
+            "12": 1,
+            "18": 2
         },
         "skip_pointers": {
-            "1": 11,
-            "11": 17
+            "2": 12,
+            "12": 18
         }
     },
     "memori": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "3": 2
+            "2": 1,
+            "4": 2
         },
         "skip_pointers": {}
     },
     "yet": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "8": 1
+            "2": 1,
+            "9": 1
         },
         "skip_pointers": {}
     },
     "abl": {
         "df": 6,
         "postings": {
-            "1": 1,
-            "3": 1,
+            "2": 1,
             "4": 1,
-            "6": 1,
+            "5": 1,
             "7": 1,
-            "14": 1
+            "8": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "1": 4,
-            "4": 7
+            "2": 5,
+            "5": 8
         }
     },
     "whole": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "show": {
         "df": 8,
         "postings": {
-            "1": 1,
-            "3": 3,
-            "4": 1,
-            "8": 1,
+            "2": 1,
+            "4": 3,
+            "5": 1,
             "9": 1,
-            "12": 1,
-            "14": 1,
-            "19": 1
+            "10": 1,
+            "13": 1,
+            "15": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "1": 4,
-            "4": 9,
-            "9": 14
+            "2": 5,
+            "5": 10,
+            "10": 15
         }
     },
     "implement": {
         "df": 6,
         "postings": {
-            "1": 1,
-            "3": 1,
+            "2": 1,
             "4": 1,
-            "7": 2,
-            "8": 1,
-            "13": 2
+            "5": 1,
+            "8": 2,
+            "9": 1,
+            "14": 2
         },
         "skip_pointers": {
-            "1": 4,
-            "4": 8
+            "2": 5,
+            "5": 9
         }
     },
     "effici": {
         "df": 4,
         "postings": {
-            "1": 1,
-            "4": 2,
-            "7": 1,
-            "14": 1
+            "2": 1,
+            "5": 2,
+            "8": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "1": 7
+            "2": 8
         }
     },
     "design": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "7": 1
+            "2": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "care": {
         "df": 2,
         "postings": {
-            "1": 1,
-            "6": 1
+            "2": 1,
+            "7": 1
         },
         "skip_pointers": {}
     },
     "chosen": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "subset": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "easi": {
         "df": 3,
         "postings": {
-            "1": 1,
             "2": 1,
-            "14": 1
+            "3": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "1": 2,
-            "2": 14
+            "2": 3,
+            "3": 15
         }
     },
     "parallel": {
         "df": 3,
         "postings": {
-            "1": 1,
-            "3": 1,
-            "14": 6
+            "2": 1,
+            "4": 1,
+            "15": 6
         },
         "skip_pointers": {
-            "1": 3,
-            "3": 14
+            "2": 4,
+            "4": 15
         }
     },
     "lead": {
         "df": 5,
         "postings": {
-            "1": 1,
-            "6": 1,
+            "2": 1,
             "7": 1,
-            "11": 1,
-            "19": 1
+            "8": 1,
+            "12": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "1": 7,
-            "7": 19
+            "2": 8,
+            "8": 20
         }
     },
     "improv": {
         "df": 7,
         "postings": {
-            "1": 1,
-            "3": 1,
+            "2": 1,
             "4": 1,
-            "7": 1,
-            "9": 1,
-            "17": 2,
-            "18": 1
+            "5": 1,
+            "8": 1,
+            "10": 1,
+            "18": 2,
+            "19": 1
         },
         "skip_pointers": {
-            "1": 4,
-            "4": 9,
-            "9": 18
+            "2": 5,
+            "5": 10,
+            "10": 19
         }
     },
     "varianc": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "varieti": {
         "df": 1,
         "postings": {
-            "1": 1
+            "2": 1
         },
         "skip_pointers": {}
     },
     "ner": {
         "df": 1,
         "postings": {
-            "2": 2
+            "3": 2
         },
         "skip_pointers": {}
     },
     "archiv": {
         "df": 2,
         "postings": {
-            "2": 4,
-            "5": 1
+            "3": 4,
+            "6": 1
         },
         "skip_pointers": {}
     },
     "find": {
         "df": 2,
         "postings": {
-            "2": 3,
-            "12": 1
+            "3": 3,
+            "13": 1
         },
         "skip_pointers": {}
     },
     "aid": {
         "df": 2,
         "postings": {
-            "2": 3,
-            "4": 1
+            "3": 3,
+            "5": 1
         },
         "skip_pointers": {}
     },
     "extend": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "amount": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "preserv": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "increas": {
         "df": 5,
         "postings": {
-            "2": 1,
             "3": 1,
-            "14": 1,
-            "17": 2,
-            "19": 1
+            "4": 1,
+            "15": 1,
+            "18": 2,
+            "20": 1
         },
         "skip_pointers": {
-            "2": 14,
-            "14": 19
+            "3": 15,
+            "15": 20
         }
     },
     "year": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "9": 1
+            "3": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "document": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "5": 1
+            "3": 1,
+            "6": 1
         },
         "skip_pointers": {}
     },
     "repres": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "18": 1
+            "3": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "nation": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "heritag": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "high": {
         "df": 3,
         "postings": {
-            "2": 3,
-            "6": 1,
-            "18": 2
+            "3": 3,
+            "7": 1,
+            "19": 2
         },
         "skip_pointers": {
-            "2": 6,
-            "6": 18
+            "3": 7,
+            "7": 19
         }
     },
     "import": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "19": 1
+            "3": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "portray": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "countri": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "17": 1
+            "3": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "histori": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "9": 1
+            "3": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "current": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "17": 2
+            "3": 1,
+            "18": 2
         },
         "skip_pointers": {}
     },
     "made": {
         "df": 3,
         "postings": {
-            "2": 2,
-            "7": 1,
-            "11": 1
+            "3": 2,
+            "8": 1,
+            "12": 1
         },
         "skip_pointers": {
-            "2": 7,
-            "7": 11
+            "3": 8,
+            "8": 12
         }
     },
     "avail": {
         "df": 2,
         "postings": {
-            "2": 2,
-            "3": 2
+            "3": 2,
+            "4": 2
         },
         "skip_pointers": {}
     },
     "public": {
         "df": 1,
         "postings": {
-            "2": 2
+            "3": 2
         },
         "skip_pointers": {}
     },
     "digit": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "format": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "howev": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "7": 1,
-            "8": 1
+            "3": 1,
+            "8": 1,
+            "9": 1
         },
         "skip_pointers": {
-            "2": 7,
-            "7": 8
+            "3": 8,
+            "8": 9
         }
     },
     "data": {
         "df": 8,
         "postings": {
-            "2": 1,
-            "5": 2,
-            "6": 3,
-            "8": 2,
-            "16": 1,
-            "17": 2,
-            "18": 6,
-            "19": 1
+            "3": 1,
+            "6": 2,
+            "7": 3,
+            "9": 2,
+            "17": 1,
+            "18": 2,
+            "19": 6,
+            "20": 1
         },
         "skip_pointers": {
-            "2": 6,
-            "6": 16,
-            "16": 18
+            "3": 7,
+            "7": 17,
+            "17": 19
         }
     },
     "annot": {
         "df": 2,
         "postings": {
-            "2": 2,
-            "18": 1
+            "3": 2,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "alway": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "7": 1
+            "3": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "analyz": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "17": 1
+            "3": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "content": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "work": {
         "df": 9,
         "postings": {
-            "2": 1,
             "3": 1,
-            "7": 1,
-            "9": 1,
-            "11": 1,
+            "4": 1,
+            "8": 1,
+            "10": 1,
             "12": 1,
             "13": 1,
-            "14": 2,
-            "17": 1
+            "14": 1,
+            "15": 2,
+            "18": 1
         },
         "skip_pointers": {
-            "2": 9,
-            "9": 13
+            "3": 10,
+            "10": 14
         }
     },
     "name": {
         "df": 2,
         "postings": {
-            "2": 3,
-            "9": 1
+            "3": 3,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "entiti": {
         "df": 1,
         "postings": {
-            "2": 4
+            "3": 4
         },
         "skip_pointers": {}
     },
     "recognit": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "solut": {
         "df": 4,
         "postings": {
-            "2": 1,
-            "7": 1,
-            "8": 2,
-            "12": 2
+            "3": 1,
+            "8": 1,
+            "9": 2,
+            "13": 2
         },
         "skip_pointers": {
-            "2": 8
+            "3": 9
         }
     },
     "creat": {
         "df": 3,
         "postings": {
-            "2": 2,
-            "13": 1,
-            "17": 1
+            "3": 2,
+            "14": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "2": 13,
-            "13": 17
+            "3": 14,
+            "14": 18
         }
     },
     "allow": {
         "df": 4,
         "postings": {
-            "2": 1,
-            "8": 1,
+            "3": 1,
             "9": 1,
-            "14": 1
+            "10": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "2": 9
+            "3": 10
         }
     },
     "identif": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "19": 1
+            "3": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "classif": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "6": 1
+            "3": 1,
+            "7": 1
         },
         "skip_pointers": {}
     },
     "sever": {
         "df": 2,
         "postings": {
-            "2": 3,
-            "14": 1
+            "3": 3,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "translat": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "crucial": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "context": {
         "df": 2,
         "postings": {
-            "2": 2,
-            "14": 1
+            "3": 2,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "confid": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "result": {
         "df": 7,
         "postings": {
-            "2": 2,
             "3": 2,
-            "4": 1,
-            "8": 1,
-            "13": 1,
-            "18": 1,
-            "19": 1
+            "4": 2,
+            "5": 1,
+            "9": 1,
+            "14": 1,
+            "19": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "2": 4,
-            "4": 13,
-            "13": 19
+            "3": 5,
+            "5": 14,
+            "14": 20
         }
     },
     "use": {
         "df": 13,
         "postings": {
-            "2": 3,
-            "3": 8,
-            "4": 3,
-            "5": 1,
-            "6": 4,
-            "7": 2,
-            "8": 1,
-            "12": 4,
-            "13": 2,
-            "14": 3,
-            "17": 3,
-            "18": 1,
-            "19": 2
+            "3": 3,
+            "4": 8,
+            "5": 3,
+            "6": 1,
+            "7": 4,
+            "8": 2,
+            "9": 1,
+            "13": 4,
+            "14": 2,
+            "15": 3,
+            "18": 3,
+            "19": 1,
+            "20": 2
         },
         "skip_pointers": {
-            "2": 5,
-            "5": 8,
-            "8": 14,
-            "14": 19
+            "3": 6,
+            "6": 9,
+            "9": 15,
+            "15": 20
         }
     },
     "purpos": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "exampl": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "creation": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "smart": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "12": 1,
-            "19": 1
+            "3": 1,
+            "13": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "2": 12,
-            "12": 19
+            "3": 13,
+            "13": 20
         }
     },
     "brows": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "tool": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "4": 2,
-            "9": 1
+            "3": 1,
+            "5": 2,
+            "10": 1
         },
         "skip_pointers": {
-            "2": 4,
-            "4": 9
+            "3": 5,
+            "5": 10
         }
     },
     "link": {
         "df": 1,
         "postings": {
-            "2": 2
+            "3": 2
         },
         "skip_pointers": {}
     },
     "record": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "7": 1
+            "3": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "techniqu": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "4": 5,
-            "19": 3
+            "3": 1,
+            "5": 5,
+            "20": 3
         },
         "skip_pointers": {
-            "2": 4,
-            "4": 19
+            "3": 5,
+            "5": 20
         }
     },
     "order": {
         "df": 8,
         "postings": {
-            "2": 1,
             "3": 1,
             "4": 1,
-            "6": 2,
-            "7": 1,
-            "8": 3,
-            "9": 1,
-            "13": 1
+            "5": 1,
+            "7": 2,
+            "8": 1,
+            "9": 3,
+            "10": 1,
+            "14": 1
         },
         "skip_pointers": {
-            "2": 4,
-            "4": 7,
-            "7": 9
+            "3": 5,
+            "5": 8,
+            "8": 10
         }
     },
     "achiev": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "5": 2
+            "3": 1,
+            "6": 2
         },
         "skip_pointers": {}
     },
     "score": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "corpora": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "train": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "machin": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "3": 1
+            "3": 1,
+            "4": 1
         },
         "skip_pointers": {}
     },
     "learn": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "12": 1
+            "3": 1,
+            "13": 1
         },
         "skip_pointers": {}
     },
     "domain": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "also": {
         "df": 6,
         "postings": {
-            "2": 1,
             "3": 1,
             "4": 1,
-            "10": 1,
-            "14": 2,
-            "17": 2
+            "5": 1,
+            "11": 1,
+            "15": 2,
+            "18": 2
         },
         "skip_pointers": {
-            "2": 4,
-            "4": 14
+            "3": 5,
+            "5": 15
         }
     },
     "differ": {
         "df": 7,
         "postings": {
-            "2": 1,
-            "5": 2,
-            "8": 1,
-            "10": 1,
+            "3": 1,
+            "6": 2,
+            "9": 1,
             "11": 1,
-            "13": 2,
-            "18": 1
+            "12": 1,
+            "14": 2,
+            "19": 1
         },
         "skip_pointers": {
-            "2": 8,
-            "8": 11,
-            "11": 18
+            "3": 9,
+            "9": 12,
+            "12": 19
         }
     },
     "architectur": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "8": 1,
-            "14": 3
+            "3": 1,
+            "9": 1,
+            "15": 3
         },
         "skip_pointers": {
-            "2": 8,
-            "8": 14
+            "3": 9,
+            "9": 15
         }
     },
     "cnn": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "lstm": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "maximum": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "entropi": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "model": {
         "df": 10,
         "postings": {
-            "2": 2,
-            "6": 2,
-            "7": 1,
-            "9": 1,
+            "3": 2,
+            "7": 2,
+            "8": 1,
             "10": 1,
-            "13": 2,
-            "14": 1,
+            "11": 1,
+            "14": 2,
             "15": 1,
-            "17": 1,
-            "18": 7
+            "16": 1,
+            "18": 1,
+            "19": 7
         },
         "skip_pointers": {
-            "2": 9,
-            "9": 14,
-            "14": 18
+            "3": 10,
+            "10": 15,
+            "15": 19
         }
     },
     "final": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "18": 1
+            "3": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "dataset": {
         "df": 3,
         "postings": {
-            "2": 1,
-            "6": 1,
-            "9": 1
+            "3": 1,
+            "7": 1,
+            "10": 1
         },
         "skip_pointers": {
-            "2": 6,
-            "6": 9
+            "3": 7,
+            "7": 10
         }
     },
     "ml": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "develop": {
         "df": 7,
         "postings": {
-            "2": 1,
-            "4": 4,
-            "9": 2,
+            "3": 1,
+            "5": 4,
             "10": 2,
-            "11": 1,
+            "11": 2,
             "12": 1,
-            "14": 1
+            "13": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "2": 9,
-            "9": 11,
-            "11": 14
+            "3": 10,
+            "10": 12,
+            "12": 15
         }
     },
     "web": {
         "df": 2,
         "postings": {
-            "2": 1,
-            "12": 1
+            "3": 1,
+            "13": 1
         },
         "skip_pointers": {}
     },
     "platform": {
         "df": 4,
         "postings": {
-            "2": 1,
-            "3": 3,
-            "8": 1,
-            "14": 1
+            "3": 1,
+            "4": 3,
+            "9": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "2": 8
+            "3": 9
         }
     },
     "di": {
         "df": 1,
         "postings": {
-            "2": 1
+            "3": 1
         },
         "skip_pointers": {}
     },
     "heterogen": {
         "df": 2,
         "postings": {
-            "3": 3,
-            "5": 2
+            "4": 3,
+            "6": 2
         },
         "skip_pointers": {}
     },
     "voronoi": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "cellbas": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "svp": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "solver": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "new": {
         "df": 4,
         "postings": {
-            "3": 1,
-            "12": 2,
-            "15": 1,
-            "18": 1
+            "4": 1,
+            "13": 2,
+            "16": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "3": 15
+            "4": 16
         }
     },
     "cpugpu": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "attack": {
         "df": 1,
         "postings": {
-            "3": 4
+            "4": 4
         },
         "skip_pointers": {}
     },
     "latticebas": {
         "df": 1,
         "postings": {
-            "3": 4
+            "4": 4
         },
         "skip_pointers": {}
     },
     "postquantum": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "cryptosystem": {
         "df": 1,
         "postings": {
-            "3": 3
+            "4": 3
         },
         "skip_pointers": {}
     },
     "shortest": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "vector": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "problem": {
         "df": 8,
         "postings": {
-            "3": 2,
-            "6": 2,
-            "7": 1,
-            "9": 1,
-            "11": 2,
-            "12": 1,
-            "14": 2,
-            "17": 2
+            "4": 2,
+            "7": 2,
+            "8": 1,
+            "10": 1,
+            "12": 2,
+            "13": 1,
+            "15": 2,
+            "18": 2
         },
         "skip_pointers": {
-            "3": 7,
-            "7": 11,
-            "11": 14
+            "4": 8,
+            "8": 12,
+            "12": 15
         }
     },
     "central": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "cryptanalysi": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "best": {
         "df": 4,
         "postings": {
-            "3": 1,
-            "6": 1,
+            "4": 1,
             "7": 1,
-            "12": 1
+            "8": 1,
+            "13": 1
         },
         "skip_pointers": {
-            "3": 7
+            "4": 8
         }
     },
     "knowledg": {
         "df": 5,
         "postings": {
-            "3": 1,
-            "9": 1,
+            "4": 1,
             "10": 1,
-            "11": 2,
-            "17": 1
+            "11": 1,
+            "12": 2,
+            "18": 1
         },
         "skip_pointers": {
-            "3": 10,
-            "10": 17
+            "4": 11,
+            "11": 18
         }
     },
     "first": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "6": 1
+            "4": 1,
+            "7": 1
         },
         "skip_pointers": {}
     },
     "svpattack": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "cpu": {
         "df": 1,
         "postings": {
-            "3": 3
+            "4": 3
         },
         "skip_pointers": {}
     },
     "gpu": {
         "df": 1,
         "postings": {
-            "3": 8
+            "4": 8
         },
         "skip_pointers": {}
     },
     "simultan": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "voronoicel": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "previou": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "suitabl": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "11": 1
+            "4": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "massiv": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "scenario": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "increment": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "12": 1
+            "4": 1,
+            "13": 1
         },
         "skip_pointers": {}
     },
     "overal": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "17": 1
+            "4": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "system": {
         "df": 11,
         "postings": {
-            "3": 1,
-            "4": 2,
-            "5": 1,
-            "7": 3,
-            "8": 2,
-            "9": 1,
+            "4": 1,
+            "5": 2,
+            "6": 1,
+            "8": 3,
+            "9": 2,
             "10": 1,
-            "11": 2,
-            "12": 4,
-            "13": 1,
-            "17": 1
+            "11": 1,
+            "12": 2,
+            "13": 4,
+            "14": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "3": 7,
-            "7": 10,
-            "10": 13
+            "4": 8,
+            "8": 11,
+            "11": 14
         }
     },
     "effect": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "7": 1
+            "4": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "typic": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "bottleneck": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "perform": {
         "df": 6,
         "postings": {
-            "3": 1,
             "4": 1,
-            "9": 1,
-            "13": 1,
+            "5": 1,
+            "10": 1,
             "14": 1,
-            "18": 1
+            "15": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "3": 9,
-            "9": 14
+            "4": 10,
+            "10": 15
         }
     },
     "success": {
         "df": 2,
         "postings": {
-            "3": 2,
-            "8": 1
+            "4": 2,
+            "9": 1
         },
         "skip_pointers": {}
     },
     "coprocessor": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "acceler": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "convent": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "take": {
         "df": 5,
         "postings": {
-            "3": 1,
-            "6": 1,
+            "4": 1,
             "7": 1,
             "8": 1,
-            "11": 1
+            "9": 1,
+            "12": 1
         },
         "skip_pointers": {
-            "3": 7,
-            "7": 11
+            "4": 8,
+            "8": 12
         }
     },
     "advantag": {
         "df": 3,
         "postings": {
-            "3": 1,
-            "8": 1,
-            "11": 1
+            "4": 1,
+            "9": 1,
+            "12": 1
         },
         "skip_pointers": {
-            "3": 8,
-            "8": 11
+            "4": 9,
+            "9": 12
         }
     },
     "multipl": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "experiment": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "19": 1
+            "4": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "speedup": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "host": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "intel": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "xeon": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "core": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "socket": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "gain": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "thread": {
         "df": 1,
         "postings": {
-            "3": 2
+            "4": 2
         },
         "skip_pointers": {}
     },
     "reserv": {
         "df": 2,
         "postings": {
-            "3": 1,
-            "4": 1
+            "4": 1,
+            "5": 1
         },
         "skip_pointers": {}
     },
     "orchestr": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "compar": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "singlecpu": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "execut": {
         "df": 3,
         "postings": {
-            "3": 1,
             "4": 1,
-            "14": 1
+            "5": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "3": 4,
-            "4": 14
+            "4": 5,
+            "5": 15
         }
     },
     "entir": {
         "df": 1,
         "postings": {
-            "3": 1
+            "4": 1
         },
         "skip_pointers": {}
     },
     "spell": {
         "df": 1,
         "postings": {
-            "4": 2
+            "5": 2
         },
         "skip_pointers": {}
     },
     "energi": {
         "df": 1,
         "postings": {
-            "4": 12
+            "5": 12
         },
         "skip_pointers": {}
     },
     "leak": {
         "df": 1,
         "postings": {
-            "4": 2
+            "5": 2
         },
         "skip_pointers": {}
     },
     "locat": {
         "df": 3,
         "postings": {
-            "4": 1,
-            "17": 1,
-            "18": 1
+            "5": 1,
+            "18": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 17,
-            "17": 18
+            "5": 18,
+            "18": 19
         }
     },
     "ineffici": {
         "df": 1,
         "postings": {
-            "4": 2
+            "5": 2
         },
         "skip_pointers": {}
     },
     "code": {
         "df": 2,
         "postings": {
-            "4": 6,
-            "14": 1
+            "5": 6,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "although": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "9": 2
+            "5": 1,
+            "10": 2
         },
         "skip_pointers": {}
     },
     "hardwar": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "gener": {
         "df": 3,
         "postings": {
-            "4": 1,
             "5": 1,
-            "17": 1
+            "6": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "4": 5,
-            "5": 17
+            "5": 6,
+            "6": 18
         }
     },
     "seen": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "main": {
         "df": 4,
         "postings": {
-            "4": 1,
-            "6": 1,
-            "9": 1,
-            "11": 1
+            "5": 1,
+            "7": 1,
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {
-            "4": 9
+            "5": 10
         }
     },
     "culprit": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "usag": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "softwar": {
         "df": 1,
         "postings": {
-            "4": 4
+            "5": 4
         },
         "skip_pointers": {}
     },
     "tremend": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "impact": {
         "df": 3,
         "postings": {
-            "4": 1,
-            "13": 1,
-            "18": 1
+            "5": 1,
+            "14": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 13,
-            "13": 18
+            "5": 14,
+            "14": 19
         }
     },
     "spent": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "unfortun": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "still": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "10": 1
+            "5": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "enough": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "support": {
         "df": 6,
         "postings": {
-            "4": 1,
-            "6": 1,
-            "8": 1,
+            "5": 1,
+            "7": 1,
             "9": 1,
             "10": 1,
-            "11": 1
+            "11": 1,
+            "12": 1
         },
         "skip_pointers": {
-            "4": 8,
-            "8": 10
+            "5": 9,
+            "9": 11
         }
     },
     "energyawarethi": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "detect": {
         "df": 3,
         "postings": {
-            "4": 1,
-            "10": 2,
-            "11": 2
+            "5": 1,
+            "11": 2,
+            "12": 2
         },
         "skip_pointers": {
-            "4": 10,
-            "10": 11
+            "5": 11,
+            "11": 12
         }
     },
     "fragment": {
         "df": 2,
         "postings": {
-            "4": 2,
-            "11": 1
+            "5": 2,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "sourc": {
         "df": 3,
         "postings": {
-            "4": 3,
-            "14": 1,
-            "18": 1
+            "5": 3,
+            "15": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 14,
-            "14": 18
+            "5": 15,
+            "15": 19
         }
     },
     "test": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "11": 1
+            "5": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "case": {
         "df": 5,
         "postings": {
-            "4": 1,
-            "8": 1,
+            "5": 1,
             "9": 1,
-            "12": 1,
-            "14": 1
+            "10": 1,
+            "13": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "4": 9,
-            "9": 14
+            "5": 10,
+            "10": 15
         }
     },
     "obtain": {
         "df": 6,
         "postings": {
-            "4": 1,
             "5": 1,
-            "8": 1,
+            "6": 1,
             "9": 1,
-            "13": 1,
-            "19": 3
+            "10": 1,
+            "14": 1,
+            "20": 3
         },
         "skip_pointers": {
-            "4": 8,
-            "8": 13
+            "5": 9,
+            "9": 14
         }
     },
     "consumpt": {
         "df": 1,
         "postings": {
-            "4": 2
+            "5": 2
         },
         "skip_pointers": {}
     },
     "measur": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "7": 2
+            "5": 1,
+            "8": 2
         },
         "skip_pointers": {}
     },
     "statist": {
         "df": 1,
         "postings": {
-            "4": 2
+            "5": 2
         },
         "skip_pointers": {}
     },
     "method": {
         "df": 4,
         "postings": {
-            "4": 1,
-            "14": 2,
-            "17": 1,
-            "18": 1
+            "5": 1,
+            "15": 2,
+            "18": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 17
+            "5": 18
         }
     },
     "spectrumbas": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "fault": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "introduc": {
         "df": 3,
         "postings": {
-            "4": 1,
             "5": 1,
-            "12": 2
+            "6": 1,
+            "13": 2
         },
         "skip_pointers": {
-            "4": 5,
-            "5": 12
+            "5": 6,
+            "6": 13
         }
     },
     "relat": {
         "df": 4,
         "postings": {
-            "4": 1,
-            "11": 1,
-            "14": 1,
-            "18": 1
+            "5": 1,
+            "12": 1,
+            "15": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 14
+            "5": 15
         }
     },
     "rank": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "point": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "7": 1
+            "5": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "possibl": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "6": 2
+            "5": 1,
+            "7": 2
         },
         "skip_pointers": {}
     },
     "toolkitfin": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "evalu": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "10": 1
+            "5": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "conduct": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "empir": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "studi": {
         "df": 10,
         "postings": {
-            "4": 1,
-            "6": 2,
+            "5": 1,
             "7": 2,
-            "8": 1,
+            "8": 2,
             "9": 1,
             "10": 1,
-            "13": 1,
+            "11": 1,
             "14": 1,
             "15": 1,
-            "19": 2
+            "16": 1,
+            "20": 2
         },
         "skip_pointers": {
-            "4": 8,
-            "8": 13,
-            "13": 19
+            "5": 9,
+            "9": 14,
+            "14": 20
         }
     },
     "ask": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "particip": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "optim": {
         "df": 3,
         "postings": {
-            "4": 2,
-            "14": 3,
-            "18": 1
+            "5": 2,
+            "15": 3,
+            "19": 1
         },
         "skip_pointers": {
-            "4": 14,
-            "14": 18
+            "5": 15,
+            "15": 19
         }
     },
     "two": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "14": 1
+            "5": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "group": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "9": 1
+            "5": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "assist": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "profil": {
         "df": 2,
         "postings": {
-            "4": 2,
-            "13": 1
+            "5": 2,
+            "14": 1
         },
         "skip_pointers": {}
     },
     "respect": {
         "df": 3,
         "postings": {
-            "4": 1,
-            "9": 1,
-            "10": 1
+            "5": 1,
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {
-            "4": 9,
-            "9": 10
+            "5": 10,
+            "10": 11
         }
     },
     "evid": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "9": 1
+            "5": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "averag": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "9": 1
+            "5": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "even": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "elsevi": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "inc": {
         "df": 1,
         "postings": {
-            "4": 1
+            "5": 1
         },
         "skip_pointers": {}
     },
     "right": {
         "df": 2,
         "postings": {
-            "4": 1,
-            "8": 1
+            "5": 1,
+            "9": 1
         },
         "skip_pointers": {}
     },
     "metamorphosi": {
         "df": 1,
         "postings": {
-            "5": 3
+            "6": 3
         },
         "skip_pointers": {}
     },
     "topic": {
         "df": 1,
         "postings": {
-            "5": 3
+            "6": 3
         },
         "skip_pointers": {}
     },
     "map": {
         "df": 1,
         "postings": {
-            "5": 3
+            "6": 3
         },
         "skip_pointers": {}
     },
     "environ": {
         "df": 6,
         "postings": {
-            "5": 2,
-            "6": 1,
-            "13": 2,
+            "6": 2,
+            "7": 1,
             "14": 2,
-            "17": 2,
-            "19": 2
+            "15": 2,
+            "18": 2,
+            "20": 2
         },
         "skip_pointers": {
-            "5": 13,
-            "13": 17
+            "6": 14,
+            "14": 18
         }
     },
     "handl": {
         "df": 3,
         "postings": {
-            "5": 2,
-            "11": 1,
-            "14": 1
+            "6": 2,
+            "12": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "5": 11,
-            "11": 14
+            "6": 12,
+            "12": 15
         }
     },
     "resourc": {
         "df": 1,
         "postings": {
-            "5": 2
+            "6": 2
         },
         "skip_pointers": {}
     },
     "nowaday": {
         "df": 2,
         "postings": {
-            "5": 1,
-            "8": 1
+            "6": 1,
+            "9": 1
         },
         "skip_pointers": {}
     },
     "institut": {
         "df": 2,
         "postings": {
-            "5": 1,
-            "7": 1
+            "6": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "compani": {
         "df": 2,
         "postings": {
-            "5": 1,
-            "8": 3
+            "6": 1,
+            "9": 3
         },
         "skip_pointers": {}
     },
     "spread": {
         "df": 1,
         "postings": {
-            "5": 1
+            "6": 1
         },
         "skip_pointers": {}
     },
     "one": {
         "df": 5,
         "postings": {
-            "5": 1,
             "6": 1,
-            "9": 2,
-            "10": 1,
-            "13": 1
+            "7": 1,
+            "10": 2,
+            "11": 1,
+            "14": 1
         },
         "skip_pointers": {
-            "5": 9,
-            "9": 13
+            "6": 10,
+            "10": 14
         }
     },
     "databas": {
         "df": 1,
         "postings": {
-            "5": 1
+            "6": 1
         },
         "skip_pointers": {}
     },
     "lot": {
         "df": 1,
         "postings": {
-            "5": 1
+            "6": 1
         },
         "skip_pointers": {}
     },
     "type": {
         "df": 3,
         "postings": {
-            "5": 1,
             "6": 1,
-            "18": 1
+            "7": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "5": 6,
-            "6": 18
+            "6": 7,
+            "7": 19
         }
     },
     "extract": {
         "df": 1,
         "postings": {
-            "5": 2
+            "6": 2
         },
         "skip_pointers": {}
     },
     "implicit": {
         "df": 1,
         "postings": {
-            "5": 1
+            "6": 1
         },
         "skip_pointers": {}
     },
     "necessari": {
         "df": 3,
         "postings": {
-            "5": 1,
             "6": 1,
-            "8": 1
-        },
-        "skip_pointers": {
-            "5": 6,
-            "6": 8
-        }
-    },
-    "pick": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "part": {
-        "df": 1,
-        "postings": {
-            "5": 2
-        },
-        "skip_pointers": {}
-    },
-    "variou": {
-        "df": 2,
-        "postings": {
-            "5": 1,
-            "7": 1
-        },
-        "skip_pointers": {}
-    },
-    "overview": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "slice": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "integr": {
-        "df": 3,
-        "postings": {
-            "5": 3,
-            "13": 1,
-            "18": 5
-        },
-        "skip_pointers": {
-            "5": 13,
-            "13": 18
-        }
-    },
-    "follow": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "rang": {
-        "df": 5,
-        "postings": {
-            "5": 1,
-            "6": 1,
-            "9": 1,
-            "14": 1,
-            "15": 1
-        },
-        "skip_pointers": {
-            "5": 9,
-            "9": 15
-        }
-    },
-    "merg": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "till": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "fusion": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "orient": {
-        "df": 2,
-        "postings": {
-            "5": 1,
-            "19": 1
-        },
-        "skip_pointers": {}
-    },
-    "enabl": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "conceptu": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "navig": {
-        "df": 2,
-        "postings": {
-            "5": 1,
-            "17": 1
-        },
-        "skip_pointers": {}
-    },
-    "among": {
-        "df": 2,
-        "postings": {
-            "5": 1,
-            "11": 1
-        },
-        "skip_pointers": {}
-    },
-    "argu": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "via": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "refer": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "semant": {
-        "df": 1,
-        "postings": {
-            "5": 1
-        },
-        "skip_pointers": {}
-    },
-    "predict": {
-        "df": 4,
-        "postings": {
-            "6": 6,
-            "15": 1,
-            "18": 1,
-            "19": 2
-        },
-        "skip_pointers": {
-            "6": 18
-        }
-    },
-    "plateau": {
-        "df": 1,
-        "postings": {
-            "6": 5
-        },
-        "skip_pointers": {}
-    },
-    "pressur": {
-        "df": 1,
-        "postings": {
-            "6": 5
-        },
-        "skip_pointers": {}
-    },
-    "intens": {
-        "df": 2,
-        "postings": {
-            "6": 2,
-            "17": 1
-        },
-        "skip_pointers": {}
-    },
-    "medicin": {
-        "df": 1,
-        "postings": {
-            "6": 1
-        },
-        "skip_pointers": {}
-    },
-    "ventil": {
-        "df": 1,
-        "postings": {
-            "6": 3
-        },
-        "skip_pointers": {}
-    },
-    "patient": {
-        "df": 3,
-        "postings": {
-            "6": 2,
             "7": 1,
-            "9": 2
+            "9": 1
         },
         "skip_pointers": {
             "6": 7,
             "7": 9
         }
     },
+    "pick": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "part": {
+        "df": 1,
+        "postings": {
+            "6": 2
+        },
+        "skip_pointers": {}
+    },
+    "variou": {
+        "df": 2,
+        "postings": {
+            "6": 1,
+            "8": 1
+        },
+        "skip_pointers": {}
+    },
+    "overview": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "slice": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "integr": {
+        "df": 3,
+        "postings": {
+            "6": 3,
+            "14": 1,
+            "19": 5
+        },
+        "skip_pointers": {
+            "6": 14,
+            "14": 19
+        }
+    },
+    "follow": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "rang": {
+        "df": 5,
+        "postings": {
+            "6": 1,
+            "7": 1,
+            "10": 1,
+            "15": 1,
+            "16": 1
+        },
+        "skip_pointers": {
+            "6": 10,
+            "10": 16
+        }
+    },
+    "merg": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "till": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "fusion": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "orient": {
+        "df": 2,
+        "postings": {
+            "6": 1,
+            "20": 1
+        },
+        "skip_pointers": {}
+    },
+    "enabl": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "conceptu": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "navig": {
+        "df": 2,
+        "postings": {
+            "6": 1,
+            "18": 1
+        },
+        "skip_pointers": {}
+    },
+    "among": {
+        "df": 2,
+        "postings": {
+            "6": 1,
+            "12": 1
+        },
+        "skip_pointers": {}
+    },
+    "argu": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "via": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "refer": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "semant": {
+        "df": 1,
+        "postings": {
+            "6": 1
+        },
+        "skip_pointers": {}
+    },
+    "predict": {
+        "df": 4,
+        "postings": {
+            "7": 6,
+            "16": 1,
+            "19": 1,
+            "20": 2
+        },
+        "skip_pointers": {
+            "7": 19
+        }
+    },
+    "plateau": {
+        "df": 1,
+        "postings": {
+            "7": 5
+        },
+        "skip_pointers": {}
+    },
+    "pressur": {
+        "df": 1,
+        "postings": {
+            "7": 5
+        },
+        "skip_pointers": {}
+    },
+    "intens": {
+        "df": 2,
+        "postings": {
+            "7": 2,
+            "18": 1
+        },
+        "skip_pointers": {}
+    },
+    "medicin": {
+        "df": 1,
+        "postings": {
+            "7": 1
+        },
+        "skip_pointers": {}
+    },
+    "ventil": {
+        "df": 1,
+        "postings": {
+            "7": 3
+        },
+        "skip_pointers": {}
+    },
+    "patient": {
+        "df": 3,
+        "postings": {
+            "7": 2,
+            "8": 1,
+            "10": 2
+        },
+        "skip_pointers": {
+            "7": 8,
+            "8": 10
+        }
+    },
     "barotrauma": {
         "df": 1,
         "postings": {
-            "6": 3
+            "7": 3
         },
         "skip_pointers": {}
     },
     "identifi": {
         "df": 4,
         "postings": {
-            "6": 2,
-            "7": 1,
-            "11": 1,
-            "17": 2
+            "7": 2,
+            "8": 1,
+            "12": 1,
+            "18": 2
         },
         "skip_pointers": {
-            "6": 11
+            "7": 12
         }
     },
     "diseas": {
         "df": 5,
         "postings": {
-            "6": 1,
-            "9": 4,
-            "10": 1,
+            "7": 1,
+            "10": 4,
             "11": 1,
-            "19": 1
+            "12": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "6": 10,
-            "10": 19
+            "7": 11,
+            "11": 20
         }
     },
     "common": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "unit": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "prevent": {
         "df": 2,
         "postings": {
-            "6": 1,
-            "9": 1
+            "7": 1,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "mine": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "dm": {
         "df": 1,
         "postings": {
-            "6": 2
+            "7": 2
         },
         "skip_pointers": {}
     },
     "occurr": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "goal": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "occur": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "health": {
         "df": 2,
         "postings": {
-            "6": 1,
-            "7": 3
+            "7": 1,
+            "8": 3
         },
         "skip_pointers": {}
     },
     "profession": {
         "df": 2,
         "postings": {
-            "6": 1,
-            "7": 1
+            "7": 1,
+            "8": 1
         },
         "skip_pointers": {}
     },
     "precaut": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "step": {
         "df": 2,
         "postings": {
-            "6": 1,
-            "8": 3
+            "7": 1,
+            "9": 3
         },
         "skip_pointers": {}
     },
     "intensivist": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "valu": {
         "df": 3,
         "postings": {
-            "6": 1,
-            "9": 1,
-            "19": 1
+            "7": 1,
+            "10": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "6": 9,
-            "9": 19
+            "7": 10,
+            "10": 20
         }
     },
     "caus": {
         "df": 3,
         "postings": {
-            "6": 1,
-            "10": 2,
-            "19": 1
+            "7": 1,
+            "11": 2,
+            "20": 1
         },
         "skip_pointers": {
-            "6": 10,
-            "10": 19
+            "7": 11,
+            "11": 20
         }
     },
     "induc": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "class": {
         "df": 1,
         "postings": {
-            "6": 2
+            "7": 2
         },
         "skip_pointers": {}
     },
     "real": {
         "df": 3,
         "postings": {
-            "6": 2,
-            "8": 1,
-            "17": 2
+            "7": 2,
+            "9": 1,
+            "18": 2
         },
         "skip_pointers": {
-            "6": 8,
-            "8": 17
+            "7": 9,
+            "9": 18
         }
     },
     "explor": {
         "df": 3,
         "postings": {
-            "6": 1,
-            "8": 1,
-            "18": 2
+            "7": 1,
+            "9": 1,
+            "19": 2
         },
         "skip_pointers": {
-            "6": 8,
-            "8": 18
+            "7": 9,
+            "9": 19
         }
     },
     "assess": {
         "df": 6,
         "postings": {
-            "6": 1,
             "7": 1,
             "8": 1,
-            "9": 3,
-            "10": 1,
-            "17": 1
+            "9": 1,
+            "10": 3,
+            "11": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "6": 8,
-            "8": 10
+            "7": 9,
+            "9": 11
         }
     },
     "accuraci": {
         "df": 1,
         "postings": {
-            "6": 2
+            "7": 2
         },
         "skip_pointers": {}
     },
     "contain": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "provid": {
         "df": 1,
         "postings": {
-            "6": 1
+            "7": 1
         },
         "skip_pointers": {}
     },
     "patholog": {
         "df": 2,
         "postings": {
-            "7": 2,
-            "9": 1
+            "8": 2,
+            "10": 1
         },
         "skip_pointers": {}
     },
     "anatomi": {
         "df": 1,
         "postings": {
-            "7": 2
+            "8": 2
         },
         "skip_pointers": {}
     },
     "servic": {
         "df": 1,
         "postings": {
-            "7": 2
+            "8": 2
         },
         "skip_pointers": {}
     },
     "technolog": {
         "df": 3,
         "postings": {
-            "7": 2,
-            "12": 1,
-            "18": 1
+            "8": 2,
+            "13": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "7": 12,
-            "12": 18
+            "8": 13,
+            "13": 19
         }
     },
     "chang": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "way": {
         "df": 3,
         "postings": {
-            "7": 3,
-            "13": 1,
-            "18": 1
+            "8": 3,
+            "14": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "7": 13,
-            "13": 18
+            "8": 14,
+            "14": 19
         }
     },
     "contribut": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "17": 2
+            "8": 1,
+            "18": 2
         },
         "skip_pointers": {}
     },
     "sustain": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "17": 3
+            "8": 1,
+            "18": 3
         },
         "skip_pointers": {}
     },
     "hospit": {
         "df": 1,
         "postings": {
-            "7": 2
+            "8": 2
         },
         "skip_pointers": {}
     },
     "emerg": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "18": 1
+            "8": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "help": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "low": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "level": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "19": 1
+            "8": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "benefit": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "17": 1
+            "8": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "accept": {
         "df": 1,
         "postings": {
-            "7": 2
+            "8": 2
         },
         "skip_pointers": {}
     },
     "user": {
         "df": 3,
         "postings": {
-            "7": 2,
-            "14": 2,
-            "17": 2
+            "8": 2,
+            "15": 2,
+            "18": 2
         },
         "skip_pointers": {
-            "7": 14,
-            "14": 17
+            "8": 15,
+            "15": 18
         }
     },
     "mitig": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "essenti": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "ensur": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "interfac": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "simpl": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "mind": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "17": 1
+            "8": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "satisfact": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "opinion": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "appli": {
         "df": 4,
         "postings": {
-            "7": 1,
-            "12": 1,
-            "17": 1,
-            "19": 1
+            "8": 1,
+            "13": 1,
+            "18": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "7": 17
+            "8": 18
         }
     },
     "tam": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "center": {
         "df": 3,
         "postings": {
-            "7": 1,
-            "9": 1,
-            "10": 1
+            "8": 1,
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {
-            "7": 9,
-            "9": 10
+            "8": 10,
+            "10": 11
         }
     },
     "aida": {
         "df": 1,
         "postings": {
-            "7": 2
+            "8": 2
         },
         "skip_pointers": {}
     },
     "weak": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "strength": {
         "df": 2,
         "postings": {
-            "7": 1,
-            "17": 1
+            "8": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "medic": {
         "df": 1,
         "postings": {
-            "7": 1
+            "8": 1
         },
         "skip_pointers": {}
     },
     "toward": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "17": 1
+            "9": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "homemad": {
         "df": 1,
         "postings": {
-            "8": 2
+            "9": 2
         },
         "skip_pointers": {}
     },
     "busi": {
         "df": 1,
         "postings": {
-            "8": 5
+            "9": 5
         },
         "skip_pointers": {}
     },
     "intellig": {
         "df": 4,
         "postings": {
-            "8": 5,
-            "12": 2,
-            "17": 2,
-            "19": 3
+            "9": 5,
+            "13": 2,
+            "18": 2,
+            "20": 3
         },
         "skip_pointers": {
-            "8": 17
+            "9": 18
         }
     },
     "textil": {
         "df": 1,
         "postings": {
-            "8": 3
+            "9": 3
         },
         "skip_pointers": {}
     },
     "industri": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "increasingli": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "look": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "13": 1
+            "9": 1,
+            "14": 1
         },
         "skip_pointers": {}
     },
     "invest": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "mainli": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "11": 1
+            "9": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "privat": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "get": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "competitor": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "know": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "analysi": {
         "df": 4,
         "postings": {
-            "8": 1,
             "9": 1,
-            "18": 2,
-            "19": 1
+            "10": 1,
+            "19": 2,
+            "20": 1
         },
         "skip_pointers": {
-            "8": 18
+            "9": 19
         }
     },
     "consolid": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "12": 1
+            "9": 1,
+            "13": 1
         },
         "skip_pointers": {}
     },
     "specif": {
         "df": 3,
         "postings": {
-            "8": 1,
             "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {
-            "8": 9,
-            "9": 10
+            "9": 10,
+            "10": 11
         }
     },
     "outlet": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "certain": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "17": 1
+            "9": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "indic": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "process": {
         "df": 3,
         "postings": {
-            "8": 1,
-            "13": 2,
-            "17": 1
+            "9": 1,
+            "14": 2,
+            "18": 1
         },
         "skip_pointers": {
-            "8": 13,
-            "13": 17
+            "9": 14,
+            "14": 18
         }
     },
     "collect": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "outsid": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "sector": {
         "df": 1,
         "postings": {
-            "8": 2
+            "9": 2
         },
         "skip_pointers": {}
     },
     "concept": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "17": 1
+            "9": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "mani": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "actual": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "bi": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "thu": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "object": {
         "df": 3,
         "postings": {
-            "8": 1,
-            "17": 1,
-            "19": 1
+            "9": 1,
+            "18": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "8": 17,
-            "17": 19
+            "9": 18,
+            "18": 20
         }
     },
     "need": {
         "df": 3,
         "postings": {
-            "8": 1,
-            "14": 1,
-            "16": 1
+            "9": 1,
+            "15": 1,
+            "17": 1
         },
         "skip_pointers": {
-            "8": 14,
-            "14": 16
+            "9": 15,
+            "15": 17
         }
     },
     "spend": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "free": {
         "df": 1,
         "postings": {
-            "8": 1
+            "9": 1
         },
         "skip_pointers": {}
     },
     "valid": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "14": 1
+            "9": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "aim": {
         "df": 3,
         "postings": {
-            "8": 1,
-            "11": 1,
-            "17": 1
+            "9": 1,
+            "12": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "8": 11,
-            "11": 17
+            "9": 12,
+            "12": 18
         }
     },
     "defin": {
         "df": 2,
         "postings": {
-            "8": 1,
-            "17": 1
+            "9": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "chronic": {
         "df": 1,
         "postings": {
-            "9": 5
+            "10": 5
         },
         "skip_pointers": {}
     },
     "kidney": {
         "df": 1,
         "postings": {
-            "9": 11
+            "10": 11
         },
         "skip_pointers": {}
     },
     "renal": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "failur": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "mean": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "17": 1
+            "10": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "unexpectedlystoppedfunct": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "ie": {
         "df": 2,
         "postings": {
-            "9": 3,
-            "11": 1
+            "10": 3,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "oncechronicdiseasei": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "expos": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "presenc": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "degre": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "dysfunct": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "progress": {
         "df": 1,
         "postings": {
-            "9": 2
+            "10": 2
         },
         "skip_pointers": {}
     },
     "must": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "underli": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "syndrom": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "diagnos": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "physic": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "examin": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "may": {
         "df": 4,
         "postings": {
-            "9": 2,
-            "10": 1,
-            "11": 2,
-            "17": 1
+            "10": 2,
+            "11": 1,
+            "12": 2,
+            "18": 1
         },
         "skip_pointers": {
-            "9": 11
+            "10": 12
         }
     },
     "denot": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "good": {
         "df": 1,
         "postings": {
-            "9": 2
+            "10": 2
         },
         "skip_pointers": {}
     },
     "practic": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "key": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "valuat": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "glomerular": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "filtrat": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "rate": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "19": 1
+            "10": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "serum": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "biomark": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "inde": {
         "df": 5,
         "postings": {
-            "9": 1,
             "10": 1,
             "11": 1,
-            "13": 1,
-            "14": 1
+            "12": 1,
+            "14": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "9": 11,
-            "11": 14
+            "10": 12,
+            "12": 15
         }
     },
     "sick": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "depict": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "anomal": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "function": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "andor": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "makeup": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "treatment": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "avoid": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "11": 1,
-            "17": 1
+            "10": 1,
+            "12": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "9": 11,
-            "11": 17
+            "10": 12,
+            "12": 18
         }
     },
     "delay": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "either": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "reduc": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "associ": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "10": 2,
-            "11": 2
+            "10": 1,
+            "11": 2,
+            "12": 2
         },
         "skip_pointers": {
-            "9": 10,
-            "10": 11
+            "10": 11,
+            "11": 12
         }
     },
     "complic": {
         "df": 1,
         "postings": {
-            "9": 2
+            "10": 2
         },
         "skip_pointers": {}
     },
     "hypertens": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "obes": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "diabet": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "mellitu": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "cardiovascular": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "acut": {
         "df": 1,
         "postings": {
-            "9": 2
+            "10": 2
         },
         "skip_pointers": {}
     },
     "injuri": {
         "df": 1,
         "postings": {
-            "9": 2
+            "10": 2
         },
         "skip_pointers": {}
     },
     "appear": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "abruptli": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "rapiddeteriorationoftherenalfunct": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "butisoftenrevers": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "recogn": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "earli": {
         "df": 2,
         "postings": {
-            "9": 2,
-            "10": 1
+            "10": 2,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "treat": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "promptli": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "situat": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "17": 1,
-            "19": 1
+            "10": 1,
+            "18": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "9": 17,
-            "17": 19
+            "10": 18,
+            "18": 20
         }
     },
     "intervent": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "significantli": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "prognosi": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "therefor": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 1
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "mandatori": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "hard": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "tradit": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "methodolog": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "exist": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "18": 1
+            "10": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "solv": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 1
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "henc": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "focu": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 1
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "hybrid": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "term": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 1
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "represent": {
         "df": 3,
         "postings": {
-            "9": 1,
             "10": 1,
-            "11": 2
+            "11": 1,
+            "12": 2
         },
         "skip_pointers": {
-            "9": 10,
-            "10": 11
+            "10": 11,
+            "11": 12
         }
     },
     "reason": {
         "df": 4,
         "postings": {
-            "9": 1,
             "10": 1,
-            "11": 3,
-            "12": 2
+            "11": 1,
+            "12": 3,
+            "13": 2
         },
         "skip_pointers": {
-            "9": 11
+            "10": 12
         }
     },
     "procedur": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 1
+            "10": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "logic": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "10": 2,
-            "11": 1
+            "10": 1,
+            "11": 2,
+            "12": 1
         },
         "skip_pointers": {
-            "9": 10,
-            "10": 11
+            "10": 11,
+            "11": 12
         }
     },
     "program": {
         "df": 4,
         "postings": {
-            "9": 1,
-            "10": 2,
-            "11": 1,
-            "14": 1
+            "10": 1,
+            "11": 2,
+            "12": 1,
+            "15": 1
         },
         "skip_pointers": {
-            "9": 11
+            "10": 12
         }
     },
     "onetoconsiderincomplet": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "unknown": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "evencontradictori": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "complement": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "artifici": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "10": 2,
-            "11": 2
+            "10": 1,
+            "11": 2,
+            "12": 2
         },
         "skip_pointers": {
-            "9": 10,
-            "10": 11
+            "10": 11,
+            "11": 12
         }
     },
     "neural": {
         "df": 3,
         "postings": {
-            "9": 1,
-            "10": 2,
-            "11": 2
+            "10": 1,
+            "11": 2,
+            "12": 2
         },
         "skip_pointers": {
-            "9": 10,
-            "10": 11
+            "10": 11,
+            "11": 12
         }
     },
     "network": {
         "df": 5,
         "postings": {
-            "9": 1,
-            "10": 2,
+            "10": 1,
             "11": 2,
-            "18": 5,
-            "19": 3
+            "12": 2,
+            "19": 5,
+            "20": 3
         },
         "skip_pointers": {
-            "9": 11,
-            "11": 19
+            "10": 12,
+            "12": 20
         }
     },
     "weigh": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "degreeofconfid": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "happen": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "10": 1
+            "10": 1,
+            "11": 1
         },
         "skip_pointers": {}
     },
     "involv": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "13": 1
+            "10": 1,
+            "14": 1
         },
         "skip_pointers": {}
     },
     "age": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "observ": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "compris": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "twenti": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "four": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "variabl": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "19": 1
+            "10": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "five": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "categori": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "diagnosi": {
         "df": 2,
         "postings": {
-            "9": 1,
-            "11": 3
+            "10": 1,
+            "12": 3
         },
         "skip_pointers": {}
     },
     "sinc": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "sensit": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "exhibit": {
         "df": 1,
         "postings": {
-            "9": 1
+            "10": 1
         },
         "skip_pointers": {}
     },
     "breast": {
         "df": 1,
         "postings": {
-            "10": 4
+            "11": 4
         },
         "skip_pointers": {}
     },
     "cancer": {
         "df": 1,
         "postings": {
-            "10": 4
+            "11": 4
         },
         "skip_pointers": {}
     },
     "capabl": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "produc": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "death": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "stage": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "properli": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "known": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "ill": {
         "df": 2,
         "postings": {
-            "10": 1,
-            "19": 1
+            "11": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "begin": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "set": {
         "df": 2,
         "postings": {
-            "10": 1,
-            "14": 1
+            "11": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "determin": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "onset": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "undeni": {
         "df": 2,
         "postings": {
-            "10": 1,
-            "11": 1
+            "11": 1,
+            "12": 1
         },
         "skip_pointers": {}
     },
     "factor": {
         "df": 2,
         "postings": {
-            "10": 1,
-            "18": 1
+            "11": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "seem": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "boost": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "risk": {
         "df": 1,
         "postings": {
-            "10": 3
+            "11": 3
         },
         "skip_pointers": {}
     },
     "maladi": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "ponder": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "consid": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "intent": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "formal": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "framework": {
         "df": 1,
         "postings": {
-            "10": 1
+            "11": 1
         },
         "skip_pointers": {}
     },
     "abstract": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "schizophrenia": {
         "df": 1,
         "postings": {
-            "11": 3
+            "12": 3
         },
         "skip_pointers": {}
     },
     "stand": {
         "df": 2,
         "postings": {
-            "11": 2,
-            "13": 1
+            "12": 2,
+            "14": 1
         },
         "skip_pointers": {}
     },
     "longlast": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "state": {
         "df": 3,
         "postings": {
-            "11": 2,
-            "15": 1,
-            "17": 1
+            "12": 2,
+            "16": 1,
+            "18": 1
         },
         "skip_pointers": {
-            "11": 15,
-            "15": 17
+            "12": 16,
+            "16": 18
         }
     },
     "mental": {
         "df": 1,
         "postings": {
-            "11": 3
+            "12": 3
         },
         "skip_pointers": {}
     },
     "uncertainti": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "bring": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "end": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "behavior": {
         "df": 2,
         "postings": {
-            "11": 1,
-            "18": 1
+            "12": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "thought": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "emot": {
         "df": 2,
         "postings": {
-            "11": 1,
-            "13": 4
+            "12": 1,
+            "14": 4
         },
         "skip_pointers": {}
     },
     "unreli": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "percept": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "action": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "feel": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "sens": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "done": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "larg": {
         "df": 5,
         "postings": {
-            "11": 1,
-            "14": 2,
-            "15": 1,
-            "17": 1,
-            "18": 1
+            "12": 1,
+            "15": 2,
+            "16": 1,
+            "18": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "11": 15,
-            "15": 18
+            "12": 16,
+            "16": 19
         }
     },
     "period": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "continuo": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "sign": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "disturb": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "persist": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "least": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "six": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "month": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "psychiatrist": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "clinic": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "interview": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "seri": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "psychic": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "address": {
         "df": 2,
         "postings": {
-            "11": 1,
-            "14": 1
+            "12": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "difficulti": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "distinguish": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "symptom": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "untidi": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "role": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "diagnost": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "blend": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "novel": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "defect": {
         "df": 1,
         "postings": {
-            "11": 1
+            "12": 1
         },
         "skip_pointers": {}
     },
     "educas": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "pedagog": {
         "df": 1,
         "postings": {
-            "12": 3
+            "13": 3
         },
         "skip_pointers": {}
     },
     "advis": {
         "df": 1,
         "postings": {
-            "12": 3
+            "13": 3
         },
         "skip_pointers": {}
     },
     "casebas": {
         "df": 1,
         "postings": {
-            "12": 2
+            "13": 2
         },
         "skip_pointers": {}
     },
     "scheme": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "easier": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "task": {
         "df": 2,
         "postings": {
-            "12": 1,
-            "17": 1
+            "13": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "student": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "staff": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "intend": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "motiv": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "behind": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "choic": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "structur": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "justifi": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "technic": {
         "df": 1,
         "postings": {
-            "12": 1
+            "13": 1
         },
         "skip_pointers": {}
     },
     "prototyp": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "team": {
         "df": 1,
         "postings": {
-            "13": 4
+            "14": 4
         },
         "skip_pointers": {}
     },
     "affect": {
         "df": 1,
         "postings": {
-            "13": 3
+            "14": 3
         },
         "skip_pointers": {}
     },
     "agent": {
         "df": 1,
         "postings": {
-            "13": 3
+            "14": 3
         },
         "skip_pointers": {}
     },
     "robocod": {
         "df": 1,
         "postings": {
-            "13": 2
+            "14": 2
         },
         "skip_pointers": {}
     },
     "multidisciplinari": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "issu": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "14": 1
+            "14": 1,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "eg": {
         "df": 2,
         "postings": {
-            "13": 2,
-            "14": 1
+            "14": 2,
+            "15": 1
         },
         "skip_pointers": {}
     },
     "insight": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "disciplin": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "psycholog": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "neurosci": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "philosophi": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "scienc": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "17": 1
+            "14": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "hand": {
         "df": 2,
         "postings": {
-            "13": 2,
-            "17": 1
+            "14": 2,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "play": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "battlefield": {
         "df": 1,
         "postings": {
-            "13": 2
+            "14": 2
         },
         "skip_pointers": {}
     },
     "person": {
         "df": 2,
         "postings": {
-            "13": 2,
-            "16": 1
+            "14": 2,
+            "17": 1
         },
         "skip_pointers": {}
     },
     "mood": {
         "df": 1,
         "postings": {
-            "13": 2
+            "14": 2
         },
         "skip_pointers": {}
     },
     "occ": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "ortoni": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "clore": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "collin": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "robot": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "pleasurearousaldomin": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "pad": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "attain": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "cooper": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "vote": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "mechan": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "18": 1
+            "14": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "decisionmak": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "simul": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "18": 1
+            "14": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "far": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "quit": {
         "df": 1,
         "postings": {
-            "13": 2
+            "14": 2
         },
         "skip_pointers": {}
     },
     "satisfi": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "well": {
         "df": 4,
         "postings": {
-            "13": 1,
-            "17": 1,
+            "14": 1,
             "18": 1,
-            "19": 1
+            "19": 1,
+            "20": 1
         },
         "skip_pointers": {
-            "13": 18
+            "14": 19
         }
     },
     "undertak": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "behaviour": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "depend": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "18": 1
+            "14": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "skirmish": {
         "df": 1,
         "postings": {
-            "13": 1
+            "14": 1
         },
         "skip_pointers": {}
     },
     "condit": {
         "df": 2,
         "postings": {
-            "13": 1,
-            "17": 1
+            "14": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "evolutionari": {
         "df": 1,
         "postings": {
-            "14": 2
+            "15": 2
         },
         "skip_pointers": {}
     },
     "bioinformat": {
         "df": 2,
         "postings": {
-            "14": 2,
-            "18": 1
+            "15": 2,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "applic": {
         "df": 2,
         "postings": {
-            "14": 1,
-            "17": 1
+            "15": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "number": {
         "df": 3,
         "postings": {
-            "14": 1,
-            "17": 1,
-            "18": 1
+            "15": 1,
+            "18": 1,
+            "19": 1
         },
         "skip_pointers": {
-            "14": 17,
-            "17": 18
+            "15": 18,
+            "18": 19
         }
     },
     "within": {
         "df": 2,
         "postings": {
-            "14": 2,
-            "17": 1
+            "15": 2,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "field": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "inher": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "complex": {
         "df": 2,
         "postings": {
-            "14": 1,
-            "17": 1
+            "15": 1,
+            "18": 1
         },
         "skip_pointers": {}
     },
     "nphard": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "demand": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "effort": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "necess": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "parjecoli": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "java": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "librari": {
         "df": 1,
         "postings": {
-            "14": 2
+            "15": 2
         },
         "skip_pointers": {}
     },
     "offer": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "metaheurist": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "wide": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "focus": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "adapt": {
         "df": 1,
         "postings": {
-            "14": 2
+            "15": 2
         },
         "skip_pointers": {}
     },
     "distinct": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "multicor": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "cluster": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "grid": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "transpar": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "proceed": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "independ": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "aspectori": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "pluggabl": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "natur": {
         "df": 2,
         "postings": {
-            "14": 1,
-            "15": 1
+            "15": 1,
+            "16": 1
         },
         "skip_pointers": {}
     },
     "modul": {
         "df": 1,
         "postings": {
-            "14": 2
+            "15": 2
         },
         "skip_pointers": {}
     },
     "easili": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "configur": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "ad": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "biolog": {
         "df": 1,
         "postings": {
-            "14": 1
+            "15": 1
         },
         "skip_pointers": {}
     },
     "uthren": {
         "df": 1,
         "postings": {
-            "15": 3
+            "16": 3
         },
         "skip_pointers": {}
     },
     "radic": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "molecul": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "quantum": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "chemic": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "twist": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "possess": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "triplet": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "ground": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "smallest": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "nonplanar": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "polycycl": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "birad": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "deriv": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "graphen": {
         "df": 1,
         "postings": {
-            "15": 1
+            "16": 1
         },
         "skip_pointers": {}
     },
     "synergi": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "onlin": {
         "df": 1,
         "postings": {
-            "16": 2
+            "17": 2
         },
         "skip_pointers": {}
     },
     "disput": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "resolut": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "protect": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "privaci": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "contribuição": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "apresenta": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "nova": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "compleição": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "resolução": {
         "df": 1,
         "postings": {
-            "16": 2
+            "17": 2
         },
         "skip_pointers": {}
     },
     "litígio": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "linha": {
         "df": 1,
         "postings": {
-            "16": 2
+            "17": 2
         },
         "skip_pointers": {}
     },
     "nest": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "artigo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "pretendemo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "aferir": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "performatividad": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "sinergia": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "sistema": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "ambient": {
         "df": 3,
         "postings": {
-            "16": 1,
             "17": 1,
-            "19": 3
+            "18": 1,
+            "20": 3
         },
         "skip_pointers": {
-            "16": 17,
-            "17": 19
+            "17": 18,
+            "18": 20
         }
     },
     "inteligent": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "ami": {
         "df": 1,
         "postings": {
-            "16": 3
+            "17": 3
         },
         "skip_pointers": {}
     },
     "atravé": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "inserção": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "sensor": {
         "df": 2,
         "postings": {
-            "16": 1,
-            "19": 4
+            "17": 1,
+            "20": 4
         },
         "skip_pointers": {}
     },
     "introduzido": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "dispositivo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "móvei": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "familiar": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "poderá": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "enriquec": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "processo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "comunicacion": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "decision": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "conflito": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "novo": {
         "df": 2,
         "postings": {
-            "16": 1,
-            "18": 1
+            "17": 1,
+            "19": 1
         },
         "skip_pointers": {}
     },
     "contributo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "fornecemo": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "perspectiva": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "principai": {
         "df": 1,
         "postings": {
-            "16": 2
+            "17": 2
         },
         "skip_pointers": {}
     },
     "implicaçõ": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "jurídica": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "uso": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "desta": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "tecnologia": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "natureza": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "ubíqua": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "odr": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "propomono": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "retratar": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "respond": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "crítica": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "apreensõ": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "relacionada": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "conceituamola": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "quadrant": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "mediação": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "dispomono": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "analisar": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "relevância": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "aplicabilidad": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "adequação": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "legislação": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "atinent": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "privacidad": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "proteção": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "dado": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "face": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "emergent": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "desafio": {
         "df": 1,
         "postings": {
-            "16": 1
+            "17": 1
         },
         "skip_pointers": {}
     },
     "road": {
         "df": 1,
         "postings": {
-            "17": 4
+            "18": 4
         },
         "skip_pointers": {}
     },
     "traffic": {
         "df": 1,
         "postings": {
-            "17": 4
+            "18": 4
         },
         "skip_pointers": {}
     },
     "express": {
         "df": 2,
         "postings": {
-            "17": 1,
-            "18": 2
+            "18": 1,
+            "19": 2
         },
         "skip_pointers": {}
     },
     "citi": {
         "df": 1,
         "postings": {
-            "17": 2
+            "18": 2
         },
         "skip_pointers": {}
     },
     "popul": {
         "df": 1,
         "postings": {
-            "17": 2
+            "18": 2
         },
         "skip_pointers": {}
     },
     "unrel": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "fact": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "portabl": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "wearabl": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "devic": {
         "df": 1,
         "postings": {
-            "17": 3
+            "18": 3
         },
         "skip_pointers": {}
     },
     "throughout": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "advent": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "capac": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "monitor": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "regist": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "peopl": {
         "df": 2,
         "postings": {
-            "17": 1,
-            "19": 2
+            "18": 1,
+            "20": 2
         },
         "skip_pointers": {}
     },
     "habit": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "movement": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "opportun": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "wealth": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "comfort": {
         "df": 1,
         "postings": {
-            "17": 2
+            "18": 2
         },
         "skip_pointers": {}
     },
     "gather": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "everyday": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "decid": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "rout": {
         "df": 1,
         "postings": {
-            "17": 2
+            "18": 2
         },
         "skip_pointers": {}
     },
     "car": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "bicycl": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "peril": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "area": {
         "df": 1,
         "postings": {
-            "17": 3
+            "18": 3
         },
         "skip_pointers": {}
     },
     "demonstr": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "surround": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "describ": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "automat": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "insid": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "deliv": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "mobil": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "ubiquit": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "problemat": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "criteria": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "signific": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "influenc": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "infrastructur": {
         "df": 1,
         "postings": {
-            "17": 1
+            "18": 1
         },
         "skip_pointers": {}
     },
     "genomescal": {
         "df": 1,
         "postings": {
-            "18": 3
+            "19": 3
         },
         "skip_pointers": {}
     },
     "bacteri": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "transcript": {
         "df": 1,
         "postings": {
-            "18": 5
+            "19": 5
         },
         "skip_pointers": {}
     },
     "regulatori": {
         "df": 1,
         "postings": {
-            "18": 7
+            "19": 7
         },
         "skip_pointers": {}
     },
     "reconstruct": {
         "df": 1,
         "postings": {
-            "18": 4
+            "19": 4
         },
         "skip_pointers": {}
     },
     "metabol": {
         "df": 1,
         "postings": {
-            "18": 3
+            "19": 3
         },
         "skip_pointers": {}
     },
     "sequenc": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "rapid": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "complet": {
         "df": 2,
         "postings": {
-            "18": 1,
-            "19": 1
+            "19": 1,
+            "20": 1
         },
         "skip_pointers": {}
     },
     "genom": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "throughput": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "realiti": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "next": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "frontier": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "microbi": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "fruition": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "upon": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "numer": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "compon": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "machineri": {
         "df": 1,
         "postings": {
-            "18": 2
+            "19": 2
         },
         "skip_pointers": {}
     },
     "cellular": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "review": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "repositori": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "includ": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "bind": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "site": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "templat": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "revers": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "discuss": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "phenotyp": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "product": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "compound": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "interest": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "pave": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "wholecel": {
         "df": 1,
         "postings": {
-            "18": 1
+            "19": 1
         },
         "skip_pointers": {}
     },
     "stress": {
         "df": 1,
         "postings": {
-            "19": 6
+            "20": 6
         },
         "skip_pointers": {}
     },
     "workplac": {
         "df": 1,
         "postings": {
-            "19": 2
+            "20": 2
         },
         "skip_pointers": {}
     },
     "testb": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "wireless": {
         "df": 1,
         "postings": {
-            "19": 3
+            "20": 3
         },
         "skip_pointers": {}
     },
     "combin": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "conclus": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "qualiti": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "life": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "particular": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "puls": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "hear": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "attribut": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "promis": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     },
     "infer": {
         "df": 1,
         "postings": {
-            "19": 1
+            "20": 1
         },
         "skip_pointers": {}
     }
