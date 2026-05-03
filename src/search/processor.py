@@ -159,10 +159,5 @@ def process_with_stopword_control(tokens, remove_stopwords=True, lang='portugues
 
 
 if __name__ == "__main__":
-    # Correr o processamento
-    process_scraped_data()
-
-    # Agora chamamos a nova função que lê da BD
-    process_from_db()
     process_from_db()
 

@@ -1,0 +1,290 @@
+// Variáveis e Paleta de Cores Académica (REQ-F01)
+$uminho-red: #B21F24;
+$bg-light: #F8F9FA;
+$text-dark: #2D3748;
+$text-muted: #718096;
+$white: #FFFFFF;
+$error-red: #E53E3E;
+$border-color: #E2E8F0;
+
+// Reset Básico (REQ-F01: Design Limpo)
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: $bg-light;
+  color: $text-dark;
+  line-height: 1.6;
+}
+
+// ==========================================
+// 1.1 MAIN SEARCH INTERFACE (REQ-F01 a F05)
+// ==========================================
+
+// REQ-F02: Design Responsivo (Flexbox com Media Queries)
+.app-header {
+  background-color: $white;
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    h1 {
+      font-size: 1.25rem;
+      color: $uminho-red;
+      margin: 0;
+    }
+    
+    span {
+      font-size: 0.875rem;
+      color: $text-muted;
+    }
+  }
+
+  // REQ-F03: Navegação entre modos de pesquisa
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    
+    a {
+      text-decoration: none;
+      color: $text-dark;
+      font-weight: 500;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      
+      &:hover, &.active {
+        color: $uminho-red;
+        border-bottom-color: $uminho-red;
+      }
+    }
+  }
+}
+
+.main-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+// ==========================================
+// 1.2 SEARCH INPUT COMPONENTS (REQ-F06 a F10)
+// ==========================================
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.search-box-container {
+  width: 100%;
+  max-width: 700px;
+  position: relative; // Para as sugestões flutuarem por baixo
+}
+
+// REQ-F06: Caixa de pesquisa principal
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+  
+  &:focus-within {
+    border-color: $uminho-red;
+    box-shadow: 0 0 0 3px rgba(178, 31, 36, 0.1);
+  }
+
+  // REQ-F10: Destaque visual de erro (Borda Vermelha)
+  &.has-error {
+    border-color: $error-red;
+    background-color: #FFF5F5;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    background: transparent;
+  }
+
+// Procura por .search-btn e substitui ou adiciona isto:
+.search-btn {
+  background: $uminho-red;
+  color: $white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease; // Para a transição de cor ser suave
+
+  &:hover:not(:disabled) { 
+    background: darken($uminho-red, 10%); 
+  }
+
+  // ESTA É A PARTE QUE FALTA:
+  &:disabled {
+    background-color: #cbd5e0; // Um cinzento claro
+    color: #a0aec0;           // Texto cinzento mais escuro
+    cursor: not-allowed;      // Muda o rato para o símbolo de "proibido"
+    opacity: 0.7;
+  }
+}
+}
+
+// REQ-F08: Sugestões e Auto-completion
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 10;
+  list-style: none;
+
+  li {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f5f9;
+    
+    &:hover {
+      background-color: #f8fafc;
+      color: $uminho-red;
+    }
+  }
+}
+
+// REQ-F07 & REQ-F09: Tooltip de ajuda e exemplos booleanos
+.syntax-help {
+  margin-top: 1rem;
+  background: $white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  width: 100%;
+  max-width: 700px;
+  font-size: 0.9rem;
+  
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $uminho-red;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style-type: none;
+    li {
+      margin-bottom: 0.5rem;
+      code {
+        background: #EDF2F7;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-weight: bold;
+        color: $uminho-red;
+      }
+    }
+  }
+}
+
+// REQ-F10: Mensagem de erro em tempo real
+.error-message {
+  color: $error-red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// MELHORIA: Animações suaves
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.slide-up { animation: slideUp 0.2s ease-out; }
+.fade-in { animation: fadeIn 0.3s ease; }
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+// MELHORIA: Estilos de ajuda e sugestões
+.search-suggestions {
+  li.active {
+    background-color: #f1f5f9;
+    color: $uminho-red;
+    border-left: 3px solid $uminho-red;
+  }
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .help-item {
+    background: #f8fafc;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    code { font-weight: bold; color: $uminho-red; display: block; margin-bottom: 2px; }
+  }
+}
+
+.example-text {
+  font-size: 0.85rem;
+  border-top: 1px solid #edf2f7;
+  padding-top: 0.8rem;
+  color: $text-muted;
+}
+
