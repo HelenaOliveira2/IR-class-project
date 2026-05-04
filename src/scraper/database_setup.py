@@ -1,13 +1,15 @@
 import sqlite3
-import json
 import os
 
-def setup_database(json_file='src/scraper/scraper_results.json', db_file='publications.db'):
+def setup_database(data_list, db_file='publications.db'):
+    """
+    REQ-B09 & REQ-B11: Configura a BD e insere os dados diretamente da lista do scraper.
+    """
     # Conectar (ou criar) a base de dados
     conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
 
-    # 1. Criar Tabelas (REQ-B09)
+    # 1. Criar Tabelas
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS documents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,7 +18,7 @@ def setup_database(json_file='src/scraper/scraper_results.json', db_file='public
             year TEXT,
             doi TEXT,
             document_link TEXT,
-            authors TEXT  -- GARANTE QUE ESTA LINHA EXISTE
+            authors TEXT 
         )
     ''')
 
@@ -28,7 +30,6 @@ def setup_database(json_file='src/scraper/scraper_results.json', db_file='public
         )
     ''')
 
-    # Tabela de ligação para REQ-B11 (Relacionamento N-para-N)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS document_authors (
             document_id INTEGER,
@@ -38,46 +39,47 @@ def setup_database(json_file='src/scraper/scraper_results.json', db_file='public
         )
     ''')
 
-    # 2. Ler os dados do JSON
-    with open(json_file, 'r', encoding='utf-8') as f:
-        publications = json.load(f)
-
-    # 3. Inserir os dados
-    for pub in publications:
-        # Inserir Documento
+    # 2. Inserir os dados diretamente da data_list
+    # Já não precisamos do 'with open(json_file)...'
+    for pub in data_list:
+        # Inserir Documento (REQ-B09)
         cursor.execute('''
             INSERT INTO documents (title, year, doi, abstract, document_link, authors)
             VALUES (?, ?, ?, ?, ?, ?)
         ''', (
-            pub['title'], 
-            pub['year'], 
-            pub['doi'], 
-            pub['abstract'], 
-            pub['document_link'], 
-            # Convertemos a lista de autores numa string para a coluna 'authors' da tabela 'documents'
-            ", ".join(pub['authors']) if isinstance(pub['authors'], list) else pub['authors']
+            pub.get('title', 'N/A'), 
+            pub.get('year', 'N/A'), 
+            pub.get('doi', 'N/A'), 
+            pub.get('abstract', 'N/A'), 
+            pub.get('document_link', 'N/A'),
+            ", ".join(pub.get('authors', [])) if isinstance(pub.get('authors'), list) else pub.get('authors', 'N/A')
         ))
         
         doc_id = cursor.lastrowid
 
-        # Inserir Autores e criar relações
-        for i, author_name in enumerate(pub['authors']):
-            # Tenta obter a afiliação correspondente (se existir na lista)
-            aff = pub['affiliations'][i] if i < len(pub['affiliations']) else "N/A"
+        # 3. Inserir Autores e criar relações (REQ-B11)
+        authors = pub.get('authors', [])
+        affiliations = pub.get('affiliations', [])
+
+        for i, author_name in enumerate(authors):
+            # Tenta obter a afiliação correspondente
+            aff = affiliations[i] if i < len(affiliations) else "N/A"
             
-            # Inserir autor (ignora se já existir pelo nome UNIQUE)
+            # Inserir autor (ignora se já existir)
             cursor.execute('INSERT OR IGNORE INTO authors (name, affiliation) VALUES (?, ?)', (author_name, aff))
             
             # Obter o ID do autor
             cursor.execute('SELECT id FROM authors WHERE name = ?', (author_name,))
-            author_id = cursor.fetchone()[0]
-
-            # Criar relação (REQ-B11)
-            cursor.execute('INSERT INTO document_authors (document_id, author_id) VALUES (?, ?)', (doc_id, author_id))
+            res = cursor.fetchone()
+            if res:
+                author_id = res[0]
+                # Criar relação na tabela intermédia
+                cursor.execute('INSERT INTO document_authors (document_id, author_id) VALUES (?, ?)', (doc_id, author_id))
 
     conn.commit()
     conn.close()
-    print(f"Migração concluída! Base de dados '{db_file}' criada com sucesso.")
+    print(f"Sucesso! {len(data_list)} documentos processados na BD '{db_file}'.")
 
+# Se quiseres testar este ficheiro sozinho, precisas de passar uma lista vazia ou dummy
 if __name__ == "__main__":
-    setup_database()
+    setup_database([])

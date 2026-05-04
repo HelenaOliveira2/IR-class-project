@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
-
+from src.api.logger import logger
 
 
 def is_valid_executable(path):
@@ -335,14 +335,14 @@ class UMinhoDSpace8Scraper:
         results = []     # To store final results
         paper_urls = []  # To store unique paper URLs
 
-        print(f"Loading collection list: {self.base_url}") # Debug print
+        logger.info(f"🚀 Acedendo à coleção: {self.base_url}")
 
         try:
 
             # Collect paper links across paginated collection
             paper_urls = self.collect_all_links()
 
-            print(f"Found {len(paper_urls)} papers. Extracting metadata...") # Debug print
+            logger.info(f"Found {len(paper_urls)} papers. Extracting metadata...") # Debug print
 
             # Visit each paper to get the abstract and authors
             for url in paper_urls:
@@ -350,11 +350,11 @@ class UMinhoDSpace8Scraper:
                 paper_info = self.get_paper_info(url)
                 
                 if paper_info:
-                    print(f"   [{len(results)+1}] Sucesso: {paper_info['title']}")
+                    logger.info(f"   [{len(results)+1}] Sucesso: {paper_info['title']}")
                     results.append(paper_info)
                 else:
                     # Se deu erro, o programa continua para o próximo URL (REQ-B06)
-                    print(f"   [!] A saltar documento devido a erro de carregamento.")
+                    logger.warning(f"   [!] A saltar documento devido a erro de carregamento.")
 
         finally:
             self.driver.quit()

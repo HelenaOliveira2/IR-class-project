@@ -1,0 +1,29 @@
+2026-04-25 15:58:15 [INFO] UMinhoScraper - 🚀 Sistema de Logging inicializado com sucesso!
+2026-04-25 16:15:47 [INFO] UMinhoScraper - 🚀 Sistema de Logging inicializado com sucesso!
+2026-04-25 16:16:47 [INFO] UMinhoScraper - 🚀 Sistema de Logging inicializado com sucesso!
+2026-04-25 16:16:53 [INFO] UMinhoScraper - 🚀 Acedendo à coleção: https://repositorium.uminho.pt/handle//1822/21293
+2026-04-25 16:17:09 [INFO] UMinhoScraper - Found 20 papers. Extracting metadata...
+2026-04-25 16:17:19 [INFO] UMinhoScraper -    [1] Sucesso: Foreword to the special section on recent advances in graphics and interaction
+2026-04-25 16:17:29 [INFO] UMinhoScraper -    [2] Sucesso: Ensemble metropolis light transport
+2026-04-25 16:17:38 [INFO] UMinhoScraper -    [3] Sucesso: NER in archival finding aids: extended
+2026-04-25 16:17:48 [INFO] UMinhoScraper -    [4] Sucesso: Heterogeneous implementation of a Voronoi cell-based SVP solver
+2026-04-25 16:17:58 [INFO] UMinhoScraper -    [5] Sucesso: SPELLing out energy leaks: Aiding developers locate energy inefficient code
+2026-04-25 16:18:08 [INFO] UMinhoScraper -    [6] Sucesso: Metamorphosis – a topic maps based environment to handle heterogeneous information resources
+2026-04-25 16:18:19 [INFO] UMinhoScraper -    [7] Sucesso: Predicting plateau pressure in intensive medicine for ventilated patients
+2026-04-25 16:18:30 [INFO] UMinhoScraper -    [8] Sucesso: Information systems assessment in pathologic anatomy service
+2026-04-25 16:18:40 [INFO] UMinhoScraper -    [9] Sucesso: Step towards of a homemade business intelligence solution: A case study in textile industry
+2026-04-25 16:18:50 [INFO] UMinhoScraper -    [10] Sucesso: An assessment of chronic kidney diseases
+2026-04-25 16:19:01 [INFO] UMinhoScraper -    [11] Sucesso: Logic programming and artificial neural networks in breast cancer detection
+2026-04-25 16:19:12 [INFO] UMinhoScraper -    [12] Sucesso: Abstract computation in schizophrenia detection through artificial neural network based systems
+2026-04-25 16:19:21 [INFO] UMinhoScraper -    [13] Sucesso: Educase – intelligent system for pedagogical advising using case-based reasoning
+2026-04-25 16:19:30 [INFO] UMinhoScraper -    [14] Sucesso: Prototyping teams of affective agents in robocode
+2026-04-25 16:19:40 [INFO] UMinhoScraper -    [15] Sucesso: Parallel evolutionary computation in bioinformatics applications
+2026-04-25 16:19:50 [INFO] UMinhoScraper -    [16] Sucesso: Uthrene, a radically new molecule?
+2026-04-25 16:20:00 [INFO] UMinhoScraper -    [17] Sucesso: Synergy in online dispute resolution and the need to protect privacy and personal data
+2026-04-25 16:20:08 [INFO] UMinhoScraper -    [18] Sucesso: Assessing road traffic expression
+2026-04-25 16:20:19 [INFO] UMinhoScraper -    [19] Sucesso: Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models
+2026-04-25 16:20:28 [INFO] UMinhoScraper -    [20] Sucesso: Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques
+2026-04-25 16:20:30 [INFO] UMinhoScraper - Scraping completed. Total papers scraped: 20
+2026-04-25 16:20:30 [INFO] UMinhoScraper - --- Verificando e Populando Infraestrutura ---
+2026-04-25 16:20:30 [INFO] UMinhoScraper - Base de dados pronta e populada.
+

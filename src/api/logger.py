@@ -1,6 +1,6 @@
 # logger.py
 import logging
-from api.config import settings
+from src.api.config import settings
 
 # Configuração básica de Logging
 logging.basicConfig(
@@ -15,4 +15,5 @@ logging.basicConfig(
 
 # Cria um logger que podes importar noutros ficheiros
 logger = logging.getLogger("UMinhoScraper")
-#No teu scraper.py, em vez de print(f"Loading collection..."), fazes from logger import logger e usas logger.info("Loading collection...") ou logger.error("Falha ao carregar a página!")
+
+logger.info("Sistema de Logging inicializado com sucesso!")
