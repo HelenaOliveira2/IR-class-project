@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 
-// 1. Recebemos a prop 'children' (que é o nosso ConfigPanel)
-export default function SearchBox({ method, excludeStopWords, language, children }) {
+// 1. ADICIONADO: 'onSearch' incluído nas props para o App.jsx poder receber os dados
+export default function SearchBox({ onSearch, method, excludeStopWords, language, children }) {
   const [query, setQuery] = useState('');
   const [searchTarget, setSearchTarget] = useState('all');
   const [researchArea, setResearchArea] = useState('all');
@@ -10,6 +10,12 @@ export default function SearchBox({ method, excludeStopWords, language, children
 
   const handleSearch = (e) => {
     e.preventDefault();
+    
+    // 2. LIGAÇÃO AO APP.JSX: Dispara a função de pesquisa real
+    if (query.trim() && onSearch) {
+      onSearch(query); 
+    }
+
     const searchData = {
       query,
       config: { method, excludeStopWords, language },
@@ -19,7 +25,6 @@ export default function SearchBox({ method, excludeStopWords, language, children
   };
 
   return (
-    // 2. Aumentamos o maxWidth para 1000px para as caixas respirarem lado a lado
     <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'left' }}>
       
       <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
@@ -39,10 +44,9 @@ export default function SearchBox({ method, excludeStopWords, language, children
         </button>
       </form>
 
-      {/* 3. Aqui começa a magia das grelhas lado a lado */}
       <div style={{ display: 'flex', gap: '20px', alignItems: 'stretch' }}>
         
-        {/* COLUNA ESQUERDA: Filtros (flex: 1 significa que ocupa metade do espaço) */}
+        {/* COLUNA ESQUERDA: Filtros */}
         <div style={{ flex: 1, padding: '20px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
           <h4 style={{ margin: '0 0 15px 0', color: '#334155' }}>Filtros de Pesquisa</h4>
 
@@ -100,7 +104,7 @@ export default function SearchBox({ method, excludeStopWords, language, children
           </div>
         </div>
 
-        {/* COLUNA DIREITA: Renderizamos aqui o ConfigPanel */}
+        {/* COLUNA DIREITA: ConfigPanel */}
         <div style={{ flex: 1 }}>
           {children}
         </div>

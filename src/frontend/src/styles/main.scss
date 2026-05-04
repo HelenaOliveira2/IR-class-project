@@ -1,3 +1,4 @@
+@use "sass:color";
 // Variáveis e Paleta de Cores Académica (REQ-F01)
 $uminho-red: #B21F24;
 $bg-light: #F8F9FA;
@@ -147,7 +148,7 @@ body {
   transition: all 0.2s ease; // Para a transição de cor ser suave
 
   &:hover:not(:disabled) { 
-    background: darken($uminho-red, 10%); 
+    background: color.adjust($uminho-red, $lightness: -10%); 
   }
 
   // ESTA É A PARTE QUE FALTA:
@@ -288,3 +289,199 @@ body {
   color: $text-muted;
 }
 
+// ==========================================
+// 3. SEARCH RESULTS INTERFACE (REQ-F21 a F34)
+// ==========================================
+
+.results-container {
+  margin-top: 3rem;
+  text-align: left;
+  animation: fadeIn 0.4s ease;
+
+  .results-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $border-color;
+    margin-bottom: 2rem;
+    color: $text-muted;
+    font-size: 0.95rem;
+
+    .export-buttons {
+      display: flex;
+      gap: 0.75rem;
+
+      button {
+        background: $white;
+        border: 1px solid $border-color;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+
+        &:hover {
+          border-color: $uminho-red;
+          color: $uminho-red;
+        }
+      }
+    }
+  }
+}
+
+// REQ-F21: Design da lista com indicadores de ranking
+.result-card {
+  display: flex;
+  gap: 1.5rem;
+  background: $white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  border: 1px solid $border-color;
+  border-left: 4px solid $border-color; // Borda neutra inicial
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateX(5px);
+    border-left-color: $uminho-red; // REQ-F21: Destaque visual ao focar
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .rank-indicator {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $text-muted;
+    min-width: 40px;
+    opacity: 0.5;
+  }
+
+  .result-content {
+    flex: 1;
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+
+      // REQ-F23: Títulos clicáveis
+      .result-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: $text-dark;
+        text-decoration: none;
+        
+        &:hover {
+          color: $uminho-red;
+          text-decoration: underline;
+        }
+      }
+
+      // REQ-F22: Scores de relevância
+      .score-tag {
+        background: #F1F5F9;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #4A5568;
+        white-space: nowrap;
+      }
+    }
+
+    // REQ-F24 & REQ-F25: Metadados
+    .meta-info {
+      font-size: 0.875rem;
+      color: $text-muted;
+      margin-bottom: 0.75rem;
+      
+      strong { color: $text-dark; }
+    }
+
+    // REQ-F26: Snippet com destaque
+    .snippet {
+      font-size: 0.95rem;
+      color: #4A5568;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+
+      b {
+        color: $text-dark;
+        background-color: rgba(178, 31, 36, 0.1); // Fundo vermelho muito suave
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+
+      button, .btn-primary {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+
+      .btn-primary {
+        background: $uminho-red;
+        color: $white;
+        text-decoration: none;
+        &:hover { background: color.adjust($uminho-red, $lightness: -10%); }
+      }
+
+      .btn-secondary {
+        background: $white;
+        border: 1px solid $border-color;
+        color: $text-dark;
+        &:hover { background: #F8FAFC; border-color: $text-muted; }
+      }
+    }
+
+    // REQ-F28: Seção de Abstract expansível
+    .abstract-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #F8FAFC;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      border-left: 2px solid $border-color;
+      animation: slideUp 0.2s ease-out;
+    }
+  }
+}
+
+// REQ-F31: Paginação
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid $border-color;
+
+  span { font-weight: 600; color: $text-dark; }
+
+  button {
+    background: $white;
+    border: 1px solid $border-color;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: $uminho-red;
+      color: $uminho-red;
+    }
+  }
+}

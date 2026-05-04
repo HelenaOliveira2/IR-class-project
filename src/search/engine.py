@@ -6,8 +6,8 @@ from nltk.corpus import wordnet
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import os
-from processor import TextProcessor, process_from_db
-from indexer import run_indexer
+from src.search.processor import TextProcessor, process_from_db
+from src.search.indexer import run_indexer
 
 class SearchEngine:
     def __init__(self, index_path='src/search/inverted_index.json', metadata_path='src/search/doc_metadata.json'):
@@ -109,7 +109,7 @@ class SearchEngine:
             output.append(stack.pop())
         return output
 
-    def search(self, query):
+    def search(self, query, method="stemming", ranking="custom_tfidf", weighting="log_normalization"):
         """
         Resolve a query booleana respeitando matemática rigorosa.
         Substitui a versão anterior para resolver precedências complexas.

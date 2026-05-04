@@ -1,9 +1,16 @@
+import time
+import re
+import csv
+import io
 from fastapi import FastAPI, HTTPException, Query, Path
+from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List, Optional
 import sqlite3
 from src.api.config import settings
 from src.api.logger import logger
+from src.search.engine import SearchEngine
 #7.1
 # Inicialização da API com metadados para o Swagger (REQ-B65)
 app = FastAPI(
@@ -12,6 +19,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Permite que o React aceda à API
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+engine = SearchEngine()
+
 # Caminho para a base de dados criada pelo teu database_setup.py
 DB_FILE = 'publications.db'
 
@@ -19,6 +36,23 @@ def get_db_connection():
     conn = sqlite3.connect(settings.db_file)
     conn.row_factory = sqlite3.Row  # Permite aceder às colunas pelo nome
     return conn
+
+# REQ-F26: Função para gerar snippets com destaque (Highlight)
+def generate_highlighted_snippet(text, query_terms):
+    if not text: return "Resumo não disponível."
+    
+    # Procura a primeira ocorrência de qualquer termo da query
+    pattern = re.compile(f"({'|'.join(re.escape(t) for t in query_terms)})", re.IGNORECASE)
+    match = pattern.search(text)
+    
+    if match:
+        start = max(0, match.start() - 50)
+        end = min(len(text), match.end() + 100)
+        snippet = text[start:end]
+        # Adiciona as tags de destaque
+        highlighted = pattern.sub(r"<b>\1</b>", snippet)
+        return f"...{highlighted}..."
+    return text[:150] + "..."
 
 # ==========================================
 # MODELOS DE VALIDAÇÃO (REQ-B66)
@@ -91,3 +125,79 @@ def get_authors():
     conn.close()
     
     return [dict(author) for author in authors]
+
+# No src/api/api.py
+
+@app.get("/api/search")
+def search(q: str, method: str = "stemming", ranking: str = "custom_tfidf", weighting: str = "log_normalization"):
+    start_time = time.time()
+    
+    # 1. Obtém os IDs do motor de busca
+    raw_results = engine.search(q, method, ranking, weighting)
+    
+    # 2. Paginação (REQ-F31)
+    limit = 10
+    paginated_ids = raw_results[:limit]
+    
+    formatted_results = []
+    conn = get_db_connection() # Usa a função que já tens no topo do api.py
+    cursor = conn.cursor()
+
+    for res in paginated_ids:
+        # 'res' pode ser um ID direto ou um dicionário {'doc_id': 5, 'score': ...}
+        # Ajusta conforme o que o teu engine.search devolve
+        #doc_id = res['doc_id'] if isinstance(res, dict) else res
+        doc_id = res['doc_id'] if isinstance(res, dict) else res
+
+        # Tenta converter explicitamente para int (ou str, dependendo da tua BD)
+        try:
+            doc_id = int(doc_id) 
+        except:
+            pass
+
+        cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+        score = res['score'] if isinstance(res, dict) else 0.0
+
+        # 3. BUSCA À BASE DE DOS (O que tu pretendes)
+        cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+        row = cursor.fetchone()
+
+        if row:
+            doc = dict(row) # Converte a linha da BD num dicionário
+            formatted_results.append({
+                "id": doc["id"],
+                "title": doc["title"],
+                "authors": doc.get("authors", "N/A"),
+                "date": doc.get("year", "N/A"),
+                "score": round(score, 4),
+                "snippet": generate_highlighted_snippet(doc.get("abstract", ""), q.split()),
+                "pdf_link": doc.get("document_link", "#"),
+                "abstract": doc.get("abstract", ""),
+                "type": "Artigo Científico"
+            })
+        else:
+            print(f"⚠️ Documento {doc_id} não encontrado na base de dados!")
+
+    conn.close()
+
+    return {
+        "results": formatted_results,
+        "total_count": len(raw_results),
+        "search_time": f"{time.time() - start_time:.4f}s"
+    }
+
+# REQ-F30: Exportação de Resultados
+@app.get("/api/export/{file_format}")
+def export_results(file_format: str, q: str):
+    # Lógica simplificada de exportação para CSV
+    if file_format == "csv":
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(["Titulo", "Autores", "Data", "Link"])
+        # Aqui buscarias os resultados reais da pesquisa
+        output.seek(0)
+        return StreamingResponse(
+            output, 
+            media_type="text/csv",
+            headers={"Content-Disposition": f"attachment; filename=search_results.csv"}
+        )
