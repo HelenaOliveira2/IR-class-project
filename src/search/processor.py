@@ -1,19 +1,9 @@
 import time
-
-import nltk
 import json
 import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.tokenize import sent_tokenize, word_tokenize
-
-# REQ-B13: Descarregar recursos necessários do NLTK
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-nltk.download('punkt_tab')
-
 from nltk.tokenize import word_tokenize, sent_tokenize
 import sqlite3
 import os
@@ -24,13 +14,6 @@ class TextProcessor:
         self.language = language
         self.stemmer = PorterStemmer() 
         self.lemmatizer = WordNetLemmatizer() 
-        
-        # Faz os downloads silenciosamente (quiet=True) caso falte algum.
-        # Assim garantimos que o projeto corre perfeitamente no PC do professor!
-        nltk.download('stopwords', quiet=True)
-        nltk.download('punkt', quiet=True)
-        nltk.download('punkt_tab', quiet=True)
-        nltk.download('wordnet', quiet=True)
         
         # REQ-B22: Carregar stop words
         self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('portuguese')))
@@ -159,5 +142,10 @@ def process_with_stopword_control(tokens, remove_stopwords=True, lang='portugues
 
 
 if __name__ == "__main__":
+    # Correr o processamento
+    process_scraped_data()
+
+    # Agora chamamos a nova função que lê da BD
+    process_from_db()
     process_from_db()
 

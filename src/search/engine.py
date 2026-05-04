@@ -1,20 +1,13 @@
 import json
 import math
-from collections import defaultdict
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 import sqlite3
-#from processor import TextProcessor, process_from_db
-import nltk
 from nltk.corpus import wordnet
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import os
-#from classifier import DocumentClassifier 
-#from indexer import run_indexer
-from src.search.processor import TextProcessor, process_from_db
-from src.search.classifier import DocumentClassifier 
-from src.search.indexer import run_indexer
+from processor import TextProcessor, process_from_db
+from indexer import run_indexer
 
 class SearchEngine:
     def __init__(self, index_path='src/search/inverted_index.json', metadata_path='src/search/doc_metadata.json'):
