@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox'; // Importamos o novo componente
+import ConfigPanel from './components/ConfigPanel';
 import './styles/main.scss';
 
+// ... (imports mantêm-se iguais) ...
+
 function App() {
+  // Estados antigos
+  const [method, setMethod] = useState('stemming');
+  const [excludeStopWords, setExcludeStopWords] = useState(false);
+  const [language, setLanguage] = useState('pt');
+
+  // NOVOS Estados para Ranking e Pesos (REQ-F18 e REQ-F20)
+  const [rankingAlgorithm, setRankingAlgorithm] = useState('custom_tfidf');
+  const [weightingScheme, setWeightingScheme] = useState('log_normalization');
+
   return (
     <Router>
       <div className="app-wrapper">
-        {/* REQ-F04 e REQ-F05 estão aqui dentro */}
         <Header />
         
-        {/* REQ-F01: Contentor principal com tag <main> */}
         <main className="main-container" role="main">
-          
           <Routes>
             <Route path="/" element={
               <div style={{ textAlign: 'center' }}>
@@ -24,14 +33,29 @@ function App() {
                   Pesquise metadados de publicações científicas do RepositóriUM
                 </p>
                 
-                {/* REQ-F06 a REQ-F10 estão todos aqui dentro */}
-                <SearchBox />
+                {/* Atualizamos a SearchBox para receber tudo (para enviar ao backend depois) */}
+                <SearchBox 
+                  method={method} 
+                  excludeStopWords={excludeStopWords} 
+                  language={language}
+                  rankingAlgorithm={rankingAlgorithm}
+                  weightingScheme={weightingScheme}
+                >
+                  {/* Passamos as novas props para o ConfigPanel */}
+                  <ConfigPanel 
+                    method={method} setMethod={setMethod}
+                    excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
+                    language={language} setLanguage={setLanguage}
+                    rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
+                    weightingScheme={weightingScheme} setWeightingScheme={setWeightingScheme}
+                  />
+                </SearchBox>
+
               </div>
             } />
             <Route path="/authors" element={<h2>Pesquisa por Autores (Em breve)</h2>} />
             <Route path="/about" element={<h2>Funcionalidades Educativas (Em breve)</h2>} />
           </Routes>
-
         </main>
       </div>
     </Router>

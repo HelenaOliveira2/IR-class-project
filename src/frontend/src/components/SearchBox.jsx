@@ -1,129 +1,111 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Info, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
 
-const SearchBox = () => {
+// 1. Recebemos a prop 'children' (que é o nosso ConfigPanel)
+export default function SearchBox({ method, excludeStopWords, language, children }) {
   const [query, setQuery] = useState('');
-  const [error, setError] = useState('');
-  const [showHelp, setShowHelp] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-
-  // REQ-F08: Base de dados simulada para auto-completion
-  const searchHistory = [
-    "machine learning AND health",
-    "covid-19 OR sars-cov-2",
-    "artificial intelligence NOT robotics",
-    "information retrieval",
-    "boolean search operators"
-  ];
-
-  // REQ-F10: Real-time query validation
-  useEffect(() => {
-    if (query.length === 0) {
-      setError('');
-      return;
-    }
-
-    // Regras de validação Booleana
-    const upperQuery = query.toUpperCase();
-    if (upperQuery.endsWith(' AND') || upperQuery.endsWith(' OR') || upperQuery.endsWith(' NOT')) {
-      setError('A query não pode terminar com um operador booleano solto.');
-    } else if ((query.match(/\(/g) || []).length !== (query.match(/\)/g) || []).length) {
-      setError('Parênteses abertos/fechados incorretamente.');
-    } else {
-      setError(''); // Query válida!
-    }
-  }, [query]);
+  const [searchTarget, setSearchTarget] = useState('all');
+  const [researchArea, setResearchArea] = useState('all');
+  const [searchMode, setSearchMode] = useState('general');
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (!error && query) {
-      alert(`A pesquisar por: ${query} \n(A ligar à API na Fase 2...)`);
-      setShowSuggestions(false);
-    }
+    const searchData = {
+      query,
+      config: { method, excludeStopWords, language },
+      filters: { target: searchTarget, area: researchArea, mode: searchMode }
+    };
+    console.log("A enviar para o servidor:", searchData);
   };
 
   return (
-    <div className="search-section">
+    // 2. Aumentamos o maxWidth para 1000px para as caixas respirarem lado a lado
+    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'left' }}>
       
-      <div className="search-box-container">
-        {/* REQ-F06: Main search box supporting Boolean queries */}
-        <form onSubmit={handleSearch}>
-          <div className={`search-input-wrapper ${error ? 'has-error' : ''}`}>
-            
-            {/* REQ-F07: Query syntax help/tooltip functionality */}
-            <button 
-              type="button" 
-              className="icon-btn" 
-              onClick={() => setShowHelp(!showHelp)}
-              title="Ajuda com pesquisa Booleana"
-              style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: '0 0.5rem' }}
-            >
-              <Info size={20} color="#718096" />
-            </button>
+      <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Ex: (health OR medical) AND artificial intelligence"
+          style={{ flex: 1, padding: '12px', borderRadius: '6px', border: '1px solid #ccc', fontSize: '1rem' }}
+        />
+        <button 
+          type="submit" 
+          style={{ padding: '12px 24px', backgroundColor: '#B91C1C', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1rem' }}
+        >
+          <Search size={20} />
+          Pesquisar
+        </button>
+      </form>
 
-            {/* REQ-F05: Accessible design (aria-label) */}
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setShowSuggestions(true);
-              }}
-              placeholder="Ex: (health OR medical) AND artificial intelligence"
-              aria-label="Caixa de pesquisa principal"
-            />
-            
-            <button type="submit" className="search-btn" disabled={!!error}>
-              <Search size={20} />
-              <span>Pesquisar</span>
-            </button>
+      {/* 3. Aqui começa a magia das grelhas lado a lado */}
+      <div style={{ display: 'flex', gap: '20px', alignItems: 'stretch' }}>
+        
+        {/* COLUNA ESQUERDA: Filtros (flex: 1 significa que ocupa metade do espaço) */}
+        <div style={{ flex: 1, padding: '20px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
+          <h4 style={{ margin: '0 0 15px 0', color: '#334155' }}>Filtros de Pesquisa</h4>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div>
+              <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '8px', color: '#475569' }}>Modo de Pesquisa:</p>
+              <div style={{ display: 'flex', gap: '15px' }}>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="general" checked={searchMode === 'general'} onChange={(e) => setSearchMode(e.target.value)} style={{ marginRight: '5px' }} />
+                  Geral
+                </label>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="author" checked={searchMode === 'author'} onChange={(e) => setSearchMode(e.target.value)} style={{ marginRight: '5px' }} />
+                  Por Autor
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '8px', color: '#475569' }}>Pesquisar em:</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="title" checked={searchTarget === 'title'} onChange={(e) => setSearchTarget(e.target.value)} style={{ marginRight: '5px' }} />
+                  Títulos
+                </label>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="abstract" checked={searchTarget === 'abstract'} onChange={(e) => setSearchTarget(e.target.value)} style={{ marginRight: '5px' }} />
+                  Resumos
+                </label>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="document" checked={searchTarget === 'document'} onChange={(e) => setSearchTarget(e.target.value)} style={{ marginRight: '5px' }} />
+                  Documento Completo
+                </label>
+                <label style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" value="all" checked={searchTarget === 'all'} onChange={(e) => setSearchTarget(e.target.value)} style={{ marginRight: '5px' }} />
+                  Todos os Campos
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '8px', color: '#475569' }}>Área de Investigação:</p>
+              <select 
+                value={researchArea} 
+                onChange={(e) => setResearchArea(e.target.value)}
+                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1', fontSize: '0.9rem' }}
+              >
+                <option value="all">Todas as Áreas</option>
+                <option value="health">Saúde / Medicina</option>
+                <option value="engineering">Engenharia / Tecnologia</option>
+                <option value="science">Ciências Exatas</option>
+                <option value="humanities">Ciências Humanas</option>
+              </select>
+            </div>
           </div>
-        </form>
-
-        {/* REQ-F10: Show real-time error highlighting */}
-        {error && (
-          <div className="error-message">
-            <AlertCircle size={16} />
-            <span>{error}</span>
-          </div>
-        )}
-
-        {/* REQ-F08: Search suggestions and auto-completion */}
-        {showSuggestions && query.length > 2 && !error && (
-          <ul className="search-suggestions">
-            {searchHistory
-              .filter(item => item.toLowerCase().includes(query.toLowerCase()))
-              .map((suggestion, index) => (
-                <li 
-                  key={index} 
-                  onClick={() => {
-                    setQuery(suggestion);
-                    setShowSuggestions(false);
-                  }}
-                >
-                  {suggestion}
-                </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* REQ-F09: Display query syntax examples */}
-      {showHelp && (
-        <div className="syntax-help">
-          <h4><Info size={18} /> Guia de Operadores Booleanos</h4>
-          <p>Otimize a sua pesquisa usando os nossos operadores em maiúsculas:</p>
-          <ul style={{ marginTop: '0.5rem' }}>
-            <li><code>AND</code> : Encontra publicações com ambas as palavras. Ex: <i>cancer <b>AND</b> treatment</i></li>
-            <li><code>OR</code> : Encontra publicações com pelo menos uma palavra. Ex: <i>covid-19 <b>OR</b> sars-cov-2</i></li>
-            <li><code>NOT</code> : Exclui palavras da pesquisa. Ex: <i>apple <b>NOT</b> fruit</i></li>
-            <li><code>( )</code> : Agrupa operações. Ex: <i>(health <b>OR</b> medical) <b>AND</b> technology</i></li>
-          </ul>
         </div>
-      )}
 
+        {/* COLUNA DIREITA: Renderizamos aqui o ConfigPanel */}
+        <div style={{ flex: 1 }}>
+          {children}
+        </div>
+
+      </div>
     </div>
   );
-};
-
-export default SearchBox;
+}
