@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ResultItem({ doc, rank }) {
+function ResultItem({ doc, rank, isSaved, onSave }) {
   const [showAbstract, setShowAbstract] = useState(false);
 
   return (
@@ -24,20 +24,42 @@ function ResultItem({ doc, rank }) {
           </div>
         </div>
 
+        {/* REQ-F24: Apresentação de autores */}
         <p className="authors"><strong>Autores:</strong> {doc.authors}</p>
+        
+        {/* REQ-F25: Exibição de Data e Tipo de Documento */}
+        <div className="doc-metadata" style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>
+          <span><strong>Data:</strong> {doc.date}</span>
+          <span style={{ margin: '0 10px' }}>|</span>
+          <span><strong>Tipo:</strong> {doc.type}</span>
+        </div>
         
         {/* REQ-F26: Snippet */}
         <p className="snippet" dangerouslySetInnerHTML={{ __html: doc.snippet }} />
 
-        <div className="result-actions">
+        <div className="result-actions" style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+          {/* Botão Guardar adaptado ao estilo do site */}
+          <button 
+            onClick={onSave} 
+            className={`btn-secondary ${isSaved ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+          >
+            <span style={{ color: isSaved ? '#f59e0b' : '#94a3b8' }}>★</span> 
+            {isSaved ? 'Guardado' : 'Guardar'}
+          </button>
+          
           <button onClick={() => setShowAbstract(!showAbstract)} className="btn-secondary">
             {showAbstract ? 'Ocultar Resumo' : 'Ver Resumo'}
           </button>
-          <a href={doc.pdf_link} className="btn-primary">PDF</a>
+
+          {/* Botão PDF usando a classe principal b91c1c do site */}
+          <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="btn-primary">
+            PDF
+          </a>
         </div>
 
         {showAbstract && (
-          <div className="abstract-box">
+          <div className="abstract-box" style={{ marginTop: '15px', padding: '15px', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #cbd5e1' }}>
             <p>{doc.abstract}</p>
           </div>
         )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 
 // 1. ADICIONADO: 'onSearch' incluído nas props para o App.jsx poder receber os dados
-export default function SearchBox({ onSearch, method, excludeStopWords, language, children }) {
+export default function SearchBox({ onSearch, method, excludeStopWords, language, children, ...props }) {
   const [query, setQuery] = useState('');
   const [searchTarget, setSearchTarget] = useState('all');
   const [researchArea, setResearchArea] = useState('all');
@@ -13,7 +13,7 @@ export default function SearchBox({ onSearch, method, excludeStopWords, language
     
     // 2. LIGAÇÃO AO APP.JSX: Dispara a função de pesquisa real
     if (query.trim() && onSearch) {
-      onSearch(query); 
+      onSearch(query, searchMode); 
     }
 
     const searchData = {

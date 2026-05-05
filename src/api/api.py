@@ -128,76 +128,115 @@ def get_authors():
 
 # No src/api/api.py
 
+# Local: src/api/api.py
+
 @app.get("/api/search")
-def search(q: str, method: str = "stemming", ranking: str = "custom_tfidf", weighting: str = "log_normalization"):
+def search(
+    q: str, 
+    method: str = "stemming", 
+    ranking: str = "custom_tfidf", 
+    weighting: str = "log_normalization",
+    page: int = Query(1, ge=1),           
+    limit: int = Query(10, ge=1, le=50),  
+    sort_by: str = "relevance"            
+):
     start_time = time.time()
     
-    # 1. Obtém os IDs do motor de busca
+    # 1. Obtém TODOS os resultados do motor de busca[cite: 5]
     raw_results = engine.search(q, method, ranking, weighting)
+    total_results = len(raw_results)
     
-    # 2. Paginação (REQ-F31)
-    limit = 10
-    paginated_ids = raw_results[:limit]
-    
-    formatted_results = []
-    conn = get_db_connection() # Usa a função que já tens no topo do api.py
+    # 2. Busca os dados de TODOS para poder ordenar corretamente
+    all_matching_docs = []
+    conn = get_db_connection()
     cursor = conn.cursor()
 
-    for res in paginated_ids:
-        # 'res' pode ser um ID direto ou um dicionário {'doc_id': 5, 'score': ...}
-        # Ajusta conforme o que o teu engine.search devolve
-        #doc_id = res['doc_id'] if isinstance(res, dict) else res
+    for res in raw_results:
         doc_id = res['doc_id'] if isinstance(res, dict) else res
-
-        # Tenta converter explicitamente para int (ou str, dependendo da tua BD)
-        try:
-            doc_id = int(doc_id) 
-        except:
-            pass
-
-        cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
         score = res['score'] if isinstance(res, dict) else 0.0
 
-        # 3. BUSCA À BASE DE DOS (O que tu pretendes)
         cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
         row = cursor.fetchone()
-
         if row:
-            doc = dict(row) # Converte a linha da BD num dicionário
-            formatted_results.append({
+            doc = dict(row)
+            all_matching_docs.append({
                 "id": doc["id"],
                 "title": doc["title"],
                 "authors": doc.get("authors", "N/A"),
-                "date": doc.get("year", "N/A"),
+                "date": str(doc.get("year", "N/A")), # Garante string para ordenação
                 "score": round(score, 4),
                 "snippet": generate_highlighted_snippet(doc.get("abstract", ""), q.split()),
                 "pdf_link": doc.get("document_link", "#"),
                 "abstract": doc.get("abstract", ""),
                 "type": "Artigo Científico"
             })
-        else:
-            print(f"⚠️ Documento {doc_id} não encontrado na base de dados!")
-
     conn.close()
 
+    # 3. Lógica de Ordenação Global (REQ-F34)
+    if sort_by == "date":
+        all_matching_docs.sort(key=lambda x: x['date'], reverse=True)
+    elif sort_by == "title":
+        all_matching_docs.sort(key=lambda x: x['title'].lower())
+    else:
+        # Relevância (já vem do motor, mas garantimos aqui)[cite: 5]
+        all_matching_docs.sort(key=lambda x: x['score'], reverse=True)
+
+    # 4. Cálculo de Paginação sobre a lista já ordenada (REQ-F31)
+    start_idx = (page - 1) * limit
+    end_idx = start_idx + limit
+    paginated_results = all_matching_docs[start_idx:end_idx]
+
     return {
-        "results": formatted_results,
-        "total_count": len(raw_results),
+        "results": paginated_results,
+        "total_count": total_results,
+        "page": page,
+        "limit": limit,
         "search_time": f"{time.time() - start_time:.4f}s"
     }
 
 # REQ-F30: Exportação de Resultados
 @app.get("/api/export/{file_format}")
-def export_results(file_format: str, q: str):
-    # Lógica simplificada de exportação para CSV
+def export_results(file_format: str, q: str = "search"):
+    # 1. Obtém os IDs dos documentos que correspondem à pesquisa[cite: 4, 5]
+    raw_results = engine.search(q) 
+    
+    # 2. Vai buscar os detalhes de cada documento à BD (semelhante à rota /api/search)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    documents = []
+    
+    for res in raw_results:
+        doc_id = res['doc_id'] if isinstance(res, dict) else res
+        cursor.execute("SELECT title, authors, year, document_link FROM documents WHERE id = ?", (doc_id,))
+        row = cursor.fetchone()
+        if row:
+            documents.append(dict(row))
+    conn.close()
+
+    output = io.StringIO()
+    
+    # 3. Escrita real dos dados nos ficheiros
     if file_format == "csv":
-        output = io.StringIO()
         writer = csv.writer(output)
-        writer.writerow(["Titulo", "Autores", "Data", "Link"])
-        # Aqui buscarias os resultados reais da pesquisa
+        writer.writerow(["Title", "Authors", "Year", "Link"]) # Cabeçalho
+        for doc in documents:
+            writer.writerow([doc['title'], doc['authors'], doc['year'], doc['document_link']])
+        
         output.seek(0)
-        return StreamingResponse(
-            output, 
-            media_type="text/csv",
-            headers={"Content-Disposition": f"attachment; filename=search_results.csv"}
-        )
+        return StreamingResponse(output, media_type="text/csv", 
+                                headers={"Content-Disposition": f"attachment; filename=search_results.csv"})
+
+    elif file_format == "json":
+        # Retorna a lista de documentos reais em formato JSON (REQ-F30)
+        return {"query": q, "total_exported": len(documents), "results": documents}
+
+    elif file_format == "bibtex":
+        bib_entries = []
+        for i, doc in enumerate(documents):
+            # Gera uma entrada BibTeX simples para cada documento[cite: 4]
+            entry = f"@article{{doc{i},\n  title={{{doc['title']}}},\n  author={{{doc['authors']}}},\n  year={{{doc['year']}}}\n}}"
+            bib_entries.append(entry)
+        
+        bib_content = "\n\n".join(bib_entries)
+        return StreamingResponse(io.StringIO(bib_content), media_type="text/plain",
+                                headers={"Content-Disposition": f"attachment; filename=results.bib"})

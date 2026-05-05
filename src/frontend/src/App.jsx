@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox'; 
@@ -18,50 +18,75 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchStats, setSearchStats] = useState({ total: 0, time: "0s" });
+  const [lastQuery, setLastQuery] = useState('');
+
+  // --- Novos Estados para REQ-F31, F32 e F34 ---
+  const [currentPage, setCurrentPage] = useState(1);
+  const [resultsPerPage, setResultsPerPage] = useState(10);
+  const [sortBy, setSortBy] = useState('relevance');
+
+  // REQ-F31, F32, F34: Dispara a pesquisa sempre que os filtros de visualização mudam
+  useEffect(() => {
+    if (lastQuery) {
+      handlePerformSearch(lastQuery, 'general', currentPage);
+    }
+  }, [currentPage, resultsPerPage, sortBy]); // Escuta estas variáveis
 
   // --- Função Principal de Pesquisa (Conecta o Frontend ao Backend) ---
-  const handlePerformSearch = async (query) => {
+  const handlePerformSearch = async (query, mode = 'general', page = 1) => {
     if (!query) return;
-    
+    setLastQuery(query);
+    setCurrentPage(page);
     setLoading(true);
-    setResults([]); // Limpa resultados anteriores ao iniciar nova busca
+    setResults([]); 
     
     try {
-      // Construção dos parâmetros para a API Python
-      const params = new URLSearchParams({
-        q: query,
-        method: method,
-        ranking: rankingAlgorithm,
-        weighting: weightingScheme,
-        stop_words: excludeStopWords,
-        lang: language
-      });
-
-      console.log("A enviar pedido para:", `http://localhost:8000/api/search?${params}`);
-
-      const response = await fetch(`http://localhost:8000/api/search?${params}`);
-
-      console.log("Dados crus recebidos:", data);
+      let url = "";
+  
+      if (mode === 'author') {
+        // Rota para pesquisa de autores (REQ-F24)[cite: 4, 5]
+        url = `http://127.0.0.1:8000/api/authors/search?name=${encodeURIComponent(query)}`;
+      } else {
+        // Rota geral com todos os filtros aplicados
+        const params = new URLSearchParams({
+          q: query,
+          method: method,
+          ranking: rankingAlgorithm,
+          weighting: weightingScheme,
+          stop_words: excludeStopWords,
+          lang: language,
+          page: page,             // REQ-F31[cite: 1]
+          limit: resultsPerPage,  // REQ-F32[cite: 1]
+          sort_by: sortBy         // REQ-F34[cite: 1]
+        });
+        url = `http://127.0.0.1:8000/api/search?${params}`;
+      }
+  
+      console.log("A enviar pedido para:", url);
+  
+      const response = await fetch(url);
       
       if (!response.ok) {
         throw new Error("Erro na resposta do servidor");
       }
-      
+    
       const data = await response.json();
       console.log("Dados recebidos da API:", data);
-
-      if (data && data.results && Array.isArray(data.results)) {
-        console.log("A atualizar resultados com:", data.results.length, "itens");
-        setResults(data.results);
+  
+      // Ajuste: A pesquisa de autor pode devolver um array direto ou um objeto com .results[cite: 4, 5]
+      const finalResults = Array.isArray(data) ? data : (data.results || []);
+  
+      if (finalResults.length > 0 || (data.results && Array.isArray(data.results))) {
+        setResults(finalResults);
         setSearchStats({ 
-          total: data.total_count || data.results.length, 
+          total: data.total_count || finalResults.length, 
           time: data.search_time || "0s" 
         });
       } else {
-        console.error("Estrutura de dados inesperada ou vazia:", data);
+        console.warn("Nenhum resultado encontrado.");
         setResults([]);
       }
-
+  
     } catch (error) {
       console.error("Erro ao procurar documentos:", error);
       alert("Erro na ligação ao servidor Python (Porta 8000).");
@@ -70,9 +95,31 @@ function App() {
     }
   };
 
-  // --- Função para Exportação (REQ-F30) ---
+  // --- Novo Estado para REQ-F29 ---
+  const [collection, setCollection] = useState([]);
+
+  // --- Função para REQ-F29 (Guardar/Remover da Coleção) ---
+  const toggleSaveToCollection = (doc) => {
+    setCollection(prev => {
+      const isAlreadySaved = prev.find(item => item.id === doc.id);
+      if (isAlreadySaved) {
+        return prev.filter(item => item.id !== doc.id); // Remove se já existir
+      }
+      return [...prev, doc]; // Adiciona à coleção
+    });
+  };
+
+  // --- Função de Exportação Atualizada (REQ-F30) ---
   const handleExport = (format) => {
-    window.open(`http://127.0.0.1:8000/api/export/${format}`, '_blank');
+    // Constrói os parâmetros para o ficheiro exportado ter os dados da pesquisa atual[cite: 1, 4]
+    const params = new URLSearchParams({
+      q: lastQuery,
+      method: method,
+      lang: language
+    });
+    const url = `http://127.0.0.1:8000/api/export/${format}?${params.toString()}`;
+    console.log("A exportar de:", url);
+    window.open(`http://127.0.0.1:8000/api/export/${format}?${params}`, '_blank');
   };
 
   return (
@@ -114,69 +161,68 @@ function App() {
                   
                   {loading && (
                     <div style={{ textAlign: 'center', padding: '40px' }}>
-                      <div className="spinner" style={{ marginBottom: '10px' }}></div>
-                      <p style={{ color: '#B91C1C', fontWeight: 'bold' }}>A pesquisar no RepositóriUM...</p>
+                      <div className="spinner"></div>
+                      <p>A pesquisar...</p>
                     </div>
                   )}
 
                   {!loading && results.length > 0 && (
                     <div className="results-content">
                       {/* Estatísticas e Exportação */}
-                      <div style={{ 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center', 
-                        borderBottom: '2px solid #edf2f7', 
-                        paddingBottom: '15px',
-                        marginBottom: '20px' 
-                      }}>
-                        <p style={{ color: '#4a5568', margin: 0 }}>
-                          Encontrados <strong>{searchStats.total}</strong> documentos em <strong>{searchStats.time}</strong>
-                        </p>
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                          <button onClick={() => handleExport('csv')} style={{ padding: '8px 15px', cursor: 'pointer' }}>CSV</button>
-                          <button onClick={() => handleExport('json')} style={{ padding: '8px 15px', cursor: 'pointer' }}>JSON</button>
+                      <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
+                        <div>
+                          Encontrados <strong>{searchStats.total}</strong> resultados ({searchStats.time})
+                        </div>
+                        
+                        <div style={{ display: 'flex', gap: '15px' }}>
+                          {/* REQ-F32: Resultados por página */}
+                          <select value={resultsPerPage} onChange={(e) => { setResultsPerPage(Number(e.target.value)); setCurrentPage(1); }}>
+                            <option value={10}>10 por pág.</option>
+                            <option value={20}>20 por pág.</option>
+                            <option value={50}>50 por pág.</option>
+                          </select>
+
+                          {/* REQ-F34: Ordenação */}
+                          <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}>
+                            <option value="relevance">Relevância</option>
+                            <option value="date">Data</option>
+                            <option value="title">Título</option>
+                          </select>
                         </div>
                       </div>
 
-                      {/* Renderização da Lista de Resultados */}
+                      {/* Renderização ÚNICA da Lista */}
                       <div className="results-list">
-                        {results.map((doc, index) => (
-                          <ResultItem 
-                            key={doc.id || index} 
-                            doc={doc} 
-                            rank={index + 1} 
-                          />
-                        ))}
-                      </div>
-
-                      {/* Paginação Simples */}
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px', paddingBottom: '40px' }}>
-                        <button style={{ padding: '10px 20px' }} disabled>Anterior</button>
-                        <span style={{ alignSelf: 'center', fontWeight: 'bold' }}>Página 1</span>
-                        <button style={{ padding: '10px 20px' }}>Próxima</button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Se NÃO está a carregar e TEM resultados, mostra a lista */}
-                  {!loading && results && results.length > 0 ? (
-                    <div className="results-list" style={{ marginTop: '20px' }}>
                       {results.map((doc, index) => (
                         <ResultItem 
                           key={doc.id || index} 
                           doc={doc} 
                           rank={index + 1} 
+                          isSaved={collection.some(item => item.id === doc.id)} 
+                          onSave={() => toggleSaveToCollection(doc)}          
                         />
                       ))}
-                    </div>
-                  ) : (
-                    /* Se NÃO está a carregar e NÃO tem resultados, mostra a mensagem de espera */
-                    !loading && (
-                      <div style={{ textAlign: 'center', marginTop: '50px', color: '#94a3b8' }}>
-                        <p>Aguardando pesquisa ou sem resultados para apresentar.</p>
                       </div>
-                    )
+
+                      <div className="pagination" style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
+                        <button 
+                          disabled={currentPage === 1} 
+                          onClick={() => handlePerformSearch(lastQuery, 'general', currentPage - 1)}
+                        > Anterior </button>
+                        <span>Página {currentPage}</span>
+                        <button 
+                          disabled={results.length < resultsPerPage}
+                          onClick={() => handlePerformSearch(lastQuery, 'general', currentPage + 1)}
+                        > Próxima </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Mensagem de "Sem resultados" apenas se não estiver a carregar e a lista estiver vazia */}
+                  {!loading && results.length === 0 && (
+                    <div style={{ textAlign: 'center', marginTop: '50px', color: '#94a3b8' }}>
+                      <p>Aguardando pesquisa ou sem resultados para apresentar.</p>
+                    </div>
                   )}
                 </div>
               </div>
