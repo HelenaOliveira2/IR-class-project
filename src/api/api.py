@@ -138,22 +138,37 @@ def search(
     weighting: str = "log_normalization",
     page: int = Query(1, ge=1),           
     limit: int = Query(10, ge=1, le=50),  
-    sort_by: str = "relevance"            
+    sort_by: str = "relevance",
+    # REQ-F43 e F44: Novos parâmetros opcionais para filtros
+    min_date: Optional[str] = None,
+    max_date: Optional[str] = None,
+    types: Optional[str] = None
 ):
     start_time = time.time()
     
-    # 1. Obtém TODOS os resultados do motor de busca[cite: 5]
+    # 1. Obtém TODOS os resultados do motor de busca
     raw_results = engine.search(q, method, ranking, weighting)
-    total_results = len(raw_results)
     
-    # 2. Busca os dados de TODOS para poder ordenar corretamente
+    # 2. Busca os dados de TODOS para poder ordenar e filtrar
     all_matching_docs = []
     conn = get_db_connection()
     cursor = conn.cursor()
 
     for res in raw_results:
-        doc_id = res['doc_id'] if isinstance(res, dict) else res
-        score = res['score'] if isinstance(res, dict) else 0.0
+        # --- EXTRAÇÃO INTELIGENTE DO DOC_ID E DO SCORE ---
+        if isinstance(res, tuple) and len(res) >= 2:
+            # Se o teu motor Python devolver tuplos: (doc_id, score)
+            doc_id = res[0]
+            score = float(res[1])
+        elif isinstance(res, dict):
+            # Se o teu motor Python devolver dicionários: {'doc_id': 1, 'score': 0.85}
+            doc_id = res.get('doc_id', res.get('id'))
+            score = float(res.get('score', 0.0))
+        else:
+            # Se o teu motor devolver APENAS os IDs dos documentos (ex: no Boolean Ranking)
+            doc_id = res
+            score = 0.0
+        # -------------------------------------------------
 
         cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
         row = cursor.fetchone()
@@ -163,25 +178,45 @@ def search(
                 "id": doc["id"],
                 "title": doc["title"],
                 "authors": doc.get("authors", "N/A"),
-                "date": str(doc.get("year", "N/A")), # Garante string para ordenação
-                "score": round(score, 4),
+                "date": str(doc.get("year", "N/A")), 
+                "score": round(score, 4), # O score matemático entra aqui!
                 "snippet": generate_highlighted_snippet(doc.get("abstract", ""), q.split()),
                 "pdf_link": doc.get("document_link", "#"),
                 "abstract": doc.get("abstract", ""),
-                "type": "Artigo Científico"
+                "type": doc.get("type", "Artigo") 
             })
     conn.close()
 
-    # 3. Lógica de Ordenação Global (REQ-F34)
+    # 3. REQ-F46: Aplicar Filtros Avançados (Datas e Tipos)
+    filtered_docs = []
+    selected_types = types.split(',') if types else []
+
+    for doc in all_matching_docs:
+        # Extrai apenas o ano (YYYY) do min_date/max_date para comparar com a BD
+        if min_date and doc["date"] != "N/A" and doc["date"] < min_date[:4]:
+            continue
+        if max_date and doc["date"] != "N/A" and doc["date"] > max_date[:4]:
+            continue
+        
+        # Filtra pelo tipo de documento (REQ-F44)
+        if selected_types and doc["type"] not in selected_types:
+            continue
+            
+        filtered_docs.append(doc)
+
+    # Atualiza a lista com os documentos que passaram nos filtros
+    all_matching_docs = filtered_docs
+    total_results = len(all_matching_docs)
+
+    # 4. Lógica de Ordenação Global (REQ-F34)
     if sort_by == "date":
         all_matching_docs.sort(key=lambda x: x['date'], reverse=True)
     elif sort_by == "title":
         all_matching_docs.sort(key=lambda x: x['title'].lower())
     else:
-        # Relevância (já vem do motor, mas garantimos aqui)[cite: 5]
         all_matching_docs.sort(key=lambda x: x['score'], reverse=True)
 
-    # 4. Cálculo de Paginação sobre a lista já ordenada (REQ-F31)
+    # 5. Cálculo de Paginação sobre a lista já ordenada e filtrada (REQ-F31)
     start_idx = (page - 1) * limit
     end_idx = start_idx + limit
     paginated_results = all_matching_docs[start_idx:end_idx]
@@ -240,3 +275,71 @@ def export_results(file_format: str, q: str = "search"):
         bib_content = "\n\n".join(bib_entries)
         return StreamingResponse(io.StringIO(bib_content), media_type="text/plain",
                                 headers={"Content-Disposition": f"attachment; filename=results.bib"})
+
+
+
+# REQ-F35: Design dedicated author search page
+@app.get("/api/authors/profile", tags=["Authors"])
+def get_author_profile(name: str):
+    """Pesquisa o perfil de um autor, as suas publicações, rede e timeline."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    # Procura documentos onde o nome do autor aparece na coluna authors
+    cursor.execute("SELECT * FROM documents WHERE authors LIKE ?", (f"%{name}%",))
+    docs = cursor.fetchall()
+    conn.close()
+
+    author_docs = []
+    collaborators = set()
+    timeline_data = {}
+
+    for row in docs:
+        doc = dict(row)
+        
+        # REQ-F36: Formata o documento para a lista de publicações
+        doc_formatted = {
+            "id": doc["id"],
+            "title": doc["title"],
+            "authors": doc.get("authors", "N/A"),
+            "date": str(doc.get("year", "N/A")),
+            "snippet": doc.get("abstract", "")[:150] + "...",
+            "abstract": doc.get("abstract", ""),
+            "pdf_link": doc.get("document_link", "#"),
+            "type": doc.get("type", "Artigo Científico")
+        }
+        author_docs.append(doc_formatted)
+
+        # REQ-F37: Extrai co-autores (Agrupa Apelido, Nome)
+        raw_authors = doc.get("authors", "")
+        doc_authors = []
+        
+        if ';' in raw_authors:
+            doc_authors = [a.strip() for a in raw_authors.split(';')]
+        else:
+            # Separa tudo por vírgula
+            parts = [p.strip() for p in raw_authors.split(',') if p.strip()]
+            # Agrupa de 2 em 2 (Apelido, Nome)
+            if len(parts) % 2 == 0:
+                doc_authors = [f"{parts[i]}, {parts[i+1]}" for i in range(0, len(parts), 2)]
+            else:
+                doc_authors = parts
+
+        for a in doc_authors:
+            # Ignora o próprio autor pesquisado para não aparecer na sua própria rede
+            if a and name.lower() not in a.lower():
+                collaborators.add(a)
+
+        # REQ-F38: Conta documentos por ano para a Timeline
+        year = str(doc.get("year", "Desconhecido"))
+        timeline_data[year] = timeline_data.get(year, 0) + 1
+
+    # Ordena a timeline cronologicamente
+    timeline = [{"year": y, "count": c} for y, c in sorted(timeline_data.items()) if y != "Desconhecido"]
+
+    # Retorna a estrutura exata que o nosso Frontend React espera
+    return {
+        "name": name,
+        "collaborators": list(collaborators)[:15], # Limitamos a 15 co-autores para a interface não quebrar visualmente
+        "timeline": timeline,
+        "publications": author_docs # REQ-F36
+    }

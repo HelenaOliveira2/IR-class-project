@@ -1,8 +1,9 @@
 import React from 'react';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Star } from 'lucide-react'; // Importei o ícone Star
 import { Link, useLocation } from 'react-router-dom';
 
-const Header = () => {
+// 1. Recebe a prop savedCount (que vamos enviar do App.jsx)
+const Header = ({ savedCount = 0 }) => {
   // Hook para identificar a página atual e ativar o estilo no menu (REQ-F03)
   const location = useLocation();
 
@@ -44,6 +45,29 @@ const Header = () => {
           >
             Como Funciona
           </Link>
+
+          {/* NOVA ABA DOS GUARDADOS */}
+          <Link 
+            to="/collection" 
+            className={location.pathname === '/collection' ? 'active' : ''}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '6px',
+              fontWeight: '600',
+              // Se tiver algo guardado, dá um pequeno destaque visual
+              color: savedCount > 0 ? '#B91C1C' : 'inherit' 
+            }}
+          >
+            <Star 
+              size={18} 
+              // A estrela fica preenchida e amarela se houver items na coleção!
+              fill={savedCount > 0 ? "#eab308" : "none"} 
+              color={savedCount > 0 ? "#eab308" : "currentColor"} 
+            />
+            Guardados {savedCount > 0 && `(${savedCount})`}
+          </Link>
+
         </div>
       </nav>
     </header>

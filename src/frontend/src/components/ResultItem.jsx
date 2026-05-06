@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 function ResultItem({ doc, rank, isSaved, onSave }) {
   const [showAbstract, setShowAbstract] = useState(false);
 
+  // Prevenção extra caso o documento venha vazio
+  if (!doc) return null;
+
+  // Lógica à prova de bala: Verifica se o score existe e é um número válido (mesmo que seja 0)
+  const hasValidScore = doc.score !== undefined && doc.score !== null && !isNaN(doc.score);
+
   return (
     <div className="result-card">
       {/* REQ-F21: Indicador de Ranking Claro */}
@@ -18,10 +24,12 @@ function ResultItem({ doc, rank, isSaved, onSave }) {
           </a>
           
           {/* REQ-F22: Score de relevância */}
-          <div className="score-tag">
-            <div className="score-bar" style={{ width: `${doc.score * 100}%` }}></div>
-            <span>{(doc.score * 100).toFixed(1)}% Relevância</span>
-          </div>
+          {hasValidScore && (
+            <div className="score-tag">
+              <div className="score-bar" style={{ width: `${Number(doc.score) * 100}%` }}></div>
+              <span>{(Number(doc.score) * 100).toFixed(1)}% Relevância</span>
+            </div>
+          )}
         </div>
 
         {/* REQ-F24: Apresentação de autores */}

@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox'; 
 import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
+// REQ-F35: Importação da página dedicada de autores
+import AuthorPage from './pages/AuthorPage'; 
 import './styles/main.scss';
 
 function App() {
+  // REQ-F43: Estado para intervalo de datas (Advanced Filters)
+  const [dateRange, setDateRange] = useState({ min: '', max: '' });
+  
+  // REQ-F44: Estado para tipos de documento (PhD, MSc, Articles)
+  const [docTypes, setDocTypes] = useState([]);
+  
   // --- Estados de Configuração (REQ-F18 e REQ-F20) ---
   const [method, setMethod] = useState('stemming');
   const [excludeStopWords, setExcludeStopWords] = useState(false);
@@ -30,7 +38,7 @@ function App() {
     if (lastQuery) {
       handlePerformSearch(lastQuery, 'general', currentPage);
     }
-  }, [currentPage, resultsPerPage, sortBy]); // Escuta estas variáveis
+  }, [currentPage, resultsPerPage, sortBy]); 
 
   // --- Função Principal de Pesquisa (Conecta o Frontend ao Backend) ---
   const handlePerformSearch = async (query, mode = 'general', page = 1) => {
@@ -47,7 +55,7 @@ function App() {
         // Rota para pesquisa de autores (REQ-F24)[cite: 4, 5]
         url = `http://127.0.0.1:8000/api/authors/search?name=${encodeURIComponent(query)}`;
       } else {
-        // Rota geral com todos os filtros aplicados
+        // REQ-F46: Rota geral com combinação de filtros avançados
         const params = new URLSearchParams({
           q: query,
           method: method,
@@ -57,7 +65,12 @@ function App() {
           lang: language,
           page: page,             // REQ-F31[cite: 1]
           limit: resultsPerPage,  // REQ-F32[cite: 1]
-          sort_by: sortBy         // REQ-F34[cite: 1]
+          sort_by: sortBy,        // REQ-F34[cite: 1]
+          // REQ-F43: Novos filtros de data[cite: 1]
+          min_date: dateRange.min,
+          max_date: dateRange.max,
+          // REQ-F44: Novos filtros de tipo[cite: 1]
+          types: docTypes.join(',')
         });
         url = `http://127.0.0.1:8000/api/search?${params}`;
       }
@@ -73,7 +86,6 @@ function App() {
       const data = await response.json();
       console.log("Dados recebidos da API:", data);
   
-      // Ajuste: A pesquisa de autor pode devolver um array direto ou um objeto com .results[cite: 4, 5]
       const finalResults = Array.isArray(data) ? data : (data.results || []);
   
       if (finalResults.length > 0 || (data.results && Array.isArray(data.results))) {
@@ -103,15 +115,14 @@ function App() {
     setCollection(prev => {
       const isAlreadySaved = prev.find(item => item.id === doc.id);
       if (isAlreadySaved) {
-        return prev.filter(item => item.id !== doc.id); // Remove se já existir
+        return prev.filter(item => item.id !== doc.id); 
       }
-      return [...prev, doc]; // Adiciona à coleção
+      return [...prev, doc]; 
     });
   };
 
   // --- Função de Exportação Atualizada (REQ-F30) ---
   const handleExport = (format) => {
-    // Constrói os parâmetros para o ficheiro exportado ter os dados da pesquisa atual[cite: 1, 4]
     const params = new URLSearchParams({
       q: lastQuery,
       method: method,
@@ -119,13 +130,14 @@ function App() {
     });
     const url = `http://127.0.0.1:8000/api/export/${format}?${params.toString()}`;
     console.log("A exportar de:", url);
-    window.open(`http://127.0.0.1:8000/api/export/${format}?${params}`, '_blank');
+    window.open(url, '_blank');
   };
 
-  return (
+return (
     <Router>
       <div className="app-wrapper">
-        <Header />
+        {/* Passa o tamanho da coleção para o Header */}
+        <Header savedCount={collection.length} />
         
         <main className="main-container" role="main">
           <Routes>
@@ -138,7 +150,6 @@ function App() {
                   Pesquise metadados de publicações científicas do RepositóriUM
                 </p>
                 
-                {/* O SearchBox envia a query para o handlePerformSearch */}
                 <SearchBox 
                   onSearch={handlePerformSearch}
                   method={method} 
@@ -153,10 +164,12 @@ function App() {
                     language={language} setLanguage={setLanguage}
                     rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
                     weightingScheme={weightingScheme} setWeightingScheme={setWeightingScheme}
+                    // REQ-F43, REQ-F44: Passagem dos novos estados para o painel[cite: 1]
+                    dateRange={dateRange} setDateRange={setDateRange}
+                    docTypes={docTypes} setDocTypes={setDocTypes}
                   />
                 </SearchBox>
 
-                {/* --- SEÇÃO DE RESULTADOS --- */}
                 <div className="results-container" style={{ marginTop: '40px', textAlign: 'left' }}>
                   
                   {loading && (
@@ -168,21 +181,18 @@ function App() {
 
                   {!loading && results.length > 0 && (
                     <div className="results-content">
-                      {/* Estatísticas e Exportação */}
                       <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
                         <div>
                           Encontrados <strong>{searchStats.total}</strong> resultados ({searchStats.time})
                         </div>
                         
                         <div style={{ display: 'flex', gap: '15px' }}>
-                          {/* REQ-F32: Resultados por página */}
                           <select value={resultsPerPage} onChange={(e) => { setResultsPerPage(Number(e.target.value)); setCurrentPage(1); }}>
                             <option value={10}>10 por pág.</option>
                             <option value={20}>20 por pág.</option>
                             <option value={50}>50 por pág.</option>
                           </select>
 
-                          {/* REQ-F34: Ordenação */}
                           <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}>
                             <option value="relevance">Relevância</option>
                             <option value="date">Data</option>
@@ -191,7 +201,6 @@ function App() {
                         </div>
                       </div>
 
-                      {/* Renderização ÚNICA da Lista */}
                       <div className="results-list">
                       {results.map((doc, index) => (
                         <ResultItem 
@@ -218,7 +227,6 @@ function App() {
                     </div>
                   )}
 
-                  {/* Mensagem de "Sem resultados" apenas se não estiver a carregar e a lista estiver vazia */}
                   {!loading && results.length === 0 && (
                     <div style={{ textAlign: 'center', marginTop: '50px', color: '#94a3b8' }}>
                       <p>Aguardando pesquisa ou sem resultados para apresentar.</p>
@@ -227,7 +235,36 @@ function App() {
                 </div>
               </div>
             } />
-            <Route path="/authors" element={<div className="main-container"><h2>Pesquisa por Autores (Em breve)</h2></div>} />
+            {/* REQ-F35: Rota atualizada para a página dedicada de autores[cite: 1] */}
+            <Route path="/authors" element={
+              <AuthorPage 
+                collection={collection} 
+                toggleSaveToCollection={toggleSaveToCollection} 
+              />
+            } />
+            {/* ROTA PARA VER OS DOCUMENTOS GUARDADOS */}
+            <Route path="/collection" element={
+              <div style={{ maxWidth: '1000px', margin: '40px auto', textAlign: 'left' }}>
+                <h2 style={{ color: '#2D3748', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px' }}>
+                  A Minha Coleção Guardada ({collection.length})
+                </h2>
+                {collection.length === 0 ? (
+                  <p style={{ marginTop: '20px', color: '#718096' }}>Ainda não guardaste nenhum documento.</p>
+                ) : (
+                  <div className="results-list" style={{ marginTop: '20px' }}>
+                    {collection.map((doc, index) => (
+                      <ResultItem 
+                        key={doc.id || index} 
+                        doc={doc} 
+                        rank={index + 1} 
+                        isSaved={true} 
+                        onSave={() => toggleSaveToCollection(doc)} 
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            } />
             <Route path="/about" element={<div className="main-container"><h2>Sobre o Projecto</h2></div>} />
           </Routes>
         </main>
