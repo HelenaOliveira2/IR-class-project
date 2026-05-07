@@ -5,8 +5,12 @@ import SearchBox from './components/SearchBox';
 import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
 // REQ-F35: Importação da página dedicada de autores
-import AuthorPage from './pages/AuthorPage'; 
+import AuthorPage from './pages/AuthorPage';
+import AboutPage from './pages/AboutPage';
+import ComparePage from './pages/ComparePage';
+import AdminDashboard from './pages/AdminDashboard';   
 import './styles/main.scss';
+
 
 function App() {
   // REQ-F43: Estado para intervalo de datas (Advanced Filters)
@@ -265,7 +269,14 @@ return (
                 )}
               </div>
             } />
-            <Route path="/about" element={<div className="main-container"><h2>Sobre o Projecto</h2></div>} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/compare" element={
+              <ComparePage 
+                collection={collection} 
+                toggleSaveToCollection={toggleSaveToCollection} 
+              />
+            } />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
       </div>
