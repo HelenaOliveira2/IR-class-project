@@ -1,65 +1,51 @@
 import React, { useState } from 'react';
 
-function ResultItem({ doc, rank, isSaved, onSave }) {
+function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
   const [showAbstract, setShowAbstract] = useState(false);
 
+  const cardPadding = density === 'compact' ? '8px 15px' : '20px';
+
   return (
-    <div className="result-card">
-      {/* REQ-F21: Indicador de Ranking Claro */}
-      <div className="rank-indicator">
-        #{rank}
-      </div>
+    <div className="result-card" style={{ padding: cardPadding }}>
+      {/* Indicador de Ranking só aparece na vista normal para poupar espaço se quiseres */}
+      <div className="rank-indicator">#{rank}</div>
 
       <div className="result-content">
         <div className="result-header">
-          {/* REQ-F23: Título clicável */}
-          <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="result-title">
+          <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="result-title" 
+             style={{ fontSize: density === 'compact' ? '1rem' : '1.2rem' }}>
             {doc.title}
           </a>
           
-          {/* REQ-F22: Score de relevância */}
           <div className="score-tag">
-            <div className="score-bar" style={{ width: `${doc.score * 100}%` }}></div>
-            <span>{(doc.score * 100).toFixed(1)}% Relevância</span>
+            <span>{(doc.score * 100).toFixed(1)}%</span>
           </div>
         </div>
 
-        {/* REQ-F24: Apresentação de autores */}
+        {/* Na vista compacta, podemos ocultar os autores se quiseres algo radical */}
         <p className="authors"><strong>Autores:</strong> {doc.authors}</p>
         
-        {/* REQ-F25: Exibição de Data e Tipo de Documento */}
-        <div className="doc-metadata" style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>
-          <span><strong>Data:</strong> {doc.date}</span>
-          <span style={{ margin: '0 10px' }}>|</span>
-          <span><strong>Tipo:</strong> {doc.type}</span>
-        </div>
-        
-        {/* REQ-F26: Snippet */}
-        <p className="snippet" dangerouslySetInnerHTML={{ __html: doc.snippet }} />
+        {/* REQ-F65: O Snippet (resumo rápido) só aparece se showSnippet for true */}
+        {showSnippet && (
+           <p className="snippet" dangerouslySetInnerHTML={{ __html: doc.snippet }} 
+              style={{ fontSize: density === 'compact' ? '0.85rem' : '0.95rem' }} />
+        )}
 
-        <div className="result-actions" style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
-          {/* Botão Guardar adaptado ao estilo do site */}
-          <button 
-            onClick={onSave} 
-            className={`btn-secondary ${isSaved ? 'active' : ''}`}
-            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-          >
-            <span style={{ color: isSaved ? '#f59e0b' : '#94a3b8' }}>★</span> 
-            {isSaved ? 'Guardado' : 'Guardar'}
+        <div className="result-actions" style={{ marginTop: density === 'compact' ? '5px' : '15px' }}>
+          <button onClick={onSave} className="btn-secondary">
+             {isSaved ? '★ Guardado' : '☆ Guardar'}
           </button>
           
+          {/* Se estiver em modo compacto, talvez o utilizador queira ver o resumo expandido */}
           <button onClick={() => setShowAbstract(!showAbstract)} className="btn-secondary">
-            {showAbstract ? 'Ocultar Resumo' : 'Ver Resumo'}
+            {showAbstract ? 'Ocultar' : 'Resumo'}
           </button>
 
-          {/* Botão PDF usando a classe principal b91c1c do site */}
-          <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="btn-primary">
-            PDF
-          </a>
+          <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="btn-primary">PDF</a>
         </div>
 
         {showAbstract && (
-          <div className="abstract-box" style={{ marginTop: '15px', padding: '15px', background: '#f8fafc', borderRadius: '8px', borderLeft: '4px solid #cbd5e1' }}>
+          <div className="abstract-box">
             <p>{doc.abstract}</p>
           </div>
         )}

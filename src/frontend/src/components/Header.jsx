@@ -38,11 +38,25 @@ const Header = () => {
             Autores
           </Link>
           <Link 
+            to="/history" 
+            className={location.pathname === '/history' ? 'active' : ''}
+            aria-current={location.pathname === '/history' ? 'page' : undefined}
+          >
+            Histórico
+          </Link>
+          <Link 
             to="/about" 
             className={location.pathname === '/about' ? 'active' : ''}
             aria-current={location.pathname === '/about' ? 'page' : undefined}
           >
             Como Funciona
+          </Link>
+          <Link 
+            to="/help" 
+            className={location.pathname === '/help' ? 'active' : ''}
+            aria-current={location.pathname === '/help' ? 'page' : undefined}
+          >
+            Ajuda
           </Link>
         </div>
       </nav>

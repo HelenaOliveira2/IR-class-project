@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Star } from 'lucide-react';
 
 // 1. ADICIONADO: 'onSearch' incluído nas props para o App.jsx poder receber os dados
-export default function SearchBox({ onSearch, method, excludeStopWords, language, children, ...props }) {
+export default function SearchBox({ onSearch, onSaveSearch, savedSearches = [], method, excludeStopWords, language, children, ...props }) {
   const [query, setQuery] = useState('');
   const [searchTarget, setSearchTarget] = useState('all');
   const [researchArea, setResearchArea] = useState('all');
   const [searchMode, setSearchMode] = useState('general');
+  const [showSaveMenu, setShowSaveMenu] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState('');
+
+  // Extrair nomes de coleções únicas para o dropdown
+  const collections = [...new Set(savedSearches.map(s => s.collectionName))].filter(Boolean);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -22,6 +27,21 @@ export default function SearchBox({ onSearch, method, excludeStopWords, language
       filters: { target: searchTarget, area: researchArea, mode: searchMode }
     };
     console.log("A enviar para o servidor:", searchData);
+  };
+
+  const handleConfirmSave = (e, folderName) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const name = folderName || newCollectionName;
+    if (!name) return alert("Escolha ou crie uma coleção.");
+    if (!query.trim()) return alert("Pesquise algo antes de guardar.");
+    
+    // Passamos a query e o nome da coleção para o App.jsx
+    onSaveSearch(query, name);
+    setShowSaveMenu(false);
+    setNewCollectionName('');
   };
 
   return (
@@ -42,7 +62,72 @@ export default function SearchBox({ onSearch, method, excludeStopWords, language
           <Search size={20} />
           Pesquisar
         </button>
+
+        {/* BOTAO GUARDAR (REQ-F60) */}
+        <button 
+          type="button" 
+          onClick={() => setShowSaveMenu(!showSaveMenu)}
+          className="btn-secondary"
+          title="Guardar Pesquisa"
+          style={{ padding: '0 15px', background: '#fef3c7', border: '1px solid #f59e0b', color: '#b45309' }}
+        >
+          ⭐
+        </button>
       </form>
+
+      {/* REQ-F60/F61: Menu de Seleção de Coleção */}
+      {showSaveMenu && (
+        <div style={{ 
+          position: 'absolute', right: 0, top: '60px', width: '300px', 
+          backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', 
+          boxShadow: '0 10px 25px rgba(0,0,0,0.1)', zIndex: 1000, padding: '15px' 
+        }}>
+          <p style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '12px', color: '#1e293b' }}>
+            Selecionar Coleção Existente:
+          </p>
+          
+          <div style={{ maxHeight: '180px', overflowY: 'auto', marginBottom: '15px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {collections.length > 0 ? (
+              collections.map(folder => (
+                <button 
+                  key={folder}
+                  type="button"
+                  // CORREÇÃO: Passar o evento 'ev' corretamente
+                  onClick={(ev) => handleConfirmSave(ev, folder)} 
+                  style={{ 
+                    width: '100%', textAlign: 'left', padding: '10px 12px', 
+                    borderRadius: '8px', border: '1px solid #f1f5f9',
+                    background: '#f8fafc', cursor: 'pointer', fontSize: '0.9rem'
+                  }}
+                >
+                  📁 {folder}
+                </button>
+              ))
+            ) : (
+              <p style={{ fontSize: '0.8rem', color: '#94a3b8', textAlign: 'center' }}>Ainda não criou coleções.</p>
+            )}
+          </div>
+
+          {/* Criar Nova */}
+          <div style={{ borderTop: '1px solid #eee', paddingTop: '10px' }}>
+            <input 
+              type="text" 
+              placeholder="Nova coleção..." 
+              value={newCollectionName}
+              onChange={(e) => setNewCollectionName(e.target.value)}
+              style={{ width: '100%', padding: '8px', marginBottom: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }}
+            />
+            <button 
+              type="button"
+              // CORREÇÃO: Função correta é handleConfirmSave e passar o evento
+              onClick={(ev) => handleConfirmSave(ev)}
+              style={{ width: '100%', padding: '8px', background: '#B91C1C', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              Criar e Guardar
+            </button>
+          </div>
+        </div>
+      )}
 
       <div style={{ display: 'flex', gap: '20px', alignItems: 'stretch' }}>
         
