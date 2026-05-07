@@ -1,92 +1,68 @@
 import React from 'react';
+import { Download, Trash2, Clock, Star, FileText } from 'lucide-react';
 
-// Adicionamos valores padrão (= []) para evitar que a página fique branca se as props falharem
-export default function HistoryPage({ history = [], saved = [], onClearHistory }) {
-
-    // REQ-F61: Agrupa as pesquisas guardadas pelo nome da coleção
-  const groupedCollections = saved.reduce((acc, item) => {
-    const folder = item.collectionName || "Sem Coleção";
-    if (!acc[folder]) acc[folder] = [];
-    acc[folder].push(item);
-    return acc;
-  }, {});
+const HistoryPage = ({ history, saved, onExport, onClearHistory, onRemoveSaved }) => {
   
-  const exportData = () => {
-    const data = { history, savedCollections: saved };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'meu_historico_pesquisa.json';
-    link.click();
+  // Estilos comuns
+  const sectionStyle = {
+    backgroundColor: 'white',
+    padding: '24px',
+    borderRadius: '12px',
+    border: '1px solid #e2e8f0',
+    marginBottom: '30px'
   };
 
   return (
-    <div className="main-container" style={{ padding: '40px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <h1 style={{ color: '#1e293b' }}>O Meu Espaço</h1>
-        <button onClick={exportData} className="btn-primary" style={{ padding: '10px 20px', backgroundColor: '#B91C1C', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>
-          📥 Exportar Dados (JSON)
-        </button>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
-        
-        {/* REQ-F61: Coleções Agrupadas por Pastas */}
-        <section>
-          <h2 style={{ borderBottom: '2px solid #f1f5f9', paddingBottom: '10px' }}>📂 Minhas Coleções</h2>
-          {Object.keys(groupedCollections).length === 0 ? (
-            <p style={{ color: '#64748b' }}>Nenhuma coleção guardada.</p>
-          ) : (
-            Object.entries(groupedCollections).map(([folderName, items]) => (
-              <div key={folderName} style={{ marginBottom: '25px', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '15px', backgroundColor: '#fff' }}>
-                <h3 style={{ color: '#B91C1C', marginTop: 0, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  📁 {folderName}
-                </h3>
-                
-                {items.map(item => (
-                  <div key={item.id} style={{ padding: '10px', borderBottom: '1px solid #f1f5f9', marginBottom: '10px' }}>
-                    <strong style={{ color: '#334155' }}>{item.name}</strong>
-                    <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '2px 0' }}>Busca: "{item.query}"</p>
-                    
-                    {/* EXIBIÇÃO DOS DOCUMENTOS GUARDADOS (REQ-F61) */}
-                    {item.savedResults && item.savedResults.length > 0 && (
-                      <details style={{ marginTop: '8px' }}>
-                        <summary style={{ fontSize: '0.75rem', cursor: 'pointer', color: '#B91C1C', fontWeight: '600' }}>
-                          Ver {item.savedResults.length} documentos nesta pesquisa
-                        </summary>
-                        <ul style={{ fontSize: '0.75rem', paddingLeft: '18px', marginTop: '5px', color: '#475569' }}>
-                          {item.savedResults.map((doc, idx) => (
-                            <li key={idx} style={{ marginBottom: '4px' }}>
-                              {doc.title} <span style={{ color: '#94a3b8' }}>({doc.date})</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ))
-          )}
-        </section>
-
-        {/* REQ-F59: Histórico Recente */}
-        <section>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #f1f5f9', paddingBottom: '10px', marginBottom: '10px' }}>
-            <h2>🕒 Histórico Recente</h2>
-            <button onClick={onClearHistory} style={{ color: '#ef4444', border: 'none', background: 'none', cursor: 'pointer', fontSize: '0.9rem' }}>Limpar Tudo</button>
+    <div className="main-container" style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+      
+      {/* --- SECÇÃO 1: HISTÓRICO DE PESQUISA --- */}
+      <section style={sectionStyle}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
+            <Clock size={24} color="#64748b" /> Histórico de Pesquisa
+          </h2>
+          
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button 
+              onClick={() => onExport('csv')} 
+              className="btn-secondary"
+              style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+            >
+              <Download size={16} /> Exportar CSV
+            </button>
+            <button 
+              onClick={onClearHistory} 
+              className="btn-danger" 
+              style={{ backgroundColor: '#fee2e2', color: '#b91c1c', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              <Trash2 size={16} /> Limpar Tudo
+            </button>
           </div>
-          {history.length === 0 ? <p style={{ color: '#64748b' }}>Histórico vazio.</p> :
-            history.map(item => (
-              <div key={item.id} style={{ fontSize: '0.9rem', padding: '10px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#334155' }}>"{item.query}"</span>
-                <small style={{ color: '#94a3b8' }}>{item.timestamp}</small>
-              </div>
-            ))
-          }
-        </section>
-      </div>
+        </div>
+
+        {history.length === 0 ? (
+          <p style={{ color: '#64748b', textAlign: 'center', padding: '20px' }}>Nenhum histórico registado.</p>
+        ) : (
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {history.map((item, index) => (
+              <li key={index} style={{ padding: '12px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                  <strong style={{ color: '#1e293b' }}>"{item.query}"</strong>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                    {new Date(item.timestamp).toLocaleString()} • {item.resultsCount} resultados
+                  </div>
+                </div>
+                <span style={{ fontSize: '0.75rem', backgroundColor: '#f1f5f9', padding: '4px 8px', borderRadius: '4px', alignSelf: 'center' }}>
+                  {item.engine}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
     </div>
   );
-}
+};
+
+export default HistoryPage;

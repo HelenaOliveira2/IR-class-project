@@ -38,6 +38,16 @@ const Header = ({ savedCount = 0 }) => {
           >
             Autores
           </Link>
+
+          {/* GUARDADOS: Link e lógica preservados da versão 3d49af... */}
+          <Link 
+            to="/collection" 
+            className={location.pathname === '/collection' ? 'active' : ''}
+            aria-current={location.pathname === '/collection' ? 'page' : undefined}
+          >
+            Guardados 
+          </Link>
+
           <Link 
             to="/history" 
             className={location.pathname === '/history' ? 'active' : ''}
@@ -62,27 +72,6 @@ const Header = ({ savedCount = 0 }) => {
             Ajuda
           </Link>
 
-          {/* GUARDADOS: Link e lógica preservados da versão 3d49af... */}
-          <Link 
-            to="/collection" 
-            className={location.pathname === '/collection' ? 'active' : ''}
-            style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '6px',
-              fontWeight: '600',
-              // Destaque visual se houver itens guardados
-              color: savedCount > 0 ? '#B91C1C' : 'inherit' 
-            }}
-          >
-            <Star 
-              size={18} 
-              // A estrela preenche-se se houver itens na coleção
-              fill={savedCount > 0 ? "#eab308" : "none"} 
-              color={savedCount > 0 ? "#eab308" : "currentColor"} 
-            />
-            Guardados {savedCount > 0 && `(${savedCount})`}
-          </Link>
         </div>
       </nav>
     </header>

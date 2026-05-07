@@ -17,6 +17,38 @@ export default function HelpPage() {
     </div>
   );
 
+  const exampleCardStyle = {
+    padding: '20px',
+    backgroundColor: '#ffffff',
+    borderRadius: '10px',
+    borderLeft: '5px solid #B91C1C',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+  };
+  
+  const exampleTitleStyle = {
+    margin: '0 0 10px 0',
+    color: '#334155',
+    fontSize: '1.1rem'
+  };
+  
+  const codeStyle = {
+    display: 'block',
+    padding: '10px',
+    backgroundColor: '#f1f5f9',
+    borderRadius: '6px',
+    color: '#B91C1C',
+    fontWeight: 'bold',
+    fontSize: '0.95rem',
+    marginBottom: '10px'
+  };
+  
+  const exampleDescStyle = {
+    margin: 0,
+    fontSize: '0.9rem',
+    color: '#64748b',
+    lineHeight: '1.5'
+  };
+
   return (
     <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', padding: '40px 20px' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
@@ -63,12 +95,52 @@ export default function HelpPage() {
         </Section>
 
         {/* SECÇÃO 4: ESTRATÉGIAS (REQ-F70) */}
-        <Section icon={Lightbulb} title="Exemplos de Estratégias (REQ-F70)">
-          <div style={{ backgroundColor: '#fff3cd', padding: '15px', borderRadius: '8px', border: '1px solid #ffeeba' }}>
-            <p style={{ margin: 0 }}><b>Dica de Especialista:</b> Para resultados académicos mais precisos, use aspas para frases exatas.</p>
-            <code style={{ display: 'block', marginTop: '10px', color: '#856404' }}>Exemplo: "Inteligência Artificial" AND Saúde</code>
-          </div>
-        </Section>
+        <section style={{ marginTop: '40px' }}>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#1e293b' }}>
+                <Lightbulb size={24} color="#B91C1C" /> 
+                Exemplos de Estratégias de Pesquisa
+            </h2>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '20px' }}>
+                
+                {/* Exemplo 1: Pesquisa por Frase Exata */}
+                <div style={exampleCardStyle}>
+                <h4 style={exampleTitleStyle}>1. Pesquisa por Termos Exatos</h4>
+                <code style={codeStyle}>"Deep Learning" AND "Natural Language Processing"</code>
+                <p style={exampleDescStyle}>
+                    Útil para encontrar documentos que discutem especificamente a interseção de duas áreas sem separar as palavras das frases.
+                </p>
+                </div>
+
+                {/* Exemplo 2: Expansão de Sinónimos */}
+                <div style={exampleCardStyle}>
+                <h4 style={exampleTitleStyle}>2. Expansão com Sinónimos (OR)</h4>
+                <code style={codeStyle}>cancer OR oncology OR "malignant tumor"</code>
+                <p style={exampleDescStyle}>
+                    Aumenta a abrangência da pesquisa ao incluir diferentes termos técnicos para o mesmo conceito médico.
+                </p>
+                </div>
+
+                {/* Exemplo 3: Filtragem por Exclusão */}
+                <div style={exampleCardStyle}>
+                <h4 style={exampleTitleStyle}>3. Exclusão de Tópicos Irrelevantes</h4>
+                <code style={codeStyle}>robotics NOT military NOT drones</code>
+                <p style={exampleDescStyle}>
+                    Ideal quando queres estudar robótica civil ou industrial, removendo resultados focados em aplicações militares.
+                </p>
+                </div>
+
+                {/* Exemplo 4: Pesquisa Complexa Agrupada */}
+                <div style={exampleCardStyle}>
+                <h4 style={exampleTitleStyle}>4. Combinação Complexa com Parênteses</h4>
+                <code style={codeStyle}>(Portugal OR Brazil) AND "sustainable energy" AND NOT solar</code>
+                <p style={exampleDescStyle}>
+                    Procura por energia sustentável em países lusófonos, mas exclui especificamente a energia solar dos resultados.
+                </p>
+                </div>
+
+            </div>
+            </section>
       </div>
     </div>
   );

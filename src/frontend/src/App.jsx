@@ -6,6 +6,7 @@ import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
 import HistoryPage from './components/HistoryPage';
 import HelpPage from './components/HelpPage';
+import CollectionPage from './components/CollectionPage';
 // REQ-F35: Importação das novas páginas dedicadas
 import AuthorPage from './pages/AuthorPage';
 import AboutPage from './pages/AboutPage';
@@ -87,21 +88,43 @@ function App() {
   }, [currentPage, resultsPerPage, sortBy]);
 
   // --- Handlers de Ações ---
-  const handleSaveSearch = (query, collectionName) => {
-    if (!query) return alert("Nada para guardar");
+  const handleSaveSearch = (queryText, collectionName) => {
+    if (!queryText) return alert("Nada para guardar");
+
+    // Captura os resultados que estão atualmente no estado 'results'
+    const resultsToSave = results.map(doc => ({
+      id: doc.id,
+      title: doc.title,
+      authors: doc.authors,
+      pdf_link: doc.pdf_link
+    }));
+
     const newSaved = { 
       id: Date.now(), 
-      name: `Pesquisa: ${query}`, 
-      collectionName, query, 
-      savedResults: results ? [...results] : [], 
+      name: `Pesquisa: ${queryText}`, 
+      collectionName: collectionName || 'Geral',
+      query: queryText,
+      results: resultsToSave, // Garante que os documentos são guardados aqui
       timestamp: new Date().toLocaleString() 
     };
-    setSavedSearches(prev => [newSaved, ...prev]);
-    alert(`Pesquisa guardada em "${collectionName}"!`);
+
+    setSavedSearches(prev => {
+      const updated = [newSaved, ...prev];
+      localStorage.setItem('savedSearches', JSON.stringify(updated));
+      return updated;
+    });
+
+    alert(`Pesquisa e ${resultsToSave.length} títulos guardados em "${collectionName || 'Geral'}"!`);
   };
 
-  const addToHistory = (query) => {
-    const newEntry = { id: Date.now(), query, timestamp: new Date().toLocaleString() };
+  const addToHistory = (query, count = 0) => {
+    const newEntry = { 
+      id: Date.now(), 
+      query, 
+      timestamp: new Date().toISOString(),
+      resultsCount: count, // Adiciona o contador
+      engine: rankingAlgorithm // Guarda o algoritmo usado
+    };
     setSearchHistory(prev => [newEntry, ...prev].slice(0, 20));
   };
 
@@ -206,12 +229,22 @@ function App() {
             } />
 
             <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
-            <Route path="/history" element={<HistoryPage history={searchHistory} saved={savedSearches} onExport={exportHistory} />} />
+            <Route path="/history" element={
+              <HistoryPage 
+                history={searchHistory} 
+                saved={collection} // Usa o estado da coleção de documentos
+                onExport={exportHistory} 
+                onClearHistory={() => setSearchHistory([])} // Exemplo de limpeza rápida
+                onRemoveSaved={toggleSaveToCollection} 
+              />
+            } />
             <Route path="/collection" element={
-              <div style={{ maxWidth: '1000px', margin: '40px auto' }}>
-                <h2>Minha Coleção ({collection.length})</h2>
-                {collection.map((doc, idx) => <ResultItem key={doc.id || idx} doc={doc} rank={idx + 1} isSaved={true} onSave={() => toggleSaveToCollection(doc)} />)}
-              </div>
+              <CollectionPage 
+                collection={collection} 
+                savedSearches={savedSearches} 
+                toggleSaveToCollection={toggleSaveToCollection}
+                onRemoveSavedSearch={(id) => setSavedSearches(prev => prev.filter(s => s.id !== id))}
+              />
             } />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/help" element={<HelpPage />} />
