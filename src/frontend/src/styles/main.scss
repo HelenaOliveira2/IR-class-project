@@ -691,3 +691,29 @@ body {
   gap: 5px;
   &:hover { background: #edf2f7; }
 }
+
+// ==========================================
+// 5. RESPONSIVE DESIGN TWEAKS (REQ-F74)
+// ==========================================
+@media (max-width: 768px) {
+  /* Força as colunas (ex: Filtros vs Painel de Configuração) a ficarem empilhadas no telemóvel */
+  div[style*="display: flex; gap: 20px; alignItems: stretch"] {
+    flex-direction: column !important;
+  }
+
+  /* Ajusta as grelhas (ex: Admin Dashboard) para 1 única coluna em ecrãs pequenos */
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduz ligeiramente o tamanho da margem principal para aproveitar o ecrã */
+  .main-container {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Ajusta o tamanho da fonte do logotipo */
+  .brand h1 {
+    font-size: 1.1rem !important;
+  }
+}

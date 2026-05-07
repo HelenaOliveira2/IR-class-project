@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox'; 
@@ -49,6 +49,9 @@ function App() {
   const [collection, setCollection] = useState([]); // REQ-F29: Coleção de documentos
   const [showHistory, setShowHistory] = useState(false);
 
+  // REQ-F78: Cache em memória para evitar pedidos repetidos à API
+  const queryCache = useRef({});
+
   // --- Opções de Exibição e Sessão ---
   const [density, setDensity] = useState(() => getSavedConfig('pref_density', 'comfortable'));
   const [showSnippet, setShowSnippet] = useState(() => getSavedConfig('showSnippet', true));
@@ -75,6 +78,17 @@ function App() {
       sessionStorage.setItem('user_session', Date.now().toString());
     }
   }, []);
+
+  // REQ-F81: Ler o URL quando a página abre para pesquisas partilháveis
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlQuery = params.get('q');
+    const urlMode = params.get('mode') || 'general';
+    
+    if (urlQuery) {
+      handlePerformSearch(urlQuery, urlMode, 1);
+    }
+  }, []); // Executa apenas 1 vez ao carregar a página
 
   // Sincronização do Histórico e Coleções
   useEffect(() => {
@@ -149,6 +163,12 @@ function App() {
     setLastQuery(query);
     setCurrentPage(page);
     setLoading(true);
+
+    // (REQ-F81) Atualizar o URL do Browser para ser partilhável
+    const newUrlParams = new URL(window.location);
+    newUrlParams.searchParams.set('q', query);
+    newUrlParams.searchParams.set('mode', mode);
+    window.history.pushState({}, '', newUrlParams);
     
     try {
       let url = "";
@@ -162,13 +182,35 @@ function App() {
         });
         url = `http://127.0.0.1:8000/api/search?${params}`;
       }
+
+      // ---------------------------------------------------------------
+      // REQ-F78: Verificar se a resposta já está na Cache!
+      // Se a resposta estiver guardada, saltamos o "fetch" e poupamos tempo
+      // ---------------------------------------------------------------
+      if (queryCache.current[url]) {
+        console.log("A carregar resultados a partir da cache!");
+        setResults(queryCache.current[url].results);
+        setSearchStats(queryCache.current[url].stats);
+        setLoading(false);
+        return; // Sai da função sem chamar o servidor
+      }
+
+      // Se não estiver na cache, faz o pedido real ao servidor Python
       const response = await fetch(url);
       const data = await response.json();
+      
       const finalResults = Array.isArray(data) ? data : (data.results || []);
+      const finalStats = { total: data.total_count || finalResults.length, time: data.search_time || "0s" };
+      
+      // REQ-F78: Guardar o resultado na Cache para a próxima vez
+      queryCache.current[url] = { results: finalResults, stats: finalStats };
+
       setResults(finalResults);
-      setSearchStats({ total: data.total_count || finalResults.length, time: data.search_time || "0s" });
+      setSearchStats(finalStats);
+
     } catch (error) {
-      alert("Erro na ligação ao servidor.");
+      console.error("Erro na pesquisa:", error);
+      alert("Erro na ligação ao servidor Python. Verifique se o backend está a correr na porta 8000.");
     } finally {
       setLoading(false);
     }
@@ -228,7 +270,7 @@ function App() {
               </div>
             } />
 
-            <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
+            <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} addToHistory={addToHistory} />} />
             <Route path="/history" element={
               <HistoryPage 
                 history={searchHistory} 
