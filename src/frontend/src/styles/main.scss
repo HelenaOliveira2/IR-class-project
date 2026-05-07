@@ -485,3 +485,209 @@ body {
     }
   }
 }
+
+// ============================================================
+// 4.1 AUTHOR SEARCH INTERFACE (REQ-F35 a REQ-F38)
+// ============================================================
+
+// REQ-F35: Design da página dedicada para autores
+.author-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in; // Reutiliza a animação que já definimos
+
+  h2 {
+    color: $text-dark;
+    border-bottom: 3px solid $uminho-red;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+}
+
+// REQ-F36: Estilo para o Perfil do Autor
+.author-profile-card {
+  background: $white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+  .author-info {
+    h3 { font-size: 1.8rem; color: $uminho-red; margin-bottom: 0.5rem; }
+    p { color: $text-muted; font-weight: 500; }
+  }
+}
+
+// REQ-F37: Visualização da Rede de Colaboração (Co-autoria)
+.collaboration-network {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #fdf2f2; // Um vermelho muito clarinho para destacar
+  border-radius: 8px;
+  border: 1px solid rgba($uminho-red, 0.1);
+
+  h4 { color: $text-dark; margin-bottom: 1rem; font-size: 1.1rem; }
+
+  .network-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .colab-tag {
+      background: $white;
+      color: $uminho-red;
+      border: 1px solid $uminho-red;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: default;
+
+      &:hover {
+        background: $uminho-red;
+        color: $white;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// REQ-F38: Implementação da Linha do Tempo (Timeline)
+.author-timeline {
+  margin: 2rem 0;
+  
+  h4 { margin-bottom: 1.5rem; }
+
+  .timeline-bar-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    height: 150px;
+    padding: 10px;
+    background: $white;
+    border-bottom: 2px solid $border-color;
+    overflow-x: auto;
+
+    .timeline-year-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 50px;
+
+      .bar {
+        width: 100%;
+        background: $uminho-red;
+        border-radius: 4px 4px 0 0;
+        transition: height 0.3s ease;
+        position: relative;
+        
+        &:hover::after {
+          content: attr(data-count);
+          position: absolute;
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.75rem;
+          font-weight: bold;
+          color: $text-dark;
+        }
+      }
+
+      span {
+        font-size: 0.75rem;
+        margin-top: 8px;
+        color: $text-muted;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// REQ-F36: Ajuste para a lista de publicações dentro da página de autor
+.author-publications {
+  margin-top: 3rem;
+  border-top: 1px solid $border-color;
+  padding-top: 2rem;
+
+  h4 { margin-bottom: 1.5rem; color: $text-dark; }
+}
+
+// REQ-F39 & REQ-F41: Estilos do Construtor Visual[cite: 2]
+.query-builder-container {
+  background: #f8fafc;
+  border: 2px dashed $border-color;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 700px;
+
+  .builder-title {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: $text-muted;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+}
+
+.query-rule-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .operator-select select {
+    background: $uminho-red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .term-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding: 2px 8px;
+
+    .drag-handle { color: $text-muted; cursor: grab; margin-right: 8px; }
+    
+    input {
+      border: none !important;
+      font-size: 0.95rem !important;
+      padding: 8px !important;
+    }
+
+    .remove-btn {
+      color: $text-muted;
+      background: none;
+      border: none;
+      cursor: pointer;
+      &:hover { color: $uminho-red; }
+    }
+  }
+}
+
+.add-rule-btn {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid $border-color;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  &:hover { background: #edf2f7; }
+}

@@ -111,16 +111,23 @@ class SearchEngine:
 
     def search(self, query, method="stemming", ranking="custom_tfidf", weighting="log_normalization"):
         """
-        Resolve a query booleana respeitando matemática rigorosa.
-        Substitui a versão anterior para resolver precedências complexas.
+        Roteador principal da pesquisa:
+        Resolve a query booleana ou TF-IDF dependendo do parâmetro 'ranking'.
         """
+        # --- A CORREÇÃO ESTÁ AQUI: Roteamento de Algoritmo ---
+        if ranking == "custom_tfidf":
+            return self.ranked_search(query, use_sklearn=False, scheme=weighting)
+            
+        elif ranking == "sklearn_tfidf":
+            return self.ranked_search(query, use_sklearn=True)
+            
+        # --- Lógica Original do Boolean Ranking (Shunting-yard) ---
         tokens = self._tokenize_boolean_query(query)
         if not tokens: return []
         
         postfix = self._infix_to_postfix(tokens)
         stack = []
         
-        # O universo de todos os documentos (para podermos fazer o operador NOT)
         all_docs_set = set(self.all_doc_ids)
         
         for token in postfix:
@@ -132,7 +139,6 @@ class SearchEngine:
                 if len(stack) >= 2:
                     s2 = stack.pop()
                     s1 = stack.pop()
-                    # REQ-B25: Otimização do AND - Interseta começando pelo conjunto mais pequeno
                     if len(s1) <= len(s2):
                         stack.append(s1.intersection(s2))
                     else:
@@ -143,11 +149,12 @@ class SearchEngine:
                     s1 = stack.pop()
                     stack.append(s1.union(s2))
             else:
-                # É um termo de pesquisa normal
                 stack.append(self._get_postings(token))
                 
-        # O resultado final é o único conjunto que sobra na pilha
         result = stack[0] if stack else set()
+        
+        # O Boolean devolve só a lista de IDs ordenada. 
+        # Como corrigimos a API no passo anterior, ela vai perceber isto e dar 0.0% (ou ocultar).
         return sorted(list(result))
         
     # ---------------------------------------------------------
