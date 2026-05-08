@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox'; 
 import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
-import HistoryPage from './components/HistoryPage';
-import HelpPage from './components/HelpPage';
-import CollectionPage from './components/CollectionPage';
-// REQ-F35: Importação das novas páginas dedicadas
-import AuthorPage from './pages/AuthorPage';
-import AboutPage from './pages/AboutPage';
-import ComparePage from './pages/ComparePage';
-import AdminDashboard from './pages/AdminDashboard';   
+
+// REQ-F84: Otimizar Bundle Size (Carregamento preguiçoso / Lazy Loading das páginas)
+const HistoryPage = lazy(() => import('./components/HistoryPage'));
+const HelpPage = lazy(() => import('./components/HelpPage'));
+const CollectionPage = lazy(() => import('./components/CollectionPage'));
+const AuthorPage = lazy(() => import('./pages/AuthorPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ComparePage = lazy(() => import('./pages/ComparePage'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));   
+
 import './styles/main.scss';
 
 // --- REQ-F63 & REQ-F64: Carregar Configurações Preferidas ---
@@ -37,6 +39,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [searchStats, setSearchStats] = useState({ total: 0, time: "0s" });
   const [lastQuery, setLastQuery] = useState('');
+  
+  // REQ-F90: Estado para mensagens de erro claras
+  const [errorMsg, setErrorMsg] = useState(null); 
 
   // --- Novos Estados para Paginação e Ordenação ---
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,11 +51,14 @@ function App() {
   // --- Estados de Histórico e Coleções ---
   const [searchHistory, setSearchHistory] = useState(() => JSON.parse(localStorage.getItem('searchHistory') || '[]'));
   const [savedSearches, setSavedSearches] = useState(() => JSON.parse(localStorage.getItem('savedSearches') || '[]'));
-  const [collection, setCollection] = useState([]); // REQ-F29: Coleção de documentos
+  const [collection, setCollection] = useState([]); 
   const [showHistory, setShowHistory] = useState(false);
 
-  // REQ-F78: Cache em memória para evitar pedidos repetidos à API
+  // REQ-F78 e REQ-F86: Cache em memória para evitar pedidos repetidos à API
   const queryCache = useRef({});
+  
+  // REQ-F83: Referência para o gatilho do Infinite Scroll
+  const observerTarget = useRef(null);
 
   // --- Opções de Exibição e Sessão ---
   const [density, setDensity] = useState(() => getSavedConfig('pref_density', 'comfortable'));
@@ -88,7 +96,7 @@ function App() {
     if (urlQuery) {
       handlePerformSearch(urlQuery, urlMode, 1);
     }
-  }, []); // Executa apenas 1 vez ao carregar a página
+  }, []); 
 
   // Sincronização do Histórico e Coleções
   useEffect(() => {
@@ -101,16 +109,30 @@ function App() {
     if (lastQuery) handlePerformSearch(lastQuery, 'general', currentPage);
   }, [currentPage, resultsPerPage, sortBy]);
 
+  // REQ-F83: Infinite Scroll (Carrega mais resultados ao chegar ao fim da página)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading && results.length > 0) {
+          setCurrentPage((prev) => prev + 1);
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (observerTarget.current) observer.observe(observerTarget.current);
+    
+    return () => {
+      if (observerTarget.current) observer.unobserve(observerTarget.current);
+    };
+  }, [loading, results]);
+
   // --- Handlers de Ações ---
   const handleSaveSearch = (queryText, collectionName) => {
     if (!queryText) return alert("Nada para guardar");
 
-    // Captura os resultados que estão atualmente no estado 'results'
     const resultsToSave = results.map(doc => ({
-      id: doc.id,
-      title: doc.title,
-      authors: doc.authors,
-      pdf_link: doc.pdf_link
+      id: doc.id, title: doc.title, authors: doc.authors, pdf_link: doc.pdf_link
     }));
 
     const newSaved = { 
@@ -118,7 +140,7 @@ function App() {
       name: `Pesquisa: ${queryText}`, 
       collectionName: collectionName || 'Geral',
       query: queryText,
-      results: resultsToSave, // Garante que os documentos são guardados aqui
+      results: resultsToSave, 
       timestamp: new Date().toLocaleString() 
     };
 
@@ -133,11 +155,8 @@ function App() {
 
   const addToHistory = (query, count = 0) => {
     const newEntry = { 
-      id: Date.now(), 
-      query, 
-      timestamp: new Date().toISOString(),
-      resultsCount: count, // Adiciona o contador
-      engine: rankingAlgorithm // Guarda o algoritmo usado
+      id: Date.now(), query, timestamp: new Date().toISOString(),
+      resultsCount: count, engine: rankingAlgorithm 
     };
     setSearchHistory(prev => [newEntry, ...prev].slice(0, 20));
   };
@@ -163,8 +182,8 @@ function App() {
     setLastQuery(query);
     setCurrentPage(page);
     setLoading(true);
+    setErrorMsg(null); // Limpa erros antigos
 
-    // (REQ-F81) Atualizar o URL do Browser para ser partilhável
     const newUrlParams = new URL(window.location);
     newUrlParams.searchParams.set('q', query);
     newUrlParams.searchParams.set('mode', mode);
@@ -183,26 +202,21 @@ function App() {
         url = `http://127.0.0.1:8000/api/search?${params}`;
       }
 
-      // ---------------------------------------------------------------
-      // REQ-F78: Verificar se a resposta já está na Cache!
-      // Se a resposta estiver guardada, saltamos o "fetch" e poupamos tempo
-      // ---------------------------------------------------------------
+      // REQ-F78 e F86: Carregar da Cache
       if (queryCache.current[url]) {
         console.log("A carregar resultados a partir da cache!");
         setResults(queryCache.current[url].results);
         setSearchStats(queryCache.current[url].stats);
         setLoading(false);
-        return; // Sai da função sem chamar o servidor
+        return; 
       }
 
-      // Se não estiver na cache, faz o pedido real ao servidor Python
       const response = await fetch(url);
       const data = await response.json();
       
       const finalResults = Array.isArray(data) ? data : (data.results || []);
       const finalStats = { total: data.total_count || finalResults.length, time: data.search_time || "0s" };
       
-      // REQ-F78: Guardar o resultado na Cache para a próxima vez
       queryCache.current[url] = { results: finalResults, stats: finalStats };
 
       setResults(finalResults);
@@ -210,7 +224,8 @@ function App() {
 
     } catch (error) {
       console.error("Erro na pesquisa:", error);
-      alert("Erro na ligação ao servidor Python. Verifique se o backend está a correr na porta 8000.");
+      // REQ-F90: Atualiza o painel de erro no ecrã
+      setErrorMsg("Erro na ligação ao servidor. Verifique se o backend Python está a correr.");
     } finally {
       setLoading(false);
     }
@@ -230,69 +245,89 @@ function App() {
         <Header savedCount={collection.length} />
 
         <main className="main-container" role="main">
-          <Routes>
-            <Route path="/" element={
-              <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-                <h2>Motor de Recuperação de Informação</h2>
-                <SearchBox 
-                  onSearch={handlePerformSearch} onSaveSearch={handleSaveSearch} savedSearches={savedSearches}
-                  method={method} excludeStopWords={excludeStopWords} language={language}
-                  rankingAlgorithm={rankingAlgorithm} weightingScheme={weightingScheme}
-                >
-                  <ConfigPanel 
-                    method={method} setMethod={setMethod} excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
-                    language={language} setLanguage={setLanguage} rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
-                    weightingScheme={weightingScheme} setWeightingScheme={setWeightingScheme}
-                    dateRange={dateRange} setDateRange={setDateRange} docTypes={docTypes} setDocTypes={setDocTypes}
-                  />
-                </SearchBox>
+          <Suspense fallback={<div style={{ textAlign: 'center', padding: '50px', fontSize: '1.2rem', color: '#64748b' }}>A carregar a página... 🚀</div>}>
+            <Routes>
+              <Route path="/" element={
+                <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+                  <h2>Motor de Recuperação de Informação</h2>
+                  <SearchBox 
+                    onSearch={handlePerformSearch} onSaveSearch={handleSaveSearch} savedSearches={savedSearches}
+                    method={method} excludeStopWords={excludeStopWords} language={language}
+                    rankingAlgorithm={rankingAlgorithm} weightingScheme={weightingScheme}
+                  >
+                    <ConfigPanel 
+                      method={method} setMethod={setMethod} excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
+                      language={language} setLanguage={setLanguage} rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
+                      weightingScheme={weightingScheme} setWeightingScheme={setWeightingScheme}
+                      dateRange={dateRange} setDateRange={setDateRange} docTypes={docTypes} setDocTypes={setDocTypes}
+                    />
+                  </SearchBox>
 
-                <div className="results-container" style={{ marginTop: '40px', textAlign: 'left' }}>
-                  {loading ? <p>A pesquisar...</p> : results.length > 0 && (
-                    <div className="results-content">
-                      <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
-                        <div>Encontrados <strong>{searchStats.total}</strong> resultados ({searchStats.time})</div>
-                        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                          <button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>{density === 'compact' ? '📂 Normal' : '📑 Compacta'}</button>
-                          <label><input type="checkbox" checked={showSnippet} onChange={(e) => setShowSnippet(e.target.checked)} /> Resumos</label>
-                          <select value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}><option value={10}>10 pág.</option><option value={20}>20 pág.</option></select>
-                          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}><option value="relevance">Relevância</option><option value="date">Data</option></select>
-                        </div>
-                      </div>
-                      <div className="results-list">
-                        {results.map((doc, idx) => (
-                          <ResultItem key={doc.id || idx} doc={doc} rank={((currentPage - 1) * resultsPerPage) + idx + 1} density={density} showSnippet={showSnippet} isSaved={collection.some(i => i.id === doc.id)} onSave={() => toggleSaveToCollection(doc)} />
-                        ))}
-                      </div>
+                  {/* REQ-F90: Error Messages Semânticas (role="alert") */}
+                  {errorMsg && (
+                    <div role="alert" style={{ marginTop: '20px', padding: '15px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #f87171', borderRadius: '8px', fontWeight: 'bold' }}>
+                      ⚠️ {errorMsg}
+                      <button onClick={() => setErrorMsg(null)} style={{ float: 'right', background: 'none', border: 'none', color: '#991b1b', cursor: 'pointer' }}>✖</button>
                     </div>
                   )}
-                </div>
-              </div>
-            } />
 
-            <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} addToHistory={addToHistory} />} />
-            <Route path="/history" element={
-              <HistoryPage 
-                history={searchHistory} 
-                saved={collection} // Usa o estado da coleção de documentos
-                onExport={exportHistory} 
-                onClearHistory={() => setSearchHistory([])} // Exemplo de limpeza rápida
-                onRemoveSaved={toggleSaveToCollection} 
-              />
-            } />
-            <Route path="/collection" element={
-              <CollectionPage 
-                collection={collection} 
-                savedSearches={savedSearches} 
-                toggleSaveToCollection={toggleSaveToCollection}
-                onRemoveSavedSearch={(id) => setSavedSearches(prev => prev.filter(s => s.id !== id))}
-              />
-            } />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/help" element={<HelpPage />} />
-            <Route path="/compare" element={<ComparePage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Routes>
+                  {/* REQ-F88: Region invisível para os leitores de ecrã falarem o resultado */}
+                  <div aria-live="polite" className="sr-only">
+                    {loading ? 'A pesquisar documentos...' : `Pesquisa terminada. Foram encontrados ${searchStats.total} resultados.`}
+                  </div>
+
+                  <div className="results-container" style={{ marginTop: '40px', textAlign: 'left' }}>
+                    {loading && results.length === 0 ? <p>A pesquisar...</p> : results.length > 0 && (
+                      <div className="results-content">
+                        <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
+                          <div>Encontrados <strong>{searchStats.total}</strong> resultados ({searchStats.time})</div>
+                          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                            <button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>{density === 'compact' ? '📂 Normal' : '📑 Compacta'}</button>
+                            <label><input type="checkbox" checked={showSnippet} onChange={(e) => setShowSnippet(e.target.checked)} /> Resumos</label>
+                            <select value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}><option value={10}>10 pág.</option><option value={20}>20 pág.</option></select>
+                            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}><option value="relevance">Relevância</option><option value="date">Data</option></select>
+                          </div>
+                        </div>
+                        <div className="results-list">
+                          {results.map((doc, idx) => (
+                            <ResultItem key={doc.id || idx} doc={doc} rank={((currentPage - 1) * resultsPerPage) + idx + 1} density={density} showSnippet={showSnippet} isSaved={collection.some(i => i.id === doc.id)} onSave={() => toggleSaveToCollection(doc)} />
+                          ))}
+                        </div>
+                        
+                        {/* REQ-F83: Gatilho do Infinite Scroll */}
+                        <div ref={observerTarget} style={{ height: '40px', margin: '20px 0', textAlign: 'center' }}>
+                          {loading && <p style={{ color: '#64748b', fontWeight: 'bold' }}>A carregar mais documentos... ⏳</p>}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              } />
+
+              <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} addToHistory={addToHistory} />} />
+              <Route path="/history" element={
+                <HistoryPage 
+                  history={searchHistory} 
+                  saved={collection} 
+                  onExport={exportHistory} 
+                  onClearHistory={() => setSearchHistory([])} 
+                  onRemoveSaved={toggleSaveToCollection} 
+                />
+              } />
+              <Route path="/collection" element={
+                <CollectionPage 
+                  collection={collection} 
+                  savedSearches={savedSearches} 
+                  toggleSaveToCollection={toggleSaveToCollection}
+                  onRemoveSavedSearch={(id) => setSavedSearches(prev => prev.filter(s => s.id !== id))}
+                />
+              } />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/help" element={<HelpPage />} />
+              <Route path="/compare" element={<ComparePage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
     </Router>

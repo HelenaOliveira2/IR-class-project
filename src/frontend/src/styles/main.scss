@@ -133,32 +133,30 @@ body {
     background: transparent;
   }
 
-// Procura por .search-btn e substitui ou adiciona isto:
-.search-btn {
-  background: $uminho-red;
-  color: $white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease; // Para a transição de cor ser suave
+  .search-btn {
+    background: $uminho-red;
+    color: $white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease; // Para a transição de cor ser suave
 
-  &:hover:not(:disabled) { 
-    background: color.adjust($uminho-red, $lightness: -10%); 
-  }
+    &:hover:not(:disabled) { 
+      background: color.adjust($uminho-red, $lightness: -10%); 
+    }
 
-  // ESTA É A PARTE QUE FALTA:
-  &:disabled {
-    background-color: #cbd5e0; // Um cinzento claro
-    color: #a0aec0;           // Texto cinzento mais escuro
-    cursor: not-allowed;      // Muda o rato para o símbolo de "proibido"
-    opacity: 0.7;
+    &:disabled {
+      background-color: #cbd5e0; // Um cinzento claro
+      color: #a0aec0;           // Texto cinzento mais escuro
+      cursor: not-allowed;      // Muda o rato para o símbolo de "proibido"
+      opacity: 0.7;
+    }
   }
-}
 }
 
 // REQ-F08: Sugestões e Auto-completion
@@ -616,7 +614,7 @@ body {
   h4 { margin-bottom: 1.5rem; color: $text-dark; }
 }
 
-// REQ-F39 & REQ-F41: Estilos do Construtor Visual[cite: 2]
+// REQ-F39 & REQ-F41: Estilos do Construtor Visual
 .query-builder-container {
   background: #f8fafc;
   border: 2px dashed $border-color;
@@ -696,24 +694,44 @@ body {
 // 5. RESPONSIVE DESIGN TWEAKS (REQ-F74)
 // ==========================================
 @media (max-width: 768px) {
-  /* Força as colunas (ex: Filtros vs Painel de Configuração) a ficarem empilhadas no telemóvel */
   div[style*="display: flex; gap: 20px; alignItems: stretch"] {
     flex-direction: column !important;
   }
 
-  /* Ajusta as grelhas (ex: Admin Dashboard) para 1 única coluna em ecrãs pequenos */
   div[style*="grid-template-columns: 1fr 1fr"],
   div[style*="grid-template-columns: repeat(3, 1fr)"] {
     grid-template-columns: 1fr !important;
   }
 
-  /* Reduz ligeiramente o tamanho da margem principal para aproveitar o ecrã */
   .main-container {
     padding: 1.5rem 1rem;
   }
 
-  /* Ajusta o tamanho da fonte do logotipo */
   .brand h1 {
     font-size: 1.1rem !important;
   }
+}
+
+// ==========================================
+// 6. ACCESSIBILITY (a11y) REQ-F87 to REQ-F90
+// ==========================================
+
+/* --- REQ-F90: Clear Focus Indicators para Navegação por Teclado --- */
+*:focus-visible {
+  outline: 3px solid #2563eb !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+/* --- REQ-F88: Screen Reader Only (Esconder visualmente mas ler) --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
