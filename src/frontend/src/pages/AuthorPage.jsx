@@ -2,25 +2,52 @@ import React, { useState } from 'react';
 import { Search, User, Users, BarChart2, BookOpen } from 'lucide-react';
 import ResultItem from '../components/ResultItem';
 
-const AuthorPage = ({ collection = [], toggleSaveToCollection }) => {
+const AuthorPage = ({ collection = [], toggleSaveToCollection , addToHistory}) => {
   const [authorProfile, setAuthorProfile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
 
-  const handleAuthorSearch = async (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-    
+  // REQ-F81: Recuperar a pesquisa do autor pelo URL ao carregar a página
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlName = params.get('name');
+    if (urlName) {
+      setQuery(urlName);
+      // Criamos uma função auxiliar ou chamamos a lógica de fetch
+      fetchProfile(urlName); 
+    }
+  }, []);
+
+  // Função auxiliar para evitar repetição de código
+  const fetchProfile = async (name) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/authors/profile?name=${encodeURIComponent(query)}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/authors/profile?name=${encodeURIComponent(name)}`);
       const data = await response.json();
       setAuthorProfile(data);
+
+      // REQ-F38: Guarda no histórico global sempre que os dados chegam
+      // Passamos o nome e o número de publicações encontradas
+      if (data && data.publications) {
+        addToHistory(`Autor: ${name}`, data.publications.length);
+      }
     } catch (error) {
       console.error("Erro ao carregar perfil:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAuthorSearch = async (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    
+    // REQ-F81: Grava o nome do autor no URL do browser
+    const newUrl = new URL(window.location);
+    newUrl.searchParams.set('name', query);
+    window.history.pushState({}, '', newUrl);
+
+    await fetchProfile(query);
   };
 
   return (
