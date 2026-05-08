@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SearchBox from './components/SearchBox'; 
 import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
+import { startTransition } from 'react';
 
 // REQ-F84: Otimizar Bundle Size (Carregamento preguiçoso / Lazy Loading das páginas)
 const HistoryPage = lazy(() => import('./components/HistoryPage'));
@@ -205,8 +206,10 @@ function App() {
       // REQ-F78 e F86: Carregar da Cache
       if (queryCache.current[url]) {
         console.log("A carregar resultados a partir da cache!");
-        setResults(queryCache.current[url].results);
-        setSearchStats(queryCache.current[url].stats);
+        startTransition(() => {
+          setResults(queryCache.current[url].results);
+          setSearchStats(queryCache.current[url].stats); // Prioriza a interação do utilizador sobre a renderização da lista
+        });
         setLoading(false);
         return; 
       }
@@ -219,8 +222,13 @@ function App() {
       
       queryCache.current[url] = { results: finalResults, stats: finalStats };
 
-      setResults(finalResults);
-      setSearchStats(finalStats);
+      // --- REQ-F97: OTIMIZAÇÃO AQUI ---
+      // Envolvemos a atualização de estado pesada numa transição
+      // Isto mantém a interface (scroll, cliques) fluida enquanto a lista renderiza
+      startTransition(() => {
+        setResults(finalResults);
+        setSearchStats(finalStats);
+      });
 
     } catch (error) {
       console.error("Erro na pesquisa:", error);
