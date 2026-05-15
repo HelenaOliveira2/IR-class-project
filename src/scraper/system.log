@@ -1,0 +1,57 @@
+2026-05-14 19:02:51 [INFO] UMinhoScraper - Sistema de Logging inicializado com sucesso!
+2026-05-14 19:02:54 [INFO] UMinhoScraper - 🚀 Acedendo à coleção: https://repositorium.uminho.pt/handle//1822/21293
+2026-05-14 19:03:21 [INFO] UMinhoScraper - Found 50 papers. Extracting metadata...
+2026-05-14 19:03:31 [INFO] UMinhoScraper -    [1] Sucesso: Foreword to the special section on recent advances in graphics and interaction
+2026-05-14 19:03:41 [INFO] UMinhoScraper -    [2] Sucesso: Ensemble metropolis light transport
+2026-05-14 19:03:51 [INFO] UMinhoScraper -    [3] Sucesso: NER in archival finding aids: extended
+2026-05-14 19:04:03 [INFO] UMinhoScraper -    [4] Sucesso: Heterogeneous implementation of a Voronoi cell-based SVP solver
+2026-05-14 19:04:13 [INFO] UMinhoScraper -    [5] Sucesso: SPELLing out energy leaks: Aiding developers locate energy inefficient code
+2026-05-14 19:04:24 [INFO] UMinhoScraper -    [6] Sucesso: Metamorphosis – a topic maps based environment to handle heterogeneous information resources
+2026-05-14 19:04:36 [INFO] UMinhoScraper -    [7] Sucesso: Predicting plateau pressure in intensive medicine for ventilated patients
+2026-05-14 19:04:51 [INFO] UMinhoScraper -    [8] Sucesso: Information systems assessment in pathologic anatomy service
+2026-05-14 19:05:18 [INFO] UMinhoScraper -    [9] Sucesso: Step towards of a homemade business intelligence solution: A case study in textile industry
+2026-05-14 19:05:30 [INFO] UMinhoScraper -    [10] Sucesso: An assessment of chronic kidney diseases
+2026-05-14 19:05:41 [INFO] UMinhoScraper -    [11] Sucesso: Logic programming and artificial neural networks in breast cancer detection
+2026-05-14 19:05:51 [INFO] UMinhoScraper -    [12] Sucesso: Abstract computation in schizophrenia detection through artificial neural network based systems
+2026-05-14 19:05:59 [INFO] UMinhoScraper -    [13] Sucesso: Educase – intelligent system for pedagogical advising using case-based reasoning
+2026-05-14 19:06:09 [INFO] UMinhoScraper -    [14] Sucesso: Prototyping teams of affective agents in robocode
+2026-05-14 19:06:19 [INFO] UMinhoScraper -    [15] Sucesso: Parallel evolutionary computation in bioinformatics applications
+2026-05-14 19:06:28 [INFO] UMinhoScraper -    [16] Sucesso: Uthrene, a radically new molecule?
+2026-05-14 19:06:37 [INFO] UMinhoScraper -    [17] Sucesso: Synergy in online dispute resolution and the need to protect privacy and personal data
+2026-05-14 19:06:46 [INFO] UMinhoScraper -    [18] Sucesso: Assessing road traffic expression
+2026-05-14 19:06:57 [INFO] UMinhoScraper -    [19] Sucesso: Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models
+2026-05-14 19:07:06 [INFO] UMinhoScraper -    [20] Sucesso: Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques
+2026-05-14 19:07:16 [INFO] UMinhoScraper -    [21] Sucesso: Interactive guiding and localization platform
+2026-05-14 19:07:26 [INFO] UMinhoScraper -    [22] Sucesso: A multi-modal approach for activity classification and fall detection
+2026-05-14 19:07:35 [INFO] UMinhoScraper -    [23] Sucesso: Evaluating techniques for learning non-taxonomic relationships of ontologies from text
+2026-05-14 19:07:44 [INFO] UMinhoScraper -    [24] Sucesso: Studying the effects of stress on negotiation behaviour
+2026-05-14 19:07:54 [INFO] UMinhoScraper -    [25] Sucesso: Development and implementation of clinical guidelines : an artificial intelligence perspective
+2026-05-14 19:08:04 [INFO] UMinhoScraper -    [26] Sucesso: Mobile application to provide personalized sightseeing tours
+2026-05-14 19:08:14 [INFO] UMinhoScraper -    [27] Sucesso: A caregiver support platform within the scope of an ambient assisted living ecosystem
+2026-05-14 19:08:22 [INFO] UMinhoScraper -    [28] Sucesso: Online dispute resolution: an artificial intelligence perspective
+2026-05-14 19:08:31 [INFO] UMinhoScraper -    [29] Sucesso: Microencapsulation of herbicide MCPA with native β-cyclodextrin and its methyl and hydroxypropyl derivatives : an experimental and theoretical investigation
+2026-05-14 19:08:42 [INFO] UMinhoScraper -    [30] Sucesso: Two high-performance alternatives to ZLIB scientific-data compression
+2026-05-14 19:08:51 [INFO] UMinhoScraper -    [31] Sucesso: New parameterization scheme of DFT-D for graphitic materials
+2026-05-14 19:09:01 [INFO] UMinhoScraper -    [32] Sucesso: Twisted pyrene-fused azaacenes
+2026-05-14 19:09:09 [INFO] UMinhoScraper -    [33] Sucesso: Stable hydrogenated graphene edge types: Normal and reconstructed Klein edges
+2026-05-14 19:09:18 [INFO] UMinhoScraper -    [34] Sucesso: Hexaazatrinaphthylenes with different twists
+2026-05-14 19:09:27 [INFO] UMinhoScraper -    [35] Sucesso: 11, 11, 12, 12-Tetracyano-4, 5-pyrenoquinodimethanes: air-stable push–pull o-Quinodimethanes with S2 fluorescence
+2026-05-14 19:09:36 [INFO] UMinhoScraper -    [36] Sucesso: Accuracy of dispersion interactions in semiempirical and molecular mechanics models : the benzene dimer case
+2026-05-14 19:09:44 [INFO] UMinhoScraper -    [37] Sucesso: Improving quality of electronic health records with SNOMED
+2026-05-14 19:09:55 [INFO] UMinhoScraper -    [38] Sucesso: ESCOLEX: a grade-level lexical database from European Portuguese elementary to middle school textbooks
+2026-05-14 19:10:03 [INFO] UMinhoScraper -    [39] Sucesso: A preventive action management platform in healthcare information systems
+2026-05-14 19:10:13 [INFO] UMinhoScraper -    [40] Sucesso: Gamification, social networks and sustainable environments
+2026-05-14 19:10:23 [INFO] UMinhoScraper -    [41] Sucesso: AIBench: a rapid application development framework for translational research in biomedicine
+2026-05-14 19:10:31 [INFO] UMinhoScraper -    [42] Sucesso: A survey of software engineering best practices for the development of smart applications in Ambient Intelligence
+2026-05-14 19:10:40 [INFO] UMinhoScraper -    [43] Sucesso: Incorporating stress estimation into user-centred agent-based platforms
+2026-05-14 19:10:49 [INFO] UMinhoScraper -    [44] Sucesso: The problem of learning non-taxonomic relationships of ontologies from text
+2026-05-14 19:10:58 [INFO] UMinhoScraper -    [45] Sucesso: An interpretable guideline model to handle incomplete information
+2026-05-14 19:11:08 [INFO] UMinhoScraper -    [46] Sucesso: Engineering molecular chains in carbon nanotubes
+2026-05-14 19:11:17 [INFO] UMinhoScraper -    [47] Sucesso: Computational tools for strain optimization by adding reactions
+2026-05-14 19:11:27 [INFO] UMinhoScraper -    [48] Sucesso: A machine learning and chemometrics assisted interpretation of spectroscopic data: a NMR-based metabolomics platform for the assessment of Brazilian propolis
+2026-05-14 19:11:35 [INFO] UMinhoScraper -    [49] Sucesso: An evolutionary approach to generate solutions for conflict scenarios
+2026-05-14 19:11:44 [INFO] UMinhoScraper -    [50] Sucesso: Stress monitoring in conflict resolution situations
+2026-05-14 19:11:47 [INFO] UMinhoScraper - Scraping completed. Total papers scraped: 50
+2026-05-14 19:11:47 [INFO] UMinhoScraper - --- Verificando e Populando Infraestrutura ---
+2026-05-14 19:11:47 [INFO] UMinhoScraper - Base de dados pronta e populada.
+

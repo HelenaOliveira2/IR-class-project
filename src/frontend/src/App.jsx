@@ -54,6 +54,7 @@ function App() {
   const [savedSearches, setSavedSearches] = useState(() => JSON.parse(localStorage.getItem('savedSearches') || '[]'));
   const [collection, setCollection] = useState([]); 
   const [showHistory, setShowHistory] = useState(false);
+  const [selectedZone, setSelectedZone] = useState('all'); // REQ-B46: Suporte a zonas
 
   // REQ-F78 e REQ-F86: Cache em memória para evitar pedidos repetidos à API
   const queryCache = useRef({});
@@ -65,6 +66,8 @@ function App() {
   const [density, setDensity] = useState(() => getSavedConfig('pref_density', 'comfortable'));
   const [showSnippet, setShowSnippet] = useState(() => getSavedConfig('showSnippet', true));
   const [showTour, setShowTour] = useState(() => !localStorage.getItem('tour_completed'));
+
+  const [searchMode, setSearchMode] = useState('general');
 
   const [userSession, setUserSession] = useState(() => {
     const session = sessionStorage.getItem('user_session');
@@ -107,18 +110,22 @@ function App() {
 
   // Pesquisa automática ao mudar paginação ou filtros
   useEffect(() => {
-    if (lastQuery) handlePerformSearch(lastQuery, 'general', currentPage);
-  }, [currentPage, resultsPerPage, sortBy]);
+    if (lastQuery) handlePerformSearch(lastQuery, searchMode, currentPage);
+  }, [currentPage, resultsPerPage, sortBy, searchMode]);
 
   // REQ-F83: Infinite Scroll (Carrega mais resultados ao chegar ao fim da página)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Só dispara se não estiver a carregar e se tivermos resultados (evita disparos em falso)
         if (entries[0].isIntersecting && !loading && results.length > 0) {
-          setCurrentPage((prev) => prev + 1);
+          // Verifique se já carregou todos os resultados disponíveis antes de somar +1
+          if (results.length < searchStats.total) {
+            setCurrentPage((prev) => prev + 1);
+          }
         }
       },
-      { threshold: 1.0 }
+      { threshold: 0.1 } // Mudar para 0.1 para detetar o início do elemento
     );
 
     if (observerTarget.current) observer.observe(observerTarget.current);
@@ -179,7 +186,12 @@ function App() {
 
   const handlePerformSearch = async (query, mode = 'general', page = 1) => {
     if (!query) return;
-    if (page === 1) addToHistory(query);
+    if (page === 1) {
+      addToHistory(query);
+      // Só limpamos a lista se for uma pesquisa TOTALMENTE nova (página 1)
+      setResults([]); 
+    }
+    setSearchMode(mode);
     setLastQuery(query);
     setCurrentPage(page);
     setLoading(true);
@@ -196,9 +208,13 @@ function App() {
         url = `http://127.0.0.1:8000/api/authors/search?name=${encodeURIComponent(query)}`;
       } else {
         const params = new URLSearchParams({
-          q: query, method, ranking: rankingAlgorithm, weighting: weightingScheme,
-          stop_words: excludeStopWords, lang: language, page, limit: resultsPerPage,
-          sort_by: sortBy, min_date: dateRange.min, max_date: dateRange.max, types: docTypes.join(',')
+          q: query,
+          search_in: selectedZone, // Agora a variável já existe!
+          method,
+          ranking: rankingAlgorithm,
+          weighting: weightingScheme,
+          page: page,
+          limit: resultsPerPage
         });
         url = `http://127.0.0.1:8000/api/search?${params}`;
       }
@@ -217,8 +233,11 @@ function App() {
       const response = await fetch(url);
       const data = await response.json();
       
-      const finalResults = Array.isArray(data) ? data : (data.results || []);
-      const finalStats = { total: data.total_count || finalResults.length, time: data.search_time || "0s" };
+      const finalResults = mode === 'author' ? data : (data.results || []);
+      const finalStats = { 
+        total: mode === 'author' ? data.length : (data.total_count || finalResults.length), 
+        time: data.search_time || "0s" 
+      };
       
       queryCache.current[url] = { results: finalResults, stats: finalStats };
 
@@ -226,7 +245,8 @@ function App() {
       // Envolvemos a atualização de estado pesada numa transição
       // Isto mantém a interface (scroll, cliques) fluida enquanto a lista renderiza
       startTransition(() => {
-        setResults(finalResults);
+        // CORREÇÃO: Se a página for > 1, somamos aos resultados existentes
+        setResults(prev => (page === 1 ? finalResults : [...prev, ...finalResults]));
         setSearchStats(finalStats);
       });
 

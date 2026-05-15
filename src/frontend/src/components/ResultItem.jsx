@@ -36,7 +36,7 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
           )}
         </div>
 
-        <p className="authors"><strong>Autores:</strong> {doc.authors}</p>
+        <p><strong>Autores:</strong> {Array.isArray(doc.authors) ? doc.authors.join(', ') : doc.authors}</p>
         
         {/* REQ-F65: O Snippet só aparece se showSnippet for true */}
         {showSnippet && (
