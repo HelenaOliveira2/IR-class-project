@@ -34,7 +34,7 @@ function App() {
   const [language, setLanguage] = useState(() => getSavedConfig('language', 'pt'));
   const [rankingAlgorithm, setRankingAlgorithm] = useState(() => getSavedConfig('ranking', 'custom_tfidf'));
   const [weightingScheme, setWeightingScheme] = useState(() => getSavedConfig('weighting', 'log_normalization'));
-
+  const [searchTarget, setSearchTarget] = useState('all');
   // --- Estados de Dados e Resultados ---
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,6 @@ function App() {
   const [savedSearches, setSavedSearches] = useState(() => JSON.parse(localStorage.getItem('savedSearches') || '[]'));
   const [collection, setCollection] = useState([]); 
   const [showHistory, setShowHistory] = useState(false);
-  const [selectedZone, setSelectedZone] = useState('all'); // REQ-B46: Suporte a zonas
 
   // REQ-F78 e REQ-F86: Cache em memória para evitar pedidos repetidos à API
   const queryCache = useRef({});
@@ -111,7 +110,7 @@ function App() {
   // Pesquisa automática ao mudar paginação ou filtros
   useEffect(() => {
     if (lastQuery) handlePerformSearch(lastQuery, searchMode, currentPage);
-  }, [currentPage, resultsPerPage, sortBy, searchMode]);
+  }, [currentPage, resultsPerPage, sortBy, searchMode, searchTarget]);
 
   // REQ-F83: Infinite Scroll (Carrega mais resultados ao chegar ao fim da página)
   useEffect(() => {
@@ -184,7 +183,7 @@ function App() {
     });
   };
 
-  const handlePerformSearch = async (query, mode = 'general', page = 1) => {
+  const handlePerformSearch = async (query, mode = 'general', target = searchTarget, page = 1) => {
     if (!query) return;
     if (page === 1) {
       addToHistory(query);
@@ -207,10 +206,11 @@ function App() {
       if (mode === 'author') {
         url = `http://127.0.0.1:8000/api/authors/search?name=${encodeURIComponent(query)}`;
       } else {
+
         const params = new URLSearchParams({
           q: query,
-          search_in: selectedZone, // Agora a variável já existe!
-          method,
+          search_in: target, // 🎯 Passa diretamente o valor ('title', 'abstract', 'document' ou 'all')
+          method: method,
           ranking: rankingAlgorithm,
           weighting: weightingScheme,
           page: page,
@@ -279,15 +279,30 @@ function App() {
                 <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
                   <h2>Motor de Recuperação de Informação</h2>
                   <SearchBox 
-                    onSearch={handlePerformSearch} onSaveSearch={handleSaveSearch} savedSearches={savedSearches}
-                    method={method} excludeStopWords={excludeStopWords} language={language}
-                    rankingAlgorithm={rankingAlgorithm} weightingScheme={weightingScheme}
+                    onSearch={handlePerformSearch} 
+                    onSaveSearch={handleSaveSearch} 
+                    savedSearches={savedSearches}
+                    method={method} 
+                    excludeStopWords={excludeStopWords} 
+                    language={language}
+                    rankingAlgorithm={rankingAlgorithm} 
+                    weightingScheme={weightingScheme}
+                    
+                    // 🌟 INJETA ESTAS 4 PROPRIEDADES AQUI:
+                    searchTarget={searchTarget} 
+                    setSearchTarget={setSearchTarget}
+                    searchMode={searchMode} 
+                    setSearchMode={setSearchMode}
                   >
                     <ConfigPanel 
-                      method={method} setMethod={setMethod} excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
-                      language={language} setLanguage={setLanguage} rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
+                      method={method} setMethod={setMethod} 
+                      excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
+                      language={language} setLanguage={setLanguage} 
+                      rankingAlgorithm={rankingAlgorithm} setRankingAlgorithm={setRankingAlgorithm}
                       weightingScheme={weightingScheme} setWeightingScheme={setWeightingScheme}
-                      dateRange={dateRange} setDateRange={setDateRange} docTypes={docTypes} setDocTypes={setDocTypes}
+                      dateRange={dateRange} setDateRange={setDateRange} 
+                      docTypes={docTypes} setDocTypes={setDocTypes}
+                      searchTarget={searchTarget} setSearchTarget={setSearchTarget} 
                     />
                   </SearchBox>
 

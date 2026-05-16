@@ -20,9 +20,8 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
       <div className="result-content">
         <div className="result-header">
           <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="result-title" 
-             style={{ fontSize: density === 'compact' ? '1rem' : '1.2rem' }}>
-            {doc.title}
-          </a>
+             style={{ fontSize: density === 'compact' ? '1rem' : '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: doc.title }}/>
           
           {/* REQ-F22: Score de relevância com barra visual (Merge branch 3d49af) */}
           {hasValidScore && (

@@ -8,7 +8,8 @@ export default function ConfigPanel({
   rankingAlgorithm, setRankingAlgorithm,
   weightingScheme, setWeightingScheme,
   dateRange, setDateRange, 
-  docTypes, setDocTypes 
+  docTypes, setDocTypes,
+  searchTarget, setSearchTarget 
 }) {
 
   const availableTypes = ['Artigo', 'Tese de Mestrado', 'Doutoramento'];

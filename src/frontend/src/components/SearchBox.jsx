@@ -4,12 +4,13 @@ import QueryBuilder from './QueryBuilder';
 
 export default function SearchBox({ 
   onSearch, onSaveSearch, savedSearches = [], 
-  method, excludeStopWords, language, children, ...props 
+  method, excludeStopWords, language, children, 
+  searchTarget, setSearchTarget, // 🌟 RECEBE O ESTADO VINDO DO APP.JSX
+  searchMode, setSearchMode,     // 🌟 RECEBE O ESTADO VINDO DO APP.JSX
+  ...props
 }) {
   const [query, setQuery] = useState('');
-  const [searchTarget, setSearchTarget] = useState('all');
   const [researchArea, setResearchArea] = useState('all');
-  const [searchMode, setSearchMode] = useState('general');
   const [showSaveMenu, setShowSaveMenu] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
   const [isBuilderOpen, setIsBuilderOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function SearchBox({
 
   const handleSearch = (e) => {
     if (e) e.preventDefault();
-    if (query.trim() && onSearch) onSearch(query, searchMode); 
+    if (query.trim() && onSearch) onSearch(query, searchMode, searchTarget); 
   };
 
   const handleConfirmSave = (e, folderName) => {
@@ -136,16 +137,31 @@ export default function SearchBox({
               <legend style={labelStyle}><Target size={14} aria-hidden="true"/> Pesquisar em</legend>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.9rem', color: '#334155' }}>
-                  <input type="radio" value="title" checked={searchTarget === 'title'} onChange={(e) => setSearchTarget(e.target.value)} style={{ accentColor: '#B91C1C' }} /> Títulos
+                  <input 
+                    type="radio" 
+                    value="title" 
+                    checked={searchTarget === 'title'} 
+                    onChange={(e) => setSearchTarget(e.target.value)} 
+                    style={{ accentColor: '#B91C1C' }} 
+                  /> Títulos
                 </label>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.9rem', color: '#334155' }}>
-                  <input type="radio" value="abstract" checked={searchTarget === 'abstract'} onChange={(e) => setSearchTarget(e.target.value)} style={{ accentColor: '#B91C1C' }} /> Resumos
+                  <input 
+                    type="radio" 
+                    value="abstract" 
+                    checked={searchTarget === 'abstract'} 
+                    onChange={(e) => setSearchTarget(e.target.value)} 
+                    style={{ accentColor: '#B91C1C' }} 
+                  /> Resumos (Abstracts)
                 </label>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.9rem', color: '#334155' }}>
-                  <input type="radio" value="document" checked={searchTarget === 'document'} onChange={(e) => setSearchTarget(e.target.value)} style={{ accentColor: '#B91C1C' }} /> Doc. Completo
-                </label>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.9rem', color: '#334155' }}>
-                  <input type="radio" value="all" checked={searchTarget === 'all'} onChange={(e) => setSearchTarget(e.target.value)} style={{ accentColor: '#B91C1C' }} /> Todos
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.9rem', color: '#334155', gridColumn: 'span 2' }}>
+                  <input 
+                    type="radio" 
+                    value="all" 
+                    checked={searchTarget === 'all'} 
+                    onChange={(e) => setSearchTarget(e.target.value)} 
+                    style={{ accentColor: '#B91C1C' }} 
+                  /> Todos os Campos
                 </label>
               </div>
             </fieldset>
@@ -167,12 +183,16 @@ export default function SearchBox({
             <div style={{ marginTop: '5px', borderTop: '1px dashed #e2e8f0', paddingTop: '15px' }}>
               <p style={labelStyle} id="topics-label"><Tag size={14} aria-hidden="true"/> Tópicos Sugeridos</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }} aria-labelledby="topics-label">
-                {['Machine Learning', 'Data Science', 'Sistemas de Informação'].map(topic => (
-                  <button
-                    key={topic} type="button" onClick={() => { setQuery(topic); onSearch(topic, searchMode); }}
-                    style={{ background: '#f1f5f9', color: '#475569', border: '1px solid #e2e8f0', padding: '4px 10px', borderRadius: '15px', fontSize: '0.75rem', cursor: 'pointer', fontWeight: '500' }}
-                  >{topic}</button>
-                ))}
+              {['Machine Learning', 'Data Science', 'Sistemas de Informação'].map(topic => (
+                <button
+                  key={topic} 
+                  type="button" 
+                  onClick={() => { setQuery(topic); onSearch(topic, searchMode, searchTarget); }} // 🌟 Adicionado aqui
+                  style={{ background: '#f1f5f9', color: '#475569', border: '1px solid #e2e8f0', padding: '4px 10px', borderRadius: '15px', fontSize: '0.75rem', cursor: 'pointer', fontWeight: '500' }}
+                >
+                  {topic}
+                </button>
+              ))}
               </div>
             </div>
 

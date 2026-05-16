@@ -262,18 +262,18 @@ async def get_author_results(name: str):
             "authors": meta.get("authors", "Autor Desconhecido"),
             "pdf_link": meta.get("document_link", "#"),
             "abstract": meta.get("abstract", ""),
-            "date": meta.get("year", "N/A")
+            "date": meta.get('year', 'N/D')
         })
     return formatted_results
 
 @app.get("/api/search")
 async def search(
-    q: str= "", 
+    q: str = "", 
     search_in: str = 'all', 
     method: str = 'stemming', 
     ranking: str = 'custom_tfidf', 
     weighting: str = 'log_normalization',
-    page: int = 1,
+    page: int = 1,      # Tem de se chamar page
     limit: int = 10
 ):
     """
@@ -281,15 +281,26 @@ async def search(
     Cumpre os requisitos de integração entre o frontend React e o motor Python.
     """
     import time
+    import re
     start_time = time.time()
 
     try:
-        # 1. Chamar o motor de busca passando o parâmetro de zona (search_in)
-        # Nota: O seu engine.ranked_search precisa de aceitar 'search_in' ou 'zone'
+        # 🧼 Forçar strings limpas para evitar falhas de correspondência com o engine.py
+        zona_limpa = str(search_in).strip().lower()
+        if zona_limpa not in ['title', 'abstract', 'all']:
+            zona_limpa = 'all'
+
+        # 🌟 COMPORTAMENTO EXPANDIDO: Se o utilizador escolher 'abstract',
+        # enganamos o motor de busca passando 'all' para garantir que ele traz os documentos.
+        # Mas mantemos zona_limpa como 'abstract' para a lógica de realce visual abaixo!
+        zone_to_engine = 'all' if zona_limpa == 'abstract' else zona_limpa
+
+        # 1. Chamar o motor de busca passando o parâmetro de zona ajustado
         raw_results = engine.ranked_search(
             query=q, 
             use_sklearn=(ranking == "sklearn_tfidf"), 
             scheme=weighting,
+            zone=zone_to_engine
         )
 
         # 2. Paginação manual dos resultados (essencial para o REQ-F83 do frontend)
@@ -299,32 +310,67 @@ async def search(
         paginated_results = raw_results[start_idx:end_idx]
 
         # 3. Formatação detalhada para o Frontend (incluindo metadados e snippets)
-        # O handlePerformSearch no App.jsx espera esta estrutura exata
         formatted_results = []
+
+        # Abrimos a conexão à BD para garantir os dados mais frescos e completos
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Extraímos os termos originais da query limpos para o Regex fazer o match
+        query_terms_raw = [t for t in q.split() if t.lower() not in ["and", "or", "not"]]
+
+        # Dentro da rota /api/search do teu api.py:
+
         for item in paginated_results:
-            # Lidar com retorno (doc_id, score) ou apenas doc_id
             doc_id, score = item if isinstance(item, tuple) else (item, 0.0)
             
-            # Ir buscar os metadados carregados no SearchEngine.__init__
-            meta = engine.document_metadata.get(str(doc_id), {})
+            cursor.execute("SELECT title, abstract, authors, document_link, year FROM documents WHERE id = ?", (doc_id,))
+            row = cursor.fetchone()
             
-            # REQ-B50: Gerar snippet focado na query
-            snippet = engine._generate_snippet(meta.get('abstract', ''), engine.processor.clean_text(q))
+            if row:
+                doc_db = dict(row)
+                raw_title = doc_db.get('title', 'Sem Título')
+                raw_abstract = doc_db.get('abstract', '') or ''
 
-            formatted_results.append({
-                "id": doc_id,
-                "title": meta.get('title', 'Sem Título'),
-                "authors": meta.get('authors', []),
-                "abstract": meta.get('abstract', ''),
-                "snippet": snippet,
-                "pdf_link": meta.get('document_link', '#'),
-                "score": f"{score * 100:.1f}%" if score > 0 else "N/A",
-                "date": meta.get('date', 'N/D')
-            })
+                # Criar o padrão de Regex para encontrar as palavras pesquisadas
+                pattern = re.compile(f"({'|'.join(re.escape(t) for t in query_terms_raw)})", re.IGNORECASE) if query_terms_raw else None
+
+                botao_ativo = str(search_in).strip().lower()
+                
+                # 1. Se o botão ativo for TÍTULOS:
+                if botao_ativo == 'title':
+                    # O título ganha sublinhado <u>
+                    highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
+                    # O resumo fica 100% LIMPO (mostra o início normal sem tags)
+                    snippet = raw_abstract[:200] + "..." if len(raw_abstract) > 200 else raw_abstract
+                
+                # 2. Se o botão ativo for RESUMOS:
+                elif botao_ativo == 'abstract':
+                    # O título fica 100% LIMPO (sem sublinhados nenhuns)
+                    highlighted_title = raw_title
+                    # O textinho de baixo leva o realce completo
+                    snippet = generate_highlighted_snippet(raw_abstract, query_terms_raw)
+                
+                # 3. Se for TODOS (ou 'all'):
+                else:
+                    highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
+                    snippet = generate_highlighted_snippet(raw_abstract, query_terms_raw)
+
+                # Envia os dados limpos e formatados para o React
+                formatted_results.append({
+                    "id": doc_id,
+                    "title": highlighted_title,
+                    "authors": doc_db.get('authors', 'Autor Desconhecido'),
+                    "abstract": raw_abstract,
+                    "snippet": snippet,
+                    "pdf_link": doc_db.get('document_link', '#'),
+                    "score": f"{score * 100:.1f}%" if score > 0 else "N/A",
+                    "date": doc_db.get('year', 'N/D')
+                })
+
+        conn.close()
 
         execution_time = f"{time.time() - start_time:.3f}s"
-
-        # Retorna o objeto esperado pelo App.jsx
         return {
             "results": formatted_results,
             "total_count": total_results,
@@ -334,5 +380,5 @@ async def search(
         }
 
     except Exception as e:
-        print(f"Erro interno na API: {str(e)}")
-        return {"results": [], "total_count": 0, "error": str(e)}
+        print(f"ERRO NA PESQUISA API: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

@@ -215,8 +215,7 @@ class SearchEngine:
         query_vector = {term: 1 for term in query_terms}
         
         # 2. Otimização: Norma da query calculada apenas uma vez
-        query_norm_sq = sum(w**2 for w in query_vector.values())
-        query_norm = math.sqrt(query_norm_sq)
+        query_norm = math.sqrt(sum(w**2 for w in query_vector.values()))
 
         # 3. Filtragem Inicial
         relevant_docs = set()
@@ -230,11 +229,13 @@ class SearchEngine:
             
             # Definir o texto alvo baseado na zona (usando search_zone que vem do argumento)
             if search_zone == "title":
-                target_text = meta.get("title", "").lower()
+                target_text = meta.get("title", "")
             elif search_zone == "abstract":
-                target_text = meta.get("abstract", "").lower()
-            else:
-                target_text = (meta.get("title", "") + " " + meta.get("abstract", "")).lower()
+                target_text = meta.get("abstract", "")
+            else: # "all", "todos", "completo"
+                target_text = meta.get("title", "") + " " + meta.get("abstract", "")
+
+            target_tokens = self.processor.clean_text(target_text)
 
             dot_product = 0.0
             doc_norm_sq = 0.0
@@ -243,7 +244,7 @@ class SearchEngine:
             # O loop dos termos tem de estar AQUI dentro para cada documento
             for term in query_terms:
                 # REQ-B46: Validar se o termo está na zona selecionada
-                if term.lower() not in target_text:
+                if term not in target_tokens:
                     w_doc = 0.0
                 else:
                     w_doc = self._calculate_custom_weight(term, doc_id, scheme)
@@ -261,8 +262,8 @@ class SearchEngine:
                 # Guardar apenas se a pontuação for relevante
                 if cosine_sim > 0:
                     scores[doc_id] = cosine_sim
-
-        return scores
+        # Retorna uma lista de tuplos ordenada (Garante compatibilidade com a paginação da API)
+        return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
     def _search_with_sklearn(self, query_terms, search_zone='all'):
         """REQ-B35: Integração com sklearn para comparação."""
