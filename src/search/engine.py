@@ -188,7 +188,7 @@ class SearchEngine:
     # ---------------------------------------------------------
     # REQ-B35 & REQ-B36: Sklearn Integration & Selection
     # ---------------------------------------------------------
-    def ranked_search(self, query, use_sklearn=False, scheme="tfidf"):
+    def ranked_search(self, query, use_sklearn=False, scheme="tfidf", zone="all"):
         """
         REQ-B36: Seleção entre Custom e Sklearn.
         """
@@ -200,55 +200,82 @@ class SearchEngine:
         if use_sklearn:
             return self._search_with_sklearn(query_terms)
         else:
-            return self._search_with_custom(query_terms, scheme)
+            return self._search_with_custom(query_terms, scheme, zone)
 
     # ---------------------------------------------------------
     # REQ-B37: Implement cosine similarity calculation
     # REQ-B38: Rank search results by relevance scores
     # ---------------------------------------------------------
-    def _search_with_custom(self, query_terms, scheme="tfidf"):
+    def _search_with_custom(self, query_terms, scheme="tfidf", search_zone="all"):
         """
-        Calcula a Similaridade do Cosseno manualmente.
+        Calcula a Similaridade do Cosseno manualmente entre a query e os documentos.
+        Suporta filtragem por zona (título, resumo ou ambos).
         """
-        # Vetor da Query (assumimos peso 1 para cada termo pesquisado)
+        # 1. Vetor da Query
         query_vector = {term: 1 for term in query_terms}
         
-        # Encontrar documentos que têm pelo menos um termo
+        # 2. Otimização: Norma da query calculada apenas uma vez
+        query_norm = math.sqrt(sum(w**2 for w in query_vector.values()))
+
+        # 3. Filtragem Inicial
         relevant_docs = set()
         for term in query_terms:
             relevant_docs.update(self._get_postings(term))
             
         scores = {}
         for doc_id in relevant_docs:
+            # PONTO CRÍTICO: Recuperar metadados usando o nome correto da variável
+            meta = self.document_metadata.get(str(doc_id), {})
+            
+            # Definir o texto alvo baseado na zona (usando search_zone que vem do argumento)
+            if search_zone == "title":
+                target_text = meta.get("title", "")
+            elif search_zone == "abstract":
+                target_text = meta.get("abstract", "")
+            else: # "all", "todos", "completo"
+                target_text = meta.get("title", "") + " " + meta.get("abstract", "")
+
+            target_tokens = self.processor.clean_text(target_text)
+
             dot_product = 0.0
             doc_norm_sq = 0.0
-            query_norm_sq = 0.0
             
+            # 4. Cálculo do Produto Escalar e Norma do Documento
+            # O loop dos termos tem de estar AQUI dentro para cada documento
             for term in query_terms:
-                w_doc = self._calculate_custom_weight(term, doc_id, scheme)
+                # REQ-B46: Validar se o termo está na zona selecionada
+                if term not in target_tokens:
+                    w_doc = 0.0
+                else:
+                    w_doc = self._calculate_custom_weight(term, doc_id, scheme)
+                
                 w_query = query_vector[term]
                 
                 dot_product += (w_doc * w_query)
                 doc_norm_sq += (w_doc ** 2)
-                query_norm_sq += (w_query ** 2)
                 
             doc_norm = math.sqrt(doc_norm_sq)
-            query_norm = math.sqrt(query_norm_sq)
             
-            # REQ-B37: Fórmula Cosine Similarity
+            # 5. Similaridade do Cosseno
             if doc_norm > 0 and query_norm > 0:
                 cosine_sim = dot_product / (doc_norm * query_norm)
-                scores[doc_id] = cosine_sim
-                
-        # REQ-B38: Ordenar resultados pelo score (maior para menor)
+                # Guardar apenas se a pontuação for relevante
+                if cosine_sim > 0:
+                    scores[doc_id] = cosine_sim
+        # Retorna uma lista de tuplos ordenada (Garante compatibilidade com a paginação da API)
         return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
-    def _search_with_sklearn(self, query_terms):
+    def _search_with_sklearn(self, query_terms, search_zone='all'):
         """REQ-B35: Integração com sklearn para comparação."""
         corpus = []
         doc_ids = []
         for d_id, meta in self.metadata.items():
-            texto = meta.get('title', '') + " " + meta.get('abstract', '')
+            if search_zone == 'title':
+                texto = meta.get('title', '')
+            elif search_zone == 'abstract':
+                texto = meta.get('abstract', '')
+            else:
+                texto = meta.get('title', '') + " " + meta.get('abstract', '')
             corpus.append(texto)
             doc_ids.append(int(d_id))
 

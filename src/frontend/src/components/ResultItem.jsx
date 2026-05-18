@@ -20,9 +20,8 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
       <div className="result-content">
         <div className="result-header">
           <a href={doc.pdf_link} target="_blank" rel="noreferrer" className="result-title" 
-             style={{ fontSize: density === 'compact' ? '1rem' : '1.2rem' }}>
-            {doc.title}
-          </a>
+             style={{ fontSize: density === 'compact' ? '1rem' : '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: doc.title }}/>
           
           {/* REQ-F22: Score de relevância com barra visual (Merge branch 3d49af) */}
           {hasValidScore && (
@@ -36,7 +35,7 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
           )}
         </div>
 
-        <p className="authors"><strong>Autores:</strong> {doc.authors}</p>
+        <p><strong>Autores:</strong> {Array.isArray(doc.authors) ? doc.authors.join(', ') : doc.authors}</p>
         
         {/* REQ-F65: O Snippet só aparece se showSnippet for true */}
         {showSnippet && (

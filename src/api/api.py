@@ -27,7 +27,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-engine = SearchEngine()
+engine = SearchEngine(
+    index_path='src/search/inverted_index.json', 
+    metadata_path='src/search/doc_metadata.json'
+)
 
 # Caminho para a base de dados criada pelo teu database_setup.py
 DB_FILE = 'publications.db'
@@ -126,108 +129,6 @@ def get_authors():
     
     return [dict(author) for author in authors]
 
-# No src/api/api.py
-
-# Local: src/api/api.py
-
-@app.get("/api/search")
-def search(
-    q: str, 
-    method: str = "stemming", 
-    ranking: str = "custom_tfidf", 
-    weighting: str = "log_normalization",
-    page: int = Query(1, ge=1),           
-    limit: int = Query(10, ge=1, le=50),  
-    sort_by: str = "relevance",
-    # REQ-F43 e F44: Novos parâmetros opcionais para filtros
-    min_date: Optional[str] = None,
-    max_date: Optional[str] = None,
-    types: Optional[str] = None
-):
-    start_time = time.time()
-    
-    # 1. Obtém TODOS os resultados do motor de busca
-    raw_results = engine.search(q, method, ranking, weighting)
-    
-    # 2. Busca os dados de TODOS para poder ordenar e filtrar
-    all_matching_docs = []
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    for res in raw_results:
-        # --- EXTRAÇÃO INTELIGENTE DO DOC_ID E DO SCORE ---
-        if isinstance(res, tuple) and len(res) >= 2:
-            # Se o teu motor Python devolver tuplos: (doc_id, score)
-            doc_id = res[0]
-            score = float(res[1])
-        elif isinstance(res, dict):
-            # Se o teu motor Python devolver dicionários: {'doc_id': 1, 'score': 0.85}
-            doc_id = res.get('doc_id', res.get('id'))
-            score = float(res.get('score', 0.0))
-        else:
-            # Se o teu motor devolver APENAS os IDs dos documentos (ex: no Boolean Ranking)
-            doc_id = res
-            score = 0.0
-        # -------------------------------------------------
-
-        cursor.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
-        row = cursor.fetchone()
-        if row:
-            doc = dict(row)
-            all_matching_docs.append({
-                "id": doc["id"],
-                "title": doc["title"],
-                "authors": doc.get("authors", "N/A"),
-                "date": str(doc.get("year", "N/A")), 
-                "score": round(score, 4), # O score matemático entra aqui!
-                "snippet": generate_highlighted_snippet(doc.get("abstract", ""), q.split()),
-                "pdf_link": doc.get("document_link", "#"),
-                "abstract": doc.get("abstract", ""),
-                "type": doc.get("type", "Artigo") 
-            })
-    conn.close()
-
-    # 3. REQ-F46: Aplicar Filtros Avançados (Datas e Tipos)
-    filtered_docs = []
-    selected_types = types.split(',') if types else []
-
-    for doc in all_matching_docs:
-        # Extrai apenas o ano (YYYY) do min_date/max_date para comparar com a BD
-        if min_date and doc["date"] != "N/A" and doc["date"] < min_date[:4]:
-            continue
-        if max_date and doc["date"] != "N/A" and doc["date"] > max_date[:4]:
-            continue
-        
-        # Filtra pelo tipo de documento (REQ-F44)
-        if selected_types and doc["type"] not in selected_types:
-            continue
-            
-        filtered_docs.append(doc)
-
-    # Atualiza a lista com os documentos que passaram nos filtros
-    all_matching_docs = filtered_docs
-    total_results = len(all_matching_docs)
-
-    # 4. Lógica de Ordenação Global (REQ-F34)
-    if sort_by == "date":
-        all_matching_docs.sort(key=lambda x: x['date'], reverse=True)
-    elif sort_by == "title":
-        all_matching_docs.sort(key=lambda x: x['title'].lower())
-    else:
-        all_matching_docs.sort(key=lambda x: x['score'], reverse=True)
-
-    # 5. Cálculo de Paginação sobre a lista já ordenada e filtrada (REQ-F31)
-    start_idx = (page - 1) * limit
-    end_idx = start_idx + limit
-    paginated_results = all_matching_docs[start_idx:end_idx]
-
-    return {
-        "results": paginated_results,
-        "total_count": total_results,
-        "page": page,
-        "limit": limit,
-        "search_time": f"{time.time() - start_time:.4f}s"
-    }
 
 # REQ-F30: Exportação de Resultados
 @app.get("/api/export/{file_format}")
@@ -343,3 +244,141 @@ def get_author_profile(name: str):
         "timeline": timeline,
         "publications": author_docs # REQ-F36
     }
+
+@app.get("/api/authors/search")
+async def get_author_results(name: str):
+    # Chama a função do engine.py
+    results = engine.search_by_author(name)
+    
+    formatted_results = []
+    for res in results:
+        doc_id = str(res['doc_id'])
+        # Usa .get() para evitar que o servidor crash se o ID não existir
+        meta = engine.metadata.get(doc_id, {})
+        
+        formatted_results.append({
+            "id": int(doc_id),
+            "title": meta.get("title", "Sem Título"),
+            "authors": meta.get("authors", "Autor Desconhecido"),
+            "pdf_link": meta.get("document_link", "#"),
+            "abstract": meta.get("abstract", ""),
+            "date": meta.get('year', 'N/D')
+        })
+    return formatted_results
+
+@app.get("/api/search")
+async def search(
+    q: str = "", 
+    search_in: str = 'all', 
+    method: str = 'stemming', 
+    ranking: str = 'custom_tfidf', 
+    weighting: str = 'log_normalization',
+    page: int = 1,      # Tem de se chamar page
+    limit: int = 10
+):
+    """
+    Endpoint de pesquisa principal que suporta filtragem por zona (search_in).
+    Cumpre os requisitos de integração entre o frontend React e o motor Python.
+    """
+    import time
+    import re
+    start_time = time.time()
+
+    try:
+        # 🧼 Forçar strings limpas para evitar falhas de correspondência com o engine.py
+        zona_limpa = str(search_in).strip().lower()
+        if zona_limpa not in ['title', 'abstract', 'all']:
+            zona_limpa = 'all'
+
+        # 🌟 COMPORTAMENTO EXPANDIDO: Se o utilizador escolher 'abstract',
+        # enganamos o motor de busca passando 'all' para garantir que ele traz os documentos.
+        # Mas mantemos zona_limpa como 'abstract' para a lógica de realce visual abaixo!
+        zone_to_engine = 'all' if zona_limpa == 'abstract' else zona_limpa
+
+        # 1. Chamar o motor de busca passando o parâmetro de zona ajustado
+        raw_results = engine.ranked_search(
+            query=q, 
+            use_sklearn=(ranking == "sklearn_tfidf"), 
+            scheme=weighting,
+            zone=zone_to_engine
+        )
+
+        # 2. Paginação manual dos resultados (essencial para o REQ-F83 do frontend)
+        total_results = len(raw_results)
+        start_idx = (page - 1) * limit
+        end_idx = start_idx + limit
+        paginated_results = raw_results[start_idx:end_idx]
+
+        # 3. Formatação detalhada para o Frontend (incluindo metadados e snippets)
+        formatted_results = []
+
+        # Abrimos a conexão à BD para garantir os dados mais frescos e completos
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Extraímos os termos originais da query limpos para o Regex fazer o match
+        query_terms_raw = [t for t in q.split() if t.lower() not in ["and", "or", "not"]]
+
+        # Dentro da rota /api/search do teu api.py:
+
+        for item in paginated_results:
+            doc_id, score = item if isinstance(item, tuple) else (item, 0.0)
+            
+            cursor.execute("SELECT title, abstract, authors, document_link, year FROM documents WHERE id = ?", (doc_id,))
+            row = cursor.fetchone()
+            
+            if row:
+                doc_db = dict(row)
+                raw_title = doc_db.get('title', 'Sem Título')
+                raw_abstract = doc_db.get('abstract', '') or ''
+
+                # Criar o padrão de Regex para encontrar as palavras pesquisadas
+                pattern = re.compile(f"({'|'.join(re.escape(t) for t in query_terms_raw)})", re.IGNORECASE) if query_terms_raw else None
+
+                botao_ativo = str(search_in).strip().lower()
+                
+                # 1. Se o botão ativo for TÍTULOS:
+                if botao_ativo == 'title':
+                    # O título ganha sublinhado <u>
+                    highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
+                    # O resumo fica 100% LIMPO (mostra o início normal sem tags)
+                    snippet = raw_abstract[:200] + "..." if len(raw_abstract) > 200 else raw_abstract
+                
+                # 2. Se o botão ativo for RESUMOS:
+                elif botao_ativo == 'abstract':
+                    # O título fica 100% LIMPO (sem sublinhados nenhuns)
+                    highlighted_title = raw_title
+                    # O textinho de baixo leva o realce completo
+                    snippet = generate_highlighted_snippet(raw_abstract, query_terms_raw)
+                
+                # 3. Se for TODOS (ou 'all'):
+                else:
+                    highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
+                    snippet = generate_highlighted_snippet(raw_abstract, query_terms_raw)
+
+                # Envia os dados limpos e formatados para o React
+                formatted_results.append({
+                    "id": doc_id,
+                    "title": highlighted_title,
+                    "authors": doc_db.get('authors', 'Autor Desconhecido'),
+                    "abstract": raw_abstract,
+                    "snippet": snippet,
+                    "pdf_link": doc_db.get('document_link', '#'),
+                    "score": f"{score * 100:.1f}%" if score > 0 else "N/A",
+                    "date": doc_db.get('year', 'N/D')
+                })
+
+        conn.close()
+
+        execution_time = f"{time.time() - start_time:.3f}s"
+        return {
+            "results": formatted_results,
+            "total_count": total_results,
+            "search_time": execution_time,
+            "query": q,
+            "page": page
+        }
+
+    except Exception as e:
+        print(f"ERRO NA PESQUISA API: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

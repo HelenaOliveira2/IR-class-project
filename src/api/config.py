@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     environment: str = "development"
     db_file: str = "publications.db"
     log_level: str = "INFO"
-    scraper_max_items: int = 20
+    scraper_max_items: int = 50
 
     # Lê as variáveis do ficheiro .env
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
