@@ -183,7 +183,7 @@ export default function SearchBox({
             <div style={{ marginTop: '5px', borderTop: '1px dashed #e2e8f0', paddingTop: '15px' }}>
               <p style={labelStyle} id="topics-label"><Tag size={14} aria-hidden="true"/> Tópicos Sugeridos</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }} aria-labelledby="topics-label">
-              {['Machine Learning', 'Data Science', 'Sistemas de Informação'].map(topic => (
+              {['information', 'Data Science', 'Foreword'].map(topic => (
                 <button
                   key={topic} 
                   type="button" 
