@@ -72,6 +72,15 @@ const Header = ({ savedCount = 0 }) => {
             Ajuda
           </Link>
 
+          {/* --- ACRESCENTA ESTA LINHA ABAIXO --- */}
+          <Link 
+            to="/dashboard" 
+            className={location.pathname === '/dashboard' ? 'active' : ''}
+            style={{ marginLeft: '10px', color: '#3b82f6', fontWeight: 'bold' }} // Estilo de destaque opcional
+          >
+            Dashboard
+          </Link>
+
         </div>
       </nav>
     </header>

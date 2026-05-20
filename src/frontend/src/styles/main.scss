@@ -735,3 +735,14 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
+.dashboard-page {
+  width: 100%;
+  min-height: 600px; // Garante uma altura mínima para o gráfico aparecer
+  
+  .recharts-responsive-container {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+}

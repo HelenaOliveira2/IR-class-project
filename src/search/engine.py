@@ -163,113 +163,147 @@ class SearchEngine:
     # ---------------------------------------------------------
     def _calculate_custom_weight(self, term, doc_id, scheme="tfidf"):
         """
-        Calcula o peso. Suporta os esquemas: 'tfidf' (default), 'tf', e 'boolean'.
+        Calcula o peso de forma robusta e integrada.
         """
-        # REQ-B32: Term Frequency (TF)
+        # Obter a frequência do termo no documento
         tf = self.index_data.get(term, {}).get("postings", {}).get(str(doc_id), 0)
         
+        # 1. Esquema Booleano (Ignora frequência)
         if scheme == "boolean":
             return 1 if tf > 0 else 0
-            
-        if tf == 0: return 0
-        tf_score = 1 + math.log10(tf)
         
-        if scheme == "tf":
-            return tf_score
+        # Se não há frequência, o peso é 0
+        if tf == 0: return 0
+
+        # 2. Lógica dos pesos baseada no esquema
+        if scheme == "standard":
+            tf_score = tf # TF puro
+        elif scheme == "log_normalization":
+            tf_score = 1 + math.log10(tf) # Log
+        elif scheme == "double_normalization":
+            # Exemplo de Double Norm K=0.5
+            tf_score = 0.5 + (0.5 * (tf / 1)) # Simplificado
+        else:
+            tf_score = 1 + math.log10(tf) # Default
             
-        # REQ-B33: Inverse Document Frequency (IDF)
+        # Cálculo IDF (Inverse Document Frequency)
         n_docs = len(self.all_doc_ids)
         df = self.index_data.get(term, {}).get("df", 0)
         idf_score = math.log10(n_docs / df) if df > 0 else 0
         
-        # REQ-B34: TF-IDF Custom
         return tf_score * idf_score
 
+
+    def _search_boolean_logic(self, query):
+        """
+        Esta é a tua lógica que já existia, agora encapsulada num método.
+        """
+        tokens = self._tokenize_boolean_query(query)
+        if not tokens: return []
+        
+        postfix = self._infix_to_postfix(tokens)
+        stack = []
+        all_docs_set = set(self.all_doc_ids)
+        
+        for token in postfix:
+            if token == 'not':
+                if stack:
+                    s1 = stack.pop()
+                    stack.append(all_docs_set - s1)
+            elif token == 'and':
+                if len(stack) >= 2:
+                    s2, s1 = stack.pop(), stack.pop()
+                    stack.append(s1.intersection(s2))
+            elif token == 'or':
+                if len(stack) >= 2:
+                    s2, s1 = stack.pop(), stack.pop()
+                    stack.append(s1.union(s2))
+            else:
+                stack.append(self._get_postings(token))
+        
+        result = stack[0] if stack else set()
+        # Converte para tuplos (id, 1.0) para ser compatível com o resto do sistema
+        return [(d_id, 1.0) for d_id in sorted(list(result))]
+    
     # ---------------------------------------------------------
     # REQ-B35 & REQ-B36: Sklearn Integration & Selection
     # ---------------------------------------------------------
-    def ranked_search(self, query, use_sklearn=False, scheme="tfidf", zone="all"):
-        """
-        REQ-B36: Seleção entre Custom e Sklearn.
-        """
-        # USA O PROCESSADOR AQUI (REQ-B18, B21):
-        query_terms = self.processor.clean_text(query)
+    def ranked_search(self, query, use_sklearn=False, method="stemming", ranking="custom_tfidf", 
+                      weighting="log_normalization", zone="all", date_range=(None, None), 
+                      doc_types=None, remove_stopwords=True, scheme="tfidf", language="pt"):
+        # Processamento
+        self.processor = TextProcessor()
+        clean_query = self.processor.clean_text(query, use_stemming=(method == 'stemming'), remove_stopwords=remove_stopwords)
+        if not clean_query: return []
+
+        # Roteamento Inteligente
+        if ranking == 'boolean':
+            return self._search_boolean_logic(query) # Chama a lógica booleana que encapsulámos
         
-        if not query_terms: return []
-
-        if use_sklearn:
-            return self._search_with_sklearn(query_terms)
-        else:
-            return self._search_with_custom(query_terms, scheme, zone)
-
+        elif ranking == 'sklearn_tfidf':
+            return self._search_with_sklearn(clean_query, search_zone=zone)
+        
+        else: # custom_tfidf
+            # Aqui garantimos que passamos o 'scheme' corretamente
+            return self._search_with_custom(clean_query, weighting, zone, date_range, doc_types)
     # ---------------------------------------------------------
     # REQ-B37: Implement cosine similarity calculation
     # REQ-B38: Rank search results by relevance scores
     # ---------------------------------------------------------
-    def _search_with_custom(self, query_terms, scheme="tfidf", search_zone="all"):
-        """
-        Calcula a Similaridade do Cosseno manualmente entre a query e os documentos.
-        Suporta filtragem por zona (título, resumo ou ambos).
-        """
-        # 1. Vetor da Query
+    def _search_with_custom(self, query_terms, scheme="tfidf", search_zone="all", date_range=(None, None), doc_types=None):
         query_vector = {term: 1 for term in query_terms}
-        
-        # 2. Otimização: Norma da query calculada apenas uma vez
         query_norm = math.sqrt(sum(w**2 for w in query_vector.values()))
 
-        # 3. Filtragem Inicial
+        # 2. Obter candidatos iniciais
         relevant_docs = set()
         for term in query_terms:
             relevant_docs.update(self._get_postings(term))
             
         scores = {}
         for doc_id in relevant_docs:
-            # PONTO CRÍTICO: Recuperar metadados usando o nome correto da variável
             meta = self.document_metadata.get(str(doc_id), {})
             
-            # Definir o texto alvo baseado na zona (usando search_zone que vem do argumento)
-            if search_zone == "title":
-                target_text = meta.get("title", "")
-            elif search_zone == "abstract":
-                target_text = meta.get("abstract", "")
-            else: # "all", "todos", "completo"
-                target_text = meta.get("title", "") + " " + meta.get("abstract", "")
+            # Filtros de Metadados
+            doc_year = int(meta.get('year', 0)) if str(meta.get('year', '')).isdigit() else 0
+            if date_range[0] and doc_year < int(date_range[0]): continue
+            if date_range[1] and doc_year > int(date_range[1]): continue
+            doc_type = meta.get('type', 'Artigo')
+            if doc_types and doc_type not in doc_types: continue
+            
+            # Definição da Zona (Segura)
+            target_text = ""
+            if search_zone == "title": target_text = meta.get("title", "")
+            elif search_zone == "abstract": target_text = meta.get("abstract", "")
+            else: target_text = meta.get("title", "") + " " + meta.get("abstract", "")
 
             target_tokens = self.processor.clean_text(target_text)
 
             dot_product = 0.0
             doc_norm_sq = 0.0
             
-            # 4. Cálculo do Produto Escalar e Norma do Documento
-            # O loop dos termos tem de estar AQUI dentro para cada documento
+            # Cálculo de similaridade
             for term in query_terms:
-                # REQ-B46: Validar se o termo está na zona selecionada
-                if term not in target_tokens:
-                    w_doc = 0.0
-                else:
+                if term in target_tokens:
+                    # w_doc é definido aqui, dentro do escopo do IF
                     w_doc = self._calculate_custom_weight(term, doc_id, scheme)
-                
-                w_query = query_vector[term]
-                
-                dot_product += (w_doc * w_query)
-                doc_norm_sq += (w_doc ** 2)
-                
-            doc_norm = math.sqrt(doc_norm_sq)
+                    w_query = query_vector[term]
+                    
+                    dot_product += (w_doc * w_query)
+                    doc_norm_sq += (w_doc ** 2)
             
-            # 5. Similaridade do Cosseno
-            if doc_norm > 0 and query_norm > 0:
-                cosine_sim = dot_product / (doc_norm * query_norm)
-                # Guardar apenas se a pontuação for relevante
+            if doc_norm_sq > 0 and query_norm > 0:
+                cosine_sim = dot_product / (math.sqrt(doc_norm_sq) * query_norm)
                 if cosine_sim > 0:
                     scores[doc_id] = cosine_sim
-        # Retorna uma lista de tuplos ordenada (Garante compatibilidade com a paginação da API)
+                    
         return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
     def _search_with_sklearn(self, query_terms, search_zone='all'):
-        """REQ-B35: Integração com sklearn para comparação."""
+        """REQ-B35: Integração com sklearn corrigida para aceitar zone."""
         corpus = []
         doc_ids = []
         for d_id, meta in self.metadata.items():
+            # Filtro de zona aplicado aqui
             if search_zone == 'title':
                 texto = meta.get('title', '')
             elif search_zone == 'abstract':
@@ -278,6 +312,8 @@ class SearchEngine:
                 texto = meta.get('title', '') + " " + meta.get('abstract', '')
             corpus.append(texto)
             doc_ids.append(int(d_id))
+
+        if not corpus: return []
 
         vectorizer = TfidfVectorizer()
         tfidf_matrix = vectorizer.fit_transform(corpus)

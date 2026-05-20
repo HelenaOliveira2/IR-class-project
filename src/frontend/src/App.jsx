@@ -6,6 +6,11 @@ import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
 import { startTransition } from 'react';
 
+// 1. IMPORTAÇÃO (No topo do ficheiro, junto aos outros)
+import DashboardPage from './pages/DashboardPage';
+
+
+
 // REQ-F84: Otimizar Bundle Size (Carregamento preguiçoso / Lazy Loading das páginas)
 const HistoryPage = lazy(() => import('./components/HistoryPage'));
 const HelpPage = lazy(() => import('./components/HelpPage'));
@@ -184,6 +189,7 @@ function App() {
   };
 
   const handlePerformSearch = async (query, mode = 'general', target = searchTarget, page = 1) => {
+
     if (!query) return;
     if (page === 1) {
       addToHistory(query);
@@ -212,9 +218,15 @@ function App() {
           search_in: target, // 🎯 Passa diretamente o valor ('title', 'abstract', 'document' ou 'all')
           method: method,
           ranking: rankingAlgorithm,
-          weighting: weightingScheme,
+          weighting: rankingAlgorithm === 'boolean' ? 'none' : weightingScheme,
           page: page,
-          limit: resultsPerPage
+          limit: resultsPerPage,
+          method: method,                 // 'stemming' ou 'lemmatization'
+          exclude_stopwords: excludeStopWords, // true ou false
+          language: language,             // 'pt' ou 'en'
+          date_min: dateRange.min, // Envia o valor do Ano Min
+          date_max: dateRange.max, // Envia o valor do Ano Max
+          doc_types: docTypes.join(','),
         });
         url = `http://127.0.0.1:8000/api/search?${params}`;
       }
@@ -271,13 +283,18 @@ function App() {
         )}
         
         <Header savedCount={collection.length} />
+      
 
         <main className="main-container" role="main">
           <Suspense fallback={<div style={{ textAlign: 'center', padding: '50px', fontSize: '1.2rem', color: '#64748b' }}>A carregar a página... 🚀</div>}>
             <Routes>
+              {/* DASHBOARD */}
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/" element={
                 <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
                   <h2>Motor de Recuperação de Informação</h2>
+                  
+                  {/* 1. A SearchBox fecha-se aqui. Não ponhas nada dentro dela! */}
                   <SearchBox 
                     onSearch={handlePerformSearch} 
                     onSaveSearch={handleSaveSearch} 
@@ -287,13 +304,14 @@ function App() {
                     language={language}
                     rankingAlgorithm={rankingAlgorithm} 
                     weightingScheme={weightingScheme}
-                    
-                    // 🌟 INJETA ESTAS 4 PROPRIEDADES AQUI:
                     searchTarget={searchTarget} 
                     setSearchTarget={setSearchTarget}
                     searchMode={searchMode} 
                     setSearchMode={setSearchMode}
-                  >
+                  />
+
+                  {/* 2. O Painel de Configuração Horizontal vive aqui, como componente irmão */}
+                  <div style={{ marginTop: '20px', marginBottom: '30px' }}>
                     <ConfigPanel 
                       method={method} setMethod={setMethod} 
                       excludeStopWords={excludeStopWords} setExcludeStopWords={setExcludeStopWords}
@@ -304,7 +322,9 @@ function App() {
                       docTypes={docTypes} setDocTypes={setDocTypes}
                       searchTarget={searchTarget} setSearchTarget={setSearchTarget} 
                     />
-                  </SearchBox>
+                  </div>
+
+     
 
                   {/* REQ-F90: Error Messages Semânticas (role="alert") */}
                   {errorMsg && (
@@ -320,29 +340,47 @@ function App() {
                   </div>
 
                   <div className="results-container" style={{ marginTop: '40px', textAlign: 'left' }}>
-                    {loading && results.length === 0 ? <p>A pesquisar...</p> : results.length > 0 && (
+  
+                    {/* 1. SE ESTIVER A CARREGAR (Aqui o comentário com chavetas é válido porque está fora da lógica) */}
+                    {loading && results.length === 0 ? (
+                      <p>A pesquisar...</p>
+                    ) : 
+                    
+                    /* 2. SE ENCONTROU DOCUMENTOS (Repara que tirei as chavetas do comentário!) */
+                    results.length > 0 ? (
                       <div className="results-content">
                         <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
-                          <div>Encontrados <strong>{searchStats.total}</strong> resultados ({searchStats.time})</div>
-                          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                            <button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>{density === 'compact' ? '📂 Normal' : '📑 Compacta'}</button>
-                            <label><input type="checkbox" checked={showSnippet} onChange={(e) => setShowSnippet(e.target.checked)} /> Resumos</label>
-                            <select value={resultsPerPage} onChange={(e) => setResultsPerPage(Number(e.target.value))}><option value={10}>10 pág.</option><option value={20}>20 pág.</option></select>
-                            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}><option value="relevance">Relevância</option><option value="date">Data</option></select>
-                          </div>
+                          <div>Encontrados <strong>{searchStats?.total || 0}</strong> resultados ({searchStats?.time || 0}ms)</div>
+                          {/* ... os teus botões de densidade, checkbox, etc ... */}
                         </div>
+                        
                         <div className="results-list">
                           {results.map((doc, idx) => (
                             <ResultItem key={doc.id || idx} doc={doc} rank={((currentPage - 1) * resultsPerPage) + idx + 1} density={density} showSnippet={showSnippet} isSaved={collection.some(i => i.id === doc.id)} onSave={() => toggleSaveToCollection(doc)} />
                           ))}
                         </div>
-                        
-                        {/* REQ-F83: Gatilho do Infinite Scroll */}
+
                         <div ref={observerTarget} style={{ height: '40px', margin: '20px 0', textAlign: 'center' }}>
                           {loading && <p style={{ color: '#64748b', fontWeight: 'bold' }}>A carregar mais documentos... ⏳</p>}
                         </div>
                       </div>
-                    )}
+                    ) : 
+                    
+                    /* 3. SE JÁ FEZ A PESQUISA MAS NÃO ENCONTROU NADA (Sem chavetas no comentário) */
+                    lastQuery ? (
+                      <div style={{ textAlign: 'center', padding: '30px', backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#64748b' }}>
+                        <p style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: '0 0 5px 0', color: '#1e293b' }}>
+                          Nenhum documento encontrado
+                        </p>
+                        <p style={{ margin: 0, fontSize: '0.95rem' }}>
+                          Não encontrámos nenhuma publicação correspondente a <strong>"{lastQuery}"</strong>.
+                        </p>
+                      </div>
+                    ) : 
+                    
+                    /* 4. CASO CONTRÁRIO (Sem chavetas) */
+                    null}
+
                   </div>
                 </div>
               } />
@@ -369,6 +407,7 @@ function App() {
               <Route path="/help" element={<HelpPage />} />
               <Route path="/compare" element={<ComparePage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
               <Route path="/admin" element={<AdminDashboard />} />
+             
             </Routes>
           </Suspense>
         </main>
