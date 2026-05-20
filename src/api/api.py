@@ -271,10 +271,15 @@ async def search(
     q: str = "", 
     search_in: str = 'all', 
     method: str = 'stemming', 
+    language: str = 'pt',           # Recebe o valor do botão
     ranking: str = 'custom_tfidf', 
     weighting: str = 'log_normalization',
     page: int = 1,      # Tem de se chamar page
-    limit: int = 10
+    limit: int = 10,
+    date_min: str = "",
+    date_max: str = "",
+    doc_types: str = "",
+    exclude_stopwords: bool = True,
 ):
     """
     Endpoint de pesquisa principal que suporta filtragem por zona (search_in).
@@ -296,12 +301,25 @@ async def search(
         zone_to_engine = 'all' if zona_limpa == 'abstract' else zona_limpa
 
         # 1. Chamar o motor de busca passando o parâmetro de zona ajustado
-        raw_results = engine.ranked_search(
-            query=q, 
-            use_sklearn=(ranking == "sklearn_tfidf"), 
-            scheme=weighting,
-            zone=zone_to_engine
-        )
+        # 1. Chamar o motor de busca consoante o método escolhido no painel
+        if ranking == "boolean":
+            # Chama a verdadeira pesquisa Booleana (Shunting-yard)
+            boolean_ids = engine.search(query=q, ranking="boolean")
+            # Converte a lista de IDs [1, 2, 3] para o formato de tuplos [(1, 0.0), (2, 0.0)] 
+            # para o resto do código não quebrar à procura do score!
+            raw_results = [(doc_id, 0.0) for doc_id in boolean_ids]
+        else:
+            # Chama o TF-IDF (Custom ou Sklearn)
+            raw_results = engine.ranked_search(
+                query=q, 
+                use_sklearn=(ranking == "sklearn_tfidf"), 
+                scheme=weighting,
+                zone=zone_to_engine,
+                date_range=(date_min, date_max),
+                doc_types=doc_types.split(',') if doc_types else [],
+                remove_stopwords=exclude_stopwords,
+                language=language
+            )
 
         # 2. Paginação manual dos resultados (essencial para o REQ-F83 do frontend)
         total_results = len(raw_results)
@@ -364,7 +382,7 @@ async def search(
                     "abstract": raw_abstract,
                     "snippet": snippet,
                     "pdf_link": doc_db.get('document_link', '#'),
-                    "score": f"{score * 100:.1f}%" if score > 0 else "N/A",
+                    "score": score if score > 0 else None,
                     "date": doc_db.get('year', 'N/D')
                 })
 
@@ -382,3 +400,15 @@ async def search(
     except Exception as e:
         print(f"ERRO NA PESQUISA API: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.get("/api/stats")
+def get_dashboard_stats():
+    conn = sqlite3.connect('publications.db') # Certifica-te que este caminho está correto!
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    # ESTA É A TUA FUNÇÃO:
+    cursor.execute("SELECT year, COUNT(*) as count FROM documents GROUP BY year ORDER BY year")
+    data = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return {"by_year": data}
