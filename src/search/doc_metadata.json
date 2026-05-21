@@ -1,6 +1,8 @@
 {
     "1": {
         "title": "Foreword to the special section on recent advances in graphics and interaction",
+        "abstract": "This special section on Recent Advances in Graphics and In- teraction features the papers submitted to Computers & Graphics (C&G) and presented at the 2021 edition of the International Conference on Graphics and Interaction – ICGI’2021 – which was held on November 4 and 5, 2021 at the Faculty of Engineering of the University of Porto, Portugal, as a joint organization with the Eurographics Portuguese Chapter — GPCG.",
+        "full_text_preview": "Computers & Graphics 102 (2022) A8-A9\nContents lists available at ScienceDirect\nComputers & Graphics\njournal homepage: www.elsevier.com/locate/cag\nEditorial\nForeword to the special section on Recent Advances in Graphics and\nInteraction\nThis special section on Recent Advances in Graphics and In-\nteraction features the papers submitted to Computers & Graphics\n(C&G) and presented at the 2021 edition of the International\nConference on Graphics and Interaction – ICGI’2021 – which was\nheld on November 4 and 5, 2021 at the Faculty of Engineering of\nthe University of Porto, Portugal, as a joint organization with the\nEurographics Portuguese Chapter — GPCG.\nAll submissions were fully peer-reviewed by at least three\nexperts according to the standards of Computers & Graphics. This\nspecial issue received 15 submissions out of which four were\naccepted to be published in this special section of Computers &\nGraphics.\nThe first paper of this special issue, Microstructure-based ap-\npearance rendering for feathers [1], from Jessica Baron, Daljit Singh\nDhillon, N. Adam Smith and Eric Patterson proposes a method for\nrendering feathers with a high degree of photorealism that takes\ninto account the detailed substructures of feathers. In the second\npaper, Data-driven insight into the puzzle-based cybersecurity train-\ning [2], Karolína Dočkalová Burská, Vít Rusňák and Radek Ošlejšek\npresent an analytical tool for cybersecurity puzzle-based training,\ncreated by the authors, useful for analyzing player",
         "authors": [
             "Rodrigues",
             "Nuno",
@@ -11,11 +13,13 @@
             "Bouatouch",
             "Kadi"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/aae6409f-cf8a-4961-bd5f-d57bddadc98e",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/5dfcc078-1137-454b-ada8-2e5ba540c6d4/download",
         "doi": "10.1016/j.cag.2021.12.006"
     },
     "2": {
         "title": "Ensemble metropolis light transport",
+        "abstract": "This article proposes a Markov Chain Monte Carlo (MCMC) rendering algorithm based on a family of guided transition kernels. The kernels exploit properties of ensembles of light transport paths, which are distributed according to the lighting in the scene, and utilize this information to make informed decisions for guiding local path sampling. Critically, our approach does not require caching distributions in world space, saving time and memory, yet it is able to make guided sampling decisions based on whole paths. We show how this can be implemented efficiently by organizing the paths in each ensemble and designing transition kernels for MCMC rendering based on a carefully chosen subset of paths from the ensemble. This algorithm is easy to parallelize and leads to improvements in variance when rendering a variety of scenes.",
+        "full_text_preview": "5\nEnsemble Metropolis Light Transport\nTHOMAS BASHFORD-ROGERS, University of the West of England, UK\nLUÍS PAULO SANTOS, Universidade do Minho/INESC TEC, Portugal\nDEMETRIS MARNERIDES and KURT DEBATTISTA, University of Warwick, UK\nFig. 1. The DOOR AJAR scene showing the reference on the left, Metropolis Light Transport in the centre, and Ensemble Metropolis Light Transport on\nthe right, rendered at an equal sample count. The use of the ensemble to propose anisotropic transition kernels allows sampling to be adapted to the scene\ngeometry and lighting information, leading to variance reduction as can be seen by lower MSE values shown at the top of each image.\nThis article proposes a Markov Chain Monte Carlo (MCMC) render-\ning algorithm based on a family of guided transition kernels. The kernels\nexploit properties of ensembles of light transport paths, which are dis-\ntributed according to the lighting in the scene, and utilize this informa-\ntion to make informed decisions for guiding local path sampling. Critically,\nour approach does not require caching distributions in world space, saving\ntime and memory, yet it is able to make guided sampling decisions based\non whole paths. We show how this can be implemented efficiently by or-\nganizing the paths in each ensemble and designing transition kernels for\nMCMC rendering based on a carefully chosen subset of paths from the en-\nsemble. This algorithm is easy to parallelize and leads to improvements in\nvariance when rendering a variety of",
         "authors": [
             "Bashford-Rogers",
             "Thomas",
@@ -26,22 +30,26 @@
             "Debattista",
             "Kurt"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/4a6a1f65-3f0d-44ee-8e95-0f957949e1f3",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/9080bf36-d1af-41b5-9cc1-e6e65fce140e/download",
         "doi": "10.1145/3472294"
     },
     "3": {
         "title": "NER in archival finding aids: extended",
+        "abstract": "The amount of information preserved in Portuguese archives has increased over the years. These documents represent a national heritage of high importance, as they portray the country’s history. Currently, most Portuguese archives have made their finding aids available to the public in digital format, however, these data do not have any annotation, so it is not always easy to analyze their content. In this work, Named Entity Recognition solutions were created that allow the identification and classification of several named entities from the archival finding aids. These named entities translate into crucial information about their context and, with high confidence results, they can be used for several purposes, for example, the creation of smart browsing tools by using entity linking and record linking techniques. In order to achieve high result scores, we annotated several corpora to train our own Machine Learning algorithms in this context domain. We also used different architectures, such as CNNs, LSTMs, and Maximum Entropy models. Finally, all the created datasets and ML models were made available to the public with a developed web platform, NER@DI.",
+        "full_text_preview": "\u0001\u0002\u0003\u0001\u0004\u0005\u0006\u0007\b\n\u0001\u0002\u0003\u0004\u0005\u0006\u0007\nCitation: Cunha, L.F.d.C.; Ramalho,\nJ.C. NER in Archival Finding Aids:\nExtended. Mach. Learn. Knowl. Extr.\n2022, 4, 42–65. https://doi.org/\n10.3390/make4010003\nAcademic Editors: Alberto Simões\nand Pedro Rangel Henriques\nReceived: 1 December 2021\nAccepted: 12 January 2022\nPublished: 17 January 2022\nPublisher’s Note: MDPI stays neutral\nwith regard to jurisdictional claims in\npublished maps and institutional afﬁl-\niations.\nCopyright:\n© 2022 by the authors.\nLicensee MDPI, Basel, Switzerland.\nThis article is an open access article\ndistributed\nunder\nthe\nterms\nand\nconditions of the Creative Commons\nAttribution (CC BY) license (https://\ncreativecommons.org/licenses/by/\n4.0/).\nmachine learning &\nknowledge extraction\nArticle\nNER in Archival Finding Aids: Extended †\nLuís Filipe da Costa Cunha\nand José Carlos Ramalho *\nDepartment of Informatics, University of Minho, 4710-057 Braga, Portugal; a83099@alunos.uminho.pt\n* Correspondence: jcr@di.uminho.pt\n† This paper is an extended version of our paper published in SLATE 2021.\nAbstract: The amount of information preserved in Portuguese archives has increased over the years.\nThese documents represent a national heritage of high importance, as they portray the country’s\nhistory. Currently, most Portuguese archives have made their ﬁnding aids available to the public in\ndigital format, however, these data do not have any annotation, so it is not always easy to analyze their\ncontent. In this work, Named Entity Recognition solutio",
         "authors": [
             "Cunha",
             "Luís Filipe da Costa",
             "Ramalho",
             "José Carlos"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/af79b188-3db8-4ff0-9560-0cf6d3d991fc",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/5cca2c0f-23ec-4175-8b9b-71dfe8a88006/download",
         "doi": "10.3390/make4010003"
     },
     "4": {
         "title": "Heterogeneous implementation of a Voronoi cell-based SVP solver",
+        "abstract": "This paper presents a new, heterogeneous CPU+GPU attacks against lattice-based (postquantum) cryptosystems based on the Shortest Vector Problem (SVP), a central problem in lattice-based cryptanalysis. To the best of our knowledge, this is the first SVP-attack against lattice-based cryptosystems using CPUs and GPUs simultaneously. We show that Voronoi-cell based CPU+GPU attacks, algorithmically improved in previous work, are suitable for the proposed massively parallel platforms. Results show that 1) heterogeneous platforms are useful in this scenario, as they increment the overall memory available in the system (as GPU's memory can be used effectively), a typical bottleneck for Voronoi-cell algorithms, and we have also been able to increase the performance of the algorithm on such a platform, by successfully using the GPU as a co-processor, 2) this attack can be successfully accelerated using conventional GPUs and 3) we can take advantage of multiple GPUs to attack lattice-based cryptosystems. Experimental results show a speedup up to 7.6× for 2 GPUs hosted by an Intel Xeon E5-2695 v2 CPU (12 cores ×2 sockets) using only 1 core and gains in the order of 20% for 2 GPUs hosted by the same machine using all 22 CPU threads (2 are reserved for orchestrating the GPUs), compared to single-CPU execution using the entire 24 threads available.",
+        "full_text_preview": "Received August 10, 2019, accepted August 22, 2019, date of publication September 3, 2019, date of current version\nSeptember 18, 2019.\nDigital Object Identifier 10.1109/ACCESS.2019.2939142\nHeterogeneous Implementation of a Voronoi\nCell-Based SVP Solver\nGABRIEL FALCAO1, (Senior Member, IEEE), FILIPE CABELEIRA1,\nARTUR MARIANO\n2, AND LUIS PAULO SANTOS2,3\n1Department of Electrical and Computer Engineering, Instituto de Telecomunicações, University of Coimbra, 3030-290 Coimbra, Portugal\n2INESC TEC, 4200-465 Porto, Portugal\n3Departamento de Informática, Universidade do Minho, 4710-057 Braga, Portugal\nCorresponding author: Gabriel Falcao (gff@co.it.pt)\nThis work was supported in part by the Instituto de Telecomunicações, in part by the Fundação para a Ciência e a Tecnologia (FCT) under\nGrant UID/EEA/50008/2019 and Grant PTDC/EEI-HAC/30485/2017, and in part by the National Funds through the Portuguese Funding\nAgency, FCT—Fundação para a Ciência e a Tecnologia, under Grant UID/EEA/50014/2019. The work of A. Mariano was supported by the\nDeutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Grant 382285730.\nABSTRACT This paper presents a new, heterogeneous CPU+GPU attacks against lattice-based (post-\nquantum) cryptosystems based on the Shortest Vector Problem (SVP), a central problem in lattice-based\ncryptanalysis. To the best of our knowledge, this is the ﬁrst SVP-attack against lattice-based cryptosystems\nusing CPUs and GPUs simultaneously. We show that Voronoi-cell ",
         "authors": [
             "Falcão",
             "Gabriel",
@@ -52,11 +60,13 @@
             "Santos",
             "Luís Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/12918e95-f79a-424a-b00e-f54c7fb42205",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/c66c84ea-c8bc-4bf5-96d5-064b7655bdf9/download",
         "doi": "10.1109/ACCESS.2019.2939142"
     },
     "5": {
         "title": "SPELLing out energy leaks: Aiding developers locate energy inefficient code",
+        "abstract": "Although hardware is generally seen as the main culprit for a computer's energy usage, software too has a tremendous impact on the energy spent. Unfortunately, there is still not enough support for software developers so they can make their code more energy-aware.This paper proposes a technique to detect energy inefficient fragments in the source code of a software system. Test cases are executed to obtain energy consumption measurements, and a statistical method, based on spectrum-based fault localization, is introduced to relate energy consumption to the source code. The result of our technique is an energy ranking of source code fragments pointing developers to possible energy leaks in their code. This technique was implemented in the SPELL toolkit.Finally, in order to evaluate our technique, we conducted an empirical study where we asked participants to optimize the energy efficiency of a software system using our tool, while also having two other groups using no tool assistance and a profiler, respectively. We showed statistical evidence that developers using our technique were able to improve the energy efficiency by 43% on average, and even out performing a profiler for energy optimization. (C) 2019 Elsevier Inc. All rights reserved.",
+        "full_text_preview": "SPELLing Out Energy Leaks\nAiding Developers Locate Energy Ineﬃcient Code\nRui Pereirab,1, Tiago Car¸c˜aob, Marco Coutob, J´acome Cunhac, Jo˜ao Paulo\nFernandesd, Jo˜ao Saraivab\naHASLab/INESC TEC & Universidade do Minho, Portugal\nbC4 — Centro de Competˆencias em Cloud Computing (C4-UBI), Universidade da Beira\nInterior, Rua Marquˆes d’ ´Avila e Bolama, 6201-001, Covilh˜a, Portugal\ncNOVA LINCS & Universidade do Minho, Portugal\ndCISUC & Universidade de Coimbra, Portugal\nAbstract\nAlthough hardware is generally seen as the main culprit for a computer’s en-\nergy usage, software too has a tremendous impact on the energy spent. Unfor-\ntunately, there is still not enough support for software developers so they can\nmake their code more energy-aware.\nThis paper proposes a technique to detect energy ineﬃcient fragments in\nthe source code of a software system. Test cases are executed to obtain en-\nergy consumption measurements, and a statistical method, based on spectrum-\nbased fault localization, is introduced to relate energy consumption to the source\ncode. The result of our technique is an energy ranking of source code fragments\npointing developers to possible energy leaks in their code. This technique was\nimplemented in the SPELL toolkit.\nFinally, in order to evaluate our technique, we conducted an empirical study\nwhere we asked participants to optimize the energy eﬃciency of a software\nsystem using our tool, while also having two other groups using no tool assistance\nand a proﬁler, resp",
         "authors": [
             "Pereira",
             "Rui Alexandre Afonso",
@@ -71,11 +81,13 @@
             "Saraiva",
             "João"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/bf7d71cb-fc49-4f2e-9274-7b227c25d624",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/fe449a74-0928-41c0-a9e0-bc94f96680f4/download",
         "doi": "10.1016/j.jss.2019.110463"
     },
     "6": {
         "title": "Metamorphosis – a topic maps based environment to handle heterogeneous information resources",
+        "abstract": "Nowadays, data handled by an institution or company is spread out by more than one database and lots of documents of different types. To extract the information implicit in that data, it is necessary to pick parts from those various archives. To obtain a general overview, those information slices should be integrated. Different approaches can be followed to achieve that integration, ranging from the merge of resources till the fusion of the extracted parts. In this paper, we introduce Metamorphosis – a Topic Maps oriented environment that enables a conceptual navigation among heterogenous information systems – and we argue that Metamorphosis can be used to achieve, via Topic Maps, the referred semantic integration.",
+        "full_text_preview": "Metamorphosis – A Topic Maps Based\nEnvironment to Handle Heterogeneous\nInformation Resources\nJos´e Carlos Ramalho, Giovani Rubert Librelotto, and Pedro Rangel Henriques\nDepartamento de Inform´atica – Universidade do Minho,\nCampus de Gualtar 4710-057 – Braga – Portugal\n{jcr, grl, prh}@di.uminho.pt\nAbstract. Nowadays, data handled by an institution or company is\nspread out by more than one database and lots of documents of diﬀerent\ntypes. To extract the information implicit in that data, it is necessary\nto pick parts from those various archives. To obtain a general overview,\nthose information slices should be integrated. Diﬀerent approaches can\nbe followed to achieve that integration, ranging from the merge of re-\nsources till the fusion of the extracted parts. In this paper, we introduce\nMetamorphosis – a Topic Maps oriented environment that enables a con-\nceptual navigation among heterogenous information systems – and we\nargue that Metamorphosis can be used to achieve, via Topic Maps, the\nreferred semantic integration.\n1\nIntroduction\nDaily, a lot of data is produced by every institution or company. To satisfy\nthe storage requirements, these organizations use most of the times relational\ndatabases, which are quite eﬃcient to save and to manipulate structured data.\nUnstructured data (appearing inside documents) is stored in plain or annotated\ntext ﬁles.\nThere is a problem when these organizations require an integrated view of\ntheir heterogeneous information systems. It is neces",
         "authors": [
             "Ramalho",
             "José Carlos",
@@ -84,11 +96,13 @@
             "Henriques",
             "Pedro Rangel"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/1ab06fe0-45a5-475f-993d-69c632eb44c5",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/7a1d38a3-f0ea-4b25-b0fa-083ec422617e/download",
         "doi": "10.1007/11676904_2"
     },
     "7": {
         "title": "Predicting plateau pressure in intensive medicine for ventilated patients",
+        "abstract": "Barotrauma is identified as one of the leading diseases in Ventilated Patients. This type of problem is most common in the Intensive Care Units. In order to prevent this problem the use of Data Mining (DM) can be useful for predicting their occurrence. The main goal is to predict the occurence of Barotrauma in order to support the health professionals taking necessary precautions. In a first step intensivists identified the Plateau Pressure values as a possible cause of Barotrauma. Through this study DM models (classification) where induced for predicting the Plateau Pressure class (>=30 cm𝐻2O) in a real environment and using real data. The present study explored and assessed the possibility of predicting the Plateau pressure class with high accuracies. The dataset used only contained data provided by the ventilators. The best models are able to predict the Plateau Pressure with an accuracy ranging from 95.52% to 98.71%.",
+        "full_text_preview": "Predicting Plateau Pressure in Intensive Medicine \nfor Ventilated Patients \nSérgio Oliveira1, Filipe Portela1, Manuel F. Santos1, José Machado1, António Abelha1 \nÁlvaro Silva2, Fernando Rua2 \n1Algoritmi Centre, University of Minho, Portugal \nsergiomdcoliveira@gmail.com; {cfp, mfs}@dsi.uminho.pt \n{jmac, abelha}@di.uminho.pt \nmoreirasilva@me.com; fernandorua.sci@chporto.min-saude.pt \n \n \n \nAbstract Barotrauma is identified as one of the leading diseases in Ventilated \nPatients. This type of problem is most common in the Intensive Care Units. In order \nto prevent this problem the use of Data Mining (DM) can be useful for predicting \ntheir occurrence. The main goal is to predict the occurence of Barotrauma in order \nto support the health professionals taking necessary precautions. In a first step \nintensivists identified the Plateau Pressure values as a possible cause of \nBarotrauma. Through this study DM models (classification) where induced for \npredicting the Plateau Pressure class (>=30 cm𝐻2O) in a real environment and \nusing real data. The present study explored and assessed the possibility of \npredicting the Plateau pressure class with high accuracies. The dataset used only \ncontained data provided by the ventilators. The best models are able to predict the \nPlateau Pressure with an accuracy ranging from 95.52% to 98.71%. \nKeywords: Barotrauma, Plateau Pressure, Intensive Medicine, Data Mining, INTCare, \nMechanical Ventilation. \n1   Introduction \nWith the advancement of tec",
         "authors": [
             "Oliveira",
             "Sérgio",
@@ -105,11 +119,13 @@
             "Rua",
             "Fernando"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/26132fe1-5c7e-4b86-b71d-fdc83d8d4159",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/5bcee471-1969-4361-a3af-2d2b06ea6c16/download",
         "doi": "10.1007/978-3-319-16528-8_17"
     },
     "8": {
         "title": "Information systems assessment in pathologic anatomy service",
+        "abstract": "Information technologies changed the way of how the health organizations work, contributing to their effectiveness, efficiency and sustainability. Hospital Information Systems (HIS) are emerging on all of health institutions, helping health professionals and patients. However, HIS are not always implemented and used in the best way, leading to low levels of benefits and acceptance by users of these systems. In order to mitigate this problem, it is essential to take measures able to ensure if the HIS and their interfaces are designed in a simple and interactive way. With this in mind, a study to measure the user satisfaction and their opinion was made. It was applied the Technology Acceptance Model (TAM) on a HIS implemented on various hospital centers (AIDA), being used the Pathologic Anatomy Service. The study identified weakness and strengths features of AIDA and it pointed some solutions to improve the medical record.",
+        "full_text_preview": "",
         "authors": [
             "Novo",
             "Ana",
@@ -129,6 +145,8 @@
     },
     "9": {
         "title": "Step towards of a homemade business intelligence solution: A case study in textile industry",
+        "abstract": "Nowadays, organizations are increasingly looking to invest in business intelligence solutions, mainly private companies in order to get advantage over its competitors, however they do not know what is necessary. Business intelligence allows an analysis of consolidated information in order to obtain more specific outlets and certain indications in order to support the decision making process. You can take the right decision based on the data collected from different information systems present in the organization and outside of them. The textile sector is a sector where concept of Business Intelligence it is not many explored yet. Actually there are few textile companies that have a BI platform. Thus, the article objective is present an architecture and show all the steps by which companies need to spend to implement a successful free homemade Business Intelligence system. As result the proposed approach it was validated using real data aiming assess the steps defined.",
+        "full_text_preview": "",
         "authors": [
             "Carvalho",
             "Sandrina",
@@ -146,6 +164,8 @@
     },
     "10": {
         "title": "An assessment of chronic kidney diseases",
+        "abstract": "Kidney renal failure means that one’s kidney have unexpectedlystoppedfunctioning,i.e.,oncechronicdiseaseis exposed, the presence or degree of kidney dysfunction and its progression must be assessed, and the underlying syndrome has to be diagnosed. Although the patient’s history and physical examination may denote good practice, some key information has to be obtained from valuation of the glomerular filtration rate, and the analysis of serum biomarkers. Indeed, chronic kidney sickness depicts anomalous kidney function and/or its makeup, i.e., there is evidence that treatment may avoid or delay its progression, either by reducing and prevent the development of some associated complications, namely hypertension, obesity, diabetes mellitus, and cardiovascular complications. Acute kidney injury appears abruptly, with a rapiddeteriorationoftherenalfunction,butisoftenreversible if it is recognized early and treated promptly. In both situations, i.e., acute kidney injury and chronic kidney disease, an early intervention can significantly improve the prognosis. The assessment of these pathologies is therefore mandatory, although it is hard to do it with traditional methodologies and existing tools for problem solving. Hence, in this work, we will focus on the development of a hybrid decision support system, in terms of its knowledge representation and reasoning procedures based on Logic Programming, that will allow onetoconsiderincomplete,unknown,and evencontradictory information, complemented with an approach to computing centered on Artificial Neural Networks, in order to weigh the Degree-of-Confidence that one has on such a happening. The present study involved 558 patients with an age average of 51.7 years and the chronic kidney disease was observed in 175 cases. The dataset comprise twenty four variables, grouped into five main categories. The proposed model showed a good performance in the diagnosis of chronic kidney disease, since the sensitivity and the specificity exhibited values range between 93.1 and 94.9 and 91.9–94.2 %, respectively.",
+        "full_text_preview": "SYSTEMS-LEVEL QUALITY IMPROVEMENT\nA Soft Computing Approach to Kidney Diseases Evaluation\nJosé Neves1 & M. Rosário Martins2 & João Vilhena2 & João Neves3 & Sabino Gomes1 &\nAntónio Abelha1 & José Machado1 & Henrique Vicente4\nReceived: 30 April 2015 /Accepted: 4 August 2015 /Published online: 27 August 2015\n# Springer Science+Business Media New York 2015\nAbstract Kidney renal failure means that one’s kidney have\nunexpectedly stopped functioning, i.e., once chronic disease is\nexposed, the presence or degree of kidney dysfunction and its\nprogression must be assessed, and the underlying syndrome\nhas to be diagnosed. Although the patient’s history and phys-\nical examination may denote good practice, some key infor-\nmation has to be obtained from valuation of the glomerular\nfiltration rate, and the analysis of serum biomarkers. Indeed,\nchronic kidney sickness depicts anomalous kidney function\nand/or its makeup, i.e., there is evidence that treatment may\navoid or delay its progression, either by reducing and prevent\nthe development of some associated complications, namely\nhypertension, obesity, diabetes mellitus, and cardiovascular\ncomplications. Acute kidney injury appears abruptly, with a\nrapid deterioration of the renal function, but is often reversible\nif it is recognized early and treated promptly. In both situa-\ntions, i.e., acute kidney injury and chronic kidney disease, an\nearly intervention can significantly improve the prognosis.\nThe assessment of these pathologies is there",
         "authors": [
             "Neves",
             "José",
@@ -164,11 +184,13 @@
             "Vicente",
             "Henrique"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/ee7ec69f-b012-4559-b1cc-9a2550bb6f74",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/16c059a2-3ca1-4b22-b85b-9cba52931005/download",
         "doi": "10.1007/978-3-319-16486-1_18"
     },
     "11": {
         "title": "Logic programming and artificial neural networks in breast cancer detection",
+        "abstract": "About 90% of breast cancers do not cause or are capable of producing death if detected at an early stage and treated properly. Indeed, it is still not known a specific cause for the illness. It may be not only a beginning, but also a set of associations that will determine the onset of the disease. Undeniably, there are some factors that seem to be associated with the boosted risk of the malady. Pondering the present study, different breast cancer risk assessment models where considered. It is our intention to develop a hybrid decision support system under a formal framework based on Logic Programming for knowledge representation and reasoning, complemented with an approach to computing centered on Artificial Neural Networks, to evaluate the risk of developing breast cancer and the respective Degree-of-Confidence that one has on such a happening.",
+        "full_text_preview": "© Springer International Publishing Switzerland 2015 \nI. Rojas et al. (Eds.): IWANN 2015, Part II, LNCS 9095, pp. 211–224, 2015. \nDOI: 10.1007/978-3-319-19222-2_18 \nLogic Programming and Artificial Neural Networks  \nin Breast Cancer Detection \nJosé Neves1(\u0002), Tiago Guimarães2, Sabino Gomes2, Henrique Vicente3,  \nMariana Santos4, João Neves5, José Machado1, and Paulo Novais1 \n1 Algoritmi, Universidade Do Minho, Braga, Portugal \n{jneves,jmac,pjon}@di.uminho.pt \n2 Departamento de Informática, Universidade Do Minho, Braga, Portugal \n{tiago.sguimaraes,sabinogomes.antonio}@gmail.com \n3 Departamento de Química, Centro de Química de Évora, Escola de Ciências E Tecnologia, \nUniversidade de Évora, Évora, Portugal \nhvicente@uevora.pt \n4 Escola de Ciências Da Saúde, Universidade Do Minho, Braga, Portugal \nmarianamltsantos@gmail.com \n5 DRS. NICOLAS&ASP, Dubai, United Arab Emirates \njoaocpneves@gmail.com \nAbstract. About 90% of breast cancers do not cause or are capable of produc-\ning death if detected at an early stage and treated properly. Indeed, it is still not \nknown a specific cause for the illness. It may be not only a beginning, but also a \nset of associations that will determine the onset of the disease. Undeniably, \nthere are some factors that seem to be associated with the boosted risk of the \nmalady. Pondering the present study, different breast cancer risk assessment \nmodels where considered. It is our intention to develop a hybrid decision  \nsupport system under a formal fram",
         "authors": [
             "Neves",
             "José",
@@ -187,11 +209,13 @@
             "Novais",
             "Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/c9e6c7cb-6253-46b9-b80e-d980dba537b8",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/da2d4f64-9a1c-40bd-aacb-b2a2108a6be2/download",
         "doi": "10.1007/978-3-319-19222-2_18"
     },
     "12": {
         "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
+        "abstract": "Schizophrenia stands for a long-lasting state of mental uncertainty that may bring to an end the relation among behavior, thought, and emotion; that is, it may lead to unreliable perception, not suitable actions and feelings, and a sense of mental fragmentation. Indeed, its diagnosis is done over a large period of time; continuos signs of the disturbance persist for at least 6 (six) months. Once detected, the psychiatrist diagnosis is made through the clinical interview and a series of psychic tests, addressed mainly to avoid the diagnosis of other mental states or diseases. Undeniably, the main problem with identifying schizophrenia is the difficulty to distinguish its symptoms from those associated to different untidiness or roles. Therefore, this work will focus on the development of a diagnostic support system, in terms of its knowledge representation and reasoning procedures, based on a blended of Logic Programming and Artificial Neural Networks approaches to computing, taking advantage of a novel approach to knowledge representation and reasoning, which aims to solve the problems associated in the handling (i.e., to stand for and reason) of defective information.",
+        "full_text_preview": "Research Article\nAbstract Computation in Schizophrenia Detection through\nArtificial Neural Network Based Systems\nL. Cardoso,1 F. Marins,1 R. Magalhães,2,3 N. Marins,4 T. Oliveira,1 H. Vicente,5\nA. Abelha,1 J. Machado,1 and J. Neves1\n1University of Minho, CCTC, 4710-057 Braga, Portugal\n2Life and Health Sciences Research Institute (ICVS), School of Health Sciences, University of Minho, 4710-057 Braga, Portugal\n3ICVS/3B’s, PT Government Associate Laboratory, Guimar˜aes, 4710-057 Braga, Portugal\n4Centro Hospitalar Conde de Ferreira, 4200-227 Porto, Portugal\n5Department of Chemistry and ´Evora Chemistry Centre, School of Science and Technology, University of ´Evora,\n7004-516 ´Evora, Portugal\nCorrespondence should be addressed to J. Neves; jneves@di.uminho.pt\nReceived 22 July 2014; Revised 17 September 2014; Accepted 28 September 2014\nAcademic Editor: Xiangfeng Luo\nCopyright © 2015 L. Cardoso et al. This is an open access article distributed under the Creative Commons Attribution License,\nwhich permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.\nSchizophrenia stands for a long-lasting state of mental uncertainty that may bring to an end the relation among behavior, thought,\nand emotion; that is, it may lead to unreliable perception, not suitable actions and feelings, and a sense of mental fragmentation.\nIndeed, its diagnosis is done over a large period of time; continuos signs of the disturbance persist for at least ",
         "authors": [
             "Cardoso",
             "L.",
@@ -212,11 +236,13 @@
             "Neves",
             "J."
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/b39ee01c-29f4-4652-85ef-a4b250e809b7",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/a76bfb48-ba85-4fc4-a403-995de1c3afa9/download",
         "doi": "10.1155/2015/467178"
     },
     "13": {
         "title": "Educase – intelligent system for pedagogical advising using case-based reasoning",
+        "abstract": "This paper introduces a proposal scheme for an Intelligent System applied to Pedagogical Advising using Case-Based Reasoning, to find consolidated solutions before used for the new problems, making easier the task of advising students to the pedagogical staff. We do intend, through this work, introduce the motivation behind the choices for this system structure, justifying the development of an incremental and smart web system who learns bests solutions for new cases when it’s used, showing technics and technology.",
+        "full_text_preview": "",
         "authors": [
             "Moura",
             "Elionai",
@@ -230,6 +256,8 @@
     },
     "14": {
         "title": "Prototyping teams of affective agents in robocode",
+        "abstract": "The study of the impact of emotion and affect in decision making processes involved in a working team stands for a multi-disciplinary issue (e.g. with insights from disciplines such as Psychology, Neuroscience, Philosophy and Computer Science). On the one hand, and in order to create such an environment we look at a team of affective agents to play into a battlefield, which present different emotional profiles (e.g. personality and mood). An emotional system, based on the OCC (Ortony, Clore and Collins) model, was proposed and implemented. As a way to integrate the personality of a robot with its emotions we used pleasure-arousal-dominance (PAD) model of mood. On the other hand, to attain cooperation, a voting mechanism and a decision-making process was implemented, being Robocode used as the simulation environment. Indeed, the results so far obtained are quite satisfying; the agent team performs quite well in the battlefield and undertakes different behaviours depending on the skirmish conditions",
+        "full_text_preview": "Prototyping Teams of Affective Agents in Robocode \nAntónio Rebelo1, Fábio Catalão1, João Alves1, Goreti Marreiros3,4,\nCesar Analide1,2, Paulo Novais1,2, José Neves1,2\n1Universidade do Minho, Campus de Gualtar, 4700 Braga, Portugal \nEmail: {pg19827, pg19832, pg20688}@alunos.uminho.pt \n2CCTC – Centro de Ciências e Tecnologias da Computação, Portugal \nEmail: {analide, pjon, jneves}@di.uminho.pt \n3GECAD – Knowledge Engineering and Decision Support Group, Porto, Portugal \nEmail: mgt@isep.ipp.pt \n4Institute of Engineering – Polytechnic of Porto (ISEP/IPP) \nABSTRACT \nThe study of the impact of emotion and affect in decision making processes involved in a \nworking team stands for a multi-disciplinary issue (e.g. with insights from disciplines such \nas Psychology, Neuroscience, Philosophy and Computer Science). On the one hand, and \nin order to create such an environment we look at a team of affective agents to play into a \nbattlefield, which present different emotional profiles (e.g. personality and mood). An \nemotional system, based on the OCC (Ortony, Clore and Collins) model, was proposed \nand implemented. As a way to integrate the personality of a robot with its emotions we \nused pleasure-arousal-dominance (PAD) model of mood. On the other hand, to attain \ncooperation, a voting mechanism and a decision-making process was implemented, being \nRobocode used as the simulation environment. Indeed, the results so far obtained are \nquite satisfying; the agent team performs quite well in",
         "authors": [
             "Rebelo",
             "António",
@@ -246,11 +274,13 @@
             "Neves",
             "José"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/cb00734d-9c7f-4222-a0df-bad69f536917",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/c393772b-e410-458a-b7b0-caf25e947514/download",
         "doi": "N/A"
     },
     "15": {
         "title": "Parallel evolutionary computation in bioinformatics applications",
+        "abstract": "A large number of optimization problems within the field of Bioinformatics require methods able to handle its inherent complexity (e.g. NP-hard problems) and also demand increased computational efforts. In this context, the use of parallel architectures is a necessity. In this work, we propose ParJECoLi, a Java based library that offers a large set of metaheuristic methods (such as Evolutionary Algorithms) and also addresses the issue of its efficient execution on a wide range of parallel architectures. The proposed approach focuses on the easiness of use, making the adaptation to distinct parallel environments (multicore, cluster, grid) transparent to the user. Indeed, this work shows how the development of the optimization library can proceed independently of its adaptation for several architectures, making use of Aspect-Oriented Programming. The pluggable nature of parallelism related modules allows the user to easily configure its environment, adding parallelism modules to the base source code when needed. The performance of the platform is validated with two case studies within biological model optimization.",
+        "full_text_preview": "",
         "authors": [
             "Pinho",
             "Jorge",
@@ -264,15 +294,19 @@
     },
     "16": {
         "title": "Uthrene, a radically new molecule?",
+        "abstract": "We have studied uthrene with a large range of quantum chemical models. Uthrene is predicted to be naturally twisted and to possess a triplet ground state, making it the smallest non-planar polycyclic biradical that can be derived from graphene.",
+        "full_text_preview": "This journal is ©The Royal Society of Chemistry 2015\nChem. Commun., 2015, 51, 5387--5390 | 5387\nCite this: Chem. Commun., 2015,\n51, 5387\nUthrene, a radically new molecule?†\nManuel Melle-Franco\nWe have studied uthrene with a large range of quantum chemical\nmodels. Uthrene is predicted to be naturally twisted and to possess\na triplet ground state, making it the smallest non-planar polycyclic\nbiradical that can be derived from graphene.\nThe experimental isolation of graphene in 2005 and its remark-\nable physical properties sparked the imagination of physicists\nand chemists alike.1–3 Graphene is nothing more than a sheet\nof benzene rings fused together or, in other words, a gigantic\nPolycyclic Hydrocarbon (PH). PHs with an even number of\ncarbon atoms are typically closed-shell, i.e. all their electrons\nare paired, but may, in special cases, have open-shell character\nresulting in unique electronic, optical and magnetic properties\nthat make them potential candidates for spintronics4–6 and\nenergy storage.7\nWe report the computational characterization of the smallest\nnon-planar biradical PH species that can be ‘‘cut’’ from graphene:\ndibenzo[de,hi]tetracene or uthrene.‡ Uthrene is a non-Kekule´\nmolecule composed by six fused benzenoid rings, Fig. 1. We will\nstudy computationally a representative set of molecules with six\nfused benzenoid rings, namely: fulminene, hexacene, zethrene,\nuthrene and triangulene, Fig. 1. Fulminene and hexacene are\nisomers of C26H16, hexacene is very reactive",
         "authors": [
             "Melle-Franco",
             "M."
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/19a2431e-fd6b-4b4b-ae2b-a13d05afa94d",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/e3456212-a876-4ef0-af26-434aab4efb5b/download",
         "doi": "10.1039/c5cc01276g"
     },
     "17": {
         "title": "Synergy in online dispute resolution and the need to protect privacy and personal data",
+        "abstract": "Esta contribuição apresenta uma nova compleição para a resolução de litígios em linha. Neste artigo pretendemos aferir se a performatividade e sinergia dos sistemas de Ambiente Inteligente (AmI), através da inserção de sensores introduzidos em dispositivos móveis que nos são familiares, poderá enriquecer o processo comunicacional e decisional na resolução de conflitos em linha. Com estes novos contributos, fornecemos uma perspectiva das principais implicações jurídicas do uso desta tecnologia de natureza ubíqua no ODR. Propomo-nos a retratar e responder às principais críticas e apreensões relacionadas com o AmI e conceituamo-las no quadrante da mediação online. Dispomo-nos a analisar a relevância, aplicabilidade e adequação da legislação atinente à privacidade e proteção de dados face aos emergentes desafios do AmI.",
+        "full_text_preview": "341 \n \n \nDemocracia Digital e Governo Eletrônico, Florianópolis, n° 10, p. 341-359, 2014. \n \nSINERGIA NA RESOLUÇÃO DE LITÍGOS EM LINHA E \nA NECESSIDADE DE PROTEÇÃO DA PRIVACIDADE E \nDOS DADOS PESSOAIS \nSYNERGY IN ONLINE DISPUTE RESOLUTION AND THE \nNEED TO PROTECT PRIVACY AND PERSONAL DATA \nCristiana Santos1, Francisco Andrade2, Paulo Novais3 \n \n \n \nResumo \nEsta contribuição apresenta uma nova compleição para a resolução de litígios em linha. \nNeste artigo pretendemos aferir se a performatividade e sinergia dos sistemas de Ambiente \nInteligente (AmI), através da inserção de sensores introduzidos em dispositivos móveis que \nnos são familiares, poderá enriquecer o processo comunicacional e decisional na resolução \nde conflitos em linha. Com estes novos contributos, fornecemos uma perspectiva das \nprincipais implicações jurídicas do uso desta tecnologia de natureza ubíqua no ODR. \nPropomo-nos a retratar e responder às principais críticas e apreensões relacionadas com o \nAmI e conceituamo-las no quadrante da mediação online. Dispomo-nos a analisar a \nrelevância, aplicabilidade e adequação da legislação atinente à privacidade e proteção de \ndados face aos emergentes desafios do AmI. \nPalavras-chave \nODR. Ambiente Inteligente. Informação Contextual. Privacidade e Proteção de Dados. Regulação. \n                                                 \n1 Mestre em Direito dos Contratos e Empresa pela Universidade do Minho (UMINHO). Doutoranda bolseira pelo \nInstituto de Direito e Tecnologia d",
         "authors": [
             "Santos",
             "Cristiana Teixeira",
@@ -281,11 +315,13 @@
             "Novais",
             "Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/238bf6ce-c926-40d3-8b37-5d8fa0fa108d",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/1601c57a-5bbc-4780-90cd-ea318f9343b6/download",
         "doi": "N/A"
     },
     "18": {
         "title": "Assessing road traffic expression",
+        "abstract": "Road traffic is a problem which is increasing in cities with large population. Unrelated to this fact the number of portable and wearable devices has also been increasing throughout the population of most countries. With this advent, the capacity to monitor and register data about people habits and locations as well as more complex data such as intensity and strength of movements has created an opportunity to contribute to the general wealth and comfort within these environments. Ambient Intelligence and Intelligent Decision Making processes can benefit from the knowledge gathered by these devices to improve decisions on everyday tasks such as deciding navigation routes by car, bicycle or other means of transportation and avoiding route perils. The concept of computational sustainability may also be applied to this problem. Current applications in this area demonstrate the usefulness of real time system that inform the user of certain conditions in the surrounding area. On the other hand, the approach presented in this work aims to describe models and approaches to automatically identify current states of traffic inside cities and use methods from computer science to improve overall comfort and the sustainability of road traffic both with the user and the environment in mind. Such objective is delivered by analyzing real time contributions from those mobile ubiquitous devices to identifying problematic situations and areas under a defined criteria that have significant influence towards a sustainable use of the road transport infrastructure.",
+        "full_text_preview": "International Journal of Artificial Intelligence and Interactive Multimedia, Vol. 1, Nº 1. \n \n1\n \nAbstract — Road traffic is a problem which is increasing in cities \nwith large population. Unrelated to this fact the number of portable \nand wearable devices has also been increasing throughout the \npopulation of most countries. With this advent, the capacity to \nmonitor and register data about people habits and locations as well as \nmore complex data such as intensity and strength of movements has \ncreated an opportunity to contribute to the general wealth and \ncomfort within these environments. Ambient Intelligence and \nIntelligent Decision Making processes can benefit from the \nknowledge gathered by these devices to improve decisions on \neveryday tasks such as deciding navigation routes by car, bicycle or \nother means of transportation and avoiding route perils. The concept \nof computational sustainability may also be applied to this problem. \nCurrent applications in this area demonstrate the usefulness of real \ntime system that inform the user of certain conditions in the \nsurrounding area. On the other hand, the approach presented in this \nwork aims to describe models and approaches to automatically \nidentify current states of traffic inside cities and use methods from \ncomputer science to improve overall comfort and the sustainability of \nroad traffic both with the user and the environment in mind.  Such \nobjective is delivered by analyzing real time contributions from th",
         "authors": [
             "Silva",
             "Fábio",
@@ -294,11 +330,13 @@
             "Novais",
             "Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/9f025d96-2606-4d1f-a2f7-3e5c6c19dcb1",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/7599fc93-896a-49ff-8590-48a28a173225/download",
         "doi": "10.9781/ijimai.2014.313"
     },
     "19": {
         "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
+        "abstract": "Advances in sequencing technology are resulting in the rapid emergence of large numbers of complete genome sequences. High throughput annotation and metabolic modeling of these genomes is now a reality. The high throughput reconstruction and analysis of genome-scale transcriptional regulatory networks represents the next frontier in microbial bioinformatics. The fruition of this next frontier will depend upon the integration of numerous data sources relating to mechanisms, components, and behavior of the transcriptional regulatory machinery, as well as the integration of the regulatory machinery into genome-scale cellular models. Here we review existing repositories for different types of transcriptional regulatory data, including expression data, transcription factor data, and binding site locations, and we explore how these data are being used for the reconstruction of new regulatory networks. From template network based methods to de novo reverse engineering from expression data, we discuss how regulatory networks can be reconstructed and integrated with metabolic models to improve model predictions and performance. Finally, we explore the impact these integrated models can have in simulating phenotypes, optimizing the production of compounds of interest or paving the way to a whole-cell model.",
+        "full_text_preview": "Genome-scale bacterial transcriptional\nregulatory networks: reconstruction\nand integrated analysis with metabolic\nmodels\nJose¤ P. Faria, Ross Overbeek, Fangfang Xia, Miguel Rocha, Isabel Rocha and Christopher S. Henry\nSubmitted: 9th July 2012; Received (in revised form): 9th October 2012\nAbstract\nAdvances in sequencing technology are resulting in the rapid emergence of large numbers of complete genome\nsequences. High-throughput annotation and metabolic modeling of these genomes is now a reality. The high-\nthroughput reconstruction and analysis of genome-scale transcriptional regulatory networks represent the next\nfrontier in microbial bioinformatics. The fruition of this next frontier will depend on the integration of numerous\ndata sources relating to mechanisms, components and behavior of the transcriptional regulatory machinery, as\nwell as the integration of the regulatory machinery into genome-scale cellular models. Here, we review existing\nrepositories for different types of transcriptional regulatory data, including expression data, transcription factor\ndata and binding site locations and we explore how these data are being used for the reconstruction of new regula-\ntory networks. From template network-based methods to de novo reverse engineering from expression data, we dis-\ncuss how regulatory networks can be reconstructed and integrated with metabolic models to improve model\npredictions and performance. We also explore the impact these integrated models can have in si",
         "authors": [
             "Faria",
             "J. P.",
@@ -313,11 +351,13 @@
             "Henry",
             "C. S."
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/c5d84aab-442b-4f53-960a-3f9ab282dc70",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/796509fd-ce7b-4084-9bce-d0ac4a4aaa6d/download",
         "doi": "10.1093/bib/bbs071"
     },
     "20": {
         "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
+        "abstract": "This paper combines techniques of ambient intelligence and wireless sensor networks with the objective of obtain important conclusions to increase the quality of life of people. In particular, we oriented our study to the stress at the workplace, because stress is a leading cause of illness and disease. This article presents a wireless sensor network obtaining information of the environment, a pulse sensor obtaining hear rate values and a complete data analysis applying techniques of ambient intelligence to predict stress from these environment variables and people attributes. Results show promise on the identification of stressful situations as well as stress inference through the use of predictive algorithms",
+        "full_text_preview": "Experimental Study of the Stress Level at the\nworkplace using an Smart Testbed of Wireless\nSensor Networks and Ambient Intelligence\ntechniques\nF. Silva +, T. Olivares *, F. Royo *, M.A. Vergara *, and C. Analide +\n+ University of Minho, Braga, Portugal\n* Albacete Research Institute of Informatics\nUniversity of Castilla-La Mancha, 02071 Albacete, Spain\nfabiosilva, analide@di.uminho.pt, teresa,froyo@dsi.uclm.es,\nAbstract. This paper combines techniques of ambient intelligence and\nwireless sensor networks with the objective of obtain important conclu-\nsions to increase the quality of life of people. In particular we oriented our\nstudy to the stress at the workplace, because stress is a leading cause\nof illness and disease. This article presents a wireless sensor networks\nobtaining information of the environment, a pulse sensor obtaining hear\nrate values and a complete data analysis applying techniques of ambi-\nent intelligence to predict stress from these environment variables and\npeople attributes.Results show promise on the identiﬁcation of stress-\nful situations as well as stress inference through the use of predictive\nalgorithms.\nKeywords: Ambient Intelligence, Intelligent Environments, Wireless Sensor\nnetworks, Body Area Networks, Environmental Monitoring, Stress Detection\n1\nIntroduction\nAmbient Intelligence (AmI) is considered one of three emergent technologies:\nUbiquitous Computing, Ubiquitous Communication and Intelligent User Inter-\nfaces. AmI systems aim to change how ",
         "authors": [
             "Silva",
             "Fábio",
@@ -330,341 +370,876 @@
             "Analide",
             "César"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/a5b4ad9b-67b5-447a-b72e-f7f0e7ca68b1",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/534b8f22-33dd-4047-abf5-7c060b47cdd1/download",
         "doi": "10.1007/978-3-642-38622-0_21"
     },
     "21": {
-        "title": "Foreword to the special section on recent advances in graphics and interaction",
+        "title": "Interactive guiding and localization platform",
+        "abstract": "Technology is now part of everyone’s life, being widespread and present in the most innocuous objects, making people able to benefit from several technological solutions that only a few years ago were impossible to be implemented. For instance, the smartphone is one example of this type of technology. Usually, this device is equipped with several sensors and a GPS module, which may be used as an orientation system when it carries the right features. The current trend is providing advanced applications to the common public, excluding some fringes of the population, like the people with cognitive disabilities. Thus, everyday technology can be used for helping on several tasks, becoming an interactive terminal, aware of the user conditions. There may be orientation applications that are too complex to be used by people with cognitive disabilities. Therefore, the main goal of this work is to build and implement an orientation method that may be used by people with mild cognitive disabilities and provides several tools to the caregivers. Furthermore, the system is linked to external services like iGenda so the user is stimulated to go outside and increase his/her social participation or not to miss an appointment. The developed system is also a localization system, enabling caregivers to know in real-time the location of the person with cognitive disabilities. Allowing the user to have an independent life.",
+        "full_text_preview": "Interactive guiding and localization platform\nJo˜ao Ramos1, Angelo Costa1, Paulo Novais1 and Jos´e Neves1\n1CCTC/Department of Informatics\nUniversity of Minho\nBraga, Portugal\nEmail: {jramos, acosta, pjon, jneves}@di.uminho.pt\nABSTRACT\nTechnology is now part of everyone’s life, being widespread and present in the most in-\nnocuous objects, making people able to beneﬁt from several technological solutions that\nonly a few years ago were impossible to be implemented. For instance, the smartphone\nis one example of this type of technology. Usually, this device is equipped with several\nsensors and a GPS module, which may be used as an orientation system when it carries\nthe right features. The current trend is providing advanced applications to the common\npublic, excluding some fringes of the population, like the people with cognitive disabilities.\nThus, everyday technology can be used for helping on several tasks, becoming an interac-\ntive terminal, aware of the user conditions. There may be orientation applications that are\ntoo complex to be used by people with cognitive disabilities. Therefore, the main goal of\nthis work is to build and implement an orientation method that may be used by people with\nmild cognitive disabilities and provides several tools to the caregivers. Furthermore, the\nsystem is linked to external services like iGenda so the user is stimulated to go outside and\nincrease his/her social participation or not to miss an appointment. The developed system\nis also a loc",
         "authors": [
-            "Rodrigues",
-            "Nuno",
-            "Mendes",
-            "Daniel",
-            "Santos",
-            "Luís Paulo",
-            "Bouatouch",
-            "Kadi"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/aae6409f-cf8a-4961-bd5f-d57bddadc98e",
-        "doi": "10.1016/j.cag.2021.12.006"
-    },
-    "22": {
-        "title": "Ensemble metropolis light transport",
-        "authors": [
-            "Bashford-Rogers",
-            "Thomas",
-            "Santos",
-            "Luís Paulo",
-            "Marnerides",
-            "Demetris",
-            "Debattista",
-            "Kurt"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/4a6a1f65-3f0d-44ee-8e95-0f957949e1f3",
-        "doi": "10.1145/3472294"
-    },
-    "23": {
-        "title": "NER in archival finding aids: extended",
-        "authors": [
-            "Cunha",
-            "Luís Filipe da Costa",
-            "Ramalho",
-            "José Carlos"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/af79b188-3db8-4ff0-9560-0cf6d3d991fc",
-        "doi": "10.3390/make4010003"
-    },
-    "24": {
-        "title": "Heterogeneous implementation of a Voronoi cell-based SVP solver",
-        "authors": [
-            "Falcão",
-            "Gabriel",
-            "Cabeleira",
-            "Filipe",
-            "Mariano",
-            "Artur",
-            "Santos",
-            "Luís Paulo"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/12918e95-f79a-424a-b00e-f54c7fb42205",
-        "doi": "10.1109/ACCESS.2019.2939142"
-    },
-    "25": {
-        "title": "SPELLing out energy leaks: Aiding developers locate energy inefficient code",
-        "authors": [
-            "Pereira",
-            "Rui Alexandre Afonso",
-            "Carção",
-            "Tiago Alves",
-            "Couto",
-            "Marco Domingos Mendes",
-            "Cunha",
-            "Jácome",
-            "Fernandes",
-            "João Paulo",
-            "Saraiva",
-            "João"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/bf7d71cb-fc49-4f2e-9274-7b227c25d624",
-        "doi": "10.1016/j.jss.2019.110463"
-    },
-    "26": {
-        "title": "Metamorphosis – a topic maps based environment to handle heterogeneous information resources",
-        "authors": [
-            "Ramalho",
-            "José Carlos",
-            "Librelotto",
-            "Giovani Rubert",
-            "Henriques",
-            "Pedro Rangel"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/1ab06fe0-45a5-475f-993d-69c632eb44c5",
-        "doi": "10.1007/11676904_2"
-    },
-    "27": {
-        "title": "Predicting plateau pressure in intensive medicine for ventilated patients",
-        "authors": [
-            "Oliveira",
-            "Sérgio",
-            "Portela",
-            "Filipe",
-            "Santos",
-            "Manuel",
-            "Machado",
-            "José Manuel",
-            "Abelha",
-            "António",
-            "Silva",
-            "Álvaro",
-            "Rua",
-            "Fernando"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/26132fe1-5c7e-4b86-b71d-fdc83d8d4159",
-        "doi": "10.1007/978-3-319-16528-8_17"
-    },
-    "28": {
-        "title": "Information systems assessment in pathologic anatomy service",
-        "authors": [
-            "Novo",
-            "Ana",
-            "Duarte",
-            "Júlio",
-            "Portela",
-            "Filipe",
-            "Abelha",
-            "António",
-            "Santos",
-            "Manuel",
-            "Machado",
-            "José Manuel"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/d286d4ad-5fec-49b9-ba8e-2d07ad277113",
-        "doi": "10.1007/978-3-319-16528-8_19"
-    },
-    "29": {
-        "title": "Step towards of a homemade business intelligence solution: A case study in textile industry",
-        "authors": [
-            "Carvalho",
-            "Sandrina",
-            "Portela",
-            "Filipe",
-            "Santos",
-            "Manuel",
-            "Abelha",
-            "António",
-            "Machado",
-            "José Manuel"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/695864cf-03af-44f1-ad8b-52f20f689588",
-        "doi": "10.1007/978-3-319-16486-1_36"
-    },
-    "30": {
-        "title": "An assessment of chronic kidney diseases",
-        "authors": [
-            "Neves",
-            "José",
-            "Rosário Martins",
-            "M.",
-            "Vilhena",
-            "João",
-            "Neves",
-            "João",
-            "Gomes",
-            "Sabino",
-            "Abelha",
-            "António",
-            "Machado",
-            "José Manuel",
-            "Vicente",
-            "Henrique"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/ee7ec69f-b012-4559-b1cc-9a2550bb6f74",
-        "doi": "10.1007/978-3-319-16486-1_18"
-    },
-    "31": {
-        "title": "Logic programming and artificial neural networks in breast cancer detection",
-        "authors": [
-            "Neves",
-            "José",
-            "Guimarães",
-            "Tiago",
-            "Gomes",
-            "Sabino",
-            "Vicente",
-            "Henrique",
-            "Santos",
-            "Mariana",
-            "Neves",
-            "João",
-            "Machado",
-            "José",
-            "Novais",
-            "Paulo"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/c9e6c7cb-6253-46b9-b80e-d980dba537b8",
-        "doi": "10.1007/978-3-319-19222-2_18"
-    },
-    "32": {
-        "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
-        "authors": [
-            "Cardoso",
-            "L.",
-            "Marins",
-            "F.",
-            "Magalhães",
-            "R.",
-            "Marins",
-            "N.",
-            "Oliveira",
-            "T.",
-            "Vicente",
-            "H.",
-            "Abelha",
-            "António",
-            "Machado",
-            "José Manuel",
-            "Neves",
-            "J."
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/b39ee01c-29f4-4652-85ef-a4b250e809b7",
-        "doi": "10.1155/2015/467178"
-    },
-    "33": {
-        "title": "Educase – intelligent system for pedagogical advising using case-based reasoning",
-        "authors": [
-            "Moura",
-            "Elionai",
-            "Cunha",
-            "José António",
-            "Analide",
-            "Cesar"
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/ae50eb78-6cb7-42a5-9de7-3b7c28f1df49",
-        "doi": "N/A"
-    },
-    "34": {
-        "title": "Prototyping teams of affective agents in robocode",
-        "authors": [
-            "Rebelo",
-            "António",
-            "Catalão",
-            "Fábio",
-            "Alves",
-            "João",
-            "Marreiros",
-            "Goreti",
-            "Analide",
-            "Cesar",
+            "Ramos",
+            "João Ricardo Martins",
+            "Costa",
+            "Ângelo",
             "Novais",
             "Paulo",
             "Neves",
             "José"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/cb00734d-9c7f-4222-a0df-bad69f536917",
+        "document_link": "https://repositorium.uminho.pt/bitstreams/7360b31b-1f2f-44b4-926b-04f9b1cde5a7/download",
         "doi": "N/A"
     },
-    "35": {
-        "title": "Parallel evolutionary computation in bioinformatics applications",
+    "22": {
+        "title": "A multi-modal approach for activity classification and fall detection",
+        "abstract": "The society is changing towards a new paradigm in which an increasing number of old adults live alone. In parallel, the incidence of conditions that affect mobility and independence is also rising as a consequence of a longer life expectancy. In this paper, the specific problem of falls of old adults is addressed by devising a technological solution for monitoring these users. Video cameras, accelerometers and GPS sensors are combined in a multi-modal approach to monitor humans inside and outside the domestic environment. Machine learning techniques are used to detect falls and classify activities from accelerometer data. Video feeds and GPS are used to provide location inside and outside the domestic environment. It results in a monitoring solution that does not imply the confinement of the users to a closed environment.",
+        "full_text_preview": "December 14, 2012\n14:54\nInternational Journal of Systems Science\n\"paper IJSS v5.0\"\nInternational Journal of Systems Science\nVol. 00, No. 00, 00 Month 20xx, 1–20\nRESEARCH ARTICLE\nA Multi-Modal Approach for Activity Classiﬁcation and Fall Detection\nJosé Carlos Castilloa ∗, Davide Carneirob, Juan Serrano-Cuerdaa, Paulo Novaisb, Antonio\nFernández-Caballeroa and José Nevesb\naUniversidad de Castilla-La Mancha, Instituto de Investigación en Informática de Albacete,\n02071-Albacete, Spain;\nbUniversidade do Minho, Departamento de Informatica, Campus of Gualtar, 4710-057 Braga, Portugal\n(v0.1 released July 2012)\nThe society is changing towards a new paradigm in which an increasing number of old adults live alone. In\nparallel, the incidence of conditions that aﬀect mobility and independence is also rising as a consequence\nof a longer life expectancy. In this paper the speciﬁc problem of falls of old adults is addressed by devising a\ntechnological solution for monitoring these users. Video cameras, accelerometers and GPS sensors are combined\nin a multi-modal approach to monitor humans inside and outside the domestic environment. Machine learning\ntechniques are used to detect falls and classify activities from accelerometer data. Video feeds and GPS are\nused to provide location inside and outside the domestic environment. It results in a monitoring solution that\ndoes not imply the conﬁnement of the users to a closed environment.\nKeywords: activity classiﬁcation; fall detection; behavioral ",
         "authors": [
-            "Pinho",
-            "Jorge",
-            "Sobral",
-            "João Luís Ferreira",
-            "Rocha",
-            "Miguel"
+            "Castillo",
+            "José Carlos",
+            "Carneiro",
+            "Davide Rua",
+            "Serrano-Cuerda",
+            "Juan",
+            "Novais",
+            "Paulo",
+            "Fernández-Caballero",
+            "Antonio",
+            "Neves",
+            "José"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/53db2176-59ae-47e8-a74a-71c5d16bb366",
-        "doi": "10.1016/j.cmpb.2012.10.001"
+        "document_link": "https://repositorium.uminho.pt/bitstreams/2324b8a5-8d62-47f8-9007-015dc9fff8d6/download",
+        "doi": "10.1080/00207721.2013.784372"
     },
-    "36": {
-        "title": "Uthrene, a radically new molecule?",
+    "23": {
+        "title": "Evaluating techniques for learning non-taxonomic relationships of ontologies from text",
+        "abstract": "Learning Non-Taxonomic Relationships is a sub-field of Ontology Learning that aims at automating the extraction of these relationships from text. Several techniques have been proposed based on Natural Language Processing and Machine Learning. However just like for other techniques for Ontology Learning, evaluating techniques for Learning Non-Taxonomic Relationships is an open problem. Three general proposals suggest that the learned ontologies can be evaluated in an executable application or by domain experts or even by a comparison with a predefined reference ontology. This article proposes two procedures to evaluate techniques for Learning Non-Taxonomic Relationships based on the comparison of the relationships obtained with those of a reference ontology. Also, these procedures are used in the evaluation of two state of the art techniques performing the extraction of relationships from two corpora in the domains of biology and Family Law.",
+        "full_text_preview": " \n1 \n \n \nEvaluating Techniques for Learning Non-Taxonomic Relationships of \nOntologies from Text \nIvo Serra1, Rosario Girardi1, Paulo Novais2  \n1 Computer Science Departament – Federal University of Maranhão (UFMA) - São Luiz, Ma – Brazil. \n2 Departament of Informatics – University of Minho - Braga – Portugal. \nivocserra@gmail.com, rosariogirardi@gmail.com, pjon@di.uminho.pt \nAbstract. Learning Non-Taxonomic Relationships is a sub-field of Ontology Learning that aims \nat automating the extraction of these relationships from text. Several techniques have been \nproposed based on Natural Language Processing and Machine Learning. However just like for \nother techniques for Ontology Learning, evaluating techniques for Learning Non-Taxonomic \nRelationships is an open problem. Three general proposals suggest that the learned ontologies \ncan be evaluated in an executable application or by domain experts or even by a comparison \nwith a predefined reference ontology. This article proposes two procedures to evaluate \ntechniques for Learning Non-Taxonomic Relationships based on the comparison of the \nrelationships obtained with those of a reference ontology. Also, these procedures are used in \nthe evaluation of two state of the art techniques performing the extraction of relationships from \ntwo corpora in the domains of biology and Family Law. \nKeywords. Learning non-taxonomic relationships; Ontology; Ontology learning; Natural \nlanguage processing; Machine learning \n1. Introduction \nMan",
         "authors": [
-            "Melle-Franco",
-            "M."
-        ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/19a2431e-fd6b-4b4b-ae2b-a13d05afa94d",
-        "doi": "10.1039/c5cc01276g"
-    },
-    "37": {
-        "title": "Synergy in online dispute resolution and the need to protect privacy and personal data",
-        "authors": [
-            "Santos",
-            "Cristiana Teixeira",
-            "Andrade",
-            "Francisco Carneiro Pacheco",
+            "Serra",
+            "Ivo",
+            "Girardi",
+            "Rosário",
             "Novais",
             "Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/238bf6ce-c926-40d3-8b37-5d8fa0fa108d",
-        "doi": "N/A"
+        "document_link": "https://repositorium.uminho.pt/bitstreams/478ec82e-fff3-4553-8ea7-70b1a7e55dd1/download",
+        "doi": "10.1016/j.eswa.2014.02.042"
+    },
+    "24": {
+        "title": "Studying the effects of stress on negotiation behaviour",
+        "abstract": "Negotiation is a collaborative activity that requires the participation of different parties whose behaviors influence the outcome of the whole process. The work presented here focuses on the identification of such behaviors and their impact on the negotiation process. The premise for this study is that identifying and cataloging the behavior of parties during a negotiation may help to clarify the role that stress plays in the process. To do so, an experiment based on a negotiation game was implemented. During this experiment, behavioral and contextual information about participants was acquired. The data from this negotiation game were analyzed in order to identify the conflict styles used by each party and to extract behavioral patterns from the interactions, useful for the development of plans and suggestions for the associated participants. The work highlights the importance of the knowledge about social interactions as a basis for informed decision support in situations of conflict.",
+        "full_text_preview": "Studying the Effects of Stress on Negotiation Behaviour \nMarco Gomes, Tiago Oliveira, Davide Carneiro, Paulo Novais and José \nNeves \nDepartment of Informatics, University of Minho, Braga, Portugal \n{marcogomes1, toliveira, dcarneiro, pjon, jneves}@di.uminho.pt \n                                                 \n1 Corresponding Author \n  Studying the Effects of Stress on Negotiation Behaviour \nNegotiation is a collaborative activity that requires the participation of different \nparties whose behaviours influence the outcome of the whole process. The work \npresented here focuses on the identification of such behaviours and their impact \non the negotiation process. The premise for this study is that identifying and \ncataloguing the behaviour of parties during a negotiation may help to clarify the \nrole stress plays in the process. To do so, an experiment based on a negotiation \ngame was implemented. During this experiment, behavioural and contextual \ninformation about participants was acquired. The data from this negotiation game \nwas analysed in order to identify the conflict styles used by each party and to \nextract behavioural patterns from the interactions, useful for the development of \nplans and suggestions for the associated participants. In sooth, the work \nhighlights the importance of the knowledge about social interactions as a basis \nfor informed decision support in situations of conflict. \nKeywords: Intelligent Environments; Online Dispute Resolution; Negotiation; \nCo",
+        "authors": [
+            "Gomes",
+            "Marco",
+            "Oliveira",
+            "Tiago José Martins",
+            "Carneiro",
+            "Davide Rua",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/d347ed00-c33e-46d9-91b8-6f7b45dbf17d/download",
+        "doi": "10.1080/01969722.2014.894858"
+    },
+    "25": {
+        "title": "Mobile application to provide personalized sightseeing tours",
+        "abstract": "Tourist recommendation systems have been growing over the last few years, mainly because of the use of mobile devices to obtain user context. This work discusses some of the most relevant systems on the field and presents PSiS Mobile, which is a mobile recommendation and planning application designed to support a tourist during his vacations. It provides recommendations about points of interest to visit based on tourist preferences and on user and sight context. Also, it suggests a visit planning which can be dynamically adapted based on current user and sight context. This tool works also like a journey dairy since it records the tourist moves and tasks to help him remember how the trip was like. To conclude, some field experiences will be presented.",
+        "full_text_preview": "",
+        "authors": [
+            "Anacleto",
+            "Ricardo",
+            "Figueiredo",
+            "Lino",
+            "Almeida",
+            "Ana",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/70603229-42af-4a18-943f-7ef1f48ffe5c/download",
+        "doi": "10.1016/j.jnca.2013.10.005"
+    },
+    "26": {
+        "title": "A caregiver support platform within the scope of an ambient assisted living ecosystem",
+        "abstract": "The Ambient Assisted Living (AAL) area is in constant evolution, providing new technologies to users and enhancing the level of security and comfort that is ensured by house platforms. The Ambient Assisted Living for All (AAL4ALL) project aims to develop a new AAL concept, supported on a unified ecosystem and certification process that enables a heterogeneous environment. The concepts of Intelligent Environments, Ambient Intelligence, and the foundations of the Ambient Assisted Living are all presented in the framework of this project. In this work, we consider a specific platform developed in the scope of AAL4ALL, called UserAccess. The architecture of the platform and its role within the overall AAL4ALL concept, the implementation of the platform, and the available interfaces are presented. In addition, its feasibility is validated through a series of tests.",
+        "full_text_preview": "",
+        "authors": [
+            "Costa",
+            "Ângelo",
+            "Novais",
+            "Paulo",
+            "Simões",
+            "Ricardo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/7351e952-4e5d-4083-a039-760bfc1c5ab1/download",
+        "doi": "10.3390/s140305654"
+    },
+    "27": {
+        "title": "Online dispute resolution: an artificial intelligence perspective",
+        "abstract": "Litigation in court is still the main dispute resolution mode. However, given the amount and characteristics of the new disputes, mostly arising out of electronic contracting, courts are becoming slower and outdated. Online Dispute Resolution (ODR) recently emerged as a set of tools and techniques, supported by technology, aimed at facilitating conflict resolution. In this paper we present a critical evaluation on the use of Artificial Intelligence (AI) based techniques in ODR. In order to fulfill this goal, we analyze a set of commercial providers (in this case twenty four) and some research projects (in this circumstance six). Supported by the results so far achieved, a new approach to deal with the problem of ODR is proposed, in which we take on some of the problems identified in the current state of the art in linking ODR and AI.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "Davide Rua",
+            "Novais",
+            "Paulo",
+            "Andrade",
+            "Francisco Carneiro Pacheco",
+            "Zeleznikow",
+            "John",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/8c7f8c84-9270-4c37-aaba-d9e2e90e6625/download",
+        "doi": "10.1007/s10462-011-9305-z"
+    },
+    "28": {
+        "title": "Microencapsulation of herbicide MCPA with native β-cyclodextrin and its methyl and hydroxypropyl derivatives : an experimental and theoretical investigation",
+        "abstract": "When a pesticide is released into the environment, most of it is lost before it reaches its target. An effective way to reduce environmental losses of pesticides is by using controlled release technology. Microencapsulation becomes a promising technique for the production of controlled release agricultural formulations. In this work, the microencapsulation of chlorophenoxy herbicide MCPA with native β-cyclodextrin and its methyl and hydroxypropyl derivatives was investigated. The phase solubility study showed that both native and β-CD derivatives increased the water solubility of the herbicide and inclusion complexes are formed in a stoichiometric ratio of 1:1. The stability constants describing the extent of formation of the complexes have been determined by phase solubility studies. 1H NMR experiments were also accomplished for the prepared solid systems and the data gathered confirm the formation of the inclusion complexes. 1H NMR data obtained for the MCPA/CDs complexes disclosed noticeable proton shift displacements for OCH2 group and H6 aromatic proton of MCPA provided clear evidence of inclusion complexation process, suggesting that the phenyl moiety of the herbicide was included in the hydrophobic cavity of CDs. Free energy molecular mechanics calculations confirm all these findings. The gathered results can be regarded as an essential step to the development of controlled release agricultural formulations containing herbicide MCPA.",
+        "full_text_preview": "",
+        "authors": [
+            "Garrido",
+            "Jorge",
+            "Cagide",
+            "Fernando",
+            "Melle-Franco",
+            "M.",
+            "Borges",
+            "Fernanda",
+            "Garrido",
+            "E. Manuela"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/2c402e23-5be1-4427-afed-2e24e95a1b44/download",
+        "doi": "10.1016/j.molstruc.2013.12.067"
+    },
+    "29": {
+        "title": "Two high-performance alternatives to ZLIB scientific-data compression",
+        "abstract": "ZLIB is used in diverse frameworks by the scientific community, both to reduce disk storage and to alleviate pressure on I/O. As it becomes a bottleneck on multi-core systems, higher throughput alternatives must be considered, exploring parallelism and/or more effective compression schemes. This work provides a comparative study of the ZLIB, LZ4 and FPC compressors (serial and parallel implementations), focusing on CR, bandwidth and speedup. LZ4 provides very high throughput (decompressing over 1GB/s versus 120MB/s for ZLIB) but its CR suffers a degradation of 5-10%. FPC also provides higher throughputs than ZLIB, but the CR varies a lot with the data. ZLIB and LZ4 can achieve almost linear speedups for some datasets, while current implementation of parallel FPC provides little if any performance gain. For the ROOT dataset, LZ4 was found to provide higher CR, scalability and lower memory consumption than FPC, thus emerging as a better alternative to ZLIB.",
+        "full_text_preview": "",
+        "authors": [
+            "Almeida",
+            "Samuel",
+            "Oliveira",
+            "Vitor Serafim Pereira",
+            "Pina",
+            "António Manuel Silva",
+            "Melle-Franco",
+            "M."
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/24c9209c-cca6-4712-8a4a-3f6b5c78b832/download",
+        "doi": "10.1007/978-3-319-09147-1_45"
+    },
+    "30": {
+        "title": "New parameterization scheme of DFT-D for graphitic materials",
+        "abstract": "A new parametrization scheme of DFT-D is proposed with the aim of devising a methodology for the study of graphitic material. The main feature of the new system is the geometry optimization within the fitting scheme. The DFT-D parameters are obtained for the benzene dimer, a good model molecule for graphitic systems. Very accurate CCSD(T) results are used as reference data for the benzene dimer, and the new method is shown to reproduce accurately its binding energies with small basis sets. After geometry optimization our new scheme performs better than the other methods. This approach generates proper geometries and accurate binding energies, even with small basis sets. We can expect this method to give similarly good results for larger graphitic systems.",
+        "full_text_preview": "",
+        "authors": [
+            "Strutyński",
+            "Karol",
+            "Melle-Franco",
+            "M.",
+            "Gomes",
+            "José A. N. F."
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/f1363474-2c81-451b-a9dc-e3150b82b3a9",
+        "doi": "10.1021/jp312239n"
+    },
+    "31": {
+        "title": "Twisted pyrene-fused azaacenes",
+        "abstract": "An approach for introducing twists in pyrene-fused azaacenes is reported. Depending on the volume and the rigidity of the silyl groups, different-sized twist angles, which oscillate between 4° and 24°, are induced along the longitudinal conjugated backbone.",
+        "full_text_preview": "",
+        "authors": [
+            "More",
+            "Sandeep",
+            "Choudhary",
+            "Sunil",
+            "Higelin",
+            "Alexander",
+            "Krossing",
+            "Ingo",
+            "Melle-Franco",
+            "M.",
+            "Mateo-Alonso",
+            "Aurelio"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/ec2e0911-b99a-42da-aecf-40be85d32d8e",
+        "doi": "10.1039/C3CC48742C"
+    },
+    "32": {
+        "title": "Stable hydrogenated graphene edge types: Normal and reconstructed Klein edges",
+        "abstract": "Hydrogenated graphene edges are assumed to be either armchair, zigzag or a combination of the two. We show that the zigzag is not the most stable fully hydrogenated structure along the <2-1-10> direction. Instead hydrogenated Klein and reconstructed Klein based edges are found to be energetically more favourable, with stabilities approaching that of armchair edges. These new structures \"unify\" graphene edge topology, the most stable flat hydrogenated graphene edges always consisting of pairwise bonded C2H4 edge groups, irrespective the edge orientation. When edge rippling is included, CH3 edge groups are most stable. These new fundamental hydrogen terminated edges have important implications for graphene edge imaging and spectroscopy, as well as mechanisms for graphene growth, nanotube cutting, and nanoribbon formation and behaviour.",
+        "full_text_preview": "",
+        "authors": [
+            "Wagner",
+            "Philipp",
+            "Ivanovskaya",
+            "Viktoria V.",
+            "Melle-Franco",
+            "M.",
+            "Humbert",
+            "Bernard",
+            "Adjizian",
+            "Jean-Joseph",
+            "Briddon",
+            "P. R.",
+            "Ewels",
+            "Christopher P."
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/1d2516a9-b01e-4966-b545-9cfa40d7794a/download",
+        "doi": "10.1103/PhysRevB.88.094106"
+    },
+    "33": {
+        "title": "Hexaazatrinaphthylenes with different twists",
+        "abstract": "A synthetic strategy that allows the induction of twist angles of different sizes in 5,6,11,12,17,18-hexaazatrinaphthylene (HATNA) chromophores is reported. The different twist angles are accompanied by measurable changes in the emission and electrochemical characteristics of HATNA.",
+        "full_text_preview": "",
+        "authors": [
+            "Choudhary",
+            "Sunil",
+            "Gozalvez",
+            "Cristian",
+            "Higelin",
+            "Alexander",
+            "Higelin",
+            "Ingo",
+            "Melle-Franco",
+            "M.",
+            "Mateo-Alonso",
+            "Aurelio"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/741502f8-9cd2-46ff-a36b-ddee1492c300",
+        "doi": "10.1002/chem.201304071"
+    },
+    "34": {
+        "title": "11, 11, 12, 12-Tetracyano-4, 5-pyrenoquinodimethanes: air-stable push–pull o-Quinodimethanes with S2 fluorescence",
+        "abstract": "The synthesis and properties of 11,11,12,12-tetracyano-4,5-pyrenoquinodimethanes (4,5-TCNPs), a new family of isolable and air-stable o-quinodimethanes, are reported. The ortho disposition of the dicyanomethane substituents strongly polarizes the pyrene framework to promote broad and intense intramolecular charge-transfer transitions. In addition, spectroscopic studies reveal that 4,5-TCNPs violate Kasha’s rule and emit from the S2 level.",
+        "full_text_preview": "",
+        "authors": [
+            "García",
+            "Raúl",
+            "More",
+            "Sandeep",
+            "Melle-Franco",
+            "M.",
+            "Mateo-Alonso",
+            "Aurelio"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/565d7268-84c3-496f-8f66-1cbe91ca7c87",
+        "doi": "10.1021/ol5029332"
+    },
+    "35": {
+        "title": "Accuracy of dispersion interactions in semiempirical and molecular mechanics models : the benzene dimer case",
+        "abstract": "The benzene dimer is arguably the simplest molecular analogue of graphitic materials. We present the systematic study of minima and transition states of the benzene dimer with semiempirical and molecular mechanics (MM) methods. Full minimizations on all conformations were performed and the results, geometries, and binding energies were compared with CCSD(T) and DFT-D results. MM yields the best results with three force fields MM3, OPLS, and AMOEBA, which reproduced nine out of the ten stationary points of the benzene dimer. We obtained new parameters for MM3 and OPLS that successfully reproduce all structures of the benzene dimer and showed improved accuracy over DFT-D in most dimer geometries. Semiempirical models were, unexpectedly, less accurate than MM methods. The most accurate semiempirical method for the benzene dimer is PM6-DH2. DFT-D was the only Hamiltonian that reproduced the variations of energy with geometry from CCSD(T) calculations accurately and is the method of choice for energies of periodic and molecular calculations of graphitic systems. In contrast, MM represents an accurate alternative to calculate geometries.",
+        "full_text_preview": "",
+        "authors": [
+            "Strutynski",
+            "Karol",
+            "Gomes",
+            "José A. N. F.",
+            "Melle-Franco",
+            "M."
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/0b10414a-2b69-480e-b181-e77e23146152",
+        "doi": "10.1021/jp506860t"
+    },
+    "36": {
+        "title": "Improving quality of electronic health records with SNOMED",
+        "abstract": "The use of classifications, standards and terminology proves to be of particular importance to classify therapist techniques, clinical and nursing procedures and formulate diagnoses. This work shows a different implementation than usual, the application developed doesn’t depend of platform of medical record. The Department of pathological anatomy was chosen as a pilot service to enter the SNOMED system, to produce reports and to evaluate the benefits of its use in a real context. The successful implementation is directly related to the success of interoperability between information and the use of electronic health record systems. It is the first step to extend the system to the whole hospital and to the success of clinical research, to provide alerts and prevention systems and reduce medical errors.",
+        "full_text_preview": "",
+        "authors": [
+            "Duarte",
+            "Júlio",
+            "Castro",
+            "Sara",
+            "Santos",
+            "Manuel",
+            "Abelha",
+            "António",
+            "Machado",
+            "José Manuel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/32572b72-e008-4c79-9575-d40cfabe4c26/download",
+        "doi": "10.1016/j.protcy.2014.10.151"
+    },
+    "37": {
+        "title": "ESCOLEX: a grade-level lexical database from European Portuguese elementary to middle school textbooks",
+        "abstract": "In this article, we introduce ESCOLEX, the first European Portuguese children’s lexical database with gradelevel- adjusted word frequency statistics. Computed froma 3.2- million-word corpus, ESCOLEX provides 48,381 word forms extracted from 171 elementary and middle school textbooks for 6- to 11-year-old children attending the first six grades in the Portuguese educational system. Like other children’s grade-level databases (e.g., Carroll, Davies, & Richman, 1971; Corral, Ferrero, & Goikoetxea, Behavior Research Methods, 41, 1009–1017, 2009; Lété, Sprenger-Charolles, & Colé, Behavior ResearchMethods, Instruments,&Computers, 36, 156–166, 2004; Zeno, Ivens, Millard, Duvvuri, 1995), ESCOLEX provides four frequency indices for each grade: overall word frequency (F), index of dispersion across the selected textbooks (D), estimated frequency per million words (U), and standard frequency index (SFI). It also provides a new measure, contextual diversity (CD). In addition, the number of letters in the word and its part(s) of speech, number of syllables, syllable structure, and adult frequencies taken from PPAL (a European Portuguese corpus-based lexical database; Soares, Comesaña, Iriarte, Almeida, Simões, Costa, …, Machado, 2010; Soares, Iriarte, Almeida, Simões, Costa, França,…, Comesaña, in press) are provided. ESCOLEX will be a useful tool both for researchers interested in language processing and development and for professionals in need of verbal materials adjusted to children’s developmental stages. ESCOLEX can be downloaded along with this article or from http://p-pal.di.uminho.pt/about/databases.",
+        "full_text_preview": "",
+        "authors": [
+            "Soares",
+            "Ana Paula",
+            "Medeiros",
+            "José Carlos",
+            "Simões",
+            "Alberto",
+            "Machado",
+            "João F.",
+            "Costa",
+            "Ana",
+            "Iriarte Sanromán",
+            "Álvaro",
+            "Almeida",
+            "J. J.",
+            "Pinheiro",
+            "Ana P.",
+            "Comesaña",
+            "Montserrat"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/c8803117-9dbc-4a5a-a255-0befb7ec2eb4",
+        "doi": "10.3758/s13428-013-0350-1"
     },
     "38": {
-        "title": "Assessing road traffic expression",
+        "title": "A preventive action management platform in healthcare information systems",
+        "abstract": "Preventive actions management plays a crucial role in clinical applications, not only for those who depend on data to make decisions, but also for those who monitor the operational and financial impact of the systems. This paper presents an open-source platform, named ScheduleIT, capable of managing preventive routines. The platform is based on an estimation model that determines the optimal time interval for interventions, according to the criticality of the system and the number of non-programmed faults, among others. ScheduleIT has a web-based interface available to different area end-users, ranging from IT technicians to administrative staff. At this point, the platform covers around 75% of the healthcare systems and it is full accepted by its main users as a reliable and effective preventive tool.",
+        "full_text_preview": "",
+        "authors": [
+            "Peixoto",
+            "Hugo",
+            "Abelha",
+            "António",
+            "Santos",
+            "Manuel Filipe",
+            "Machado",
+            "José Manuel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/09040cc3-a4d0-477d-abc0-8938e58beb1d",
+        "doi": "10.4018/978-1-4666-7230-7.ch026"
+    },
+    "39": {
+        "title": "Gamification, social networks and sustainable environments",
+        "abstract": "Intelligent environments and ambient intelligence enabled systems provide means to gather rich information from both environments and its users. With the help of such systems, it is possible to foster communities of ambient intelligence systems with community driven knowledge, which is created by individual actions and setups in each of the environments. Such arrangements provides the potential to build systems that promote better practices and more efficient and sustainable environments by promoting the community best examples and engaging users to adopt and develop proactive behaviors to improve their standings in the community. This work aims to use knowledge from communities of intelligent environments to their own benefit. The approach presented in this work uses information from different environments, ranking them according to their sustainability assessment. Recommendations are then computed using similarity and clustering functions ranking users and environments, updating their previous records and launching new recommendations in the process. Gamification concepts are used in order to keep users motivation and engage them actively to produce better results in terms of sustainability.",
+        "full_text_preview": "",
         "authors": [
             "Silva",
             "Fábio",
             "Analide",
             "César",
+            "Rosa",
+            "Luís",
+            "Felgueiras",
+            "Gilberto",
+            "Pimenta",
+            "Cedric"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/1b1fe3ee-a8d9-463c-808b-1b26fffc9340/download",
+        "doi": "10.9781/ijimai.2013.246"
+    },
+    "40": {
+        "title": "AIBench: a rapid application development framework for translational research in biomedicine",
+        "abstract": "Applied research in both biomedical discovery and translational medicine today often requires the rapid development of fully featured applications containing both advanced and specific functionalities, for real use in practice. In this context, new tools are demanded that allowfor efficient generation, deployment and reutilization of such biomedical applications as well as their associated functionalities. In this context this paper presents AIBench, an open-source Java desktop application framework for scientific software development with the goal of providing support to both fundamental and applied research in the domain of translational biomedicine. AIBench incorporates a powerful plug-in engine, a flexible scripting platform and takes advantage of Java annotations, reflection and various design principles in order to make it easy to use, lightweight and non-intrusive. By following a basic input–processing–output life cycle, it is possible to fully develop multiplatform applications using only three types of concepts: operations, data-types and views. The framework automatically provides functionalities that are present in a typical scientific application including user parameter definition, logging facilities, multi-threading execution, experiment repeatability and user interface workflow management, among others. The proposed framework architecture defines a reusable component model which also allows assembling new applications by the reuse of libraries from past projects or third-party software.",
+        "full_text_preview": "",
+        "authors": [
+            "Rocha",
+            "Miguel",
+            "Glez-Peña",
+            "Daniel",
+            "Reboiro-Jato",
+            "M.",
+            "Maia",
+            "P.",
+            "Díaz",
+            "Fernando",
+            "Fdez-Riverola",
+            "Florentino"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/c9664d72-2849-4b76-9135-bafa8b429617/download",
+        "doi": "10.1016/j.cmpb.2009.12.003"
+    },
+    "41": {
+        "title": "A survey of software engineering best practices for the development of smart applications in Ambient Intelligence",
+        "abstract": "Over the past decade, the world of Ambient Intelligence and smart environments has brought us a wide variety of novel applications with potential for exhibiting sophisticated intelligent behavior. These applications are called smart because they can sense, anticipate and adapt themselves to the context, desires and intentions of their users. However, the unpredictability of human behavior, the unanticipated circumstances of execution and a growing heterogeneity of future operational environments impose significant development challenges if these innovative applications are to gain wide acceptance in our daily life. Therefore, applying well-established software engineering methodologies is a fundamental prerequisite for delivering high quality and robust smart software applications. This survey provides a illustrative presentation of software engineering best practices in the area of smart environments and Ambient Intelligence. The aim of this survey is not to explore and compare every possible related work in detail, but to offer insights into the latest developments in this domain and to further the research into the successful design, development and evaluation of Ambient Intelligence frameworks and applications.",
+        "full_text_preview": "",
+        "authors": [
+            "Preuveneers",
+            "Davy",
             "Novais",
             "Paulo"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/9f025d96-2606-4d1f-a2f7-3e5c6c19dcb1",
-        "doi": "10.9781/ijimai.2014.313"
+        "document_link": "https://repositorium.uminho.pt/entities/publication/3f7659a6-ee66-46e4-86b9-5fe76f793a66",
+        "doi": "10.3233/AIS-2012-0150"
     },
-    "39": {
-        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
+    "42": {
+        "title": "Incorporating stress estimation into user-centred agent-based platforms",
+        "abstract": "Current virtual environments for communication, cooperation and problem solving lack the rich context information that is present in face-to-face interactions. People rely on this context information, that includes body language or level of stress just to name a few, to take decisions. In this paper we present an approach whose objective is to be able to acquire context information about the users of such technological tools, making that information available for the tool and eventually to other people. We present a prototype being developed in the context of an agent-based conflict resolution platform. As a result, we achieve communication and problem solving virtual environments that are richer and closer to traditional environments, allowing people and software agents to take better and more rational decisions.",
+        "full_text_preview": "",
         "authors": [
-            "Faria",
-            "J. P.",
-            "Overbeek",
-            "R.",
-            "Xia",
+            "Novais",
+            "Paulo",
+            "Carneiro",
+            "Davide Rua",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/3d751b47-1ec1-43a3-a057-6a51715b2003/download",
+        "doi": "10.1007/978-3-642-28786-2_37"
+    },
+    "43": {
+        "title": "The problem of learning non-taxonomic relationships of ontologies from text",
+        "abstract": "Manual construction of ontologies by domain experts and knowledge engineers is a costly task. Thus, automatic and/or semi-automatic approaches to their development are needed. Ontology Learning aims at identifying its constituent elements, such as non-taxonomic relationships, from textual information sources. This article presents a discussion of the problem of Learning Non-Taxonomic Relationships of Ontologies and defines its generic process. Four techniques representing the state of the art of Learning Non-Taxonomic Relationships of Ontologies are described and the solutions they provide are discussed along with their advantages and limitations.",
+        "full_text_preview": "",
+        "authors": [
+            "Serra",
+            "Ivo",
+            "Girardi",
+            "Rosário",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/06177278-268c-4f0b-9f3d-07a63ce2fbf3/download",
+        "doi": "10.1007/978-3-642-28765-7_58"
+    },
+    "44": {
+        "title": "An interpretable guideline model to handle incomplete information",
+        "abstract": "Healthcare institutions are both natural and emotionalstressful environments; indeed, the healthcare professionals may fall intopractices that may lead to medical errors, undesirable variations in clinical doing and defensive medicine. On the other hand, Clinical Guidelines may offer an effective response to these irregularities in clinical practice, if the issues concerning their availability during the clinical process are solved. Hence, in this work it is proposed a model intended to provide a formal representation of Computer-Interpretable Guidelines, in terms of the extensions of the predicates that make their universe of discourse, as well as a Decision Support System framework to handle Incomplete Information. It will be used an extension to the language of Logic Programming, where an assessment of the Quality-of-Information of the extensions of the predicates referred to above is paramount.",
+        "full_text_preview": "",
+        "authors": [
+            "Oliveira",
+            "Tiago José Martins",
+            "Neves",
+            "João C. P.",
+            "Costa",
+            "Ângelo",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/f9e2da40-6763-4887-a731-92198774b127",
+        "doi": "10.1007/978-3-642-28765-7_52"
+    },
+    "45": {
+        "title": "Engineering molecular chains in carbon nanotubes",
+        "abstract": "A range of mono- and bis-functionalised fullerenes have been synthesised and inserted into single-walled carbon nanotubes. The effect of the size and shape of the functional groups of the fullerenes on the resultant 1D arrays formed within the nanotubes was investigated by high resolution transmission electron microscopy and X-ray diffraction. The addition of non-planar, sterically bulky chains to the fullerene cage results in highly ordered 1D structures in which the fullerenes are evenly spaced along the internal nanotube cavity. Theoretical calculations reveal that the functional groups interact with neighbouring fullerene cages to space the fullerenes evenly within the confines of the nanotube. The addition of two functional groups to opposite sides of the fullerene cages results in a further increase in the separation of the fullerene cages within the nanotubes at the cost of lower nanotube filling rates.",
+        "full_text_preview": "",
+        "authors": [
+            "Chamberlain",
+            "Thomas W.",
+            "Pfeiffer",
+            "Rudolf",
+            "Howells",
+            "Jonathan",
+            "Peterlik",
+            "H.",
+            "Kuzmany",
+            "H.",
+            "Kräutler",
+            "B.",
+            "Da Ros",
+            "T.",
+            "Melle-Franco",
+            "M.",
+            "Zerbetto",
             "F.",
+            "ZerbettoMilic",
+            "D.",
+            "Khlobystov",
+            "A. N."
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/2bd5d76b-1ce0-48b9-8ad3-353722e492de/download",
+        "doi": "10.1039/c2nr32571c"
+    },
+    "46": {
+        "title": "Computational tools for strain optimization by adding reactions",
+        "abstract": "This paper introduces a new plug-in for the OptFlux Metabolic Engineering platform, aimed at finding suitable sets of reactions to add to the genomes of microbes (wild type strain), as well as finding complementary sets of deletions, so that the mutant becomes able to overproduce compounds with industrial interest, while preserving their viability. The optimization methods used are Evolutionary Algorithms and Simulated Annealing. The usefulness of this plug-in is demonstrated by a case study, regarding the production of vanillin by the bacterium E. coli.",
+        "full_text_preview": "",
+        "authors": [
+            "Correia",
+            "Sara",
             "Rocha",
-            "Miguel",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/f47a2f9e-fec5-4274-85f2-897c26eaedc2/download",
+        "doi": "10.1007/978-3-642-28839-5_28"
+    },
+    "47": {
+        "title": "A machine learning and chemometrics assisted interpretation of spectroscopic data: a NMR-based metabolomics platform for the assessment of Brazilian propolis",
+        "abstract": "In this work, a metabolomics dataset from 1H nuclear magnetic resonance spectroscopy of Brazilian propolis was analyzed using machine learning algorithms, including feature selection and classification methods. Partial least square-discriminant analysis (PLS-DA), random forest (RF), and wrapper methods combining decision trees and rules with evolutionary algorithms (EA) showed to be complementary approaches, allowing to obtain relevant information as to the importance of a given set of features, mostly related to the structural fingerprint of aliphatic and aromatic compounds typically found in propolis, e.g., fatty acids and phenolic compounds. The feature selection and decision tree-based algorithms used appear to be suitable tools for building classification models for the Brazilian propolis metabolomics regarding its geographic origin, with consistency, high accuracy, and avoiding redundant information as to the metabolic signature of relevant compounds.",
+        "full_text_preview": "",
+        "authors": [
+            "Maraschin",
+            "Marcelo",
+            "Somensi-Zeggio",
+            "A.",
+            "Oliveira",
+            "S. K.",
+            "Kuhnen",
+            "S.",
+            "Tomazzoli",
+            "M. M.",
+            "Zeri",
+            "A. C. M.",
+            "Carreira",
+            "Rafael",
+            "Rocha",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/cc10d588-d88a-4515-aa75-a3b25d8a10f6/download",
+        "doi": "10.1007/978-3-642-34123-6_12"
+    },
+    "48": {
+        "title": "An evolutionary approach to generate solutions for conflict scenarios",
+        "abstract": "Conflict resolution is nowadays an important topic. Online Dispute Resolution in particular is nowadays a major research topic, focusing on the development of technology-based tools to assist parties involved in conflict resolution processes. In this paper we present such a tool aimed at the generation of solutions. It is based on Genetic Algorithms that evolve a population of solutions through successive iterations, generating more specialized ones. The result is a tree of solutions that the conflict resolution platform can use to guide the conflict resolution process. This approach is especially suited for parties which have no ability or are unwilling to generate realistic proposals for the resolution of the conflict.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "Davide Rua",
+            "Analide",
+            "César",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/edb25f22-98c6-485c-a591-df704bbc68c3/download",
+        "doi": "10.1007/978-3-642-28942-2_40"
+    },
+    "49": {
+        "title": "Stress monitoring in conflict resolution situations",
+        "abstract": "Online Dispute Resolution is steadily growing to become the major alternative to litigation in court. In fact, given the characteristics of current disputes, technology-based conflict resolution may be a quite efficient approach. However, in this shift of paradigm, there are also threats that should be considered. Specifically, in this paper we deal with the problem of the lack of important context information when parties communicate in a virtual setting. In that sense, we propose the addition of a monitoring framework capable of measuring the level of stress of the parties in a non-invasive way. This information will be used by the platform and the mediator throughout the complete conflict resolution process to adapt strategies in real-time, resulting in a context-aware and more efficient approach.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "Davide Rua",
+            "Castillo",
+            "José Carlos",
+            "Novais",
+            "Paulo",
+            "Fernández-Caballero",
+            "Antonio",
+            "Neves",
+            "José",
+            "López",
+            "María T."
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/7d40d855-db5f-4fdf-82fe-35179e174c7c/download",
+        "doi": "10.1007/978-3-642-28783-1_17"
+    },
+    "50": {
+        "title": "Introduction to the thematic issue",
+        "abstract": "This Thematic Issue focuses on software engineering perspectives on the design, the use and the evaluation of Smart Applications for Ambient Intelligence. It congregates works showing the latest advancements in simulated smart environments as well as successful deployments in the real world, with contributions from revised and extended papers from the ISAmI’11 (International Symposium on Ambient Intelligence) event held at the University of Salamanca, Spain in April, 2011. Ambient Intelligence (AmI) is recognized as an established research field where smart and sensitive devices are used as proactive tools to assist people with their day-to-day activities, making everyone’s life more comfortable. The application of software engineering best practices can strengthen the successful development of systems that offer context-aware suggestions or automate tasks according to the current situation of their users. The papers in this Thematic Issue highlight various best practices for engineering intelligent software architectures, with development methodologies for building intelligent applications and case studies on software requirements and testing of smart behavior.",
+        "full_text_preview": "",
+        "authors": [
+            "Preuveneers",
+            "Davy",
+            "Novais",
+            "Paulo",
+            "Corchado",
+            "Juan M."
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/6426d40c-4728-40b4-8b5d-a46619269708/download",
+        "doi": "10.3233/AIS-2012-0152"
+    },
+    "51": {
+        "title": "Multimodal behavioral analysis for non-invasive stress detection",
+        "abstract": "This study presents and approach to measure the levels of acute stress in humans by analysing their behavioural patterns when interacting with technological devices. We study the effects of stress on eight behavioural, physical and cognitive features. The data was collected with the participation of 19 users in different phases, with different levels of stress induced. A non-parametric statistical hypothesis test is used to determine which features show statistically significant differences, for each user, when under stress. It is shown that the features more related to stress are the acceleration and the mean and maximum intensity of the touch. It is also shown that each user is affected by stress in a specific way. Moreover, all the process of estimating stress is undertaken in a non-invasive way. This work constitutes the foundation of a context layer for a virtual environment for conflict resolution. The main objective is to overcome some of the main drawbacks of communicating online, namely the lack of contextual information such as body language or gestures.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "Davide Rua",
+            "Castillo",
+            "José Carlos",
+            "Novais",
+            "Paulo",
+            "Fernández-Caballero",
+            "Antonio",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/b8e2e52e-42dd-44a1-84f3-35619ba7a139/download",
+        "doi": "10.1016/j.eswa.2012.05.065"
+    },
+    "52": {
+        "title": "Non-invasive estimation of stress in conflict resolution environments",
+        "abstract": "The current trend in Online Dispute Resolution focuses mostly on the development of technological tools that allow parties to solve conflicts through telecommunication means. However, this tendency leaves aside key issues, namely our concern with respect to context information that was previously available in traditional Alternative Dispute Resolution processes. The main weakness of this approach is that conflict resolution may become a cold process, focused solely on objective questions. In order to overcome this inconvenience, we move forward to incorporate context information in an Online Dispute Resolution platform. In particular, we consider the estimation of the level of stress of the users by analyzing their interaction patterns. As a result, the conflict resolution platform or the mediator may weight to what extent a party is affected by a particular matter, allowing one to adapt the conflict resolution strategy to a specific problem in real time.",
+        "full_text_preview": "",
+        "authors": [
+            "Novais",
+            "Paulo",
+            "Carneiro",
+            "Davide Rua",
+            "Gomes",
+            "Marco",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/6663c9a6-e043-4328-9296-4bdd7b5e7f6c/download",
+        "doi": "10.1007/978-3-642-28786-2_17"
+    },
+    "53": {
+        "title": "Analysing participants' performance in idea generation meeting considering emotional context-aware",
+        "abstract": "In an idea generation meeting the emotional context-aware is correlated the with participants’ performance. To achieve good results in idea generation sessions it is important that participants maintain a positive emotional state. In this paper we will present an agent-based idea generation meeting using an emotional context-aware model that includes several mechanisms, namely: the analysis and evaluation of events, emotion-based process and recommendation selection. In order to analyse and test the benefits of these mechanisms, we also created a simulated scenario where agents generate ideas and are affected by context-aware situations. The simulation reveals that these mechanisms can increase the participants’ performance using some techniques. This study shows how the use of recommendation mechanisms can maximize meeting results in some situations.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "João",
+            "Laranjeira",
+            "João",
+            "Marreiros",
+            "Goreti",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/3dc4e7a3-7473-4131-99d1-9905a0955abd/download",
+        "doi": "10.1007/978-3-642-28783-1_13"
+    },
+    "54": {
+        "title": "In silico strain optimization by adding reactions to metabolic models",
+        "abstract": "Nowadays, the concerns about the environment and the needs to increase the productivity at low costs, demand for the search of new ways to produce compounds with industrial interest. Based on the increasing knowledge of biological processes, through genome sequencing projects, and high-throughput experimental techniques as well as the available computational tools, the use of microorganisms has been considered as an approach to produce desirable compounds. However, this usually requires to manipulate these organisms by genetic engineering and/ or changing the enviromental conditions to make the production of these compounds possible. In many cases, it is necessary to enrich the genetic material of those microbes with hereologous pathways from other species and consequently adding the potential to produce novel compounds. This paper introduces a new plug-in for the OptFlux Metabolic Engineering platform, aimed at finding suitable sets of reactions to add to the genomes of selected microbes (wild type strain), as well as finding complementary sets of deletions, so that the mutant becomes able to overproduce compounds with industrial interest, while preserving their viability. The necessity of adding reactions to the metabolic model arises from existing gaps in the original model or motivated by the productions of new compounds by the organism. The optimization methods used are metaheuristics such as Evolutionary Algorithms and Simulated Annealing. The usefulness of this plug-in is demonstrated by a case study, regarding the production of vanillin by the bacterium E. coli.",
+        "full_text_preview": "",
+        "authors": [
+            "Correia",
+            "Sara",
+            "Rocha",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/aeb14dd6-7422-4f50-8e41-f54741d87950/download",
+        "doi": "10.2390/biecoll-jib-2012-202"
+    },
+    "55": {
+        "title": "A web platform and a decision model for computer-interpretable guidelines",
+        "abstract": "Situations of medical error and defensive medicine are com- mon in healthcare environments and have repercussions in the quality of care under o er. The occurrence of adverse events and the increase of healthcare expenses are some of the consequences of medical malpractice. Indeed, these situations may be prevented by encouraging the compli- ance with Clinical Guidelines (CGs). However, the current format of CGs proved to be disadvantageous for real-time application, i.e., they may not provide recommendations to healthcare professionals when required, and on time. The introduction of Computer-Interpretable Guidelines (CIGs) may provide a solution to this problem, however they are not widely implemented and there are some issues that need to be contemplated. Indeed, in this paper it is presented the CompGuide project for guideline representation and sharing, combined with the handling of incomplete information in that context.",
+        "full_text_preview": "",
+        "authors": [
+            "Oliveira",
+            "T.",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/c1681224-44dd-42f4-8d31-693e47cf3337/download",
+        "doi": "10.1007/978-3-642-32922-7_21"
+    },
+    "56": {
+        "title": "Modelling stress recognition in conflict resolution scenarios",
+        "abstract": "The current trend in Online Dispute Resolution focuses mostly on the development of technological tools that allow parties to solve conflicts through telecommunication means. However, this tendency leaves aside key issues, namely the context information that was previously available in traditional Alternative Dispute Resolution processes. The main weakness of this approach is that conflict resolution may become focused solely on objective issues. In order to overcome this inconvenience, we move forward to incorporate context and behavioural information in an Online Dispute Resolution platform. In particular, we consider the estimation of the level of stress and the prediction of the stress state evolution. As a result, the conflict resolution platform or the mediator may predict to what extent a party is affected by a particular matter, allowing one to adapt the conflict resolution strategy to a specific scenario in real time.",
+        "full_text_preview": "",
+        "authors": [
+            "Gomes",
+            "Marco",
+            "Carneiro",
+            "Davide Rua",
+            "Novais",
+            "Paulo",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/4cd23f41-58b3-4df6-b6b4-d01c2caa3518/download",
+        "doi": "10.1007/978-3-642-28942-2_48"
+    },
+    "57": {
+        "title": "A statistical classifier for assessing the level of stress from the analysis of interaction patterns in a touch screen",
+        "abstract": "This paper describes an approach for assessing the level of stress of users of mobile devices with tactile screens by analysing their touch patterns. Two features are extracted from touches: duration and intensity. These features allow to analyse the intensity curve of each touch.We use decision trees (J48) and support vector machines (SMO) to train a stress detection classifier using additional data collected in previous experiments. This data includes the amount of movement, acceleration on the device, cognitive performance, among others. In previous work we have shown the co-relation between these parameters and stress. Both algorithms show around 80% of correctly classified instances. The decision tree can be used to classify, in real time, the touches of the users, serving as an input to the assessment of the stress level.",
+        "full_text_preview": "",
+        "authors": [
+            "Carneiro",
+            "Davide Rua",
+            "Novais",
+            "Paulo",
+            "Gomes",
+            "Marco",
+            "Oliveira",
+            "P. M.",
+            "Neves",
+            "José"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/f4fa1683-ccbb-4155-856d-c5c971d974fb/download",
+        "doi": "10.1007/978-3-642-32922-7_27"
+    },
+    "58": {
+        "title": "Mobile sensor systems on outpatients",
+        "abstract": "Society walks towards a massive aging phenomena. It is estimated that in 50 years the elderly population will surpass the young population. This means that two major problems will arise: social and economic. The active population will not produce enough wealth to support the elderly population and the problems that elderly person usually have will be growing exponentially, being the health services provided today unable to respond to such demand. Technology and the ever-growing evolution of it can be a possible response to both problems, providing an initial assistance and remote monitoring. This project enables elderly people to have an active life, by providing freedom in form of monitoring the user health state and providing tools to help them overcome daily tasks. In this paper it is presented a remote body sensoring that paramounts with a cognitive impairment helper, present in a mobile system, to provide constant monitoring of the users’ health condition, enabling proactive actions and medical reports to the user physician.",
+        "full_text_preview": "",
+        "authors": [
+            "Costa",
+            "Ângelo",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/cbf45889-e3ab-4488-8c6b-211447814132",
+        "doi": "N/A"
+    },
+    "59": {
+        "title": "E-learning platforms and e-learning students : building the bridge to success",
+        "abstract": "E-learning platforms are becoming more and more common in education and with organisations. They are seen as a complementary tool to support learning or, as in many cases, as the primary tool to do it (possibly the only one). In traditional learning, teachers can easily get an insight into how their students work and learn, and how they interact in the classroom. However, in online learning, it is more difficult for teachers to see how individual students behave. Affective states and learning styles are determinant in students’ performance. Together with stress, these are crucial factor to success. It is believed that the sole use of an E-learning platform can in itself be a cause of stress for students. Estimating, in a non-invasive way, such parameters, and taking measures to deal with them, are then the goal of this paper. We do not consider the use of dedicated sensors (invasive) such as special gloves or wrist bracelets since we intend not to be dependent on specific hardware and also because we believe that such specific hardware can induce for itself some alteration in the parameters being analysed. Our work focuses on the development of a new module (Dynamic Recognition Module) to incorporate in Moodle E-learning platform, to accommodate individualized support to E-learning students.",
+        "full_text_preview": "",
+        "authors": [
+            "Rodrigues",
+            "Manuel",
+            "Gonçalves",
+            "Sérgio",
+            "Fdez-Riverola",
+            "Florentino",
+            "Novais",
+            "Paulo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/8dfc668a-b4f9-4f56-b96e-89e2e8067eea/download",
+        "doi": "N/A"
+    },
+    "60": {
+        "title": "An algorithm to assemble gene-protein-reaction associations for genome-scale metabolic model reconstruction",
+        "abstract": "The considerable growth in the number of sequenced genomes and recent advances in Bioinformatics and Systems Biology fields have provided several genome-scale metabolic models (GSMs) that have been used to provide phenotype simulation methods. Given their importance in biomedical research and biotechnology applications (e.g. in Metabolic Engineering efforts), several workflows and computational platforms have been proposed for GSM reconstruction. One of the challenges of these methods is related to the assignment of gene-protein-reaction (GPR) associations that allow to add transcriptional/ translational information to GSMs, a task typically addressed through manual literature curation. This work proposes a novel algorithm to create a set of GPR rules, based on the integration of the information provided by the genome annotation with information on protein composition and function (protein complexes, sub-units, iso-enzymes, etc.) provided by the UniProt database. The methods are validated by using two state-of-the-art models for E. coli and S. cerevisiae, with competitive results.",
+        "full_text_preview": "",
+        "authors": [
+            "Cardoso",
+            "João",
+            "Vilaça",
+            "Paulo",
+            "Soares",
+            "Simão",
+            "Rocha",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/21fae5f9-cf3b-49d6-955c-53d03664ad52/download",
+        "doi": "10.1007/978-3-642-34123-6_11"
+    },
+    "61": {
+        "title": "Sensor-driven intelligent ambient agenda",
+        "abstract": "The rapid increasing of elderly persons living alone presents a need for continuous monitoring to detect hazardous situations. Besides, in some cases, the forgetfulness of these people leads to disorientations or accidents. For these rea-sons, this paper introduces a system that brings together visual monitoring capabil-ities to track people and to perform activity detection, such as falls, with schedul-ing abilities to intelligently schedule urgent and non-urgent events.",
+        "full_text_preview": "",
+        "authors": [
+            "Costa",
+            "Ângelo",
+            "Castillo",
+            "José Carlos",
+            "Novais",
+            "Paulo",
+            "Fernández-Caballero",
+            "Antonio",
+            "Bonal",
+            "María Teresa López"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/dc8444a8-3348-4c7d-b22c-416840f0b889",
+        "doi": "10.1007/978-3-642-28783-1_3"
+    },
+    "62": {
+        "title": "AspectGrid: aspect-oriented fault-tolerance in grid platforms",
+        "abstract": "Migrating traditional scientific applications to computational Grids requires programming tools that can help programmers update application behaviour to this kind of platforms. Computational Grids are particularly suited for long running scientific applications, but they are also more prone to faults than desktop machines. The AspectGrid framework aims to develop methodologies and tools that can help Grid-enable scientific applications, particularly focusing on techniques based on aspect-oriented programming. In this paper we present the aspect-oriented approach taken in the AspectGrid framework to address faults in computational Grids. In the proposed approach, scientific applications are enhanced with fault-tolerance capability by plugging additional modules. The proposed technique is portable across operating systems and minimises the changes required to base applications.",
+        "full_text_preview": "",
+        "authors": [
+            "Medeiros",
+            "Bruno",
+            "Sobral",
+            "João Luís Ferreira"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/6f85de6a-01ef-4548-992b-16fb61576d84/download",
+        "doi": "N/A"
+    },
+    "63": {
+        "title": "An integrated computational environment for elementary modes analysis of biochemical networks",
+        "abstract": "Elementary Flux Modes (EFMs) have been claimed as one of the most promising approaches for pathway analysis. These are a set of vectors that emerge from the stoichiometric matrix of a biochemical network through the use of convex analysis. The computation of all EFMs of a given network is an NP–hard problem and existing algorithms do not scale well. Moreover, the analysis of results is difficult given the thousands or millions of possible modes generated. In this work, we propose a new plug–in, running on top of the OptFlux Metabolic Engineering workbench (Rocha et al., 2010), whose aims are to ease the analysis of these results and explore synergies among EFM analysis, phenotype simulation and strain optimisation. Two case studies are shown to illustrate the capabilities of the proposed tool.",
+        "full_text_preview": "",
+        "authors": [
+            "Maia",
+            "P.",
+            "Vilaça",
+            "P.",
             "Rocha",
             "I.",
-            "Henry",
-            "C. S."
+            "Pont",
+            "M.",
+            "Tomb",
+            "J. F.",
+            "Rocha",
+            "Miguel"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/c5d84aab-442b-4f53-960a-3f9ab282dc70",
-        "doi": "10.1093/bib/bbs071"
+        "document_link": "https://repositorium.uminho.pt/entities/publication/b7a08cce-7683-4950-aa9c-66851e9cd5be",
+        "doi": "10.1504/IJDMB.2012.049292"
     },
-    "40": {
-        "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
+    "64": {
+        "title": "Optimization approaches for the in silico discovery of optimal targets for gene over/underexpression",
+        "abstract": "Metabolic engineering (ME) efforts have been recently boosted by the increase in the number of annotated genomes and by the development of several genome-scale metabolic models for microbes of interest in industrial biotechnology. Based on these efforts, strain optimization methods have been proposed to reach the best set of genetic changes to apply to selected host microbes, in order to create strains that are able to overproduce metabolites of industrial interest. Previous work in strain optimization has been mostly based in finding sets of gene (or reaction) deletions that lead to desired phenotypes in computational simulations. In this work, we focus on enlarging the set of possible genetic changes, considering gene over and underexpression. A gene is considered under (over) expressed if its expression value is constrained to be significantly lower (higher) than the one in the wild-type strain, used as a reference. A method is proposed to propagate relative gene expression values to flux constraints over related reactions, making use of the available transcriptional/ translational information. The algorithms chosen for the optimization tasks are metaheuristics such as eolutionary agorithm (EA) and smulated anealing (SA), based on previous successful work on gene knockout optimization. These methods were modified appropriately to accommodate the novel optimization tasks and were applied to study the optimization of succinic and lactic acid production using Escherichia coli as the host. The results are compared with previous ones obtained in gene knockout optimization, thus showing the usefulness of the approach. The methods proposed in this work were implemented in a novel plug-in for OptFlux, an open-source software framework for ME. Supplementary Material is available at www.liebertonline.com/cmb.",
+        "full_text_preview": "",
+        "authors": [
+            "Gonçalves",
+            "Emanuel",
+            "Pereira",
+            "Rui",
+            "Rocha",
+            "I.",
+            "Rocha",
+            "Miguel"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/8fa66c26-3275-49a7-8d8a-2de4c2411a6c/download",
+        "doi": "10.1089/cmb.2011.0265"
+    },
+    "65": {
+        "title": "Sensor-driven agenda for intelligent home care of the elderly",
+        "abstract": "The exponential increase of home-bound persons who live alone and are in need of continuous monitoring requires new solutions to current problems. Most of these cases present illnesses such as motor or psychological disabilities that deprive of a normal living. Common events such as forgetfulness or falls are quite common and have to be prevented or dealt with. This paper introduces a platform to guide and assist these persons (mostly elderly people) by providing multisensory monitoring and intelligent assistance. The platform operates at three levels. The lower level, denominated ‘‘Data acquisition and processing’’ performs the usual tasks of a monitoring system, collecting and processing data from the sensors for the purpose of detecting and tracking humans. The aim is to identify their activities in an intermediate level called ‘‘activity detection’’. The upper level, ‘‘Scheduling and decision-making’’, consists of a scheduler which provides warnings, schedules events in an intelligent manner and serves as an interface to the rest of the platform. The idea is to use mobile and static sensors performing constant monitoring of the user and his/her environment, providing a safe environment and an immediate response to severe problems. A case study on elderly fall detection in a nursery home bedroom demonstrates the usefulness of the proposal.",
+        "full_text_preview": "",
+        "authors": [
+            "Costa",
+            "Ângelo",
+            "Castillo",
+            "José Carlos",
+            "Novais",
+            "Paulo",
+            "Fernández-Caballero",
+            "Antonio",
+            "Simões",
+            "Ricardo"
+        ],
+        "document_link": "https://repositorium.uminho.pt/entities/publication/ad01570b-9204-46f7-b5eb-29d1c956a611",
+        "doi": "10.1016/j.eswa.2012.04.058"
+    },
+    "66": {
+        "title": "O lúdico como uma possibilidade de intervenção no bullying e formação da criança na escola",
+        "abstract": "Este estudo pretende análisar as principais características do lúdico, através dos autores que tratam do lúdico como a essência para a construção de um tempo, onde o brincar seja reconhecido como uma importante estratégia de desenvolvimento, aprendizagem e melhoria das relações no contexto infantil, sendo uma importante estratégia para a diminuição das práticas agressivas no contexto escolar. Quer ainda discutir os principais conceitos e entendimentos deste tema e desta maneira situá-lo dentro da esfera do conhecimento, da cultura e do meio em que as crianças estão inseridas, bem como suas significações no universo da educação e dos muros da escola, a qual faz uso da ludicidade de muitas formas, mas não se dá conta do seu real significado e importância. O estudo nos remete a um questionamento: as atividades lúdicas podem ser utilizadas como um instrumento de prevenção ao bullying no contexto escolar? Diante destas considerações é oportuno fazer uma relação destas aparentes relações da cultura e do lúdico com as possibilidades de inserção no meio educacional, especialmente nas insituições de ensino, em que o lúdico se caracteriza como uma ação muito utilizada, mas pouco refletida. Para uma reflexão mais aprofundada, fazendo um paralelo entre a violência e o lúdico, entendemos que um dos trunfos que a escola dispõe atualmente para regular a violência, deveria ser uma prioridade à valorização das atividades lúdicas no tempo e no espaço que ela disponibiliza para seus alunos, seja em qualquer idade ou nível escolar. As atividades lúdicas são muito indicadas para o desenvolvimento destes objetivos, especialmente para as crianças que entendem suas manifestações como um momento de integração e desenvolvimento.",
+        "full_text_preview": "",
+        "authors": [
+            "Carvalho",
+            "João Eloir",
+            "Barros",
+            "Paulo Cesar",
+            "Pereira",
+            "Beatriz Oliveira"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/f3455161-5fdf-40e4-9283-3bd1b33f6d5c/download",
+        "doi": "N/A"
+    },
+    "67": {
+        "title": "Um estudo sobre o bullying no contexto escolar",
+        "abstract": "Este estudo relaciona-se com outros na área do bullying na escola e procura analisar os conceitos e características dos comportamentos de bullying e as possibilidades de intervenção através das atividades lúdicas para a melhoria das relações no contexto escolar. Tem como objetivo o entendimento dos conceitos e características dos envolvidos com o fenômeno e ainda o reconhecimento das formas de vitimização e sinais que possibilitem a identificação e auxílio das vítimas, tendo como instrumento de intervenção as atividades lúdicas e recreativas desenvolvidas na escola. Este estudo de caráter qualitativo, aparece na sequência uma análise da revisão de literatura e do estudo de pesquisas de intervenção já realizadas em diversos países, no âmbito do doutoramento em Estudos da Criança, os quais estão em desenvolvimento e que possibilitaram o aprofundamento das questões norteadoras dos eixos temáticos relativos ao presente estudo, que vem de encontro com o tema relacionado à violência dentro da escola. Contudo, a intenção deste estudo em relacionar a violência com o lúdico, o lazer com a escola, seria propor mudanças significativas que possam prevenir as brigas, os conflitos e as confusões e contribuir para melhorar o ambiente escolar através do desenvolvimento de competências sociais de cooperação aprendidas em jogos, brincadeiras e ações que oportunizem momentos de alegria, integração e confraternização, nos quais, as crianças possam não apenas vivenciar o lúdico, mas também expressar o seu ímpeto em condições definidas e seguras, que permitam a liberação de sua agressividade espontânea e desta forma aprendam a respeitar, conviver e reconhecer o outro por meio das atividades lúdicas.",
+        "full_text_preview": "",
+        "authors": [
+            "Barros",
+            "Paulo Cesar",
+            "Carvalho",
+            "João Eloir",
+            "Pereira",
+            "Beatriz Oliveira"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/a3803ec8-058f-44a4-bd4c-3021663a677e/download",
+        "doi": "N/A"
+    },
+    "68": {
+        "title": "Videojogos e práticas desportivas",
+        "abstract": "We present a study that aims to knowing the level of attachment to new technologies and videogames of teens who take a formal and regular sport practice as well as finding out the common characteristics among young people who are athletes and intensive videogame players at the same time. We have employed qualitative methods in a case-study design. 14-16 year-old-students from Barcelos Secondary School were the target-population in this research. The data were collected through semistructured interviews whose content was analysed afterwards. Findings show that these teenagers see large opportunities to value leisure time in both activities; they also refer socialization as a strong impulse towards those actions; they are stimulated by a strong intrinsic motivation; competitive spirit distinguishes all these youngsters; they recognize educational value to both activities and they see them as an opportunity of learning and development of specific and overall skills.",
+        "full_text_preview": "",
+        "authors": [
+            "Pereira",
+            "Carlos Alberto Gomes",
+            "Ramos",
+            "Altina",
+            "Pereira",
+            "Beatriz Oliveira"
+        ],
+        "document_link": "https://repositorium.uminho.pt/bitstreams/ecd378fc-b69c-45a5-95e7-a5f231a2a66d/download",
+        "doi": "N/A"
+    },
+    "69": {
+        "title": "A violência como fator de vulnerabilidade na ótica de adolescentes escolares",
+        "abstract": "O objetivo deste estudo foi compreender como é que os adolescentes escolares percebem a violência em suas diferentes formas e expressões e em que medida cada uma destas dimensões é percebida como fator de vulnerabilidade. O estudo é de natureza qualitativa, utilizando como técnica de coleta de dados entrevistas semi-estruturadas aa dolescentesde 10 a 19 anos. A análise dos dados foi realizada por meio da análise de conteúdo temática baseando-se em princípios hermenêuticodialéticos. A violência social, em particular a delinqüência juvenil, comunitária e escolar é apontada enquanto um fator de vulnerabilidade o que nos leva a considerar que para impedirmos a sua (re) produção, as iniciativas sócio-políticas devem procurar responder aos desafios de tirá-la da clandestinidade; compreender melhor o seu processo de produção e formar profissionais comprometidos no seu enfrentamento.",
+        "full_text_preview": "",
         "authors": [
             "Silva",
-            "Fábio",
-            "Olivares",
-            "Teresa",
-            "Royo",
-            "Fernando",
-            "Vergara",
-            "M. A.",
-            "Analide",
-            "César"
+            "Marta Angélica Iossi",
+            "Pereira",
+            "Beatriz Oliveira"
         ],
-        "document_link": "https://repositorium.uminho.pt/entities/publication/a5b4ad9b-67b5-447a-b72e-f7f0e7ca68b1",
-        "doi": "10.1007/978-3-642-38622-0_21"
+        "document_link": "https://repositorium.uminho.pt/bitstreams/a9ab7f08-0313-4486-9bd3-66f2daa9bcca/download",
+        "doi": "N/A"
     }
 }

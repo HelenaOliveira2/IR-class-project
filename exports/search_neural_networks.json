@@ -1,58 +1,51 @@
 [
     {
-        "id": 12,
-        "score": 0.416,
-        "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
-        "snippet": "...ded of Logic Programming and Artificial Neural Networks approaches to computing,...",
-        "link": "https://repositorium.uminho.pt/entities/publication/b39ee01c-29f4-4652-85ef-a4b250e809b7"
-    },
-    {
-        "id": 32,
-        "score": 0.416,
-        "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
-        "snippet": "...ded of Logic Programming and Artificial Neural Networks approaches to computing,...",
-        "link": "https://repositorium.uminho.pt/entities/publication/b39ee01c-29f4-4652-85ef-a4b250e809b7"
-    },
-    {
         "id": 11,
-        "score": 0.3419,
+        "score": 0.1626,
         "title": "Logic programming and artificial neural networks in breast cancer detection",
         "snippet": "...ach to computing centered on Artificial Neural Networks, to evaluate the risk of...",
-        "link": "https://repositorium.uminho.pt/entities/publication/c9e6c7cb-6253-46b9-b80e-d980dba537b8"
+        "link": "https://repositorium.uminho.pt/bitstreams/da2d4f64-9a1c-40bd-aacb-b2a2108a6be2/download"
     },
     {
-        "id": 31,
-        "score": 0.3419,
-        "title": "Logic programming and artificial neural networks in breast cancer detection",
-        "snippet": "...ach to computing centered on Artificial Neural Networks, to evaluate the risk of...",
-        "link": "https://repositorium.uminho.pt/entities/publication/c9e6c7cb-6253-46b9-b80e-d980dba537b8"
+        "id": 12,
+        "score": 0.1347,
+        "title": "Abstract computation in schizophrenia detection through artificial neural network based systems",
+        "snippet": "...ded of Logic Programming and Artificial Neural Networks approaches to computing,...",
+        "link": "https://repositorium.uminho.pt/bitstreams/a76bfb48-ba85-4fc4-a403-995de1c3afa9/download"
     },
     {
-        "id": 19,
-        "score": 0.1362,
-        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
-        "snippet": "...genome-scale transcriptional regulatory networks represents the next frontier in...",
-        "link": "https://repositorium.uminho.pt/entities/publication/c5d84aab-442b-4f53-960a-3f9ab282dc70"
+        "id": 10,
+        "score": 0.0989,
+        "title": "An assessment of chronic kidney diseases",
+        "snippet": "...ach to computing centered on Artificial Neural Networks, in order to weigh the D...",
+        "link": "https://repositorium.uminho.pt/bitstreams/16c059a2-3ca1-4b22-b85b-9cba52931005/download"
     },
     {
-        "id": 39,
-        "score": 0.1362,
-        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
-        "snippet": "...genome-scale transcriptional regulatory networks represents the next frontier in...",
-        "link": "https://repositorium.uminho.pt/entities/publication/c5d84aab-442b-4f53-960a-3f9ab282dc70"
+        "id": 63,
+        "score": 0.0792,
+        "title": "An integrated computational environment for elementary modes analysis of biochemical networks",
+        "snippet": "...stoichiometric matrix of a biochemical network through the use of convex analys...",
+        "link": "https://repositorium.uminho.pt/entities/publication/b7a08cce-7683-4950-aa9c-66851e9cd5be"
     },
     {
         "id": 20,
-        "score": 0.1287,
+        "score": 0.073,
         "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
         "snippet": "...mbient intelligence and wireless sensor networks with the objective of obtain im...",
-        "link": "https://repositorium.uminho.pt/entities/publication/a5b4ad9b-67b5-447a-b72e-f7f0e7ca68b1"
+        "link": "https://repositorium.uminho.pt/bitstreams/534b8f22-33dd-4047-abf5-7c060b47cdd1/download"
     },
     {
-        "id": 40,
-        "score": 0.1287,
-        "title": "Experimental study of the stress level at the workplace using an smart testbed of wireless sensor networks and ambient intelligence techniques",
-        "snippet": "...mbient intelligence and wireless sensor networks with the objective of obtain im...",
-        "link": "https://repositorium.uminho.pt/entities/publication/a5b4ad9b-67b5-447a-b72e-f7f0e7ca68b1"
+        "id": 19,
+        "score": 0.0631,
+        "title": "Genome-scale bacterial transcriptional regulatory networks: reconstruction and integrated analysis with metabolic models",
+        "snippet": "...genome-scale transcriptional regulatory networks represents the next frontier in...",
+        "link": "https://repositorium.uminho.pt/bitstreams/796509fd-ce7b-4084-9bce-d0ac4a4aaa6d/download"
+    },
+    {
+        "id": 39,
+        "score": 0.0628,
+        "title": "Gamification, social networks and sustainable environments",
+        "snippet": "Intelligent environments and ambient intelligence enabled systems provide means ...",
+        "link": "https://repositorium.uminho.pt/bitstreams/1b1fe3ee-a8d9-463c-808b-1b26fffc9340/download"
     }
 ]

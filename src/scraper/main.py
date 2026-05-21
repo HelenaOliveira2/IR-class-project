@@ -43,14 +43,13 @@ def main():
     # --- USO DO SETTINGS ---
     # Substituímos o '20' fixo pelo valor que está no teu config/ .env
     
-    final_results = scraper_instance.scrape()
+    # APAGAMOS A LINHA DO final_results E USAMOS A LISTA QUE JÁ TEM TUDO (all_results)
+    logger.info(f"Scraping completed. Total papers scraped: {len(all_results)}")
 
-    logger.info(f"Scraping completed. Total papers scraped: {len(final_results)}")
-
-    # 2. Migrar diretamente da memória para a Base de Dados (REQ-B09)
+    # 2. Migrar diretamente da memória para a Base de Dados
     logger.info("--- Verificando e Populando Infraestrutura ---")
 
-    setup_database(data_list=final_results, db_file=settings.db_file) 
+    setup_database(data_list=all_results, db_file=settings.db_file)
     
     logger.info("Base de dados pronta e populada.\n")
 if __name__ == "__main__":

@@ -47,13 +47,19 @@ class Indexer:
             meta = doc.get("original_metadata", {})
             self.document_metadata[doc_id] = {
                 "title": meta.get("title", "Sem Título"),
-                "authors": meta.get("authors", []), # ADICIONA ESTA LINHA se não tiveres
+                "abstract": meta.get("abstract", ""),
+                "full_text_preview": meta.get("full_text_preview", ""), # NOVO
+                "authors": meta.get("authors", []),
                 "document_link": meta.get("document_link", "N/A"),
                 "doi": meta.get("doi", "N/A")
             }
 
-            # União de tokens para processar frequências
-            all_tokens = doc.get("title_tokens", []) + doc.get("abstract_tokens", [])
+            # O Indexador agora junta as 3 zonas
+            all_tokens = (
+                doc.get("title_tokens", []) + 
+                doc.get("abstract_tokens", []) +
+                doc.get("full_text_tokens", []) # A NOVA ZONA
+            )
 
             term_counts = defaultdict(int)
             for token in all_tokens:

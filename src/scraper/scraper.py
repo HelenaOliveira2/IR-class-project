@@ -121,7 +121,7 @@ def find_chrome_executable():
 
 
 class UMinhoDSpace8Scraper:
-    def __init__(self, base_url, max_items=10):
+    def __init__(self, base_url, max_items=80):
         """
         Initialize the web scraper with Selenium WebDriver configuration.
         Args:
@@ -170,18 +170,18 @@ class UMinhoDSpace8Scraper:
 
         # REQ-B04 & REQ-B51: Link de Acesso ao Documento
         try:
-            # 1. Tenta encontrar o Handle/Link Permanente (mais fiável no RepositóriUM)
-            handle_elem = self.driver.find_elements(By.XPATH, "//div[contains(@class, 'item-location')]//a")
+            # 1. Tentar apanhar logo o link direto do PDF no novo formato DSpace 7
+            pdf_link_elem = self.driver.find_elements(By.CSS_SELECTOR, "a[href*='/bitstreams/'], a[href*='/download']")
             
-            if handle_elem:
-                data["document_link"] = handle_elem[0].get_attribute("href")
+            if pdf_link_elem:
+                # Encontrou o PDF!
+                data["document_link"] = pdf_link_elem[0].get_attribute("href")
             else:
-                # 2. Se não encontrar o handle, tenta o link do bitstream/PDF que já tinhas
-                pdf_link_elem = self.driver.find_elements(By.CSS_SELECTOR, "a[href*='/bitstream/'], a.download-button")
-                if pdf_link_elem:
-                    data["document_link"] = pdf_link_elem[0].get_attribute("href")
+                # 2. Se não houver PDF, guarda o link da página normal
+                handle_elem = self.driver.find_elements(By.XPATH, "//div[contains(@class, 'item-location')]//a")
+                if handle_elem:
+                    data["document_link"] = handle_elem[0].get_attribute("href")
                 else:
-                    # 3. Fallback: Usa o URL atual da página onde o Selenium está
                     data["document_link"] = self.driver.current_url
         except Exception as e:
             print(f"Erro ao capturar link: {e}")

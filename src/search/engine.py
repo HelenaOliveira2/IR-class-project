@@ -8,6 +8,10 @@ from xml.dom import minidom
 import os
 from src.search.processor import TextProcessor, process_from_db
 from src.search.indexer import run_indexer
+import fitz
+import requests
+import io
+import time
 
 class SearchEngine:
     def __init__(self, index_path='src/search/inverted_index.json', metadata_path='src/search/doc_metadata.json'):
@@ -296,11 +300,19 @@ class SearchEngine:
             if doc_types and doc_type not in doc_types: continue
             
             # Definição da Zona (Segura)
+            # Definição da Zona (Segura)
             target_text = ""
-            if search_zone == "title": target_text = meta.get("title", "")
-            elif search_zone == "abstract": target_text = meta.get("abstract", "")
-            else: target_text = meta.get("title", "") + " " + meta.get("abstract", "")
-
+            if search_zone == "title": 
+                target_text = meta.get("title", "")
+            elif search_zone == "abstract": 
+                target_text = meta.get("abstract", "")
+            else: 
+                # Zona ALL: Junta tudo o que o documento tem!
+                target_text = (
+                    meta.get("title", "") + " " + 
+                    meta.get("abstract", "") + " " + 
+                    meta.get("full_text_preview", "")
+                )
             # Extraímos os tokens reais do documento nesta zona
             target_tokens = self.processor.clean_text(target_text)
             unique_target_tokens = set(target_tokens)

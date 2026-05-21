@@ -7,6 +7,9 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.tokenize import word_tokenize, sent_tokenize
 import sqlite3
 import os
+import fitz
+import requests
+import io 
 
 
 class TextProcessor:
@@ -53,30 +56,75 @@ class TextProcessor:
 
 # --- FUNÇÃO FORA DA CLASSE (Para evitar o NameError) ---
 
+def extract_pdf_from_url(pdf_url):
+    """Faz o download do PDF para a RAM e extrai o texto."""
+    # Agora aceita 'bitstream', 'bitstreams' ou 'download'
+    if not pdf_url or "http" not in pdf_url or ("bitstream" not in pdf_url.lower() and "download" not in pdf_url.lower()): 
+        return ""
+        
+    try:
+        # Disfarce avançado: O Python finge ser o Google Chrome no Windows
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/pdf,application/xhtml+xml,text/html'
+        }
+        
+        # Ignora avisos de segurança da universidade
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        
+        response = requests.get(pdf_url, headers=headers, stream=True, timeout=15, verify=False)
+        
+        # Resto do código mantém-se igual...
+        if 'application/pdf' not in response.headers.get('Content-Type', ''):
+            return ""
+            
+        pdf_stream = io.BytesIO(response.content)
+        doc = fitz.open(stream=pdf_stream, filetype="pdf")
+        text = " ".join(page.get_text() for page in doc)
+        return text
+    except Exception as e:
+        print(f"Erro ao extrair PDF ({pdf_url}): {e}")
+        return ""
+
 def process_from_db(db_file='publications.db', output_file='src/search/processed_data.json',use_stemming=True, remove_stopwords=True):
     conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
     
-    # ADICIONA 'authors' e 'year' aqui no SELECT
     cursor.execute('SELECT id, title, abstract, year, doi, document_link, authors FROM documents')
     rows = cursor.fetchall()
     
     processor = TextProcessor()
     processed_list = []
     
+    # --- CONTADOR PARA LIMITAR A 20 PDFs ---
+    full_text_count = 0 
+    
     for row in rows:
-        # Desempacota as 7 colunas (agora incluindo authors)
         doc_id, title, abstract, year, doi, link, authors_raw = row
-        
-        # O SQLite guarda listas como strings. Se os autores estiverem separados por vírgulas:
         authors_list = [a.strip() for a in authors_raw.split(',')] if authors_raw else []
 
+        full_text = ""
+        
+        # Tenta ir à web sacar o PDF SE ainda tivermos menos de 20 e SE o link existir
+        if full_text_count < 20 and link and link != "N/A":
+            full_text = extract_pdf_from_url(link)
+            
+            if full_text.strip():
+                full_text_count += 1
+                print(f"🌐 Texto completo extraído da Web: Doc ID {doc_id} ({full_text_count}/20)")
+
+        # Guarda Título e Abstract para TODOS os 80 documentos.
+        # Guarda o Texto Completo para os 20 que conseguiu ler, e vazio para os restantes.
         processed_doc = {
             "id": doc_id,
             "title_tokens": processor.clean_text(title, use_stemming=use_stemming, remove_stopwords=remove_stopwords),
             "abstract_tokens": processor.clean_text(abstract, use_stemming=use_stemming, remove_stopwords=remove_stopwords),
+            "full_text_tokens": processor.clean_text(full_text, use_stemming=use_stemming, remove_stopwords=remove_stopwords),
             "original_metadata": {
                 "title": title,
+                "abstract": abstract,
+                "full_text_preview": full_text[:1500], # Se não tiver lido, fica vazio
                 "year": year,
                 "authors": authors_list,
                 "doi": doi,
@@ -89,7 +137,7 @@ def process_from_db(db_file='publications.db', output_file='src/search/processed
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(processed_list, f, ensure_ascii=False, indent=4)
     conn.close()
-    print(f"Sucesso! {output_file}")
+    print(f"Sucesso! Processados {len(rows)} documentos ({full_text_count} com texto completo).")
 
 #REQ-B14
 def segment_and_tokenize(text):
