@@ -16,8 +16,25 @@ def main():
     # Example collection:  https://repositorium.uminho.pt/collections/690f7814-a67b-4f27-8fff-6b33581d1a91/search
     # https://repositorium.uminho.pt/handle/1822/21292
     repo_url = f"https://repositorium.uminho.pt/handle/"
-    collection = "1822/21293"
-    base_url = f"{repo_url}/{collection}"
+    collections = [
+        "1822/21293",
+        "1822/21292", 
+        "1822/2418",   # outra coleção
+        "1822/3061",   # outra coleção
+    ]
+    all_results = []
+    
+    for collection in collections:
+        base_url = f"https://repositorium.uminho.pt/handle/{collection}"
+        logger.info(f"A fazer scraping de: {base_url}")
+        
+        scraper_instance = UMinhoDSpace8Scraper(
+            base_url, 
+            max_items=settings.scraper_max_items
+        )
+        results = scraper_instance.scrape()
+        all_results.extend(results)
+        logger.info(f"Recolhidos {len(results)} documentos desta coleção.")
 
     # Create an instance of the Scraper class
     # The scraper will automatically detect Chrome in default locations
@@ -25,10 +42,6 @@ def main():
     # scraper_instance = scraper.UMinhoDSpace8Scraper(base_url, max_items=2, portable_chrome_path=r"D:\Portable\chrome\chrome.exe")
     # --- USO DO SETTINGS ---
     # Substituímos o '20' fixo pelo valor que está no teu config/ .env
-    scraper_instance = UMinhoDSpace8Scraper(
-        base_url, 
-        max_items=settings.scraper_max_items 
-    )
     
     final_results = scraper_instance.scrape()
 

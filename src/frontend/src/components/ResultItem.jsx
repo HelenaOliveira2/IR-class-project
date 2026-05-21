@@ -8,7 +8,7 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
   if (!doc) return null;
 
   // Lógica para validar se o score existe e é um número
-  const hasValidScore = doc.score !== undefined && doc.score !== null && !isNaN(doc.score);
+  const hasValidScore = doc.score && doc.score !== "N/A";
 
   // Determinar a cor da barra baseada no score
   let scoreColor = '#3b82f6'; // Azul por defeito
@@ -64,10 +64,10 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
           {hasValidScore && (
             <div className="score-tag" style={{ width: '100px', textAlign: 'right' }}>
               <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '2px', fontWeight: 'bold' }}>
-                  {(Number(doc.score) * 100).toFixed(1)}%
+                  {doc.score}  {/* já vem "11.0%" da API, mostra diretamente */}
               </div>
               <div style={{ width: '100%', backgroundColor: '#e2e8f0', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
-                  <div style={{ width: `${Number(doc.score) * 100}%`, backgroundColor: scoreColor, height: '100%' }}></div>
+                  <div style={{ width: doc.score, backgroundColor: scoreColor, height: '100%' }}></div>
               </div>
             </div>
           )}

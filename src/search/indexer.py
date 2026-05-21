@@ -103,13 +103,13 @@ class Indexer:
             
         print("Índice Invertido e Metadados guardados com sucesso!")
 
-def run_indexer(batch_size=100):
+def run_indexer(batch_size=100, input_path='src/search/processed_data.json',
+                index_file='src/search/inverted_index.json',
+                metadata_file='src/search/doc_metadata.json', fresh=False):
     """
     REQ-B59: Implementação de processamento em lotes (batch processing).
     Processa a coleção em fatias para não sobrecarregar a memória RAM.
     """
-    input_path = 'src/search/processed_data.json'
-    
     try:
         with open(input_path, 'r', encoding='utf-8') as f:
             processed_data = json.load(f)
@@ -118,22 +118,42 @@ def run_indexer(batch_size=100):
         return
 
     indexer = Indexer()
-    indexer.load_existing_index()
     
-    # --- REQ-B59: Lógica de Lotes (Batches) ---
+    if not fresh:
+        indexer.load_existing_index(index_file, metadata_file)
+    
     total_docs = len(processed_data)
     print(f"\n📦 A iniciar indexação em Lotes (Tamanho do Lote: {batch_size})...")
     
     for i in range(0, total_docs, batch_size):
-        # Cortar a lista numa fatia de tamanho 'batch_size'
         batch = processed_data[i:i + batch_size]
         print(f" -> A processar lote {i//batch_size + 1} (Docs {i} a {i + len(batch) - 1})...")
-        
-        # Constrói o índice apenas para esta fatia
         indexer.build_index(batch)
         
-    # Guarda o ficheiro gigante apenas uma vez no final
-    indexer.save_index()
+    indexer.save_index(index_file, metadata_file)
+
+def build_index_from_data(use_stemming=True, remove_stopwords=True):
+    from src.search.processor import process_from_db
+    import tempfile, os
+
+    # Processa para um ficheiro temporário
+    tmp_path = f'src/search/_tmp_processed.json'
+    process_from_db(output_file=tmp_path, use_stemming=use_stemming, remove_stopwords=remove_stopwords)
+    
+    with open(tmp_path, 'r', encoding='utf-8') as f:
+        processed_data = json.load(f)
+    os.remove(tmp_path)
+
+    indexer = Indexer()
+    indexer.build_index(processed_data)
+    indexer.generate_skip_pointers()
+
+    # Devolve os dados em memória em vez de guardar ficheiros
+    index_data = {
+        k: {"df": v["df"], "postings": dict(v["postings"]), "skip_pointers": v.get("skip_pointers", {})}
+        for k, v in indexer.inverted_index.items()
+    }
+    return index_data, indexer.document_metadata
 
 if __name__ == "__main__":
     run_indexer()

@@ -6,19 +6,17 @@ import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
 import { startTransition } from 'react';
 
-// 1. IMPORTAÇÃO (No topo do ficheiro, junto aos outros)
+// 📊 IMPORTS ESTÁTICOS (Correção para os gráficos do Recharts não colapsarem no arranque)
 import DashboardPage from './pages/DashboardPage';
+import AdminDashboard from './pages/AdminDashboard';
 
-
-
-// REQ-F84: Otimizar Bundle Size (Carregamento preguiçoso / Lazy Loading das páginas)
+// 🚀 IMPORTS PREGUIÇOSOS / LAZY LOADING (Para as páginas normais de texto)
 const HistoryPage = lazy(() => import('./components/HistoryPage'));
 const HelpPage = lazy(() => import('./components/HelpPage'));
 const CollectionPage = lazy(() => import('./components/CollectionPage'));
 const AuthorPage = lazy(() => import('./pages/AuthorPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ComparePage = lazy(() => import('./pages/ComparePage'));
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));   
 
 import './styles/main.scss';
 
@@ -29,6 +27,7 @@ const getSavedConfig = (key, defaultValue) => {
 };
 
 function App() {
+  const activeRequestRef = useRef(null);
   // REQ-F43: Estado para intervalo de datas e REQ-F44: Tipos de documento
   const [dateRange, setDateRange] = useState({ min: '', max: '' });
   const [docTypes, setDocTypes] = useState([]);
@@ -114,8 +113,8 @@ function App() {
 
   // Pesquisa automática ao mudar paginação ou filtros
   useEffect(() => {
-    if (lastQuery) handlePerformSearch(lastQuery, searchMode, currentPage);
-  }, [currentPage, resultsPerPage, sortBy, searchMode, searchTarget]);
+    if (lastQuery) handlePerformSearch(lastQuery, searchMode, searchTarget, currentPage);
+  }, [currentPage, resultsPerPage, sortBy, searchMode, searchTarget, weightingScheme, rankingAlgorithm, dateRange]);
 
   // REQ-F83: Infinite Scroll (Carrega mais resultados ao chegar ao fim da página)
   useEffect(() => {
@@ -129,7 +128,9 @@ function App() {
           }
         }
       },
-      { threshold: 0.1 } // Mudar para 0.1 para detetar o início do elemento
+      { threshold: 0.1 , // Mudar para 0.1 para detetar o início do elemento
+        rootMargin: "50px"} 
+      
     );
 
     if (observerTarget.current) observer.observe(observerTarget.current);
@@ -137,7 +138,7 @@ function App() {
     return () => {
       if (observerTarget.current) observer.unobserve(observerTarget.current);
     };
-  }, [loading, results]);
+  }, [loading, results, searchStats.total]);
 
   // --- Handlers de Ações ---
   const handleSaveSearch = (queryText, collectionName) => {
@@ -202,6 +203,14 @@ function App() {
     setLoading(true);
     setErrorMsg(null); // Limpa erros antigos
 
+    // 🌟 SE JÁ HOUVER UM PEDIDO A CORRER, CANCELA-O IMEDIATAMENTE!
+    if (activeRequestRef.current) {
+      activeRequestRef.current.abort();
+    }
+    // Criamos um novo controlador para o pedido atual
+    const controller = new AbortController();
+    activeRequestRef.current = controller;
+
     const newUrlParams = new URL(window.location);
     newUrlParams.searchParams.set('q', query);
     newUrlParams.searchParams.set('mode', mode);
@@ -210,7 +219,7 @@ function App() {
     try {
       let url = "";
       if (mode === 'author') {
-        url = `http://127.0.0.1:8000/api/authors/search?name=${encodeURIComponent(query)}`;
+        url = `/api/authors/search?name=${encodeURIComponent(query)}`;
       } else {
 
         const params = new URLSearchParams({
@@ -228,7 +237,7 @@ function App() {
           date_max: dateRange.max, // Envia o valor do Ano Max
           doc_types: docTypes.join(','),
         });
-        url = `http://127.0.0.1:8000/api/search?${params}`;
+        url = `/api/search?${params}`;
       }
 
       // REQ-F78 e F86: Carregar da Cache
@@ -242,7 +251,7 @@ function App() {
         return; 
       }
 
-      const response = await fetch(url);
+      const response = await fetch(url, { signal: controller.signal });
       const data = await response.json();
       
       const finalResults = mode === 'author' ? data : (data.results || []);
@@ -262,12 +271,27 @@ function App() {
         setSearchStats(finalStats);
       });
 
+      // Limpa a referência já que o pedido terminou com sucesso
+      if (activeRequestRef.current === controller) {
+        activeRequestRef.current = null;
+      }
+
     } catch (error) {
-      console.error("Erro na pesquisa:", error);
-      // REQ-F90: Atualiza o painel de erro no ecrã
+      // 🌟 CORREÇÃO CRÍTICA: Se o erro for um cancelamento nosso, ignora-o em silêncio!
+      if (error.name === 'AbortError') {
+        console.log("Pedido duplicado cancelado com sucesso nos bastidores. 🛡️");
+        return; 
+      }
+      
+      console.error("Erro real na pesquisa:", error);
+      // REQ-F90: Só mostra esta mensagem se o erro for real (ex: servidor desligado)
       setErrorMsg("Erro na ligação ao servidor. Verifique se o backend Python está a correr.");
+      
     } finally {
-      setLoading(false);
+      // 🌟 CORREÇÃO CRÍTICA: Só desativamos o loading se este for o último pedido ativo real
+      if (activeRequestRef.current === controller) {
+        setLoading(false);
+      }
     }
   };
 
@@ -288,7 +312,7 @@ function App() {
         <main className="main-container" role="main">
           <Suspense fallback={<div style={{ textAlign: 'center', padding: '50px', fontSize: '1.2rem', color: '#64748b' }}>A carregar a página... 🚀</div>}>
             <Routes>
-              {/* DASHBOARD */}
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/" element={
                 <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
@@ -386,31 +410,14 @@ function App() {
               } />
 
               <Route path="/authors" element={<AuthorPage collection={collection} toggleSaveToCollection={toggleSaveToCollection} addToHistory={addToHistory} />} />
-              <Route path="/history" element={
-                <HistoryPage 
-                  history={searchHistory} 
-                  saved={collection} 
-                  onExport={exportHistory} 
-                  onClearHistory={() => setSearchHistory([])} 
-                  onRemoveSaved={toggleSaveToCollection} 
-                />
-              } />
-              <Route path="/collection" element={
-                <CollectionPage 
-                  collection={collection} 
-                  savedSearches={savedSearches} 
-                  toggleSaveToCollection={toggleSaveToCollection}
-                  onRemoveSavedSearch={(id) => setSavedSearches(prev => prev.filter(s => s.id !== id))}
-                />
-              } />
+              <Route path="/history" element={<HistoryPage history={searchHistory} saved={collection} onExport={exportHistory} onClearHistory={() => setSearchHistory([])} onRemoveSaved={toggleSaveToCollection} />} />
+              <Route path="/collection" element={<CollectionPage collection={collection} savedSearches={savedSearches} toggleSaveToCollection={toggleSaveToCollection} onRemoveSavedSearch={(id) => setSavedSearches(prev => prev.filter(s => s.id !== id))} />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/help" element={<HelpPage />} />
               <Route path="/compare" element={<ComparePage collection={collection} toggleSaveToCollection={toggleSaveToCollection} />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-             
-            </Routes>
-          </Suspense>
-        </main>
+              </Routes>
+            </Suspense>
+          </main>
       </div>
     </Router>
   );

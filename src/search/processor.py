@@ -53,7 +53,7 @@ class TextProcessor:
 
 # --- FUNÇÃO FORA DA CLASSE (Para evitar o NameError) ---
 
-def process_from_db(db_file='publications.db', output_file='src/search/processed_data.json'):
+def process_from_db(db_file='publications.db', output_file='src/search/processed_data.json',use_stemming=True, remove_stopwords=True):
     conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
     
@@ -73,26 +73,23 @@ def process_from_db(db_file='publications.db', output_file='src/search/processed
 
         processed_doc = {
             "id": doc_id,
-            "title_tokens": processor.clean_text(title),
-            "abstract_tokens": processor.clean_text(abstract),
+            "title_tokens": processor.clean_text(title, use_stemming=use_stemming, remove_stopwords=remove_stopwords),
+            "abstract_tokens": processor.clean_text(abstract, use_stemming=use_stemming, remove_stopwords=remove_stopwords),
             "original_metadata": {
                 "title": title,
                 "year": year,
-                "authors": authors_list,  # <--- CRUCIAL: Adicionar aqui!
+                "authors": authors_list,
                 "doi": doi,
                 "document_link": link
             }
         }
         processed_list.append(processed_doc)
         
-    # Garantir que a pasta existe
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(processed_list, f, ensure_ascii=False, indent=4)
-        
     conn.close()
-    print(f"Sucesso! Dados guardados em {output_file}")
+    print(f"Sucesso! {output_file}")
 
 #REQ-B14
 def segment_and_tokenize(text):

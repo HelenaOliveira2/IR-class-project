@@ -73,12 +73,12 @@ const Header = ({ savedCount = 0 }) => {
           </Link>
 
           {/* --- ACRESCENTA ESTA LINHA ABAIXO --- */}
-          <Link 
-            to="/dashboard" 
-            className={location.pathname === '/dashboard' ? 'active' : ''}
-            style={{ marginLeft: '10px', color: '#3b82f6', fontWeight: 'bold' }} // Estilo de destaque opcional
-          >
-            Dashboard
+          <Link to="/dashboard" style={{ marginRight: '15px', textDecoration: 'none', color: '#475569' }}>
+            Dashboard Geral
+          </Link>
+
+          <Link to="/admin" style={{ textDecoration: 'none', color: '#475569' }}>
+            Painel Admin
           </Link>
 
         </div>

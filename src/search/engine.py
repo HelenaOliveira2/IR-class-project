@@ -12,6 +12,7 @@ from src.search.indexer import run_indexer
 class SearchEngine:
     def __init__(self, index_path='src/search/inverted_index.json', metadata_path='src/search/doc_metadata.json'):
         try:
+            self._ensure_indexes_exist()
             with open(index_path, 'r', encoding='utf-8') as f:
                 self.index_data = json.load(f)
             with open(metadata_path, 'r', encoding='utf-8') as f:
@@ -229,28 +230,48 @@ class SearchEngine:
     # REQ-B35 & REQ-B36: Sklearn Integration & Selection
     # ---------------------------------------------------------
     def ranked_search(self, query, use_sklearn=False, method="stemming", ranking="custom_tfidf", 
-                      weighting="log_normalization", zone="all", date_range=(None, None), 
-                      doc_types=None, remove_stopwords=True, scheme="tfidf", language="pt"):
+              weighting="log_normalization", zone="all", date_range=(None, None), 
+              doc_types=None, remove_stopwords=True, scheme="tfidf", language="pt"):
+
+        # Escolher o índice correto
+        use_stemming = (method == 'stemming')
+        key = ('stem' if use_stemming else 'lem') + '_' + ('nostop' if remove_stopwords else 'stop')
+        self.index_data = self.all_indexes[key]['index']
+        self.metadata = self.all_indexes[key]['metadata']
+        self.document_metadata = self.metadata
+        self.all_doc_ids = sorted([int(id) for id in self.metadata.keys()])
+
         # Processamento
         self.processor = TextProcessor()
-        clean_query = self.processor.clean_text(query, use_stemming=(method == 'stemming'), remove_stopwords=remove_stopwords)
+        clean_query = self.processor.clean_text(query, use_stemming=use_stemming, remove_stopwords=remove_stopwords)
         if not clean_query: return []
 
-        # Roteamento Inteligente
+        # Roteamento
         if ranking == 'boolean':
-            return self._search_boolean_logic(query) # Chama a lógica booleana que encapsulámos
+            results = self._search_boolean_logic(query)
+            if date_range[0] or date_range[1]:
+                filtered = []
+                for doc_id, score in results:
+                    meta = self.document_metadata.get(str(doc_id), {})
+                    raw_year = str(meta.get('year', '') or '').strip()[:4]
+                    doc_year = int(raw_year) if raw_year.isdigit() else None
+                    if doc_year is not None:
+                        if date_range[0] and doc_year < int(date_range[0]): continue
+                        if date_range[1] and doc_year > int(date_range[1]): continue
+                    filtered.append((doc_id, score))
+                return filtered
+            return results
         
         elif ranking == 'sklearn_tfidf':
             return self._search_with_sklearn(clean_query, search_zone=zone)
         
-        else: # custom_tfidf
-            # Aqui garantimos que passamos o 'scheme' corretamente
-            return self._search_with_custom(clean_query, weighting, zone, date_range, doc_types)
+        else:
+            return self._search_with_custom(clean_query, scheme=weighting, search_zone=zone, date_range=date_range, doc_types=doc_types)
     # ---------------------------------------------------------
     # REQ-B37: Implement cosine similarity calculation
     # REQ-B38: Rank search results by relevance scores
     # ---------------------------------------------------------
-    def _search_with_custom(self, query_terms, scheme="tfidf", search_zone="all", date_range=(None, None), doc_types=None):
+    def _search_with_custom(self, query_terms, scheme="log_normalization", search_zone="all", date_range=(None, None), doc_types=None):
         query_vector = {term: 1 for term in query_terms}
         query_norm = math.sqrt(sum(w**2 for w in query_vector.values()))
 
@@ -264,9 +285,13 @@ class SearchEngine:
             meta = self.document_metadata.get(str(doc_id), {})
             
             # Filtros de Metadados
-            doc_year = int(meta.get('year', 0)) if str(meta.get('year', '')).isdigit() else 0
-            if date_range[0] and doc_year < int(date_range[0]): continue
-            if date_range[1] and doc_year > int(date_range[1]): continue
+            raw_year = str(meta.get('year', '') or '').strip()[:4]
+            doc_year = int(raw_year) if raw_year.isdigit() else None
+
+            # Se o ano for desconhecido, NÃO filtrar (incluir o documento)
+            if doc_year is not None:
+                if date_range[0] and doc_year < int(date_range[0]): continue
+                if date_range[1] and doc_year > int(date_range[1]): continue
             doc_type = meta.get('type', 'Artigo')
             if doc_types and doc_type not in doc_types: continue
             
@@ -276,27 +301,60 @@ class SearchEngine:
             elif search_zone == "abstract": target_text = meta.get("abstract", "")
             else: target_text = meta.get("title", "") + " " + meta.get("abstract", "")
 
+            # Extraímos os tokens reais do documento nesta zona
             target_tokens = self.processor.clean_text(target_text)
+            unique_target_tokens = set(target_tokens)
 
+            # 🌟 PRODUTO ESCALAR: Apenas entre os termos partilhados (Query x Doc)
             dot_product = 0.0
-            doc_norm_sq = 0.0
-            
-            # Cálculo de similaridade
             for term in query_terms:
-                if term in target_tokens:
-                    # w_doc é definido aqui, dentro do escopo do IF
-                    w_doc = self._calculate_custom_weight(term, doc_id, scheme)
+                if term in unique_target_tokens:
+                    w_doc = self._calculate_custom_weight(term, doc_id, scheme=scheme)
                     w_query = query_vector[term]
-                    
                     dot_product += (w_doc * w_query)
-                    doc_norm_sq += (w_doc ** 2)
             
+            # 🌟 NORMA REAL DO DOCUMENTO: Calculada sobre TODOS os termos únicos do documento nesta zona!
+            doc_norm_sq = 0.0
+            for t_doc in unique_target_tokens:
+                w_t_doc = self._calculate_custom_weight(t_doc, doc_id, scheme=scheme)
+                doc_norm_sq += (w_t_doc ** 2)
+            
+            # 🌟 CÁLCULO DA SIMILARIDADE DO COSSENO VETORIAL
             if doc_norm_sq > 0 and query_norm > 0:
                 cosine_sim = dot_product / (math.sqrt(doc_norm_sq) * query_norm)
                 if cosine_sim > 0:
                     scores[doc_id] = cosine_sim
                     
         return sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+    def _ensure_indexes_exist(self):
+        all_indexes_path = 'src/search/all_indexes.json'
+        
+        if not os.path.exists(all_indexes_path):
+            print("🔨 Índices em falta, a reconstruir...")
+            from src.search.processor import process_from_db
+            from src.search.indexer import build_index_from_data
+
+            all_indexes = {}
+            configs = [
+                (True,  True,  'stem_nostop'),
+                (True,  False, 'stem_stop'),
+                (False, True,  'lem_nostop'),
+                (False, False, 'lem_stop'),
+            ]
+
+            for use_stemming, remove_sw, key in configs:
+                index_data, metadata = build_index_from_data(use_stemming=use_stemming, remove_stopwords=remove_sw)
+                all_indexes[key] = {"index": index_data, "metadata": metadata}
+
+            with open(all_indexes_path, 'w', encoding='utf-8') as f:
+                json.dump(all_indexes, f, ensure_ascii=False)
+            
+            print("✅ Todos os índices construídos!")
+        
+        # Carrega tudo de uma vez
+        with open(all_indexes_path, 'r', encoding='utf-8') as f:
+            self.all_indexes = json.load(f)
 
     def _search_with_sklearn(self, query_terms, search_zone='all'):
         """REQ-B35: Integração com sklearn corrigida para aceitar zone."""
