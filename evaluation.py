@@ -5,7 +5,6 @@ import sqlite3
 import os
 import sys
 
-# 1. Descobrir onde está a pasta 'src/search' em relação a este ficheiro
 base_dir = os.path.dirname(os.path.abspath(__file__))
 search_module_path = os.path.join(base_dir, "src", "search")
 
@@ -13,7 +12,6 @@ search_module_path = os.path.join(base_dir, "src", "search")
 if search_module_path not in sys.path:
     sys.path.insert(0, search_module_path)
 
-# 3. Agora os ficheiros dentro de src/search (engine, processor, indexer) 
 # ficam visíveis como se estivessem na raiz
 try:
     from engine import SearchEngine
@@ -24,9 +22,7 @@ except ImportError as e:
     print(f"❌ Erro ao importar: {e}")
     print(f"Caminho tentado: {search_module_path}")
 
-#from src.search.processor import TextProcessor # Ajusta o caminho se necessário
-#from src.search.indexer import Indexer         # Ajusta o caminho se necessário
-#from src.search.engine import SearchEngine     # Ajusta o caminho se necessário
+
 
 def evaluate_indexing_performance():
     """

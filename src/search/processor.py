@@ -54,7 +54,7 @@ class TextProcessor:
         # Aplicamos apenas o stemmer para coincidir com o índice
         return [self.stemmer.stem(w) for w in words if w not in self.stop_words]
 
-# --- FUNÇÃO FORA DA CLASSE (Para evitar o NameError) ---
+
 
 def extract_pdf_from_url(pdf_url):
     """Faz o download do PDF para a RAM e extrai o texto."""
