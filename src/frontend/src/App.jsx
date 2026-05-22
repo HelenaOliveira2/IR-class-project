@@ -6,11 +6,11 @@ import ConfigPanel from './components/ConfigPanel';
 import ResultItem from './components/ResultItem';
 import { startTransition } from 'react';
 
-// 📊 IMPORTS ESTÁTICOS (Correção para os gráficos do Recharts não colapsarem no arranque)
+// IMPORTS ESTÁTICOS 
 import DashboardPage from './pages/DashboardPage';
 import AdminDashboard from './pages/AdminDashboard';
 
-// 🚀 IMPORTS PREGUIÇOSOS / LAZY LOADING (Para as páginas normais de texto)
+// LAZY LOADING (Para as páginas normais de texto)
 const HistoryPage = lazy(() => import('./components/HistoryPage'));
 const HelpPage = lazy(() => import('./components/HelpPage'));
 const CollectionPage = lazy(() => import('./components/CollectionPage'));

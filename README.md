@@ -1,236 +1,233 @@
-# Research Publication Search System
+#  Sistema de Pesquisa de Publicações Científicas
 
-[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+Motor de Recuperação de Informação desenvolvido no âmbito do Mestrado em Engenharia Biomédica, focado na extração, indexação, pesquisa e visualização de publicações científicas do RepositóriUM da Universidade do Minho.
 
-A comprehensive web application for searching and discovering research publications and authors affiliated with University of Minho. This project combines web scraping, natural language processing, and modern web technologies to provide an intuitive search experience for academic content.
-
-Project inspired by the [Coventry-PureHub-Search-Engine](https://github.com/maladeep/Coventry-PureHub-Search-Engine/tree/main?tab=readme-ov-file#features)
-
-## 📚 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Technology Stack](#technology-stack)
-- [Team Organization](#team-organization)
-- [Contributing](#contributing)
-- [Documentation](#documentation)
-- [Testing](#testing)
-- [License](#license)
+O sistema implementa um ecossistema completo de *Information Retrieval* (IR), integrando:
+- Web Scraping automatizado
+- Processamento de Linguagem Natural (NLP)
+- Indexação Invertida
+- Algoritmos de Ranking TF-IDF
+- Pesquisa Booleana
+- API RESTful em FastAPI
+- Frontend SPA em React
+- Dashboards Analíticos
+- Infraestrutura Dockerizada
 
 ---
 
-## 🎯 Overview
+##  Funcionalidades Principais
 
-This project is a collaborative educational initiative that implements a full-stack research publication search system. The system scrapes academic publications from [UMinho repositories](https://repositorium.uminho.pt/), processes them using NLP techniques, and provides a user-friendly web interface for searching and exploring the content.
+### 1. Recolha e Armazenamento de Dados
+* **Web Scraping Automatizado:** Sistema de scraping desenvolvido com Selenium WebDriver para navegação dinâmica no RepositóriUM (DSpace 7 Angular).
+* **Extração de Metadados:** O scraper extrai automaticamente Título, Abstract, Autores, DOI, Ano, Keywords, Afiliações e Links permanentes dos documentos.
+* **Persistência Estruturada:** Todos os dados são armazenados numa base de dados SQLite (`publications.db`).
 
-**Key Capabilities:**
-- 🔍 Advanced search with natural language processing
-- 📊 TF-IDF-based ranking for relevant results
-- 👤 Author profiles and publication tracking
-- 🚀 Fast inverse indexer for quick searches
-- 📱 Responsive web interface
-- 🐳 Containerized deployment
+### 2. Processamento de Linguagem Natural (NLP)
+* **Pipeline Textual:** O sistema implementa Tokenização, Lowercasing, Remoção de pontuação e Filtragem de Stop Words.
+* **Suporte Bilingue:** Suporte simultâneo para Português e Inglês através da biblioteca NLTK.
+* **Estratégias de Normalização:** Foram implementadas duas abordagens:
+  * **Stemming** (PorterStemmer / Snowball)
+  * **Lemmatization** (WordNetLemmatizer)
 
----
+### 3. Motor de Indexação Invertida
+* **Arquitetura Híbrida:** O sistema implementa uma estratégia híbrida: Extração *Full-Text* dos primeiros 20 PDFs via PyMuPDF (`fitz`), sendo a restante coleção indexada via metadados estruturados.
+* **Índices Persistentes:** Os índices invertidos são armazenados em JSON (`inverted_index.json`, `doc_metadata.json`).
+* **Pesquisa em RAM:** Os índices são carregados em memória para minimizar a latência.
 
-## ✨ Features
+### 4. Algoritmos de Pesquisa e Ranking
+* **Pesquisa Booleana:** Suporte para operadores `AND`, `OR`, `NOT`, incluindo parsing lógico complexo.
+* **Ranking Vetorial TF-IDF:** Implementação manual de TF, TF-IDF e Similaridade do Cosseno.
+* **Scikit-Learn:** Integração opcional com `TfidfVectorizer` e `cosine_similarity` para validação matemática dos resultados.
 
-### Data Collection
-- **Web Scraper**: Automated collection from [UMinho repositories](https://repositorium.uminho.pt/)
-- **Metadata Extraction**: Title, authors, abstract, DOI, publication date
-- **Pagination Handling**: Efficient navigation through large collections
-- **Error Recovery**: Robust handling of network issues and timeouts
+### 5. API RESTful (FastAPI) e Monitorização
+* **Endpoints REST:** Pesquisa de documentos, autores, exportação (CSV/JSON/BibTeX), dashboard estatístico e perfis avançados.
+* **Swagger UI:** Documentação automática disponível em `http://localhost:8000/docs`.
+* **Logging:** Sistema centralizado de logs para debug, medição de performance e gestão de erros.
 
-### Search & Processing
-- **Natural Language Processing**:
-  - Text stemming and lemmatization
-  - Stop word removal
-  - TF-IDF vectorization
-- **Inverse Indexer**: Fast keyword-based search
-- **Ranking Algorithm**: Relevance-based result ordering
-- **Fuzzy Matching**: Handles typos and variations
-
-### User Interface
-- **Search Interface**: Clean, intuitive search experience
-- **Filters**: Year, author, department, publication type
-- **Author Profiles**: Detailed author information and statistics
-- **Publication Details**: Full metadata display
-- **Responsive Design**: Works on desktop, tablet, and mobile
-
-### DevOps & Infrastructure
-- **Docker Support**: Containerized application
-- **CI/CD Pipeline**: Automated testing and deployment
-- **Monitoring**: Logging and performance metrics
-- **Documentation**: Comprehensive guides and API docs
+### 6. Frontend React SPA
+* **Interface Moderna:** Desenvolvido com React, Vite, SCSS e Axios.
+* **Dashboard Analítico:** Visualizações construídas com Recharts (Bar Charts, Pie Charts, Area Charts, Line Charts).
+* **Funcionalidades Interativas:** Pesquisa avançada, Query Builder Booleano, filtros dinâmicos, comparação de algoritmos, redes de coautoria e persistência de estado via URL.
 
 ---
 
-## 📁 Project Structure (EXAMPLE)
+##  Funcionalidades Educativas
+O sistema inclui módulos pedagógicos para explicar conceitos de Recuperação de Informação:
+* Índices Invertidos
+* Cálculos de TF-IDF e Similaridade do Cosseno
+* Operações Booleanas e Comparação de algoritmos
 
-```
-UMinho-scraper/
-├── src/                        # Source code
-│   ├── scraper/               # Web scraping module
-│   │   ├── scraper.py        # Main scraper class
-│   │   └── utils.py          # Helper functions
-│   ├── search/               # Search engine
-│   │   ├── indexer.py       # Inverse indexer
-│   │   ├── tfidf.py         # TF-IDF implementation
-│   │   └── nlp.py           # NLP utilities
-│   ├── api/                 # Backend API
-│   │   ├── app.py           # FastAPI application
-│   │   └── routes/          # API endpoints
-│   └── frontend/            # Frontend
+---
+
+##  Docker e Contentorização
+Infraestrutura totalmente dockerizada utilizando **Docker** e **Docker Compose**.
+* **Backend Container:** Executa Python 3.11, FastAPI, SQLite e gere os Índices JSON.
+* **Frontend Container:** Executa React SPA gerado via Vite.
+* **Comunicação Interna:** Rede virtual Docker (*bridge network*) para comunicação segura, baixa latência e isolamento.
+
+---
+
+
+## 📂 Estrutura do Projeto
+
+```plaintext
+IR-class-project/
+├── exports/
+├── src/
+│   ├── scraper/
+│   │   ├── main.py
+|   |   ├── database_setup.py
+│   │   └── scraper.py
+│   ├── search/
+│   │   ├── engine.py
+│   │   ├── indexer.py
+│   │   ├── processor.py
+|   |   ├── classifier.py
+│   │   └── rebuild_indexes.json
+│   ├── api/
+│   │   ├── api.py
+│   │   ├── logger.py
+│   │   └── config.py
+│   └── frontend/          
+│       ├── public/
 │       ├── src/
-│       └── public/
-│
-├── tests/                    # Test suite
-│   ├── test_scraper.py
-│   ├── test_search.py
-│   └── test_api.py
-│
-├── docs/                     # Documentation
-│   ├── architecture.md
-│   ├── api-reference.md
-│   └── deployment.md
-│
-├── docker/                   # Docker configurations
-│   ├── Dockerfile
-│   └── docker-compose.yml
-│
-├── .github/                  # GitHub configurations
-│   ├── workflows/           # CI/CD pipelines
-│   └── PULL_REQUEST_TEMPLATE.md
-│
-├── requirements.txt          # Python dependencies
-├── requirements-dev.txt      # Development dependencies
-├── .gitignore
-├── CONTRIBUTING.md          # Contribution guidelines
-├── LICENSE
-└── README.md                # This file
+│       │   ├── components/
+│       │   ├── pages/
+│       │   ├── styles/
+│       │   ├── test/
+│       │   ├── App.jsx
+│       │   ├── App.test.jsx
+│       │   └── main.jsx
+│       ├── index.html
+│       ├── package.json
+│       ├── vite.config.js
+│       └── vitest.config.js
+├── tests/
+│       ├── tesr_api.py
+│       ├── test_scraper.py
+│       └── test_search.py
+├── evaluation.py
+├── publications.db
+├── requirements.txt
+├── README.md
+├── Dockerfile.backend
+├── Dockerfile.frontend
+└── docker-compose.yml
 ```
 
----
+## Instalação e Execução
 
-## 🚀 Getting Started
+### Pré-requisitos
+* Python 3.11+
+* Docker e Docker Compose
+* Google Chrome (para Web Scraping)
 
-### Prerequisites
+### Configuração Local
 
-Before you begin, ensure you have:
+1. **Clonar o Repositório**
+`git clone <repo-url>`
+`cd IR-class-project`
 
-- **Python 3.10+** ([Download](https://www.python.org/downloads/))
-- **Git** ([Download](https://git-scm.com/downloads))
-- **Chrome/Chromium** browser (for Selenium)
-- **Docker** (optional, for containerized deployment)
 
-### Quick Start
+2. Criar Ambiente Virtual
 
-#### 1. Fork the Repository
+`python -m venv venv`
+`.\venv\Scripts\activate`
 
-**Team leads:** Follow the instructions in [CONTRIBUTING.md](CONTRIBUTING.md) to fork this repository to your team's account.
+3. Instalar Dependências
+`pip install -r requirements.txt`
 
-#### 2. Clone Your Fork
+### Extração e Processamento
 
-```bash
-# Clone your team's fork
-git clone https://github.com/YOUR_TEAM/IR-class-project.git
-cd IR-class-project
-```
+1. Executar o Scraper
+Isto irá navegar automaticamente no RepositóriUM, extrair metadados científicos e gerar a publications.db
+`python src/scraper/main.py`
 
-#### 3. Set Up Development Environment
+2. Gerar Índices Invertidos
+Este processo limpa o texto, aplica NLP, extrai Full-Text, calcula índices invertidos e guarda as estruturas JSON.
+`python -m src.search.engine`
 
-```bash
-# Create virtual environment
-python -m venv venv
+3. Avaliação Experimental
+O script mede o tempo de indexação, o consumo de RAM, a latência de pesquisa e a consistência de ranking.
+`python evaluation.py`
 
-# Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
+### Execução com Docker
 
-# Install dependencies
-pip install -r requirements.txt
-```
+- Inicializar todo o sistema
+`docker compose up --build`
 
-#### 4. Run the Scraper
 
-```bash
-# Run scraper with default settings
-python main.py
-```
+- Interfaces Disponíveis
+    * Frontend React: http://localhost:5173
+    * API Swagger: http://localhost:8000/docs
 
-#### 6. Run Tests  (TODO)
+# Resultados Experimentais
 
-```bash
-# Run all tests
-pytest
+| Métrica | Resultado |
+|---|---|
+| Indexação com Stemming | ~1.13s |
+| RAM (Stemming) | ~3.79 MB |
+| Indexação com Lemmatization | ~43.45s |
+| RAM (Lemmatization) | ~166.94 MB |
+| Latência de Pesquisa (TF-IDF) | ~208 ms |
+| Latência de Pesquisa (Scikit-Learn) | ~139 ms |
 
-# Run with coverage
-pytest --cov=src --cov-report=html
 
-# Run specific test file
-pytest tests/test_scraper.py -v
-```
----
+# Tecnologias Utilizadas
 
-## 🤝 Contributing
+## Backend
+- Python 3.11
+- FastAPI
+- SQLite
+- Uvicorn
 
-We welcome contributions from all team members! Please read our detailed contribution guidelines:
+## NLP & IA
+- NLTK
+- PyMuPDF
+- Scikit-Learn
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
+## Frontend
+- React
+- Vite
+- SCSS
+- Axios
+- Recharts
 
----
-
-## 📖 Documentation
-
-Comprehensive documentation is available in the `docs/` directory..
-
----
-
-## 🎓 Learning Resources
-
-### Git & GitHub
-- [Pro Git Book](https://git-scm.com/book/en/v2) (Free)
-- [GitHub Guides](https://guides.github.com/)
-- [Interactive Git Tutorial](https://learngitbranching.js.org/)
-
-### Python
-- [Python Official Docs](https://docs.python.org/3/)
-- [Real Python Tutorials](https://realpython.com/)
-- [Python Testing with pytest](https://docs.pytest.org/)
-
-### Web Development
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [React Documentation](https://react.dev/)
-- [Docker Documentation](https://docs.docker.com/)
-
-### NLP & Search
-- [NLTK Book](https://www.nltk.org/book/)
-- [Elasticsearch Guide](https://www.elastic.co/guide/)
-- [TF-IDF Explained](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+## Infraestrutura
+- Docker
+- Docker Compose
+- Selenium WebDriver
 
 ---
 
-## 📞 Getting Help
+# Funcionalidades de Investigação
 
-1. **Read the docs** - Check [CONTRIBUTING.md](CONTRIBUTING.md) and `docs/` folder
-2. **Search Issues** - Your question may already be answered
-3. **Ask Your Team** - Collaborate with teammates first
-4. **GitHub Discussions** - Use for general questions
-5. **Office Hours** - Attend instructor's office hours for complex issues
+O projeto inclui:
 
+- Comparação empírica de algoritmos
+- Avaliação de ranking
+- Precision / Recall
+- Performance benchmarking
+- Estratégias híbridas de indexação
 
 ---
 
-<div align="center">
+# Trabalho Futuro
 
-**⭐ Star this repository if you find it helpful!**
+Possíveis extensões futuras:
 
-**Made with ❤️ by University of Minho Students**
+- Integração com PubMed e arXiv
+- Modelos Transformer (BERT)
+- Relevance Feedback
+- Pesquisa Semântica
+- Recomendações Inteligentes
+- Clustering de documentos
+- Pesquisa multimodal
 
-</div>
+# Contexto Académico
+
+Projeto desenvolvido no âmbito da unidade curricular de:
+
+## Processamento e Recuperação de Informação (PRI)
+
+### Mestrado em Engenharia Biomédica

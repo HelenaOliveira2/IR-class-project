@@ -7,6 +7,6 @@ export default defineConfig({
     // REQ-F91: Ambiente necessário para renderizar componentes React
     environment: 'jsdom',
     globals: true,
-    setupFiles: './src/test/setup.js', // Vamos criar este ficheiro a seguir
+    setupFiles: './src/test/setup.js', 
   },
 });
