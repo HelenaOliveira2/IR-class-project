@@ -203,7 +203,7 @@ function App() {
     setLoading(true);
     setErrorMsg(null); // Limpa erros antigos
 
-    // 🌟 SE JÁ HOUVER UM PEDIDO A CORRER, CANCELA-O IMEDIATAMENTE!
+    // SE JÁ HOUVER UM PEDIDO A CORRER, CANCELA-O IMEDIATAMENTE!
     if (activeRequestRef.current) {
       activeRequestRef.current.abort();
     }
@@ -224,7 +224,7 @@ function App() {
 
         const params = new URLSearchParams({
           q: query,
-          search_in: target, // 🎯 Passa diretamente o valor ('title', 'abstract', 'document' ou 'all')
+          search_in: target, // Passa diretamente o valor ('title', 'abstract', 'document' ou 'all')
           method: method,
           ranking: rankingAlgorithm,
           weighting: rankingAlgorithm === 'boolean' ? 'none' : weightingScheme,
@@ -266,7 +266,7 @@ function App() {
       // Envolvemos a atualização de estado pesada numa transição
       // Isto mantém a interface (scroll, cliques) fluida enquanto a lista renderiza
       startTransition(() => {
-        // CORREÇÃO: Se a página for > 1, somamos aos resultados existentes
+        // Se a página for > 1, somamos aos resultados existentes
         setResults(prev => (page === 1 ? finalResults : [...prev, ...finalResults]));
         setSearchStats(finalStats);
       });
@@ -277,7 +277,7 @@ function App() {
       }
 
     } catch (error) {
-      // 🌟 CORREÇÃO CRÍTICA: Se o erro for um cancelamento nosso, ignora-o em silêncio!
+      // Se o erro for um cancelamento nosso, ignora-o em silêncio!
       if (error.name === 'AbortError') {
         console.log("Pedido duplicado cancelado com sucesso nos bastidores. 🛡️");
         return; 
@@ -288,7 +288,7 @@ function App() {
       setErrorMsg("Erro na ligação ao servidor. Verifique se o backend Python está a correr.");
       
     } finally {
-      // 🌟 CORREÇÃO CRÍTICA: Só desativamos o loading se este for o último pedido ativo real
+      // Só desativamos o loading se este for o último pedido ativo real
       if (activeRequestRef.current === controller) {
         setLoading(false);
       }
@@ -318,7 +318,6 @@ function App() {
                 <div style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
                   <h2>Motor de Recuperação de Informação</h2>
                   
-                  {/* 1. A SearchBox fecha-se aqui. Não ponhas nada dentro dela! */}
                   <SearchBox 
                     onSearch={handlePerformSearch} 
                     onSaveSearch={handleSaveSearch} 
@@ -365,17 +364,15 @@ function App() {
 
                   <div className="results-container" style={{ marginTop: '40px', textAlign: 'left' }}>
   
-                    {/* 1. SE ESTIVER A CARREGAR (Aqui o comentário com chavetas é válido porque está fora da lógica) */}
                     {loading && results.length === 0 ? (
                       <p>A pesquisar...</p>
                     ) : 
                     
-                    /* 2. SE ENCONTROU DOCUMENTOS (Repara que tirei as chavetas do comentário!) */
+                    /* 2. SE ENCONTROU DOCUMENTOS */
                     results.length > 0 ? (
                       <div className="results-content">
                         <div className="stats-bar" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
                           <div>Encontrados <strong>{searchStats?.total || 0}</strong> resultados ({searchStats?.time || 0}ms)</div>
-                          {/* ... os teus botões de densidade, checkbox, etc ... */}
                         </div>
                         
                         <div className="results-list">
@@ -390,7 +387,7 @@ function App() {
                       </div>
                     ) : 
                     
-                    /* 3. SE JÁ FEZ A PESQUISA MAS NÃO ENCONTROU NADA (Sem chavetas no comentário) */
+                    /* 3. SE JÁ FEZ A PESQUISA MAS NÃO ENCONTROU NADA */
                     lastQuery ? (
                       <div style={{ textAlign: 'center', padding: '30px', backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#64748b' }}>
                         <p style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: '0 0 5px 0', color: '#1e293b' }}>
@@ -402,7 +399,7 @@ function App() {
                       </div>
                     ) : 
                     
-                    /* 4. CASO CONTRÁRIO (Sem chavetas) */
+                    /* 4. CASO CONTRÁRIO */
                     null}
 
                   </div>

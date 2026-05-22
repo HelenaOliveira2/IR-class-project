@@ -40,7 +40,6 @@ def setup_database(data_list, db_file='publications.db'):
     ''')
 
     # 2. Inserir os dados diretamente da data_list
-    # Já não precisamos do 'with open(json_file)...'
     for pub in data_list:
         # Inserir Documento (REQ-B09)
         cursor.execute('''

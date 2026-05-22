@@ -4,7 +4,7 @@ import {
   CategoryScale, LinearScale, BarElement, PointElement,
   LineElement, Tooltip, Legend, Title
 } from 'chart.js';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Tooltip, Legend, Title);
 
@@ -14,18 +14,37 @@ export default function AdminDashboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Lê o histórico guardado no browser
+    const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+    // Conta as queries mais frequentes
+    const queryCounts = {};
+    history.forEach(entry => {
+      const q = entry.query?.toLowerCase().trim();
+      if (q) queryCounts[q] = (queryCounts[q] || 0) + 1;
+    });
+
+    const topQueries = Object.entries(queryCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([query, count]) => ({ query, count }));
+
     fetch('http://127.0.0.1:8000/api/admin-stats')
       .then(res => {
         if (!res.ok) throw new Error("Não foi possível obter dados do motor de busca.");
         return res.json();
       })
-      .then(fetchedData => { setData(fetchedData); setLoading(false); })
+      .then(fetchedData => {
+        fetchedData.frequentQueries = topQueries;
+        setData(fetchedData);
+        setLoading(false);
+      })
       .catch(err => { setError(err.message); setLoading(false); });
   }, []);
 
   if (loading) return (
     <div style={{ textAlign: 'center', padding: '50px', color: '#64748b', fontSize: '1.2rem' }}>
-      A ler metadados do motor de busca... 🚀
+      A ler metadados do motor de busca... 
     </div>
   );
 
@@ -42,23 +61,20 @@ export default function AdminDashboard() {
   const indexGrowth = data.indexGrowth || [];
   const classification = data.classification || { precision: 0, recall: 0, f1Score: 0, accuracy: 0 };
 
-  const lineData = {
+  const indexBarData = {
     labels: indexGrowth.map(d => d.month),
     datasets: [{
-      label: 'Tamanho (MB)',
+      label: 'Valor',
       data: indexGrowth.map(d => d.size),
-      borderColor: '#2563eb',
-      backgroundColor: 'rgba(37,99,235,0.1)',
-      tension: 0.4,
-      borderWidth: 3,
-      pointRadius: 4,
+      backgroundColor: ['#2563eb', '#7c3aed', '#0f766e', '#ea580c'],
+      borderRadius: 6,
     }]
   };
 
-  const barData = {
+  const metricsBarData = {
     labels: ['Precisão', 'Recall', 'F1-Score', 'Accuracy'],
     datasets: [{
-      label: 'Percentagem',
+      label: 'Percentagem (%)',
       data: [classification.precision, classification.recall, classification.f1Score, classification.accuracy],
       backgroundColor: '#10b981',
       borderRadius: 6,
@@ -66,7 +82,7 @@ export default function AdminDashboard() {
   };
 
   const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
-  const barOptions = { ...chartOptions, scales: { y: { min: 0, max: 100 } } };
+  const metricsOptions = { ...chartOptions, scales: { y: { min: 0, max: 100 } } };
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '30px', textAlign: 'left', fontFamily: 'system-ui, sans-serif' }}>
@@ -92,17 +108,11 @@ export default function AdminDashboard() {
 
       {/* GRÁFICOS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '30px', marginBottom: '40px' }}>
-        <div style={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '25px', borderRadius: '16px' }}>
-          <h4 style={{ margin: '0 0 20px 0', color: '#1e293b' }}>Crescimento do Índice Invertido (MB)</h4>
-          <div style={{ position: 'relative', height: '300px' }}>
-            <Line data={lineData} options={chartOptions} />
-          </div>
-        </div>
 
         <div style={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '25px', borderRadius: '16px' }}>
           <h4 style={{ margin: '0 0 20px 0', color: '#1e293b' }}>Métricas de Avaliação do Motor (%)</h4>
           <div style={{ position: 'relative', height: '300px' }}>
-            <Bar data={barData} options={barOptions} />
+            <Bar data={metricsBarData} options={metricsOptions} />
           </div>
         </div>
       </div>
@@ -111,26 +121,34 @@ export default function AdminDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '30px' }}>
         <div style={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '20px', borderRadius: '12px' }}>
           <h4 style={{ margin: '0 0 15px 0', color: '#1e293b' }}>Top 5 Pesquisas Frequentes</h4>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {frequentQueries.map((item, index) => (
-              <li key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 10px', borderBottom: index !== frequentQueries.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
-                <span style={{ color: '#475569', fontWeight: '500' }}>"{item.query}"</span>
-                <span style={{ backgroundColor: '#eff6ff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', color: '#1e40af' }}>{item.count} pesquisas</span>
-              </li>
-            ))}
-          </ul>
+          {frequentQueries.length === 0 ? (
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', padding: '10px 0' }}>Sem pesquisas registadas ainda.</p>
+          ) : (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {frequentQueries.map((item, index) => (
+                <li key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 10px', borderBottom: index !== frequentQueries.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
+                  <span style={{ color: '#475569', fontWeight: '500' }}>"{item.query}"</span>
+                  <span style={{ backgroundColor: '#eff6ff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', color: '#1e40af' }}>{item.count} pesquisas</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div style={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', padding: '20px', borderRadius: '12px' }}>
           <h4 style={{ margin: '0 0 15px 0', color: '#1e293b' }}>Top 5 Termos Mais Comuns no Corpus</h4>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {frequentTerms.map((item, index) => (
-              <li key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 10px', borderBottom: index !== frequentTerms.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
-                <span style={{ color: '#475569', fontStyle: 'italic' }}>{item.term}</span>
-                <span style={{ backgroundColor: '#f0fdf4', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', color: '#166534' }}>{item.count} vezes</span>
-              </li>
-            ))}
-          </ul>
+          {frequentTerms.length === 0 ? (
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', padding: '10px 0' }}>Sem dados de termos disponíveis.</p>
+          ) : (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {frequentTerms.map((item, index) => (
+                <li key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 10px', borderBottom: index !== frequentTerms.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
+                  <span style={{ color: '#475569', fontStyle: 'italic' }}>{item.term}</span>
+                  <span style={{ backgroundColor: '#f0fdf4', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', color: '#166534' }}>{item.count} vezes</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 

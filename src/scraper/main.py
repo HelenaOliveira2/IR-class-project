@@ -19,8 +19,8 @@ def main():
     collections = [
         "1822/21293",
         "1822/21292", 
-        "1822/2418",   # outra coleção
-        "1822/3061",   # outra coleção
+        "1822/2418",   
+        "1822/3061",   
     ]
     all_results = []
     

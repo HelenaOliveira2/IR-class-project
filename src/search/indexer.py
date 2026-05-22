@@ -43,7 +43,6 @@ class Indexer:
             new_docs_count += 1
             self.indexed_doc_ids.add(doc_id)
             
-            # --- CORREÇÃO AQUI: A chave correta é 'original_metadata' ---
             meta = doc.get("original_metadata", {})
             self.document_metadata[doc_id] = {
                 "title": meta.get("title", "Sem Título"),

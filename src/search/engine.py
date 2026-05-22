@@ -119,7 +119,6 @@ class SearchEngine:
         Roteador principal da pesquisa:
         Resolve a query booleana ou TF-IDF dependendo do parâmetro 'ranking'.
         """
-        # --- A CORREÇÃO ESTÁ AQUI: Roteamento de Algoritmo ---
         if ranking == "custom_tfidf":
             return self.ranked_search(query, use_sklearn=False, scheme=weighting)
             
@@ -300,7 +299,6 @@ class SearchEngine:
             if doc_types and doc_type not in doc_types: continue
             
             # Definição da Zona (Segura)
-            # Definição da Zona (Segura)
             target_text = ""
             if search_zone == "title": 
                 target_text = meta.get("title", "")
@@ -317,7 +315,7 @@ class SearchEngine:
             target_tokens = self.processor.clean_text(target_text)
             unique_target_tokens = set(target_tokens)
 
-            # 🌟 PRODUTO ESCALAR: Apenas entre os termos partilhados (Query x Doc)
+            #  PRODUTO ESCALAR: Apenas entre os termos partilhados (Query x Doc)
             dot_product = 0.0
             for term in query_terms:
                 if term in unique_target_tokens:
@@ -325,13 +323,13 @@ class SearchEngine:
                     w_query = query_vector[term]
                     dot_product += (w_doc * w_query)
             
-            # 🌟 NORMA REAL DO DOCUMENTO: Calculada sobre TODOS os termos únicos do documento nesta zona!
+            #  NORMA REAL DO DOCUMENTO: Calculada sobre TODOS os termos únicos do documento nesta zona!
             doc_norm_sq = 0.0
             for t_doc in unique_target_tokens:
                 w_t_doc = self._calculate_custom_weight(t_doc, doc_id, scheme=scheme)
                 doc_norm_sq += (w_t_doc ** 2)
             
-            # 🌟 CÁLCULO DA SIMILARIDADE DO COSSENO VETORIAL
+            #  CÁLCULO DA SIMILARIDADE DO COSSENO VETORIAL
             if doc_norm_sq > 0 and query_norm > 0:
                 cosine_sim = dot_product / (math.sqrt(doc_norm_sq) * query_norm)
                 if cosine_sim > 0:
@@ -527,7 +525,7 @@ class SearchEngine:
                 stack.append(all_docs - s1)
             elif token == 'and':
                 s2, s1 = stack.pop(), stack.pop()
-                stack.append(s1.intersection(s2)) # REQ-B25 aqui
+                stack.append(s1.intersection(s2)) # REQ-B25 
             elif token == 'or':
                 s2, s1 = stack.pop(), stack.pop()
                 stack.append(s1.union(s2))

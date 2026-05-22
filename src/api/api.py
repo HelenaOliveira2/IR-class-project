@@ -446,54 +446,77 @@ async def search(
 # ==============================================================================
 
 def calculate_real_ir_metrics(engine_instance):
+    # Liga à base de dados SQLite local onde estão armazenadas as publicações
     import sqlite3
     conn = sqlite3.connect('publications.db')
     cursor = conn.cursor()
 
-    # Vai buscar queries e IDs relevantes diretamente da BD
+    # Define a lista fixa de queries temáticas que serão testadas na avaliação do motor
     # Constrói o ground truth automaticamente pesquisando por palavras-chave nos títulos/abstracts
     queries_to_test = ["neural networks", "health data", "textile industry", "information systems", "ambient intelligence"]
     
+    # Inicializa o dicionário que guardará os IDs genuinamente relevantes (Ground Truth) para cada query
     GROUND_TRUTH = {}
     for query in queries_to_test:
+        # Divide a query em palavras individuais para aplicar a lógica AND na pesquisa SQL
         terms = query.split()
+        # Cria cláusulas LIKE dinâmicas para garantir que todos os termos aparecem no título ou no abstract
         like_clauses = " AND ".join([f"(title LIKE '%{t}%' OR abstract LIKE '%{t}%')" for t in terms])
+        # Executa a query na tabela de documentos utilizando os filtros gerados
         cursor.execute(f"SELECT id FROM documents WHERE {like_clauses}")
+        # Extrai os IDs resultantes da consulta da base de dados
         relevant_ids = [row[0] for row in cursor.fetchall()]
+        # Se encontrar documentos relevantes, associa-os à respetiva query no Ground Truth
         if relevant_ids:
             GROUND_TRUTH[query] = relevant_ids
 
+    # Fecha a ligação à base de dados para libertar os recursos após recolher o Ground Truth
     conn.close()
 
+    # Caso nenhum documento relevante tenha sido encontrado na BD para as queries, aborta e devolve métricas a zero
     if not GROUND_TRUTH:
         return {"precision": 0, "recall": 0, "f1Score": 0, "accuracy": 0}
 
+    # Inicializa os acumuladores para calcular as médias macro das métricas no final
     total_precision = 0
     total_recall = 0
     queries_run = 0
 
+    # Avalia o motor de busca iterando sobre cada query e o seu conjunto de documentos esperados
     for query, expected_docs in GROUND_TRUTH.items():
+        # Converte os documentos esperados num set para operações de conjuntos rápidas
         expected_set = set(expected_docs)
 
+        # Invoca o motor de busca a testar e extrai o Top 10 dos resultados devolvidos
         raw_results = engine_instance.ranked_search(query)[:10]
+        # Normaliza os resultados tratando tuplos ou IDs brutos e converte para um set de inteiros
         retrieved_set = set([int(res[0] if isinstance(res, tuple) else res) for res in raw_results])
 
+        # Calcula os Verdadeiros Positivos (interseção entre o que foi devolvido e o que era esperado)
         true_positives = len(retrieved_set.intersection(expected_set))
+        # Calcula os Falsos Positivos (documentos devolvidos pelo motor que não eram esperados)
         false_positives = len(retrieved_set - expected_set)
+        # Calcula os Falsos Negativos (documentos esperados que o motor não conseguiu recuperar)
         false_negatives = len(expected_set - retrieved_set)
 
+        # Calcula a Precisão e o Recall para a query atual, protegendo contra divisões por zero
         precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
         recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
 
+        # Acumula os valores obtidos para o cálculo da média global posterior
         total_precision += precision
         total_recall += recall
         queries_run += 1
 
+    # Calcula as médias aritméticas (Macro-averaging) das métricas de Precisão e Recall
     avg_precision = total_precision / queries_run if queries_run > 0 else 0
     avg_recall = total_recall / queries_run if queries_run > 0 else 0
+    # Calcula a métrica F1-Score através da média harmónica entre a precisão média e o recall médio
     f1_score = 2 * (avg_precision * avg_recall) / (avg_precision + avg_recall) if (avg_precision + avg_recall) > 0 else 0
+    # Calcula uma métrica simplificada de Accuracy baseada na média simples das duas componentes
     accuracy = (avg_precision + avg_recall) / 2
 
+    # Devolve um dicionário com os valores finais convertidos para percentagem e arredondados
     return {
         "precision": round(avg_precision * 100),
         "recall": round(avg_recall * 100),
@@ -559,18 +582,15 @@ def get_admin_dashboard_stats():
                 "totalTerms": total_terms,
                 "avgDocLength": avg_doc_length
             },
-            "frequentQueries": [
-                { "query": "neural networks", "count": 42 },
-                { "query": "health data", "count": 28 },
-                { "query": "stress level", "count": 19 },
-                { "query": "machine learning", "count": 15 },
-                { "query": "business intelligence", "count": 12 }
-            ], # Mantemos este fixo apenas porque não guardamos log de cliques dos utilizadores
-            "frequentTerms": top_terms, 
+            "frequentQueries": [],  # Vem do localStorage do browser (tratado no AdminDashboard.jsx)
+            "frequentTerms": top_terms,
             "indexGrowth": [
-                { "month": "Atual", "size": file_size_mb }
+                { "month": "Documentos", "size": real_doc_count },
+                { "month": "Termos Únicos", "size": total_terms },
+                { "month": "Tamanho Índice (MB)", "size": file_size_mb },
+                { "month": "Média Palavras/Doc", "size": avg_doc_length },
             ],
-            "classification": real_metrics 
+            "classification": real_metrics
         }
     except Exception as e:
         print(f"❌ ERRO NO MOTOR ADMIN: {str(e)}")

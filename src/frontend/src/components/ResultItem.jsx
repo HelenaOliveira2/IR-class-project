@@ -79,7 +79,7 @@ function ResultItem({ doc, density, showSnippet, rank, isSaved, onSave }) {
                 <Users size={14} /> 
                 {Array.isArray(doc.authors) ? doc.authors.join(', ') : doc.authors || 'Autor Desconhecido'}
             </span>
-            {/* NOVO: Exibição da Data (assumindo que o backend envia doc.date ou doc.year) */}
+            {/* Exibição da Data */}
             {(doc.date || doc.year) && (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <Calendar size={14} /> 
