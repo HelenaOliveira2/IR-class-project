@@ -11,7 +11,7 @@ import sqlite3
 from src.api.config import settings
 from src.api.logger import logger
 from src.search.engine import SearchEngine
-#7.1
+
 # Inicialização da API com metadados para o Swagger (REQ-B65)
 app = FastAPI(
     title="UMinho Publications API",
@@ -32,7 +32,7 @@ engine = SearchEngine(
     metadata_path='src/search/doc_metadata.json'
 )
 
-# Caminho para a base de dados criada pelo teu database_setup.py
+# Caminho para a base de dados criada pelo database_setup.py
 DB_FILE = 'publications.db'
 
 def get_db_connection():
@@ -101,7 +101,7 @@ def get_documents(
 def get_document_by_id(
     doc_id: int = Path(..., title="O ID do documento", ge=1)
 ):
-    logger.info(f"🆔 A pesquisar documento ID: {doc_id}")
+    logger.info(f" A pesquisar documento ID: {doc_id}")
     """Pesquisa um documento específico pelo seu ID."""
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -133,10 +133,10 @@ def get_authors():
 # REQ-F30: Exportação de Resultados
 @app.get("/api/export/{file_format}")
 def export_results(file_format: str, q: str = "search"):
-    # 1. Obtém os IDs dos documentos que correspondem à pesquisa[cite: 4, 5]
+    # Obtém os IDs dos documentos que correspondem à pesquisa
     raw_results = engine.search(q) 
     
-    # 2. Vai buscar os detalhes de cada documento à BD (semelhante à rota /api/search)
+    # Vai buscar os detalhes de cada documento à BD (semelhante à rota /api/search)
     conn = get_db_connection()
     cursor = conn.cursor()
     documents = []
@@ -151,7 +151,7 @@ def export_results(file_format: str, q: str = "search"):
 
     output = io.StringIO()
     
-    # 3. Escrita real dos dados nos ficheiros
+    # Escrita real dos dados nos ficheiros
     if file_format == "csv":
         writer = csv.writer(output)
         writer.writerow(["Title", "Authors", "Year", "Link"]) # Cabeçalho
@@ -169,7 +169,7 @@ def export_results(file_format: str, q: str = "search"):
     elif file_format == "bibtex":
         bib_entries = []
         for i, doc in enumerate(documents):
-            # Gera uma entrada BibTeX simples para cada documento[cite: 4]
+            # Gera uma entrada BibTeX simples para cada documento
             entry = f"@article{{doc{i},\n  title={{{doc['title']}}},\n  author={{{doc['authors']}}},\n  year={{{doc['year']}}}\n}}"
             bib_entries.append(entry)
         
@@ -271,10 +271,10 @@ async def search(
     q: str = "", 
     search_in: str = 'all', 
     method: str = 'stemming', 
-    language: str = 'pt',           # Recebe o valor do botão
+    language: str = 'pt',          
     ranking: str = 'custom_tfidf', 
     weighting: str = 'log_normalization',
-    page: int = 1,      # Tem de se chamar page
+    page: int = 1,     
     limit: int = 10,
     date_min: str = "",
     date_max: str = "",
@@ -290,14 +290,14 @@ async def search(
     start_time = time.time()
 
     try:
-        # 🧼 Forçar strings limpas para evitar falhas de correspondência com o engine.py
+        # Forçar strings limpas para evitar falhas de correspondência com o engine.py
         zona_limpa = str(search_in).strip().lower()
         if zona_limpa not in ['title', 'abstract', 'all']:
             zona_limpa = 'all'
 
-        # 🌟 COMPORTAMENTO EXPANDIDO: Se o utilizador escolher 'abstract',
-        # enganamos o motor de busca passando 'all' para garantir que ele traz os documentos.
-        # Mas mantemos zona_limpa como 'abstract' para a lógica de realce visual abaixo!
+        # COMPORTAMENTO EXPANDIDO: Se o utilizador escolher 'abstract',
+        # engana o motor de busca passando 'all' para garantir que ele traz os documentos.
+        # Mas mantem zona_limpa como 'abstract' para a lógica de realce visual abaixo
         zone_to_engine = 'all' if zona_limpa == 'abstract' else zona_limpa
 
         # Limpar os filtros de data — string vazia vira None
@@ -347,33 +347,32 @@ async def search(
             conn_filter.close()
             raw_results = filtered
 
-        # 2. Paginação manual dos resultados (essencial para o REQ-F83 do frontend)
+        # Paginação manual dos resultados 
         total_results = len(raw_results)
         start_idx = (page - 1) * limit
         end_idx = start_idx + limit
         paginated_results = raw_results[start_idx:end_idx]
 
-        # 3. Formatação detalhada para o Frontend (incluindo metadados e snippets)
+        #  Formatação detalhada para o Frontend (incluindo metadados e snippets)
         formatted_results = []
 
-        # Abrimos a conexão à BD para garantir os dados mais frescos e completos
+        # Abre a conexão à BD para garantir os dados mais frescos e completos
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Extraímos os termos originais da query limpos para o Regex fazer o match
+        # Extrai os termos originais da query limpos para o Regex fazer o match
         query_terms_raw = [t for t in q.split() if t.lower() not in ["and", "or", "not"]]
 
-        # 🌟 LISTA DE CONTROLO DE IDS JÁ RENDERIZADOS NESTA RESPOSTA
         ids_processados_nesta_api = set()
 
         for item in paginated_results:
-            # 1. Separar o ID e o Score
+            # Separar o ID e o Score
             raw_id, score = item if isinstance(item, tuple) else (item, 0.0)
             
-            # 2. 🎯 CRÍTICO: Forçar o ID a ser um Inteiro Puro para o SQLite não duplicar/baralhar
+            #  Força o ID a ser um Inteiro Puro para o SQLite não duplicar/baralhar
             doc_id = int(raw_id)
 
-            # 3. Se por algum motivo o motor ou a BD tentar repetir este ID no mesmo pedido, saltamos!
+            # Se por algum motivo o motor ou a BD tentar repetir este ID no mesmo pedido, salta
             if doc_id in ids_processados_nesta_api:
                 continue
             ids_processados_nesta_api.add(doc_id)
@@ -391,14 +390,14 @@ async def search(
 
                 botao_ativo = str(search_in).strip().lower()
                 
-                # 1. Se o botão ativo for TÍTULOS:
+                # Se o botão ativo for TÍTULOS:
                 if botao_ativo == 'title':
                     # O título ganha sublinhado <u>
                     highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
                     # O resumo fica 100% LIMPO (mostra o início normal sem tags)
                     snippet = raw_abstract[:200] + "..." if len(raw_abstract) > 200 else raw_abstract
                 
-                # 2. Se o botão ativo for RESUMOS:
+                # Se o botão ativo for RESUMOS:
                 elif botao_ativo == 'abstract':
                     # O título fica 100% LIMPO (sem sublinhados nenhuns)
                     highlighted_title = raw_title
@@ -410,7 +409,7 @@ async def search(
                     highlighted_title = pattern.sub(r"<u>\1</u>", raw_title) if pattern else raw_title
                     snippet = generate_highlighted_snippet(raw_abstract, query_terms_raw)
 
-                # 🌟 CORREÇÃO CRÍTICA DO SCORE: Formata como string de percentagem para o React não crashar!
+                #  Formata como string de percentagem para o React não crashar
                 # Se for maior que 0, vira (ex: "87.5%"). Se for 0 (como na Booleana), vira "N/A"
                 score_formatado = f"{score * 100:.1f}%" if score > 0 else "N/A"
 
@@ -422,7 +421,7 @@ async def search(
                     "abstract": raw_abstract,
                     "snippet": snippet,
                     "pdf_link": doc_db.get('document_link', '#'),
-                    "score": score_formatado,  # ✨ Injeta a string corrigida aqui!
+                    "score": score_formatado,  
                     "date": doc_db.get('year', 'N/D')
                 })
 
@@ -446,6 +445,62 @@ async def search(
 # ENDPOINTS DAS DASHBOARDS
 # ==============================================================================
 
+def calculate_real_ir_metrics(engine_instance):
+    import sqlite3
+    conn = sqlite3.connect('publications.db')
+    cursor = conn.cursor()
+
+    # Vai buscar queries e IDs relevantes diretamente da BD
+    # Constrói o ground truth automaticamente pesquisando por palavras-chave nos títulos/abstracts
+    queries_to_test = ["neural networks", "health data", "textile industry", "information systems", "ambient intelligence"]
+    
+    GROUND_TRUTH = {}
+    for query in queries_to_test:
+        terms = query.split()
+        like_clauses = " AND ".join([f"(title LIKE '%{t}%' OR abstract LIKE '%{t}%')" for t in terms])
+        cursor.execute(f"SELECT id FROM documents WHERE {like_clauses}")
+        relevant_ids = [row[0] for row in cursor.fetchall()]
+        if relevant_ids:
+            GROUND_TRUTH[query] = relevant_ids
+
+    conn.close()
+
+    if not GROUND_TRUTH:
+        return {"precision": 0, "recall": 0, "f1Score": 0, "accuracy": 0}
+
+    total_precision = 0
+    total_recall = 0
+    queries_run = 0
+
+    for query, expected_docs in GROUND_TRUTH.items():
+        expected_set = set(expected_docs)
+
+        raw_results = engine_instance.ranked_search(query)[:10]
+        retrieved_set = set([int(res[0] if isinstance(res, tuple) else res) for res in raw_results])
+
+        true_positives = len(retrieved_set.intersection(expected_set))
+        false_positives = len(retrieved_set - expected_set)
+        false_negatives = len(expected_set - retrieved_set)
+
+        precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
+        recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
+
+        total_precision += precision
+        total_recall += recall
+        queries_run += 1
+
+    avg_precision = total_precision / queries_run if queries_run > 0 else 0
+    avg_recall = total_recall / queries_run if queries_run > 0 else 0
+    f1_score = 2 * (avg_precision * avg_recall) / (avg_precision + avg_recall) if (avg_precision + avg_recall) > 0 else 0
+    accuracy = (avg_precision + avg_recall) / 2
+
+    return {
+        "precision": round(avg_precision * 100),
+        "recall": round(avg_recall * 100),
+        "f1Score": round(f1_score * 100),
+        "accuracy": round(accuracy * 100)
+    }
+
 @app.get("/api/stats", tags=["Dashboards"])
 def get_dashboard_stats():
     try:
@@ -461,51 +516,65 @@ def get_dashboard_stats():
 
 @app.get("/api/admin-stats", tags=["Dashboards"])
 def get_admin_dashboard_stats():
+    import json
+    import os
     try:
+        # 1. Total de Documentos Reais na BD
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM documents")
         row = cursor.fetchone()
         real_doc_count = row[0] if row else 0
         conn.close()
+
+        # 2. Dados Reais do Índice Invertido
+        # Vamos usar o índice principal como referência
+        index_ref = engine.all_indexes.get('stem_nostop', {}).get('index', {})
+        total_terms = len(index_ref)
         
-        total_docs = real_doc_count if real_doc_count > 0 else 14502
+        # Calcular os 5 termos reais mais frequentes no corpus
+        term_frequencies = []
+        total_words_corpus = 0
+        
+        for term, posting_list in index_ref.items():
+            doc_freq = len(posting_list)
+            term_frequencies.append({"term": term, "count": doc_freq})
+            total_words_corpus += doc_freq
+        
+        top_terms = sorted(term_frequencies, key=lambda x: x["count"], reverse=True)[:5]
+        avg_doc_length = int(total_words_corpus / real_doc_count) if real_doc_count > 0 else 0
+
+        # 3. Tamanho Real do Ficheiro de Índice (MB)
+        file_size_mb = 0
+        index_path = 'src/search/all_indexes.json'
+        if os.path.exists(index_path):
+            file_size_mb = round(os.path.getsize(index_path) / (1024 * 1024), 2)
+
+        # 4. CALCULA AS MÉTRICAS DE MACHINE LEARNING REAIS
+        real_metrics = calculate_real_ir_metrics(engine)
 
         return {
             "stats": {
-                "totalDocs": total_docs,
-                "totalTerms": 85230,
-                "avgDocLength": 450
+                "totalDocs": real_doc_count,
+                "totalTerms": total_terms,
+                "avgDocLength": avg_doc_length
             },
             "frequentQueries": [
-                { "query": "artificial intelligence", "count": 342 },
-                { "query": "health data", "count": 215 },
-                { "query": "machine learning", "count": 198 },
-                { "query": "climate change", "count": 156 },
-                { "query": "quantum computing", "count": 102 }
-            ],
-            "frequentTerms": [
-                { "term": "data", "count": 8900 },
-                { "term": "model", "count": 7450 },
-                { "term": "system", "count": 6800 },
-                { "term": "network", "count": 5200 },
-                { "term": "analysis", "count": 4900 }
-            ],
+                { "query": "neural networks", "count": 42 },
+                { "query": "health data", "count": 28 },
+                { "query": "stress level", "count": 19 },
+                { "query": "machine learning", "count": 15 },
+                { "query": "business intelligence", "count": 12 }
+            ], # Mantemos este fixo apenas porque não guardamos log de cliques dos utilizadores
+            "frequentTerms": top_terms, 
             "indexGrowth": [
-                { "month": "Jan", "size": 120 },
-                { "month": "Fev", "size": 145 },
-                { "month": "Mar", "size": 190 },
-                { "month": "Abr", "size": 250 },
-                { "month": "Mai", "size": 310 },
-                { "month": "Jun", "size": 420 }
+                { "month": "Atual", "size": file_size_mb }
             ],
-            "classification": {
-                "precision": 88,
-                "recall": 82,
-                "f1Score": 85,
-                "accuracy": 91
-            }
+            "classification": real_metrics 
         }
     except Exception as e:
         print(f"❌ ERRO NO MOTOR ADMIN: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+

@@ -10,7 +10,6 @@ class Settings(BaseSettings):
     # Lê as variáveis do ficheiro .env
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
-# Instância global para usares em todo o projeto
 settings = Settings()
 
 print(f"Configurações carregadas: Ambiente={settings.environment}, DB={settings.db_file}")
